@@ -1,0 +1,187 @@
+.wpallimport-plugin .existing_umeta_values {
+	clear: both;
+	display: block;
+	margin: 15px;
+}
+.wpallimport-plugin .wpallimport-user-data .wpallimport-help {
+	top:0;
+}
+
+.wpallimport-plugin .pmui-account-fields input[type="text"],
+.wpallimport-plugin .pmui-other-fields input[type="text"],
+.wpallimport-plugin .pmui-other-fields select,
+.wpallimport-plugin .pmsci-account-fields input[type="text"],
+.wpallimport-plugin .pmsci-other-fields input[type="text"],
+.wpallimport-plugin .pmsci-other-fields select {
+    height: 40px;
+}
+
+.wpallimport-plugin .pmui-other-fields select,
+.wpallimport-plugin .pmsci-other-fields select {
+    font-size: 15px !important;
+}
+
+.wpallimport-plugin .pmui-other-fields textarea,
+.wpallimport-plugin .pmsci-other-fields textarea {
+    font-size: 14px !important;
+	padding: 6px !important;
+}
+
+.wpallimport-plugin .pmui-account-fields,
+.wpallimport-plugin .pmui-other-fields,
+.wpallimport-plugin .pmsci-account-fields,
+.wpallimport-plugin .pmsci-other-fields {
+    width: 100%;
+}
+
+.wpallimport-plugin .pmui-account-fields div.input label,
+.wpallimport-plugin .pmsci-account-fields div.input label {
+    vertical-align: 0;
+}
+
+.wpallimport-plugin .pmui-account-fields a.wpallimport-help,
+.wpallimport-plugin .pmui-other-fields a.wpallimport-help,
+.wpallimport-plugin .pmsci-account-fields a.wpallimport-help,
+.wpallimport-plugin .pmsci-other-fields a.wpallimport-help
+ {
+    margin-top: -5px;
+    top: 0;
+}
+
+.wpallimport-plugin .pmui-half > .pmui-half-left,
+.wpallimport-plugin .pmui-half > .pmui-half-right,
+.wpallimport-plugin .pmsci-half > .pmsci-half-left,
+.wpallimport-plugin .pmsci-half > .pmsci-half-right {
+    width: 48%;
+}
+
+.wpallimport-plugin .pmui-half > .pmui-half-left,
+.wpallimport-plugin .pmsci-half > .pmsci-half-left {
+    float: left;
+}
+
+.wpallimport-plugin .pmui-half > .pmui-half-right,
+.wpallimport-plugin .pmsci-half > .pmsci-half-right {
+    float: right;
+}
+
+.wpallimport-plugin .pmsci-customer-fields input[type="text"] {
+    height: 40px;
+}
+
+.wpallimport-plugin .pmui-half,
+.wpallimport-plugin .pmui-full,
+.wpallimport-plugin .pmsci-half,
+.wpallimport-plugin .pmsci-full {
+    overflow: auto;
+}
+
+.wpallimport-plugin .pmui-quarter > .pmui-quarter-piece {
+    float: left;
+    width: 22%;
+}
+
+.wpallimport-plugin .pmsci-customer-fields .wpallimport-switcher-section {
+    margin-top: 27px;
+    padding-left: 20px;
+}
+
+.wpallimport-plugin .pmsci-customer-fields .wpallimport-switcher-section input[type=radio] {
+    margin: 8px 10px 0px 0;
+    position: relative;
+}
+
+.wpallimport-plugin .pmsci-customer-fields .wpallimport-switcher-section label {
+    margin-top: 6px;
+    display: inline-block;
+}
+
+.wpallimport-plugin #pmsci_billing {
+    float: left;
+    width: 48%;
+}
+
+.wpallimport-plugin #pmsci_shipping {
+    float: right;
+    width: 48%;
+}
+
+.wpallimport-plugin .pmsci-customer-fields a.wpallimport-help {
+    top: 0px;
+    margin-top: -2px;
+}
+
+/* Matching method sub-fields alignment */
+.wpallimport-plugin .switcher-target-duplicate_indicator_custom_field {
+	margin-left: 28px;
+	padding: 5px 0 5px 0;
+	position: relative;
+	display: block;
+}
+
+.wpallimport-plugin .switcher-target-duplicate_indicator_pid {
+	margin-left: 20px;
+	padding: 5px 0 5px 0;
+	position: relative;
+	display: block;
+}
+
+.wpallimport-plugin .switcher-target-duplicate_indicator_custom_field input[type="text"],
+.wpallimport-plugin .switcher-target-duplicate_indicator_pid input[type="text"] {
+	margin-left: 8px;
+	margin-right: 8px;
+}
+
+/* Wizard type matching description text */
+.wpallimport-plugin .wpallimport-wizard-type-description {
+	margin: 0;
+	color: #40acad;
+	font-size: 13px;
+}
+
+/* Wizard type matching options container */
+.wpallimport-plugin .wpallimport-wizard-type-options {
+	margin-top: 10px;
+	margin-left: -4px;
+}
+
+/* Wizard target padding - using padding instead of margin to avoid animation conflicts */
+.wpallimport-plugin .switcher-target-wizard_type_new .wpallimport-unique-key-wrapper {
+	padding-left: 26px;
+	padding-top: 20px;
+	padding-bottom: 20px !important;
+}
+
+.wpallimport-plugin .wpallimport-wizard-type-options {
+	padding-left: 26px;
+}
+
+.wpallimport-plugin .wpallimport-wizard-description {
+	padding-bottom: 10px;
+	padding-left: 26px;
+	font-size: 13px;
+}
+
+.wpallimport-plugin .wpallimport-wizard-section-spacing {
+	padding-top: 10px;
+}
+
+.wpallimport-plugin .wpallimport-wizard-content-wrapper {
+	/* No padding needed - spacing handled by unique-key-wrapper */
+}
+
+.wpallimport-plugin .wpallimport-unique-key-input {
+	width: 300px;
+	padding-left: 10px;
+}
+
+/* Remove left margin for wizard type radio inputs */
+.wpallimport-plugin input[type="radio"]#wizard_type_new,
+.wpallimport-plugin input[type="radio"]#wizard_type_matching {
+	margin-left: 0;
+}
+
+/* Remove left margin for delete missing section radio inputs */
+.wpallimport-plugin .switcher-target-is_delete_missing input[type="radio"] {
+	margin-left: 0;
+}
