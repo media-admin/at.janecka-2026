@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Media Lab Project Starter
+ * Plugin Name: Janecka Juweliere Project
  * Plugin URI: https://github.com/media-admin/media-lab-starter-kit
  * Description: Project-specific CPTs, taxonomies, and ACF fields. Duplicate and customize for each client project.
  * Version: 1.0.0
@@ -31,7 +31,7 @@ function medialab_project_check_dependencies() {
     if (!function_exists('medialab_core_version')) {
         add_action('admin_notices', function() {
             echo '<div class="notice notice-error"><p>';
-            echo '<strong>Media Lab Project Starter</strong> requires ';
+            echo '<strong>Janecka Juweliere Project</strong> requires ';
             echo '<strong>Media Lab Agency Core</strong> plugin to be installed and activated.';
             echo '</p></div>';
         });
@@ -67,7 +67,7 @@ function medialab_project_activate() {
     if (!medialab_project_check_dependencies()) {
         deactivate_plugins(MEDIALAB_PROJECT_BASENAME);
         wp_die(
-            '<strong>Media Lab Project Starter</strong> requires <strong>Media Lab Agency Core</strong> plugin.',
+            '<strong>Janecka Juweliere Project</strong> requires <strong>Media Lab Agency Core</strong> plugin.',
             'Plugin Dependency Check',
             array('back_link' => true)
         );
