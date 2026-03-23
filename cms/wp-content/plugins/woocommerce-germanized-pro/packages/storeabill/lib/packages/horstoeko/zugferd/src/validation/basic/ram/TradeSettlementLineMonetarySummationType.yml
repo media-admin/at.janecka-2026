@@ -1,0 +1,7 @@
+Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\basic\ram\TradeSettlementLineMonetarySummationType:
+    properties:
+        lineTotalAmount:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules

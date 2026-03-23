@@ -1,0 +1,575 @@
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+/**
+ * AJAX Handler
+ *
+ * @class        WC_GZD_AJAX
+ * @version        1.0.0
+ * @author        Vendidero
+ */
+class WC_GZD_AJAX {
+
+	/**
+	 * Hook in methods
+	 */
+	public static function init() {
+		$ajax_events = array(
+			'gzd_revocation'                    => true,
+			'gzd_refresh_unit_price'            => true,
+			'gzd_refresh_cart_vouchers'         => true,
+			'gzd_json_search_delivery_time'     => false,
+			'gzd_json_search_manufacturer'      => false,
+			'gzd_legal_checkboxes_save_changes' => false,
+			'gzd_toggle_tab_enabled'            => false,
+			'gzd_install_extension'             => false,
+		);
+
+		foreach ( $ajax_events as $ajax_event => $nopriv ) {
+			add_action( 'wp_ajax_woocommerce_' . $ajax_event, array( __CLASS__, $ajax_event ) );
+
+			if ( $nopriv ) {
+				add_action( 'wp_ajax_nopriv_woocommerce_' . $ajax_event, array( __CLASS__, $ajax_event ) );
+
+				// WC AJAX can be used for frontend ajax requests.
+				add_action( 'wc_ajax_' . $ajax_event, array( __CLASS__, $ajax_event ) );
+			}
+		}
+	}
+
+	public static function gzd_install_extension() {
+		check_ajax_referer( 'wc_gzd_install_extension_nonce', 'security' );
+
+		if ( ! current_user_can( 'install_plugins' ) || ! isset( $_POST['extension'] ) ) {
+			wp_die( - 1 );
+		}
+
+		$extension           = wc_clean( wp_unslash( $_POST['extension'] ) );
+		$license_key         = isset( $_POST['license_key'] ) ? wc_clean( wp_unslash( $_POST['license_key'] ) ) : '';
+		$redirect_on_success = false;
+
+		if ( ! empty( $extension ) && \Vendidero\Germanized\PluginsHelper::is_plugin_whitelisted( $extension ) ) {
+			$plugin_name = \Vendidero\Germanized\PluginsHelper::get_plugin_name( $extension );
+
+			if ( 'woocommerce-germanized-pro' === $extension ) {
+				if ( empty( $license_key ) ) {
+					wp_send_json(
+						array(
+							'message' => __( 'Please provide your license key.', 'woocommerce-germanized' ),
+						)
+					);
+				}
+
+				$redirect_on_success = admin_url( 'admin.php?page=wc-gzdp-setup' );
+			} elseif ( 'shiptastic-for-woocommerce' === $extension ) {
+				$redirect_on_success = admin_url( 'admin.php?page=wc-shiptastic-setup' );
+			}
+
+			$result = \Vendidero\Germanized\PluginsHelper::install_or_activate_extension( $extension, $license_key );
+
+			if ( \Vendidero\Germanized\PluginsHelper::is_plugin_active( $extension ) ) {
+				$result = array(
+					'success' => true,
+				);
+
+				if ( 'woocommerce-germanized-pro' === $extension ) {
+					if ( class_exists( '\Vendidero\VendideroHelper\Package' ) ) {
+						$pro_product_id = \Vendidero\Germanized\PluginsHelper::get_pro_version_product_id();
+						$pro_version    = \Vendidero\VendideroHelper\Package::get_product_by_id( $pro_product_id );
+
+						if ( ! $pro_version ) {
+							\Vendidero\VendideroHelper\Package::add_product( 'woocommerce-germanized-pro/woocommerce-germanized-pro.php', $pro_product_id, array( 'free' => false ) );
+							$pro_version = \Vendidero\VendideroHelper\Package::get_product_by_id( $pro_product_id );
+						}
+
+						if ( $pro_version ) {
+							$pro_version->register( $license_key );
+						}
+					}
+				}
+
+				if ( $redirect_on_success ) {
+					$result['redirect'] = $redirect_on_success;
+				}
+
+				wp_send_json( $result );
+			} else {
+				if ( ! is_wp_error( $result ) ) {
+					$result = new WP_Error( 'plugin_install', sprintf( __( 'There was an error while automatically installing %1$s. %2$s', 'woocommerce-germanized' ), esc_html( $plugin_name ), \Vendidero\Germanized\PluginsHelper::get_plugin_manual_install_message( $extension ) ) );
+				}
+
+				wp_send_json(
+					array(
+						'message' => $result->get_error_message(),
+					)
+				);
+			}
+		}
+	}
+
+	public static function gzd_toggle_tab_enabled() {
+		check_ajax_referer( 'wc_gzd_tab_toggle_nonce', 'security' );
+
+		if ( ! current_user_can( 'manage_woocommerce' ) || ! isset( $_POST['tab'] ) || ! isset( $_POST['enable'] ) ) {
+			wp_die( - 1 );
+		}
+
+		$tab_id = wc_clean( wp_unslash( $_POST['tab'] ) );
+		$enable = wc_string_to_bool( wc_clean( wp_unslash( $_POST['enable'] ) ) );
+
+		$pages = WC_Admin_Settings::get_settings_pages();
+
+		foreach ( $pages as $page ) {
+
+			if ( is_a( $page, 'WC_GZD_Settings_Germanized' ) ) {
+				if ( $tab = $page->get_tab_by_name( $tab_id ) ) {
+					if ( $enable ) {
+						$tab->enable();
+						$data = array(
+							'data'    => true,
+							'message' => '',
+						);
+
+						if ( $tab->notice_on_activate() ) {
+							$data['message'] = $tab->notice_on_activate();
+						}
+
+						wp_send_json( $data );
+					} else {
+						$tab->disable();
+
+						wp_send_json(
+							array(
+								'data' => false,
+							)
+						);
+					}
+				}
+			}
+		}
+
+		wp_send_json(
+			array(
+				'data' => false,
+			)
+		);
+	}
+
+	public static function gzd_legal_checkboxes_save_changes() {
+		if ( ! isset( $_POST['wc_gzd_legal_checkbox_nonce'], $_POST['changes'] ) ) {
+			wp_send_json_error( 'missing_fields' );
+			wp_die();
+		}
+
+		if ( ! wp_verify_nonce( wp_unslash( $_POST['wc_gzd_legal_checkbox_nonce'] ), 'wc_gzd_legal_checkbox_nonce' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			wp_send_json_error( 'bad_nonce' );
+			wp_die();
+		}
+
+		// Check User Caps
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( 'missing_capabilities' );
+			wp_die();
+		}
+
+		$changes = wc_clean( wp_unslash( $_POST['changes'] ) );
+		$manager = WC_GZD_Legal_Checkbox_Manager::instance();
+		$options = $manager->get_options();
+
+		foreach ( $changes as $id => $data ) {
+
+			$checkbox = $manager->get_checkbox( $id );
+
+			if ( isset( $data['deleted'] ) ) {
+				if ( isset( $data['newRow'] ) ) {
+					// So the user added and deleted a new row.
+					// That's fine, it's not in the database anyways. NEXT!
+					continue;
+				}
+				// Delete
+				if ( isset( $options[ $id ] ) ) {
+					// Do not allow to delete core entries
+					if ( $checkbox && $checkbox->is_core() ) {
+						continue;
+					}
+					$manager->delete( $id );
+					unset( $options[ $id ] );
+				}
+				continue;
+			}
+
+			/**
+			 * Filters legal checkbox default option keys.
+			 *
+			 * @param array $args Option keys.
+			 *
+			 * @since 2.0.0
+			 *
+			 */
+			$keys = apply_filters(
+				'woocommerce_gzd_legal_checkboxes_option_keys',
+				array(
+					'id'       => '',
+					'priority' => 1,
+				)
+			);
+
+			$checkbox_data = array_intersect_key( $data, $keys );
+
+			if ( ! isset( $options[ $id ] ) || ! is_array( $options[ $id ] ) ) {
+				$options[ $id ] = array();
+			}
+
+			$options[ $id ] = array_replace_recursive( $options[ $id ], $checkbox_data );
+		}
+
+		$manager->update_options( $options );
+		$manager->do_register_action();
+
+		$checkboxes = $manager->get_checkboxes( array(), 'json' );
+
+		wp_send_json_success(
+			array(
+				'checkboxes' => $checkboxes,
+			)
+		);
+	}
+
+	public static function gzd_json_search_delivery_time() {
+		ob_start();
+
+		check_ajax_referer( 'search-products', 'security' );
+		$term  = isset( $_GET['term'] ) ? (string) wc_clean( wp_unslash( $_GET['term'] ) ) : '';
+		$terms = array();
+
+		if ( empty( $term ) ) {
+			die();
+		}
+
+		$args = array(
+			'hide_empty' => false,
+			'fields'     => 'id=>name',
+		);
+
+		if ( is_numeric( $term ) ) {
+			$args['include'] = array( absint( $term ) );
+		} else {
+			$args['name__like'] = (string) $term;
+		}
+
+		$query = WC_germanized()->delivery_times->get_delivery_times( $args );
+
+		if ( ! empty( $query ) ) {
+			foreach ( $query as $term_id => $term_name ) {
+				$terms[ $term_id ] = rawurldecode( $term_name );
+			}
+		} else {
+			$terms[ rawurldecode( $term ) ] = rawurldecode( sprintf( __( '%s [new]', 'woocommerce-germanized' ), $term ) );
+		}
+		wp_send_json( $terms );
+	}
+
+	public static function gzd_json_search_manufacturer() {
+		ob_start();
+
+		check_ajax_referer( 'search-products', 'security' );
+		$term  = isset( $_GET['term'] ) ? (string) wc_clean( wp_unslash( $_GET['term'] ) ) : '';
+		$terms = array();
+
+		if ( empty( $term ) ) {
+			die();
+		}
+
+		$args = array(
+			'hide_empty' => false,
+			'fields'     => 'id=>name',
+		);
+
+		if ( is_numeric( $term ) ) {
+			$args['include'] = array( absint( $term ) );
+		} else {
+			$args['name__like'] = (string) $term;
+		}
+
+		$query = WC_germanized()->manufacturers->get_manufacturers( $args );
+
+		if ( ! empty( $query ) ) {
+			foreach ( $query as $term_id => $term_name ) {
+				$terms[ $term_id ] = rawurldecode( $term_name );
+			}
+		} else {
+			$terms[ rawurldecode( $term ) ] = rawurldecode( sprintf( __( '%s [new]', 'woocommerce-germanized' ), $term ) );
+		}
+		wp_send_json( $terms );
+	}
+
+	/**
+	 * @param $price
+	 * @param WC_Product $product
+	 */
+	protected static function get_price_excluding_tax( $price, $product ) {
+		$tax_rates    = WC_Tax::get_rates( $product->get_tax_class() );
+		$remove_taxes = WC_Tax::calc_tax( $price, $tax_rates, true );
+		$price        = $price - array_sum( $remove_taxes ); // Unrounded since we're dealing with tax inclusive prices. Matches logic in cart-totals class. @see adjust_non_base_location_price.
+
+		return \Vendidero\Germanized\Utilities\NumberUtil::round( $price, wc_get_price_decimals() );
+	}
+
+	protected static function get_price_including_tax( $price, $product ) {
+		// If prices are shown excl. tax, add taxes to match the prices stored in the DB.
+		$tax_rates = WC_Tax::get_rates( $product->get_tax_class() );
+		$taxes     = WC_Tax::calc_tax( $price, $tax_rates, false );
+		$price     = $price + array_sum( $taxes );
+
+		return \Vendidero\Germanized\Utilities\NumberUtil::round( $price, wc_get_price_decimals() );
+	}
+
+	public static function gzd_refresh_cart_vouchers() {
+		check_ajax_referer( 'wc-gzd-refresh-cart-vouchers', 'security' );
+
+		$return = array(
+			'vouchers' => array(),
+			'result'   => 'success',
+		);
+
+		if ( WC()->cart ) {
+			// Make sure vouchers are already registered as fees.
+			WC()->cart->calculate_totals();
+
+			$return['vouchers'] = WC_GZD_Coupon_Helper::instance()->get_voucher_data_from_cart();
+		}
+
+		wp_send_json( $return );
+	}
+
+	public static function gzd_refresh_unit_price() {
+		check_ajax_referer( 'wc-gzd-refresh-unit-price', 'security' );
+
+		if ( ! isset( $_POST['products'] ) ) {
+			wp_send_json( array( 'result' => 'failure' ) );
+		}
+
+		$queue_id = isset( $_POST['queue_id'] ) ? absint( wp_unslash( $_POST['queue_id'] ) ) : 1;
+		$products = (array) wc_clean( wp_unslash( $_POST['products'] ) );
+		$response = array();
+
+		foreach ( $products as $product_data ) {
+			if ( ! isset( $product_data['product_id'], $product_data['price'], $product_data['key'] ) ) {
+				continue;
+			}
+
+			$product_id = absint( $product_data['product_id'] );
+			$key        = wc_clean( wp_unslash( $product_data['key'] ) );
+
+			if ( ! $product = wc_gzd_get_product( $product_id ) ) {
+				continue;
+			}
+
+			$org_unit_price = $product->get_unit_price_html();
+			$has_unit_price = ! empty( $org_unit_price );
+			$unit_price     = '';
+
+			/**
+			 * Check whether the current product actually supports unit price display.
+			 */
+			if ( $has_unit_price ) {
+				$regular_price = (float) wc_clean( wp_unslash( $product_data['price'] ) );
+				$sale_price    = isset( $product_data['price_sale'] ) && '' !== wc_clean( wp_unslash( $product_data['price_sale'] ) ) ? (float) wc_clean( wp_unslash( $product_data['price_sale'] ) ) : '';
+				$is_range      = isset( $product_data['is_range'] ) ? wc_string_to_bool( wc_clean( wp_unslash( $product_data['is_range'] ) ) ) : false;
+				$price         = '' !== $sale_price ? $sale_price : $regular_price;
+				$price_html    = '';
+
+				if ( is_a( $product, 'WC_GZD_Product_Variable' ) ) {
+					if ( $product->has_unit() ) {
+						$prices            = $product->get_variation_unit_prices( true );
+						$variation_ids     = array_keys( $prices['price'] );
+						$variation_id_from = current( $variation_ids );
+						$variation_id_to   = end( $variation_ids );
+
+						if ( $from_variation = wc_gzd_get_gzd_product( $variation_id_from ) ) {
+							$price_args = array(
+								'price'    => $regular_price,
+								'base'     => $from_variation->get_unit_base(),
+								'products' => $from_variation->get_unit_product(),
+							);
+
+							$from_prices = wc_gzd_recalculate_unit_price( $price_args );
+							$to_prices   = $from_prices;
+
+							if ( $sale_price && $variation_id_from !== $variation_id_to ) {
+								if ( $to_variation = wc_gzd_get_gzd_product( $variation_id_to ) ) {
+									$price_args = array(
+										'price'    => $sale_price,
+										'base'     => $to_variation->get_unit_base(),
+										'products' => $to_variation->get_unit_product(),
+									);
+
+									$to_prices = wc_gzd_recalculate_unit_price( $price_args );
+									$to_prices = wp_parse_args(
+										$to_prices,
+										array(
+											'unit' => 0.0,
+										)
+									);
+
+									if ( $to_variation->get_unit_base() !== $from_variation->get_unit_base() || $to_variation->get_unit_product() !== $from_variation->get_unit_product() ) {
+										$is_range = true;
+									}
+								}
+							}
+
+							if ( ! empty( $from_prices ) ) {
+								if ( $from_prices['unit'] !== $to_prices['unit'] && ! $is_range ) {
+									$price_html = wc_format_sale_price( wc_price( $from_prices['unit'] ), wc_price( $to_prices['unit'] ) );
+								} elseif ( $from_prices['unit'] !== $to_prices['unit'] ) {
+									$price_html = woocommerce_gzd_format_unit_price_range( $from_prices['unit'], $to_prices['unit'] );
+								} else {
+									$price_html = wc_price( $from_prices['unit'] );
+								}
+							}
+						}
+					}
+				} elseif ( is_a( $product, 'WC_GZD_Product_Grouped' ) ) { // Do not recalculate unit prices for grouped products
+					$unit_price = '';
+				} else {
+					$prices = wc_gzd_recalculate_unit_price(
+						array(
+							'regular_price' => $regular_price,
+							'sale_price'    => $sale_price,
+							'price'         => $price,
+							'base'          => $product->get_unit_base(),
+							'products'      => $product->get_unit_product(),
+						)
+					);
+
+					if ( ! empty( $prices ) ) {
+						$price_html = ! empty( $sale_price ) ? $product->get_price_html_from_to( $prices['regular'], $prices['sale'], false ) : wc_price( $prices['unit'] );
+					}
+				}
+
+				if ( ! empty( $price_html ) ) {
+					$unit_price = wc_gzd_format_unit_price( $price_html, $product->get_unit_html(), $product->get_unit_base_html(), wc_gzd_format_product_units_decimal( $product->get_unit_product() ) );
+				}
+			}
+
+			$response[ $key ] = array(
+				'unit_price_html' => $unit_price,
+				'product_id'      => $product_id,
+			);
+		}
+
+		wp_send_json(
+			array(
+				'queue_id' => $queue_id,
+				'result'   => 'success',
+				'products' => $response,
+			)
+		);
+	}
+
+	/**
+	 * @param WC_GZD_Product|WC_Product $product
+	 * @param $prices
+	 *
+	 * @return array
+	 */
+	public static function get_db_prices_by_display_prices( $product, $prices ) {
+		wc_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '4.0' );
+
+		return $prices;
+	}
+
+	public static function tmp_increase_price_decimals() {
+		wc_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '4.0' );
+
+		return absint( WC_ROUNDING_PRECISION );
+	}
+
+	public static function tmp_manipulate_tax_calculation( $taxes, $price, $rates, $price_includes_tax ) {
+		wc_deprecated_function( __CLASS__ . '::' . __FUNCTION__, '4.0' );
+
+		return $taxes;
+	}
+
+	/**
+	 * Checks revocation form and sends Email to customer and Admin
+	 */
+	public static function gzd_revocation() {
+		check_ajax_referer( 'woocommerce-revocation', 'security' );
+
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( wp_unslash( $_POST['_wpnonce'] ), 'woocommerce-revocation' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			wp_send_json( array( 'result' => 'failure' ) );
+		}
+
+		$data   = array();
+		$fields = WC_GZD_Revocation::get_fields();
+
+		if ( ! empty( $fields ) ) {
+			foreach ( $fields as $key => $field ) {
+				if ( 'sep' !== $key ) {
+					if ( isset( $field['required'] ) && true === $field['required'] ) {
+						if ( 'address_mail' === $key ) {
+							if ( ! isset( $_POST[ $key ] ) || ! is_email( wp_unslash( $_POST[ $key ] ) ) ) {
+								wc_add_notice( '<strong>' . $field['label'] . '</strong> ' . _x( 'is not a valid email address.', 'revocation-form', 'woocommerce-germanized' ), 'error' );
+							}
+						} elseif ( 'address_postal' === $key ) {
+							if ( ! isset( $_POST['address_country'] ) || ! isset( $_POST[ $key ] ) || ! WC_Validation::is_postcode( wc_clean( wp_unslash( $_POST[ $key ] ) ), wc_clean( wp_unslash( $_POST['address_country'] ) ) ) || empty( $_POST[ $key ] ) ) {
+								wc_add_notice( _x( 'Please enter a valid postcode/ZIP', 'revocation-form', 'woocommerce-germanized' ), 'error' );
+							}
+						} elseif ( 'privacy_checkbox' === $key ) {
+							if ( isset( $field['required'] ) && empty( $_POST[ $key ] ) ) {
+								wc_add_notice( '<strong>' . $field['label'] . '</strong>', 'error' );
+							}
+						} elseif ( isset( $field['required'] ) && empty( $_POST[ $key ] ) ) {
+								wc_add_notice( '<strong>' . $field['label'] . '</strong> ' . _x( 'is not valid.', 'revocation-form', 'woocommerce-germanized' ), 'error' );
+						}
+					}
+
+					if ( isset( $_POST[ $key ] ) && ! empty( $_POST[ $key ] ) ) {
+						if ( 'country' === $field['type'] ) {
+							$countries    = WC()->countries->get_countries();
+							$country      = wc_clean( wp_unslash( $_POST[ $key ] ) );
+							$data[ $key ] = ( isset( $countries[ $country ] ) ? $countries[ $country ] : '' );
+						} else {
+							$data[ $key ] = wc_clean( wp_unslash( $_POST[ $key ] ) );
+						}
+					}
+				}
+			}
+		}
+
+		$error = false;
+
+		if ( 0 === wc_notice_count( 'error' ) ) {
+			wc_add_notice( _x( 'Thank you. We have received your Revocation Request. You will receive a conformation email within a few minutes.', 'revocation-form', 'woocommerce-germanized' ), 'success' );
+
+			// Send Mail
+			if ( $mail = WC_germanized()->emails->get_email_instance_by_id( 'customer_revocation' ) ) {
+				// Send to customer
+				$mail->trigger( $data );
+
+				// Send to Admin
+				$data['send_to_admin'] = true;
+				$mail->trigger( $data );
+			}
+		} else {
+			$error = true;
+		}
+
+		ob_start();
+		wc_print_notices();
+		$messages = ob_get_clean();
+
+		$data = array(
+			'messages' => isset( $messages ) ? $messages : '',
+			'result'   => ( $error ? 'failure' : 'success' ),
+		);
+
+		wp_send_json( $data );
+	}
+}
+
+WC_GZD_AJAX::init();

@@ -1,0 +1,7 @@
+Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\en16931\ram\TaxRegistrationType:
+    properties:
+        iD:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules

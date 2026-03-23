@@ -1,0 +1,35 @@
+Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\en16931\ram\TradePriceType:
+    properties:
+        chargeAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: ChargeAmount
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100'
+            accessor:
+                getter: getChargeAmount
+                setter: setChargeAmount
+            type: Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\en16931\udt\AmountType
+        basisQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: BasisQuantity
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100'
+            accessor:
+                getter: getBasisQuantity
+                setter: setBasisQuantity
+            type: Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\en16931\udt\QuantityType
+        appliedTradeAllowanceCharge:
+            expose: true
+            access_type: public_method
+            serialized_name: AppliedTradeAllowanceCharge
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100'
+            accessor:
+                getter: getAppliedTradeAllowanceCharge
+                setter: setAppliedTradeAllowanceCharge
+            type: Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\en16931\ram\TradeAllowanceChargeType

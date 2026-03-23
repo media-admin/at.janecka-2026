@@ -1,0 +1,187 @@
+@import '../cart-checkout/items';
+
+.wc-gzd-checkout {
+  &.wc-gzd-checkout-has-custom-submit {
+    .wp-block-woocommerce-checkout-fields-block {
+      .wc-block-checkout__actions {
+        display: none;
+      }
+    }
+  }
+
+  .is-large {
+     /**
+      * Somehow setting align-self: start unsets the 100 % sidebar height which disables sticky.
+      */
+     .wc-block-checkout__sidebar {
+       align-self: auto;
+     }
+
+     .wc-block-components-totals-wrapper {
+       &.wc-gzd-hide-total-wrapper {
+         display: none;
+       }
+
+       &.wc-gzd-show-total-wrapper {
+         display: block;
+       }
+     }
+
+     .wc-gzd-checkout-submit {
+       margin-top: 1em;
+
+       .wc-block-components-checkout-order-summary__title {
+         display: none !important;
+       }
+
+       .wc-block-components-totals-wrapper {
+         display: none;
+         border-top: none;
+
+         &.wc-gzd-show-total-wrapper {
+           display: block;
+         }
+       }
+
+       .wc-block-components-panel__content {
+        .wc-block-components-totals-wrapper {
+          display: block;
+        }
+       }
+
+       position: sticky;
+       top: 0;
+
+       .wc-block-checkout__actions {
+         border-top: none;
+         padding: 36px 0;
+
+         .wc-block-checkout__actions_row {
+           display: flex;
+           flex-wrap: wrap;
+           flex-direction: column-reverse;
+         }
+
+         .wc-block-components-checkout-place-order-button {
+           width: 100%;
+           margin-bottom: 1em;
+         }
+       }
+     }
+   }
+
+  .wc-block-checkout.is-mobile,
+  .wc-block-checkout.is-medium,
+  .wc-block-checkout.is-small {
+    flex-direction: column-reverse !important;
+
+    .checkout-order-summary-block-fill-wrapper {
+      display: none;
+    }
+
+    .wp-block-woocommerce-checkout-order-summary-block {
+      .wc-block-components-checkout-order-summary__title {
+        .wc-block-components-checkout-order-summary__title-icon {
+          display: none;
+        }
+      }
+      .wc-block-components-checkout-order-summary__content {
+        display: block !important;
+      }
+    }
+
+    .wc-gzd-checkout-submit {
+      position: relative;
+      padding: 1.5em 0;
+
+      .wp-block-woocommerce-checkout-order-summary-block {
+        display: none;
+      }
+    }
+
+    .wc-gzd-checkboxes {
+      padding-top: 10px;
+    }
+  }
+
+  /**
+  * Prevent overflows for empty prices with width > 100 % tweak
+  */
+  .wc-block-components-order-summary .wc-block-components-order-summary-item__total-price {
+   min-width: 55px;
+  }
+
+  .wc-block-components-product-metadata {
+   ul.wc-block-components-product-details:first-child {
+     display: flex;
+     flex-direction: column;
+
+     li {
+       order: 950;
+     }
+
+     li[class*="wc-block-components-product-details__gzd-"] {
+       order: 90;
+       width: 130%;
+     }
+
+     li.wc-block-components-product-details__gzd-unit-price {
+       order: 0;
+     }
+
+     li.wc-block-components-product-details__gzd-deposit-packaging-type {
+       order: 5;
+       font-weight: bold;
+       text-transform: uppercase;
+     }
+
+     li.wc-block-components-product-details__gzd-deposit {
+       order: 10;
+     }
+
+     li.wc-block-components-product-details__gzd-differential-taxation {
+       order: 10;
+     }
+
+     li.wc-block-components-product-details__gzd-delivery-time {
+      order: 20;
+     }
+
+     li.wc-block-components-product-details__gzd-item-desc {
+       order: 100;
+     }
+
+     li.wc-gzd-summary-item-last {
+       margin-bottom: 1em;
+     }
+    }
+  }
+}
+
+/**
+* Hide unit price within checkout as unit price is moved to subtotal instead.
+*/
+.wc-block-components-order-summary-item {
+  .wc-block-components-product-details {
+    .wc-block-components-product-details__gzd-unit-price {
+      display: none !important;
+    }
+
+    .wc-not-gzd-summary-item-first {
+      margin-top: 1em;
+    }
+  }
+}
+
+.wp-block-woocommerce-checkout {
+  .wc-block-components-totals-wrapper {
+    .wc-gzd-small-business-info {
+      padding-left: 16px;
+      padding-right: 16px;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+}

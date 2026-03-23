@@ -1,0 +1,64 @@
+{
+  "name": "storeabill/storerabill-lib",
+  "description": "A package for hiding re-namespaced dependencies and executing them",
+  "prefer-stable": true,
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.0"
+  },
+  "require-dev": {
+    "mpdf/mpdf": "8.*",
+    "mpdf/qrcode": "^1.1.1",
+    "horstoeko/zugferd": "^1",
+    "josemmo/einvoicing": "0.*"
+  },
+  "config": {
+    "allow-plugins": true,
+    "platform": {
+      "php": "7.4"
+    }
+  },
+  "scripts": {
+    "prefix-namespaces": [
+      "sh -c 'test -f ./bin/strauss.phar || curl -o bin/strauss.phar -L -C - https://github.com/BrianHenryIE/strauss/releases/latest/download/strauss.phar'",
+      "@php bin/strauss.phar",
+      "@composer dump-autoload"
+    ],
+    "post-install-cmd": [
+      "mkdir -p ./packages/mpdf/mpdf/data; cp -R vendor/mpdf/mpdf/data ./packages/mpdf/mpdf/",
+      "mkdir -p ./packages/mpdf/qrcode/data; cp -R vendor/mpdf/qrcode/data ./packages/mpdf/qrcode/",
+      "@prefix-namespaces",
+      "rm -rf ./vendor"
+    ],
+    "post-update-cmd": [
+      "mkdir -p ./packages/mpdf/mpdf/data; cp -R vendor/mpdf/mpdf/data ./packages/mpdf/mpdf/",
+      "mkdir -p ./packages/mpdf/qrcode/data; cp -R vendor/mpdf/qrcode/data ./packages/mpdf/qrcode/",
+      "@prefix-namespaces",
+      "rm -rf ./vendor"
+    ]
+  },
+  "extra": {
+    "strauss": {
+      "namespace_prefix": "Vendidero\\StoreaBill\\Vendor\\",
+      "target_directory": "/packages/",
+      "packages": [
+        "mpdf/mpdf",
+        "mpdf/qrcode",
+        "horstoeko/zugferd",
+        "josemmo/einvoicing"
+      ],
+      "exclude_from_prefix": {
+        "packages": [
+        ],
+        "namespaces": [
+        ],
+        "file_patterns": [
+        ]
+      },
+      "excluded_packages": [],
+      "classmap_prefix": "StoreaBill_Vendor_",
+      "delete_vendor_files": false,
+      "classmap_output": false
+    }
+  }
+}

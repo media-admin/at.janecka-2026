@@ -1,0 +1,30 @@
+{
+	"apiVersion": 3,
+	"name": "woocommerce-germanized-pro/checkout-billing-vat-id",
+	"version": "2.0.0",
+	"title": "VAT ID",
+	"category": "woocommerce",
+	"description": "Adds the VAT ID field to the billing address.",
+	"supports": {
+		"align": false,
+		"html": false,
+		"multiple": false,
+		"reusable": false,
+		"lock": false
+	},
+	"parent": [ "woocommerce/checkout-billing-address-block" ],
+	"textdomain": "woocommerce-germanized-pro",
+	"attributes": {
+		"className": {
+			"type": "string",
+			"default": ""
+		},
+		"lock": {
+			"type": "object",
+			"default": {
+				"remove": true,
+				"move": false
+			}
+		}
+	}
+}

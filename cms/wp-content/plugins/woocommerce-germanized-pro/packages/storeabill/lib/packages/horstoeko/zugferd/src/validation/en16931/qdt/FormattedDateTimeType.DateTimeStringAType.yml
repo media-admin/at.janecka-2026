@@ -1,0 +1,7 @@
+Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\en16931\qdt\FormattedDateTimeType\DateTimeStringAType:
+    properties:
+        format:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules

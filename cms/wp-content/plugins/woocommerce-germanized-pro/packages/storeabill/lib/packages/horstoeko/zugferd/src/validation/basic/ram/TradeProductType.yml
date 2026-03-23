@@ -1,0 +1,7 @@
+Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\basic\ram\TradeProductType:
+    properties:
+        name:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules

@@ -1,0 +1,39 @@
+<?php
+
+namespace Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\minimum\ram;
+
+/**
+ * Class representing LegalOrganizationType
+ *
+ * XSD Type: LegalOrganizationType
+ */
+class LegalOrganizationType
+{
+
+    /**
+     * @var \Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\minimum\udt\IDType $iD
+     */
+    private $iD = null;
+
+    /**
+     * Gets as iD
+     *
+     * @return \Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\minimum\udt\IDType
+     */
+    public function getID()
+    {
+        return $this->iD;
+    }
+
+    /**
+     * Sets a new iD
+     *
+     * @param  \Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\minimum\udt\IDType $iD
+     * @return self
+     */
+    public function setID(?\Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\minimum\udt\IDType $iD = null)
+    {
+        $this->iD = $iD;
+        return $this;
+    }
+}

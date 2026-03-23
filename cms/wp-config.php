@@ -55,4 +55,4 @@ if (!defined('ABSPATH')) {
 require_once ABSPATH . 'wp-settings.php';
 
 // Better Stack (Logtail)
-define('LOGTAIL_SOURCE_TOKEN', 'qqP84gVb14fpM7mesNM2EYn8');
+define('LOGTAIL_SOURCE_TOKEN', 'qqP84gVb14fpM7mesNM2EYn8');define( 'WC_GZD_ENCRYPTION_KEY', '98779bb6fe273cbb970823f17031a224ed1fb6f0632b3f92d087c7d163b865b0' );

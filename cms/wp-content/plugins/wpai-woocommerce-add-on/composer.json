@@ -1,0 +1,7 @@
+{
+  "autoload": {
+    "psr-4": {
+      "wpai_woocommerce_add_on\\": "src"
+    }
+  }
+}

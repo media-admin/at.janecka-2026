@@ -1,0 +1,1 @@
+jQuery((function(a){a("#_billing_vat_id").length>0&&a.ajaxSetup({beforeSend:function(i,e){void 0!==e.data&&"string"==typeof e.data&&e.data.indexOf("woocommerce_calc_line_taxes")>=0&&(e.data+="&vat_id="+a("#_billing_vat_id").val())}})})),((window.germanizedPro=window.germanizedPro||{}).static=window.germanizedPro.static||{})["admin-meta-boxes-order"]={};

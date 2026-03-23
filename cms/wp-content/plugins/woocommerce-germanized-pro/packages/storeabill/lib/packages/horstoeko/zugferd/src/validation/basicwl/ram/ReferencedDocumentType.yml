@@ -1,0 +1,10 @@
+Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\basicwl\ram\ReferencedDocumentType:
+    properties:
+        issuerAssignedID:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+        formattedIssueDateTime:
+            -
+                Valid: null

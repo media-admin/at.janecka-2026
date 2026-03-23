@@ -1,0 +1,26 @@
+.wc-gzd-vat-id {
+  .wc-block-components-text-input {
+    margin-top: 16px !important;
+  }
+}
+
+.wc-gzd-vat-id-element-placeholder {
+  display: none;
+}
+
+.wp-block-woocommerce-checkout-shipping-address-block,
+.wp-block-woocommerce-checkout-billing-address-block {
+  .wc-block-components-address-form {
+    .wc-gzd-vat-id {
+      box-sizing: border-box;
+      flex: 0 0 calc(50% - 12px);
+      margin-top: 1.5em;
+      position: relative;
+      white-space: nowrap;
+
+      .wc-block-components-text-input {
+        margin-top: 0 !important;
+      }
+    }
+  }
+}

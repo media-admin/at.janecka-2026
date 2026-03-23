@@ -1,0 +1,1 @@
+((window.wcGzdPro=window.wcGzdPro||{}).blocks=window.wcGzdPro.blocks||{})["wc-gzdp-blocks"]={};

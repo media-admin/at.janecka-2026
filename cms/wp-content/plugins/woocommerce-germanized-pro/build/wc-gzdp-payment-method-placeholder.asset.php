@@ -1,0 +1,1 @@
+<?php return array('dependencies' => array('react', 'wc-blocks-registry', 'wc-gzdp-blocks-settings', 'wc-settings', 'wp-element', 'wp-html-entities', 'wp-primitives'), 'version' => '028642d5672c7ac028a0');

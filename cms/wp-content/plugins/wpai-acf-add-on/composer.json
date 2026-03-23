@@ -1,0 +1,8 @@
+{
+  "autoload": {
+    "psr-4": {
+      "wpai_acf_add_on_pro\\": "src",
+      "PMXI\\AddonInstaller\\": "src"
+    }
+  }
+}

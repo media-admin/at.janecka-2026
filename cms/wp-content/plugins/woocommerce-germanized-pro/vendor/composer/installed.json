@@ -1,0 +1,769 @@
+{
+    "packages": [
+        {
+            "name": "automattic/jetpack-autoloader",
+            "version": "v2.11.18",
+            "version_normalized": "2.11.18.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Automattic/jetpack-autoloader.git",
+                "reference": "53cbf0528fa6931c4fa6465bccd37514f9eda720"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Automattic/jetpack-autoloader/zipball/53cbf0528fa6931c4fa6465bccd37514f9eda720",
+                "reference": "53cbf0528fa6931c4fa6465bccd37514f9eda720",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1 || ^2.0"
+            },
+            "require-dev": {
+                "automattic/jetpack-changelogger": "^3.3.2",
+                "yoast/phpunit-polyfills": "1.0.4"
+            },
+            "time": "2023-03-29T12:51:59+00:00",
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Automattic\\Jetpack\\Autoloader\\CustomAutoloaderPlugin",
+                "autotagger": true,
+                "mirror-repo": "Automattic/jetpack-autoloader",
+                "branch-alias": {
+                    "dev-trunk": "2.11.x-dev"
+                },
+                "changelogger": {
+                    "link-template": "https://github.com/Automattic/jetpack-autoloader/compare/v${old}...v${new}"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Automattic\\Jetpack\\Autoloader\\": "src"
+                },
+                "classmap": [
+                    "src/AutoloadGenerator.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Creates a custom autoloader for a plugin or theme.",
+            "support": {
+                "source": "https://github.com/Automattic/jetpack-autoloader/tree/v2.11.18"
+            },
+            "install-path": "../automattic/jetpack-autoloader"
+        },
+        {
+            "name": "composer/installers",
+            "version": "v1.12.0",
+            "version_normalized": "1.12.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/installers.git",
+                "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/installers/zipball/d20a64ed3c94748397ff5973488761b22f6d3f19",
+                "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0 || ^2.0"
+            },
+            "replace": {
+                "roundcube/plugin-installer": "*",
+                "shama/baton": "*"
+            },
+            "require-dev": {
+                "composer/composer": "1.6.* || ^2.0",
+                "composer/semver": "^1 || ^3",
+                "phpstan/phpstan": "^0.12.55",
+                "phpstan/phpstan-phpunit": "^0.12.16",
+                "symfony/phpunit-bridge": "^4.2 || ^5",
+                "symfony/process": "^2.3"
+            },
+            "time": "2021-09-13T08:19:44+00:00",
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Composer\\Installers\\Plugin",
+                "branch-alias": {
+                    "dev-main": "1.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Installers\\": "src/Composer/Installers"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kyle Robinson Young",
+                    "email": "kyle@dontkry.com",
+                    "homepage": "https://github.com/shama"
+                }
+            ],
+            "description": "A multi-framework Composer library installer",
+            "homepage": "https://composer.github.io/installers/",
+            "keywords": [
+                "Craft",
+                "Dolibarr",
+                "Eliasis",
+                "Hurad",
+                "ImageCMS",
+                "Kanboard",
+                "Lan Management System",
+                "MODX Evo",
+                "MantisBT",
+                "Mautic",
+                "Maya",
+                "OXID",
+                "Plentymarkets",
+                "Porto",
+                "RadPHP",
+                "SMF",
+                "Starbug",
+                "Thelia",
+                "Whmcs",
+                "WolfCMS",
+                "agl",
+                "aimeos",
+                "annotatecms",
+                "attogram",
+                "bitrix",
+                "cakephp",
+                "chef",
+                "cockpit",
+                "codeigniter",
+                "concrete5",
+                "croogo",
+                "dokuwiki",
+                "drupal",
+                "eZ Platform",
+                "elgg",
+                "expressionengine",
+                "fuelphp",
+                "grav",
+                "installer",
+                "itop",
+                "joomla",
+                "known",
+                "kohana",
+                "laravel",
+                "lavalite",
+                "lithium",
+                "magento",
+                "majima",
+                "mako",
+                "mediawiki",
+                "miaoxing",
+                "modulework",
+                "modx",
+                "moodle",
+                "osclass",
+                "pantheon",
+                "phpbb",
+                "piwik",
+                "ppi",
+                "processwire",
+                "puppet",
+                "pxcms",
+                "reindex",
+                "roundcube",
+                "shopware",
+                "silverstripe",
+                "sydes",
+                "sylius",
+                "symfony",
+                "tastyigniter",
+                "typo3",
+                "wordpress",
+                "yawik",
+                "zend",
+                "zikula"
+            ],
+            "support": {
+                "issues": "https://github.com/composer/installers/issues",
+                "source": "https://github.com/composer/installers/tree/v1.12.0"
+            },
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/composer",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
+            ],
+            "install-path": "./installers"
+        },
+        {
+            "name": "league/iso3166",
+            "version": "4.4.0",
+            "version_normalized": "4.4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alcohol/iso3166.git",
+                "reference": "928ac7ecc569db9123a83ef5b1c6efc279e7cb49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alcohol/iso3166/zipball/928ac7ecc569db9123a83ef5b1c6efc279e7cb49",
+                "reference": "928ac7ecc569db9123a83ef5b1c6efc279e7cb49",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.12.6",
+                "phpstan/phpstan-deprecation-rules": "^1.2.1",
+                "phpstan/phpstan-strict-rules": "^1.6.1",
+                "phpunit/phpunit": "^9.6.21"
+            },
+            "time": "2026-01-02T09:49:36+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "League\\ISO3166\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Bast",
+                    "email": "rob.bast@gmail.com"
+                }
+            ],
+            "description": "ISO 3166-1 PHP Library",
+            "homepage": "https://github.com/alcohol/iso3166",
+            "keywords": [
+                "3166",
+                "3166-1",
+                "ISO 3166",
+                "countries",
+                "iso",
+                "library"
+            ],
+            "support": {
+                "issues": "https://github.com/alcohol/iso3166/issues",
+                "source": "https://github.com/alcohol/iso3166"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/alcohol",
+                    "type": "github"
+                }
+            ],
+            "install-path": "../league/iso3166"
+        },
+        {
+            "name": "vendidero/dpd-for-shiptastic",
+            "version": "2.1.3",
+            "version_normalized": "2.1.3.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:vendidero/dpd-for-shiptastic.git",
+                "reference": "48adf2fa77da54af8901c79466ae817d5b0fba78"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vendidero/dpd-for-shiptastic/zipball/48adf2fa77da54af8901c79466ae817d5b0fba78",
+                "reference": "48adf2fa77da54af8901c79466ae817d5b0fba78",
+                "shasum": ""
+            },
+            "require": {
+                "automattic/jetpack-autoloader": "2.11.18",
+                "league/iso3166": "^4.1.0"
+            },
+            "require-dev": {
+                "woocommerce/woocommerce-sniffs": "^1.0.0"
+            },
+            "time": "2026-02-24T10:00:34+00:00",
+            "type": "wordpress-plugin",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Vendidero\\Shiptastic\\DPD\\": "src/"
+                }
+            },
+            "scripts": {
+                "post-install-cmd": [
+                    "composer dump-autoload"
+                ],
+                "post-update-cmd": [
+                    "composer dump-autoload"
+                ],
+                "phpcs": [
+                    "phpcs -s -p"
+                ],
+                "phpcs-pre-commit": [
+                    "phpcs -s -p -n"
+                ],
+                "phpcbf": [
+                    "phpcbf -p"
+                ]
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "DPD integration for Shiptastic.",
+            "homepage": "https://github.com/vendidero/dpd-for-shiptastic",
+            "support": {
+                "source": "https://github.com/vendidero/dpd-for-shiptastic/tree/v2.1.3",
+                "issues": "https://github.com/vendidero/dpd-for-shiptastic/issues"
+            },
+            "install-path": "../../packages/dpd-for-shiptastic"
+        },
+        {
+            "name": "vendidero/gls-for-shiptastic",
+            "version": "1.2.3",
+            "version_normalized": "1.2.3.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:vendidero/gls-for-shiptastic.git",
+                "reference": "4ace4a21b89e458dfd926301d186687c13eb83a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vendidero/gls-for-shiptastic/zipball/4ace4a21b89e458dfd926301d186687c13eb83a9",
+                "reference": "4ace4a21b89e458dfd926301d186687c13eb83a9",
+                "shasum": ""
+            },
+            "require": {
+                "automattic/jetpack-autoloader": "2.11.18"
+            },
+            "require-dev": {
+                "woocommerce/woocommerce-sniffs": "^1.0.0"
+            },
+            "time": "2026-03-17T09:09:28+00:00",
+            "type": "wordpress-plugin",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Vendidero\\Shiptastic\\GLS\\": "src/"
+                }
+            },
+            "scripts": {
+                "post-install-cmd": [
+                    "composer dump-autoload"
+                ],
+                "post-update-cmd": [
+                    "composer dump-autoload"
+                ],
+                "phpcs": [
+                    "phpcs -s -p"
+                ],
+                "phpcs-pre-commit": [
+                    "phpcs -s -p -n"
+                ],
+                "phpcbf": [
+                    "phpcbf -p"
+                ]
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "GLS integration for Shiptastic",
+            "homepage": "https://github.com/vendidero/gls-for-shiptastic",
+            "support": {
+                "source": "https://github.com/vendidero/gls-for-shiptastic/tree/v1.2.3",
+                "issues": "https://github.com/vendidero/gls-for-shiptastic/issues"
+            },
+            "install-path": "../../packages/gls-for-shiptastic"
+        },
+        {
+            "name": "vendidero/hermes-for-shiptastic",
+            "version": "1.0.9",
+            "version_normalized": "1.0.9.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:vendidero/hermes-for-shiptastic.git",
+                "reference": "3e59e351ae85417b9eae98e5946abed17dd6b0d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vendidero/hermes-for-shiptastic/zipball/3e59e351ae85417b9eae98e5946abed17dd6b0d7",
+                "reference": "3e59e351ae85417b9eae98e5946abed17dd6b0d7",
+                "shasum": ""
+            },
+            "require": {
+                "automattic/jetpack-autoloader": "2.11.18"
+            },
+            "require-dev": {
+                "woocommerce/woocommerce-sniffs": "^1.0.0"
+            },
+            "time": "2025-11-17T13:31:01+00:00",
+            "type": "wordpress-plugin",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Vendidero\\Shiptastic\\Hermes\\": "src/"
+                }
+            },
+            "scripts": {
+                "post-install-cmd": [
+                    "composer dump-autoload"
+                ],
+                "post-update-cmd": [
+                    "composer dump-autoload"
+                ],
+                "phpcs": [
+                    "phpcs -s -p"
+                ],
+                "phpcs-pre-commit": [
+                    "phpcs -s -p -n"
+                ],
+                "phpcbf": [
+                    "phpcbf -p"
+                ]
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "Hermes for Shiptastic.",
+            "homepage": "https://github.com/vendidero/hermes-for-shiptastic",
+            "support": {
+                "source": "https://github.com/vendidero/hermes-for-shiptastic/tree/v1.0.9",
+                "issues": "https://github.com/vendidero/hermes-for-shiptastic/issues"
+            },
+            "install-path": "../../packages/hermes-for-shiptastic"
+        },
+        {
+            "name": "vendidero/storeabill",
+            "version": "3.5.0",
+            "version_normalized": "3.5.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:vendidero/storeabill.git",
+                "reference": "2c66621dd4bd564cb6d87e4ed627df7d57436e93"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vendidero/storeabill/zipball/2c66621dd4bd564cb6d87e4ed627df7d57436e93",
+                "reference": "2c66621dd4bd564cb6d87e4ed627df7d57436e93",
+                "shasum": ""
+            },
+            "require": {
+                "automattic/jetpack-autoloader": "2.11.18",
+                "vendidero/woocommerce-eu-tax-helper": "2.0.8"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0.0",
+                "woocommerce/woocommerce-sniffs": "^1.0.0",
+                "yoast/phpunit-polyfills": "^3.0"
+            },
+            "time": "2026-03-17T10:26:56+00:00",
+            "type": "wordpress-plugin",
+            "extra": {
+                "installer-paths": {
+                    "vendor/vendidero/woocommerce-eu-tax-helper": [
+                        "vendidero/woocommerce-eu-tax-helper"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Vendidero\\StoreaBill\\": "src/",
+                    "Vendidero\\StoreaBill\\Vendor\\": "lib/packages/"
+                },
+                "psr-0": {
+                    "Vendidero\\StoreaBill\\Vendor\\": "lib/packages/"
+                },
+                "classmap": [
+                    "lib/packages"
+                ]
+            },
+            "scripts": {
+                "post-install-cmd": [
+                    "sh ./bin/vendor-clean.sh"
+                ],
+                "post-update-cmd": [
+                    "sh ./bin/vendor-clean.sh"
+                ],
+                "makepot": [
+                    "@makepot-audit --skip-audit"
+                ],
+                "build-lib": [
+                    "sh ./bin/build-lib.sh"
+                ],
+                "phpcs": [
+                    "phpcs -s -p"
+                ],
+                "phpcs-pre-commit": [
+                    "phpcs -s -p -n"
+                ],
+                "phpcbf": [
+                    "phpcbf -p"
+                ]
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "StoreaBill",
+            "homepage": "https://github.com/vendidero/storeabill",
+            "support": {
+                "source": "https://github.com/vendidero/storeabill/tree/v3.5.0",
+                "issues": "https://github.com/vendidero/storeabill/issues"
+            },
+            "install-path": "../../packages/storeabill"
+        },
+        {
+            "name": "vendidero/storeabill-lexoffice",
+            "version": "2.1.2",
+            "version_normalized": "2.1.2.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:vendidero/storeabill-lexoffice.git",
+                "reference": "697f14654564cad5085fdfb044a70df03d5fc793"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vendidero/storeabill-lexoffice/zipball/697f14654564cad5085fdfb044a70df03d5fc793",
+                "reference": "697f14654564cad5085fdfb044a70df03d5fc793",
+                "shasum": ""
+            },
+            "require": {
+                "automattic/jetpack-autoloader": "2.11.18"
+            },
+            "require-dev": {
+                "woocommerce/woocommerce-sniffs": "^1.0.0"
+            },
+            "time": "2025-07-22T10:42:57+00:00",
+            "type": "wordpress-plugin",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Vendidero\\StoreaBill\\Lexoffice\\": "src"
+                }
+            },
+            "scripts": {
+                "post-install-cmd": [
+                    "composer dump-autoload"
+                ],
+                "post-update-cmd": [
+                    "composer dump-autoload"
+                ],
+                "phpcs": [
+                    "phpcs -s -p"
+                ],
+                "phpcs-pre-commit": [
+                    "phpcs -s -p -n"
+                ],
+                "phpcbf": [
+                    "phpcbf -p"
+                ]
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "The StoreaBill lexoffice integration.",
+            "homepage": "https://vendidero.de",
+            "support": {
+                "source": "https://github.com/vendidero/storeabill-lexoffice/tree/v2.1.2",
+                "issues": "https://github.com/vendidero/storeabill-lexoffice/issues"
+            },
+            "install-path": "../../packages/storeabill-lexoffice"
+        },
+        {
+            "name": "vendidero/storeabill-sevdesk",
+            "version": "2.1.12",
+            "version_normalized": "2.1.12.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:vendidero/storeabill-sevdesk.git",
+                "reference": "be7e5870f0dde92f7a2eaa4752290d2ae9134246"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vendidero/storeabill-sevdesk/zipball/be7e5870f0dde92f7a2eaa4752290d2ae9134246",
+                "reference": "be7e5870f0dde92f7a2eaa4752290d2ae9134246",
+                "shasum": ""
+            },
+            "require": {
+                "automattic/jetpack-autoloader": "2.11.18"
+            },
+            "require-dev": {
+                "woocommerce/woocommerce-sniffs": "^1.0.0"
+            },
+            "time": "2025-11-17T13:31:56+00:00",
+            "type": "wordpress-plugin",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Vendidero\\StoreaBill\\sevDesk\\": "src"
+                }
+            },
+            "scripts": {
+                "post-install-cmd": [
+                    "composer dump-autoload"
+                ],
+                "post-update-cmd": [
+                    "composer dump-autoload"
+                ],
+                "phpcs": [
+                    "phpcs -s -p"
+                ],
+                "phpcs-pre-commit": [
+                    "phpcs -s -p -n"
+                ],
+                "phpcbf": [
+                    "phpcbf -p"
+                ]
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "The StoreaBill sevDesk integration.",
+            "homepage": "https://vendidero.de",
+            "support": {
+                "source": "https://github.com/vendidero/storeabill-sevdesk/tree/v2.1.12",
+                "issues": "https://github.com/vendidero/storeabill-sevdesk/issues"
+            },
+            "install-path": "../../packages/storeabill-sevdesk"
+        },
+        {
+            "name": "vendidero/vendidero-helper",
+            "version": "2.3.2",
+            "version_normalized": "2.3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vendidero/vendidero-helper.git",
+                "reference": "5b2e5a7b4e1ccccf2a4729b1f41497f4d07cbe9d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vendidero/vendidero-helper/zipball/5b2e5a7b4e1ccccf2a4729b1f41497f4d07cbe9d",
+                "reference": "5b2e5a7b4e1ccccf2a4729b1f41497f4d07cbe9d",
+                "shasum": ""
+            },
+            "require": {
+                "automattic/jetpack-autoloader": "2.11.18",
+                "composer/installers": "^1.9 || ^2.0"
+            },
+            "require-dev": {
+                "woocommerce/woocommerce-sniffs": "^1.0.0"
+            },
+            "time": "2025-10-06T08:51:59+00:00",
+            "type": "wordpress-plugin",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Vendidero\\VendideroHelper\\": "src"
+                }
+            },
+            "scripts": {
+                "post-install-cmd": [
+                    "composer dump-autoload"
+                ],
+                "post-update-cmd": [
+                    "composer dump-autoload"
+                ],
+                "phpcs": [
+                    "phpcs -s -p"
+                ],
+                "phpcs-pre-commit": [
+                    "phpcs -s -p -n"
+                ],
+                "phpcbf": [
+                    "phpcbf -p"
+                ]
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "vendidero",
+                    "email": "info@vendidero.de"
+                }
+            ],
+            "description": "Will help vendidero users to manage their licenses and receive automatic updates",
+            "support": {
+                "source": "https://github.com/vendidero/vendidero-helper/tree/v2.3.2",
+                "issues": "https://github.com/vendidero/vendidero-helper/issues"
+            },
+            "install-path": "../../packages/vendidero-helper"
+        },
+        {
+            "name": "vendidero/woocommerce-eu-tax-helper",
+            "version": "2.0.8",
+            "version_normalized": "2.0.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vendidero/woocommerce-eu-tax-helper.git",
+                "reference": "95158ef45418a35fe9ca56b408abc9f3ba17edea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vendidero/woocommerce-eu-tax-helper/zipball/95158ef45418a35fe9ca56b408abc9f3ba17edea",
+                "reference": "95158ef45418a35fe9ca56b408abc9f3ba17edea",
+                "shasum": ""
+            },
+            "require": {
+                "automattic/jetpack-autoloader": "2.11.18",
+                "composer/installers": "^1.9.0"
+            },
+            "require-dev": {
+                "myclabs/deep-copy": "^1.7.0",
+                "woocommerce/woocommerce-sniffs": "^1.0.0"
+            },
+            "time": "2025-08-25T08:51:35+00:00",
+            "type": "wordpress-plugin",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Vendidero\\EUTaxHelper\\": "src/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit"
+                ],
+                "phpcs": [
+                    "phpcs -s -p"
+                ],
+                "phpcs-pre-commit": [
+                    "phpcs -s -p -n"
+                ],
+                "phpcbf": [
+                    "phpcbf -p"
+                ]
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "EU tax helper for WooCommerce",
+            "homepage": "https://vendidero.de/",
+            "support": {
+                "source": "https://github.com/vendidero/woocommerce-eu-tax-helper/tree/v2.0.8",
+                "issues": "https://github.com/vendidero/woocommerce-eu-tax-helper/issues"
+            },
+            "install-path": "../vendidero/woocommerce-eu-tax-helper"
+        }
+    ],
+    "dev": false,
+    "dev-package-names": []
+}

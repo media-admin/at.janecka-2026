@@ -1,0 +1,7 @@
+Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\extended\ram\DebtorFinancialAccountType:
+    properties:
+        iBANID:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules

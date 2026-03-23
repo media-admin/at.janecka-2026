@@ -1,0 +1,12 @@
+Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\basic\ram\LineTradeAgreementType:
+    properties:
+        grossPriceProductTradePrice:
+            -
+                Valid: null
+        netPriceProductTradePrice:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null

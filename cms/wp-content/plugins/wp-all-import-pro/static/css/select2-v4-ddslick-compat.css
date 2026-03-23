@@ -1,0 +1,332 @@
+/*
+ * Select2 v4 to Ddslick Compatibility CSS
+ * This file provides styling to make Select2 v4 dropdowns look exactly like the ddslick dropdowns they replaced
+ *
+ * EXACT DDSLICK REPLICATION:
+ * .dd-select: background #fff, border 1px solid #ddd, padding 10px 0, margin-left -5px
+ * .dd-selected: color #000, font-weight normal, font-size 18px, padding 0 12px, line-height 24px
+ * .change_file .dd-select: padding 5px 0 0
+ *
+ * WIDTHS: file_selector 600px, custom_type_selector 590px, taxonomy_to_import 300px
+ * ICONS: Selected state color #46ba69, font-size 24px, margin 2px 5px 2px 2px
+ *
+ * DROPDOWN HEIGHT: Double the default height for better visibility
+ */
+
+/* Double the default dropdown height for Select2 v4 */
+.select2-results__options {
+    max-height: 400px !important; /* Default is usually ~200px, doubling to 400px */
+}
+
+.select2-dropdown .select2-results {
+    max-height: 400px !important; /* Ensure results container matches */
+}
+
+.select2-container--default .select2-results__options {
+    max-height: 400px !important; /* Target default theme specifically */
+}
+
+/* ===== SELECT2 V4 TO DDSLICK EXACT REPLICATION ===== */
+
+/* STEP 1: MAIN CONTAINER - Replicate .dd-select container styling */
+.wpallimport-plugin .select2-container {
+    border: none !important;
+    background: transparent !important;
+    box-sizing: border-box !important;
+}
+
+/* STEP 2: SELECTION AREA - Replicate .dd-select styling exactly */
+.wpallimport-plugin .select2-container .select2-selection--single {
+    background: #fff !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    height: auto !important;
+    padding: 10px 0 !important;
+    line-height: 24px !important;
+    cursor: pointer !important;
+    outline: none !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+}
+
+/* STEP 3: TEXT DISPLAY - Replicate .dd-selected styling exactly */
+.wpallimport-plugin .select2-container .select2-selection--single .select2-selection__rendered {
+    color: #000 !important;
+    font-weight: normal !important;
+    font-size: 18px !important;
+    padding: 0 12px !important;
+    line-height: 24px !important;
+    text-align: left !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    display: block !important;
+    padding-right: 20px !important; /* Space for arrow */
+}
+
+/* STEP 4: ARROW STYLING - Clean ddslick-style arrow */
+.wpallimport-plugin .select2-container .select2-selection--single .select2-selection__arrow {
+    height: 24px !important;
+    position: absolute !important;
+    top: 50% !important;
+    right: 8px !important;
+    width: 20px !important;
+    transform: translateY(-50%) !important;
+}
+
+.wpallimport-plugin .select2-container .select2-selection--single .select2-selection__arrow b {
+    border-color: #888 transparent transparent transparent !important;
+    border-style: solid !important;
+    border-width: 5px 4px 0 4px !important;
+    height: 0 !important;
+    left: 50% !important;
+    margin-left: -4px !important;
+    margin-top: -2px !important;
+    position: absolute !important;
+    top: 50% !important;
+    width: 0 !important;
+}
+
+/* STEP 5: SPECIFIC WIDTHS - Match exact ddslick widths */
+.wpallimport-plugin #file_selector + .select2-container,
+.wpallimport-plugin .change_file #file_selector + .select2-container {
+    width: 600px !important;
+    margin-bottom: 10px !important;
+    margin-left: 0 !important;
+}
+
+.wpallimport-plugin #custom_type_selector + .select2-container {
+    width: 600px !important;
+}
+
+.wpallimport-plugin #taxonomy_to_import + .select2-container {
+    width: 600px !important;
+}
+
+.wpallimport-plugin #gravity_form_to_import + .select2-container {
+    width: 600px !important;
+}
+
+/* STEP 7: HOVER AND FOCUS STATES - Keep ddslick simplicity */
+.wpallimport-plugin .select2-container .select2-selection--single:hover,
+.wpallimport-plugin .select2-container .select2-selection--single:focus,
+.wpallimport-plugin .select2-container.select2-container--open .select2-selection--single {
+    background: #fff !important;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* STEP 8: DROPDOWN STYLING - Match ddslick dropdown appearance */
+.wpallimport-plugin .select2-dropdown {
+    border: 1px solid #ddd !important;
+    border-top: none !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    margin-left: -10px !important;
+}
+
+.wpallimport-plugin .select2-dropdown .select2-results__option {
+    font-size: 18px !important;
+    color: #555 !important;
+    padding: 8px 12px !important;
+    line-height: 24px !important;
+}
+
+.wpallimport-plugin .select2-dropdown .select2-results__option:hover,
+.wpallimport-plugin .select2-dropdown .select2-results__option--highlighted {
+    background: #eee !important;
+    color: #555 !important;
+}
+
+/* STEP 9: CUSTOM TYPE SELECTOR ICONS - Replicate ddslick icon styling */
+.wpallimport-plugin #custom_type_selector + .select2-container .select2-selection__rendered .dashicon {
+    display: inline-block !important;
+    font-family: "dashicons" !important;
+    font-size: 24px !important;
+    width: 24px !important;
+    height: 24px !important;
+    line-height: 24px !important;
+    vertical-align: middle !important;
+    float: left !important;
+    margin: 2px 5px 2px 2px !important;
+}
+
+/* Selected state icons - replicate ddslick .dd-selected .dashicon:before styling */
+.wpallimport-plugin #custom_type_selector + .select2-container .select2-selection__rendered .dashicon:before {
+    color: #46ba69 !important;
+    line-height: 24px !important;
+}
+
+/* STEP 10: DROPDOWN ICONS FOR CUSTOM_TYPE_SELECTOR */
+.wpallimport-plugin .select2-dropdown.custom-type-dropdown .select2-results__option .dashicon {
+    display: inline-block !important;
+    font-family: "dashicons" !important;
+    font-size: 24px !important;
+    width: 24px !important;
+    height: 24px !important;
+    line-height: 24px !important;
+    margin-right: 8px !important;
+    color: #555 !important;
+    vertical-align: middle !important;
+    float: left !important;
+    margin: 2px 5px 2px 2px !important;
+}
+
+/* STEP 11: SEARCH INPUT STYLING - Match dropdown options */
+.wpallimport-plugin .select2-dropdown.custom-type-dropdown .select2-search__field {
+    font-size: 18px !important;
+    color: #555 !important;
+    padding-left: 12px !important;
+    line-height: 24px !important;
+    height: auto !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+}
+
+/* STEP 12: CLEAN UP - Remove any conflicting default Select2 styling */
+.wpallimport-plugin .select2-container--default .select2-selection--single {
+    background-color: #fff !important;
+    background-image: none !important;
+}
+
+.wpallimport-plugin .select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: #999 !important;
+}
+
+.wpallimport-plugin .select2-container--default.select2-container--disabled .select2-selection--single {
+    background-color: #eee !important;
+    cursor: default !important;
+}
+
+/* STEP 12: ENSURE PROPER POSITIONING */
+.wpallimport-plugin .select2-dropdown {
+    left: 10px !important;
+}
+
+/* STEP 13: SPECIFIC ICON STYLES - Replicate exact ddslick icon styling */
+.wpallimport-plugin #custom_type_selector + .select2-container .select2-selection__rendered .dashicon-post:before {
+    font-family: "dashicons" !important;
+    content: "\f109" !important;
+    color: #46ba69 !important;
+}
+
+.wpallimport-plugin #custom_type_selector + .select2-container .select2-selection__rendered .dashicon-page:before {
+    font-family: "dashicons" !important;
+    content: "\f105" !important;
+    color: #46ba69 !important;
+}
+
+.wpallimport-plugin #custom_type_selector + .select2-container .select2-selection__rendered .dashicon-cpt:before {
+    font-family: "dashicons" !important;
+    content: "\f111" !important;
+    color: #46ba69 !important;
+}
+
+.wpallimport-plugin #custom_type_selector + .select2-container .select2-selection__rendered .dashicon-import_users:before,
+.wpallimport-plugin #custom_type_selector + .select2-container .select2-selection__rendered .dashicon-users:before {
+    font-family: "dashicons" !important;
+    content: "\f110" !important;
+    color: #46ba69 !important;
+}
+
+.wpallimport-plugin #custom_type_selector + .select2-container .select2-selection__rendered .dashicon-comments:before {
+    font-family: "dashicons" !important;
+    content: "\f101" !important;
+    color: #46ba69 !important;
+}
+
+.wpallimport-plugin #custom_type_selector + .select2-container .select2-selection__rendered .dashicon-taxonomies:before {
+    font-family: "dashicons" !important;
+    content: "\f318" !important;
+    color: #46ba69 !important;
+}
+
+.wpallimport-plugin #custom_type_selector + .select2-container .select2-selection__rendered .dashicon-shop_order:before,
+.wpallimport-plugin #custom_type_selector + .select2-container .select2-selection__rendered .dashicon-shop_coupon:before,
+.wpallimport-plugin #custom_type_selector + .select2-container .select2-selection__rendered .dashicon-shop_customer:before,
+.wpallimport-plugin #custom_type_selector + .select2-container .select2-selection__rendered .dashicon-product:before,
+.wpallimport-plugin #custom_type_selector + .select2-container .select2-selection__rendered .dashicon-woo_reviews:before {
+    font-family: "WooCommerce" !important;
+    content: "\e03d" !important;
+    color: #46ba69 !important;
+    margin-top: 2px !important;
+}
+
+/* Gravity Forms icon - special background image handling */
+.wpallimport-plugin #custom_type_selector + .select2-container .select2-selection__rendered .dashicon-gf_entries {
+    background-image: url("../img/gf-selected.svg") !important;
+    background-repeat: no-repeat !important;
+    background-position: 3px 0 !important;
+    padding-left: 30px !important;
+}
+
+/* STEP 14: DROPDOWN ICON STYLES - For options in dropdown */
+.wpallimport-plugin .select2-dropdown.custom-type-dropdown .select2-results__option .dashicon-post:before {
+    font-family: "dashicons" !important;
+    content: "\f109" !important;
+    color: #555 !important;
+}
+
+.wpallimport-plugin .select2-dropdown.custom-type-dropdown .select2-results__option .dashicon-page:before {
+    font-family: "dashicons" !important;
+    content: "\f105" !important;
+    color: #555 !important;
+}
+
+.wpallimport-plugin .select2-dropdown.custom-type-dropdown .select2-results__option .dashicon-cpt:before {
+    font-family: "dashicons" !important;
+    content: "\f111" !important;
+    color: #555 !important;
+}
+
+.wpallimport-plugin .select2-dropdown.custom-type-dropdown .select2-results__option .dashicon-import_users:before,
+.wpallimport-plugin .select2-dropdown.custom-type-dropdown .select2-results__option .dashicon-users:before {
+    font-family: "dashicons" !important;
+    content: "\f110" !important;
+    color: #555 !important;
+}
+
+.wpallimport-plugin .select2-dropdown.custom-type-dropdown .select2-results__option .dashicon-comments:before {
+    font-family: "dashicons" !important;
+    content: "\f101" !important;
+    color: #555 !important;
+}
+
+.wpallimport-plugin .select2-dropdown.custom-type-dropdown .select2-results__option .dashicon-taxonomies:before {
+    font-family: "dashicons" !important;
+    content: "\f318" !important;
+    color: #555 !important;
+}
+
+.wpallimport-plugin .select2-dropdown.custom-type-dropdown .select2-results__option .dashicon-shop_order:before,
+.wpallimport-plugin .select2-dropdown.custom-type-dropdown .select2-results__option .dashicon-shop_coupon:before,
+.wpallimport-plugin .select2-dropdown.custom-type-dropdown .select2-results__option .dashicon-shop_customer:before,
+.wpallimport-plugin .select2-dropdown.custom-type-dropdown .select2-results__option .dashicon-product:before,
+.wpallimport-plugin .select2-dropdown.custom-type-dropdown .select2-results__option .dashicon-woo_reviews:before {
+    font-family: "WooCommerce" !important;
+    content: "\e03d" !important;
+    color: #555 !important;
+    margin-top: 2px !important;
+}
+
+/* Gravity Forms icon for dropdown options - special background image handling */
+.wpallimport-plugin .select2-dropdown.custom-type-dropdown .select2-results__option .dashicon-gf_entries {
+    display: inline-block !important;
+    width: 24px !important;
+    height: 24px !important;
+    line-height: 24px !important;
+    vertical-align: middle !important;
+    float: left !important;
+    margin: 0 5px 2px 2px !important;
+    background-image: url("../img/gf.svg") !important;
+    background-repeat: no-repeat !important;
+    background-position: 1px 2px !important;
+    padding-left: 24px !important;
+}
+
+/* STEP 15: FINAL CLEANUP - Ensure no conflicts */
+.wpallimport-plugin .select2-container * {
+    box-sizing: border-box !important;
+}

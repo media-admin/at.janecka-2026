@@ -1,0 +1,167 @@
+/**
+ * Custom WC Germanized CSS for OceanWP
+ */
+
+/**
+ * LOOP
+ */
+
+.woocommerce ul.products li.product {
+  .price {
+    .wc-gzd-sale-price-label {
+      color: #999;
+      font-size: 12px;
+    }
+    .wc-gzd-sale-price-regular-label {
+      display: block;
+      margin-top: 5px;
+    }
+  }
+
+  p.wc-gzd-additional-info {
+    color: #999;
+    margin: 0;
+  }
+  p.price-unit {
+    font-size: 1em;
+    color: #999;
+
+    .amount {
+      color: #999;
+    }
+
+    ins, del {
+      .amount {
+        color: #999;
+        font-size: 1em;
+      }
+    }
+  }
+}
+
+table.wc-gzd-food-table {
+  th, td {
+    text-transform: none;
+  }
+
+  tr {
+    th {
+      font-weight: bold;
+    }
+
+    &.wc-gzd-nutrient-table-item-is-child {
+      th {
+        font-weight: normal;
+      }
+    }
+  }
+}
+
+.woocommerce div.type-product {
+  p.wc-gzd-additional-info {
+    color: #999;
+    margin: 0;
+
+    .amount {
+      color: #999;
+    }
+  }
+
+  .wc-gzd-nutri-score {
+    margin: 1rem 0;
+
+    .wc-gzd-nutri-score-value {
+      height: 6rem;
+      width: auto;
+    }
+  }
+
+  .price {
+    .wc-gzd-sale-price-label {
+      color: #999;
+      font-size: 12px;
+      display: block;
+      line-height: 12px;
+      margin-bottom: -5px;
+    }
+    .wc-gzd-sale-price-regular-label {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
+
+  p.price-unit {
+    font-size: 1em;
+    color: #999;
+
+    del {
+      font-size: 1em !important;
+      color: #999 !important;
+
+      .amount {
+        color: #999 !important;
+      }
+    }
+
+    ins, del {
+      font-size: 1em;
+
+      .amount {
+        color: #999;
+        font-size: 1em;
+      }
+    }
+  }
+}
+
+.woocommerce {
+  .woocommerce-cart-form, table.woocommerce-checkout-review-order-table {
+    .wc-gzd-cart-info {
+      color: #999;
+      font-size: 12px;
+      margin: 5px 0;
+
+      &.unit-price, &.deposit-amount {
+        .amount {
+          color: #999;
+        }
+      }
+    }
+  }
+
+  .cart_totals table, #order_review table.woocommerce-checkout-review-order-table tfoot {
+    tr.order-tax {
+      th {
+        font-weight: normal;
+        font-size: 12px;
+        color: #999;
+      }
+      td {
+        .amount {
+          color: #999;
+        }
+        color: #999;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.woocommerce-gzd-checkout {
+  h3#order_payment_heading {
+    font-size: 14px;
+    position: relative;
+    margin: 0 0 20px;
+    padding-bottom: 8px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    border-color: #eaeaea;
+  }
+
+  h3#order_review_heading {
+    float: left;
+    width: 100%;
+  }
+}

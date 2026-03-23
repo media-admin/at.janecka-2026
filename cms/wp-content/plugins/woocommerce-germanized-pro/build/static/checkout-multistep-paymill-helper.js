@@ -1,0 +1,1 @@
+jQuery((function(e){"undefined"!=typeof paymill_form_checkout_submit_id&&e(".woocommerce-checkout").length&&e(".step-wrapper").length&&(paymill_form_checkout_submit_id="#next-step-payment")})),((window.germanizedPro=window.germanizedPro||{}).static=window.germanizedPro.static||{})["checkout-multistep-paymill-helper"]={};

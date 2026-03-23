@@ -1,0 +1,57 @@
+Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\basic\ram\SupplyChainTradeLineItemType:
+    properties:
+        associatedDocumentLineDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: AssociatedDocumentLineDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100'
+            accessor:
+                getter: getAssociatedDocumentLineDocument
+                setter: setAssociatedDocumentLineDocument
+            type: Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\basic\ram\DocumentLineDocumentType
+        specifiedTradeProduct:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedTradeProduct
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100'
+            accessor:
+                getter: getSpecifiedTradeProduct
+                setter: setSpecifiedTradeProduct
+            type: Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\basic\ram\TradeProductType
+        specifiedLineTradeAgreement:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedLineTradeAgreement
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100'
+            accessor:
+                getter: getSpecifiedLineTradeAgreement
+                setter: setSpecifiedLineTradeAgreement
+            type: Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\basic\ram\LineTradeAgreementType
+        specifiedLineTradeDelivery:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedLineTradeDelivery
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100'
+            accessor:
+                getter: getSpecifiedLineTradeDelivery
+                setter: setSpecifiedLineTradeDelivery
+            type: Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\basic\ram\LineTradeDeliveryType
+        specifiedLineTradeSettlement:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedLineTradeSettlement
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100'
+            accessor:
+                getter: getSpecifiedLineTradeSettlement
+                setter: setSpecifiedLineTradeSettlement
+            type: Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\basic\ram\LineTradeSettlementType

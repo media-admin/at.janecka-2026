@@ -1,0 +1,7 @@
+Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\minimum\ram\TradeAddressType:
+    properties:
+        countryID:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules

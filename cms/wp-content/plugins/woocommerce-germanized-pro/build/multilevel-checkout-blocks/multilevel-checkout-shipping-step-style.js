@@ -1,0 +1,1 @@
+"use strict";(self.webpackWcGzdProBlocksJsonp=self.webpackWcGzdProBlocksJsonp||[]).push([[671],{743:function(e,n,c){c.r(n),c.d(n,{Frontend:function(){return o}});var s=c(196),t=c(421);const o=({children:e,...n})=>(0,s.createElement)(t.h,{stepName:"shipping",...n},e);n.default=o}}]);
