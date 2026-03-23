@@ -1,0 +1,62 @@
+@use '../abstracts' as *;
+
+// Swiper Override – lädt nach Swiper-CSS aus JS-Bundle
+// Muss als letzter @use in style.scss stehen
+.swiper-pagination-bullet {
+  background: $color-primary !important;
+  opacity: 0.3 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: $color-primary !important;
+  opacity: 1 !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: $color-primary !important;
+}
+
+// Hero-Slider: weiße Bullets
+.hero-slider {
+  .swiper-pagination-bullet {
+    background: #ffffff !important;
+    opacity: 0.5 !important;
+  }
+  .swiper-pagination-bullet-active {
+    background: #ffffff !important;
+    opacity: 1 !important;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: #ffffff !important;
+  }
+}
+
+// Carousel ohne Bild – Caption-Styling
+.carousel-grid__image--empty {
+  position: relative;
+
+  .carousel-grid__overlay,
+  + .carousel-grid__caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px;
+  }
+}
+
+.carousel-grid__item:has(.carousel-grid__image--empty) {
+  .carousel-grid__caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+    
+    .carousel-grid__title { color: #fff; }
+    .carousel-grid__subtitle { color: rgba(255,255,255,0.8); }
+  }
+}

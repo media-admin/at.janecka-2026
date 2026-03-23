@@ -1,0 +1,98 @@
+# =============================================================================
+# Media Lab Starter Kit – Projekt-Konfiguration
+# =============================================================================
+#
+# Dieses File als setup.yml kopieren und anpassen:
+#   cp bin/setup.example.yml bin/setup.yml
+#
+# Dann ausführen:
+#   bash bin/setup.sh --config bin/setup.yml
+#
+# Oder interaktiv (kein Config-File nötig):
+#   bash bin/setup.sh
+# =============================================================================
+
+# ── Projekt-Identität ─────────────────────────────────────────────────────────
+
+project:
+  # Kurzname des Projekts (nur a-z, 0-9, Bindestriche) – wird als Slug verwendet
+  # Beispiel: "muster-gmbh" → Theme-Ordner: muster-gmbh, Prefix: mustergmbh_
+  name: "kunde-projekt"
+
+  # Anzeigename des Kunden (für Theme-Header, Dokumentation)
+  client_name: "Muster GmbH"
+
+# ── Domain ───────────────────────────────────────────────────────────────────
+
+domain:
+  # Ziel-Domain (ohne trailing slash, ohne https://)
+  new: "www.muster-gmbh.at"
+
+  # Protokoll: http oder https
+  protocol: "https"
+
+  # Alte Domain ersetzen (bei Umzug/Clone) – leer lassen wenn Neuinstallation
+  old: ""
+
+# ── WordPress ────────────────────────────────────────────────────────────────
+
+wordpress:
+  # Pfad zur WordPress-Installation (relativ zum Projekt-Root oder absolut)
+  path: "cms"
+
+  # Datenbank-Präfix (nur Buchstaben + Unterstrich, mind. 2 Zeichen)
+  # Beispiel: "mg_" für Muster GmbH
+  db_prefix: "mg_"
+
+  # Sprache
+  locale: "de_AT"
+
+# ── Admin-User ───────────────────────────────────────────────────────────────
+
+admin:
+  # Wird nur angelegt wenn create: true
+  create: true
+
+  username: "admin-muster"
+  email: "admin@muster-gmbh.at"
+
+  # Passwort – leer lassen für zufällig generiertes Passwort
+  password: ""
+
+  # Anzeigename
+  display_name: "Muster GmbH Admin"
+
+# ── Theme ────────────────────────────────────────────────────────────────────
+
+theme:
+  # Quell-Ordner (relativ zu wp-content/themes/)
+  source: "custom-theme"
+
+  # Ziel-Ordner – wird aus project.name generiert wenn leer
+  # target: ""
+
+  # Text Domain (nur a-z, Bindestriche) – Standard: gleich wie Ziel-Ordner
+  # text_domain: ""
+
+# ── Plugin-Prefix ────────────────────────────────────────────────────────────
+
+plugins:
+  # medialab_ → neuer Prefix in allen Plugin-Dateien ersetzen
+  # Nur aktivieren wenn Plugins für diesen Kunden angepasst werden
+  rename_prefix: false
+
+  # Neuer Prefix (nur a-z, 0-9, Underscore)
+  # Wird aus project.name generiert wenn leer (z.B. "mustergmbh_")
+  # new_prefix: ""
+
+# ── Optionen ─────────────────────────────────────────────────────────────────
+
+options:
+  # Backup vor allen Änderungen erstellen
+  backup: true
+
+  # Trockenlauf – zeigt was gemacht würde ohne Änderungen
+  dry_run: false
+
+  # Verbose-Output
+  verbose: true

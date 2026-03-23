@@ -1,0 +1,147 @@
+@use '../abstracts' as *;
+
+// =============================================================================
+// GOOGLE MAPS SHORTCODE
+// Shortcode: [google_map src="..." height="..." fullwidth="true"]
+// Cookie Consent Integration via _google-maps.js
+// =============================================================================
+
+.google-map {
+    position: relative;
+    width: 100%;
+    height: var(--map-height, 450px);
+    overflow: hidden;
+    border-radius: $radius-lg;
+    background-color: $color-gray-100;
+
+    // ── Fullwidth Variante ────────────────────────────────────────────────────
+    // Bricht aus dem Container heraus auf 100vw.
+    &--fullwidth {
+        border-radius: 0;
+        width: 100vw;
+        margin-left: 50%;
+        transform: translateX(-50%);
+
+        .google-map__iframe {
+            width: 100%;
+        }
+    }
+
+    // ── iframe ────────────────────────────────────────────────────────────────
+    &__iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+
+        &.is-loaded {
+            animation: mapFadeIn 0.4s ease forwards;
+        }
+
+        &[hidden] {
+            display: none;
+        }
+    }
+
+    // ── Placeholder ───────────────────────────────────────────────────────────
+    &__placeholder {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $color-gray-50;
+        padding: $spacing-8;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+
+        &.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+    }
+
+    &__placeholder-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 28rem;
+        gap: $spacing-4;
+    }
+
+    &__placeholder-icon {
+        color: $color-gray-400;
+        flex-shrink: 0;
+        opacity: 0.7;
+    }
+
+    &__placeholder-title {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-semibold;
+        color: $color-text;
+        margin: 0;
+    }
+
+    &__placeholder-text {
+        font-size: $font-size-sm;
+        color: $color-text-muted;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    &__placeholder-btn {
+        // Erbt .btn .btn--primary .btn--sm aus dem Button-System
+        white-space: nowrap;
+    }
+
+    &__placeholder-hint {
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+        margin: 0;
+    }
+
+    &__placeholder-settings-link {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        color: $color-primary;
+        font-size: inherit;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        font-family: inherit;
+
+        &:hover {
+            color: $color-primary-dark;
+            text-decoration: none;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-primary;
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+    }
+}
+
+// ── Animation ─────────────────────────────────────────────────────────────────
+@keyframes mapFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+// ── Reduced Motion ────────────────────────────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+    .google-map {
+        &__iframe.is-loaded {
+            animation: none;
+        }
+
+        &__placeholder {
+            transition: none;
+        }
+    }
+}

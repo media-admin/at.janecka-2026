@@ -1,0 +1,8 @@
+// =============================================================================
+// ABSTRACTS INDEX
+// Single entry point für alle Abstracts.
+// @use '../abstracts' as * – macht alle Tokens + Mixins ohne Namespace verfügbar.
+// =============================================================================
+
+@forward 'variables';
+@forward 'mixins';

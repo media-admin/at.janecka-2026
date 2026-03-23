@@ -1,0 +1,158 @@
+@use '../abstracts' as *;
+
+// =============================================================================
+// TOP HEADER
+// Kontaktleiste über dem Haupt-Header.
+// Farben via Modifier-Klassen, gesetzt durch das ACF "Hintergrundfarbe"-Feld.
+// =============================================================================
+
+.top-header {
+    width: 100%;
+    font-size: 0.8125rem; // ~13px
+    line-height: 1;
+    position: relative;
+    z-index: $z-header;
+
+    // ── Farbvarianten ──────────────────────────────────────────────
+    &--primary {
+        background-color: var(--color-primary);
+        color: $color-white;
+
+        a           { color: $color-white; opacity: 0.9; }
+        a:hover     { opacity: 1; }
+    }
+
+    &--dark {
+        background-color: $color-dark;
+        color: $color-grey-light;
+
+        a           { color: $color-grey-light; }
+        a:hover     { color: $color-white; }
+    }
+
+    &--light {
+        background-color: $color-light;
+        color: $color-grey-dark;
+        border-bottom: 1px solid $color-border;
+
+        a           { color: $color-grey-dark; }
+        a:hover     { color: var(--color-primary); }
+    }
+
+    // ── Layout ────────────────────────────────────────────────────
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: $spacing-2;
+        padding-top: $spacing-1;
+        padding-bottom: $spacing-1;
+        flex-wrap: wrap;
+
+        @include respond-to('lg') {
+            gap: $spacing-3;
+        }
+    }
+
+    &__contact {
+        display: flex;
+        align-items: center;
+        gap: $spacing-2;
+        flex-wrap: wrap;
+
+        @include respond-to('lg') {
+            gap: $spacing-sm;
+        }
+    }
+
+    &__item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        white-space: nowrap;
+
+        svg { flex-shrink: 0; }
+
+        a {
+            text-decoration: none;
+            transition: $transition-fast;
+        }
+    }
+
+    // ── Social ────────────────────────────────────────────────────
+    &__social {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    &__social-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.75rem;
+        height: 1.75rem;
+        border-radius: $radius-full;
+        text-decoration: none;
+        opacity: 0.85;
+        transition: $transition-fast;
+
+        svg {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        &:hover {
+            opacity: 1;
+            transform: translateY(-1px);
+        }
+    }
+
+    // ── Mobile Verhalten ──────────────────────────────────────────
+    // top-header--mobile-hide → unterhalb $breakpoint-md versteckt
+    &--mobile-hide {
+        @media (max-width: #{$breakpoint-md - 1}) {
+            display: none;
+        }
+    }
+
+    // top-header--mobile-toggle → eingeklappt auf Mobile, Toggle-Button sichtbar
+    &--mobile-toggle {
+        @media (max-width: #{$breakpoint-md - 1}) {
+            .top-header__inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: $spacing-1;
+                max-height: 0;
+                overflow: hidden;
+                padding: 0;
+                transition: max-height 0.3s ease, padding 0.3s ease;
+            }
+
+            &.is-open .top-header__inner {
+                max-height: 20rem;
+                padding-top: $spacing-1;
+                padding-bottom: $spacing-1;
+            }
+
+            // Toggle-Button (via JS gerendert, siehe top-header.js)
+            .top-header__toggle {
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+                width: 100%;
+                padding: 0.4rem $spacing-2;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 0.8125rem;
+                font-weight: $font-weight-semibold;
+                color: inherit;
+            }
+        }
+
+        @media (min-width: #{$breakpoint-md}) {
+            .top-header__toggle { display: none; }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+/bin/sh: /Users/markus.tritremmel/Valet-Umgebung/claude-wp-template/scripts/backup.sh: Permission denied
+/bin/sh: /Users/markus.tritremmel/Valet-Umgebung/claude-wp-template/scripts/backup.sh: Permission denied
+/bin/sh: /Users/markus.tritremmel/Valet-Umgebung/claude-wp-template/scripts/backup.sh: Permission denied
+/bin/sh: /Users/markus.tritremmel/Valet-Umgebung/claude-wp-template/scripts/backup.sh: Permission denied
+/bin/sh: /Users/markus.tritremmel/Valet-Umgebung/claude-wp-template/scripts/backup.sh: Permission denied
+/bin/sh: /Users/markus.tritremmel/Valet-Umgebung/claude-wp-template/scripts/backup.sh: Permission denied
+/bin/sh: /Users/markus.tritremmel/Valet-Umgebung/claude-wp-template/scripts/backup.sh: Permission denied
+🔄 Starting backup: backup-production-20260210-020000
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+mkdir: /var/backups/wordpress: Permission denied
+🔄 Starting backup: backup-production-20260212-020000
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+mkdir: /var/backups/wordpress: Permission denied
