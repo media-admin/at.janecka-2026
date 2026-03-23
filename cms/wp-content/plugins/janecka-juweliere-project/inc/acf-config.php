@@ -32,14 +32,14 @@ add_filter('acf/settings/load_json', function($paths) {
 if (function_exists('acf_add_options_page')) {
     
     // Main options page
-    acf_add_options_page(array(
-        'page_title' => 'Theme Settings',
-        'menu_title' => 'Theme Settings',
-        'menu_slug' => 'theme-settings',
-        'capability' => 'edit_posts',
-        'icon_url' => 'dashicons-admin-generic',
-        'position' => 30,
-    ));
+    // acf_add_options_page(array(
+    //     'page_title' => 'Theme Settings',
+    //     'menu_title' => 'Theme Settings',
+    //     'menu_slug' => 'theme-settings',
+    //     'capability' => 'edit_posts',
+    //     'icon_url' => 'dashicons-admin-generic',
+    //     'position' => 30,
+    // ));
     
     // Sub-pages (uncomment if needed)
     /*

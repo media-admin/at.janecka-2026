@@ -22,7 +22,7 @@ if (file_exists(__DIR__ . '/wp-config-local.php')) {
 // Shared configuration (all environments)
 
 // Database Table prefix
-$table_prefix = 'wp_';
+$table_prefix = 'jl_';
 
 // Authentication Unique Keys and Salts
 // Generate: https://api.wordpress.org/secret-key/1.1/salt/

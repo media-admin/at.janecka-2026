@@ -27,14 +27,13 @@
 # ============================================
 # PLUGINS - Third Party (ignorieren)
 # ============================================
-/cms/wp-content/plugins/advanced-custom-fields/
-/cms/wp-content/plugins/advanced-custom-fields-pro/
-/cms/wp-content/plugins/contact-form-7/
-/cms/wp-content/plugins/wordpress-importer/
-/cms/wp-content/plugins/woocommerce/
-/cms/wp-content/plugins/better-search-replace/
-/cms/wp-content/plugins/ewww-image-optimizer/
-/cms/wp-content/plugins/wp-fastest-cache/
+/cms/wp-content/plugins/git sta
+!/cms/wp-content/plugins/janecka-juweliere-project/
+!/cms/wp-content/plugins/media-lab-agency-core/
+!/cms/wp-content/plugins/media-lab-analytics/
+!/cms/wp-content/plugins/media-lab-seo/
+!/cms/wp-content/plugins/media-lab-woocommerce/
+
 
 # ============================================
 # THEMES
@@ -81,6 +80,8 @@ Thumbs.db
 *.sql
 *.sql.gz
 docs-backup/
+/cms/wp-content/updraft/
+
 
 # ============================================
 # ENVIRONMENT
@@ -89,13 +90,13 @@ docs-backup/
 .env.local
 
 # ============================================
-# PROJEKT SPEZIFISCH - Stadtwirt
+# PROJEKT SPEZIFISCH - Janecka Juweliere
 # ============================================
 
-# Stadtwirt Plugin (wird committed)
-!/cms/wp-content/plugins/stadtwirt-plugin/
+# Janecka Plugin (wird committed)
+!/cms/wp-content/plugins/janecka-juweliere-project/
 
 # Stadtwirt Theme (wird committed)
-!/cms/wp-content/themes/stadtwirt-theme/
-cms/wp-content/themes/stadtwirt-theme/assets/hot
+!/cms/wp-content/themes/custom-theme/
+/cms/wp-content/themes/custom-theme/assets/hot
 
