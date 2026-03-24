@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Janecka Juweliere Project
+ * Plugin Name: Janecka Juweliere Plugin
  * Plugin URI: https://github.com/media-admin/media-lab-starter-kit
  * Description: Project-specific CPTs, taxonomies, and ACF fields. Duplicate and customize for each client project.
  * Version: 1.0.0

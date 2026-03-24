@@ -257,3 +257,36 @@ function agency_core_register_job_location_taxonomy() {
     register_taxonomy('job_location', 'job', $args);
 }
 add_action('init', 'agency_core_register_job_location_taxonomy');
+
+
+
+/**
+ * Register Payment-Methods Taxonomy for Stores
+ */
+function agency_core_register_payment_methods_taxonomy() {
+    $labels = array(
+        'name' => __('Filialen-Zahlungsweisen', 'agency-core'),
+        'singular_name' => __('Filialen-Zahlungsweise', 'agency-core'),
+        'search_items' => __('Filialen-Zahlungsweise durchsuchen', 'agency-core'),
+        'all_items' => __('Alle Filialen-Zahlungsweisen', 'agency-core'),
+        'edit_item' => __('Filialen-Zahlungsweise bearbeiten', 'agency-core'),
+        'update_item' => __('Filialen-Zahlungsweise aktualisieren', 'agency-core'),
+        'add_new_item' => __('Neue Filialen-Zahlungsweise hinzufügen', 'agency-core'),
+        'new_item_name' => __('Name der neuen Filialen-Zahlungsweise', 'agency-core'),
+        'menu_name' => __('Filialen-Zahlungsweisen', 'agency-core'),
+		'parent_item' => __( 'Übergeordnete Filialen-Zahlungsweise', 'agency-core'),
+		'parent_item_colon' => __( 'Übergeordnete Filialen-Zahlungsweise:', 'agency-core' ),
+	);
+
+    $args = array(
+        'hierarchical' => true,
+		'labels' => $labels,
+		'show_ui' => true,
+		'show_in_rest' => true,
+		'query_var' => true,
+		'rewrite' => array( 'slug' => 'filialen-zahlungsweisen' ),
+    );
+
+	register_taxonomy('filialen-zahlungsweisen', array('store'), $args);
+}
+add_action('init', 'agency_core_register_payment_methods_taxonomy');

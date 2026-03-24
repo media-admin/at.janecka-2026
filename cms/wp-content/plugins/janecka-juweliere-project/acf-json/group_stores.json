@@ -1,0 +1,510 @@
+[
+    {
+        "key": "group_6119c7a444568",
+        "title": "Filialen",
+        "fields": [
+            {
+                "key": "field_6153213ab5911",
+                "label": "Aktuelle Meldung",
+                "name": "store-aktuelle-meldung",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_6119c8a1a957e",
+                "label": "Kurzbeschreibung",
+                "name": "store-kurzbeschreibung",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_6119c7aea9575",
+                "label": "Straße",
+                "name": "store-strasse",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_6119c7c8a9576",
+                "label": "PLZ",
+                "name": "store-plz",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_6119c7f1a9577",
+                "label": "Ort",
+                "name": "store-ort",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_6119c7f9a9578",
+                "label": "Telefon",
+                "name": "store-telefon",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_6119c809a9579",
+                "label": "EMail",
+                "name": "store-email",
+                "aria-label": "",
+                "type": "email",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_6119c831a957b",
+                "label": "Öffnungszeiten",
+                "name": "store-oeffnungszeiten",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "Eintrag hinzufügen",
+                "sub_fields": [
+                    {
+                        "key": "field_612d5300c6dab",
+                        "label": "Montag geöffnet",
+                        "name": "monday_opened",
+                        "aria-label": "",
+                        "type": "time_picker",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "display_format": "H:i",
+                        "return_format": "H:i",
+                        "parent_repeater": "field_6119c831a957b"
+                    },
+                    {
+                        "key": "field_612d536cc6dad",
+                        "label": "Montag geschlossen",
+                        "name": "monday_closed",
+                        "aria-label": "",
+                        "type": "time_picker",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "display_format": "H:i",
+                        "return_format": "H:i",
+                        "parent_repeater": "field_6119c831a957b"
+                    },
+                    {
+                        "key": "field_612d53a9c6db0",
+                        "label": "Dienstag geöffnet",
+                        "name": "thuesday_opened",
+                        "aria-label": "",
+                        "type": "time_picker",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "display_format": "H:i",
+                        "return_format": "H:i",
+                        "parent_repeater": "field_6119c831a957b"
+                    },
+                    {
+                        "key": "field_612d538fc6daf",
+                        "label": "Dienstag geschlossen",
+                        "name": "thuesday_closed",
+                        "aria-label": "",
+                        "type": "time_picker",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "display_format": "H:i",
+                        "return_format": "H:i",
+                        "parent_repeater": "field_6119c831a957b"
+                    },
+                    {
+                        "key": "field_612d53c971ad4",
+                        "label": "Mittwoch geöffnet",
+                        "name": "wednesday_opened",
+                        "aria-label": "",
+                        "type": "time_picker",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "display_format": "H:i",
+                        "return_format": "H:i",
+                        "parent_repeater": "field_6119c831a957b"
+                    },
+                    {
+                        "key": "field_612d53da71ad5",
+                        "label": "Mittwoch geschlossen",
+                        "name": "wednesday_closed",
+                        "aria-label": "",
+                        "type": "time_picker",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "display_format": "H:i",
+                        "return_format": "H:i",
+                        "parent_repeater": "field_6119c831a957b"
+                    },
+                    {
+                        "key": "field_612d53f271ad6",
+                        "label": "Donnerstag geöffnet",
+                        "name": "thursday_opened",
+                        "aria-label": "",
+                        "type": "time_picker",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "display_format": "H:i",
+                        "return_format": "H:i",
+                        "parent_repeater": "field_6119c831a957b"
+                    },
+                    {
+                        "key": "field_612d541671ad7",
+                        "label": "Donnerstag geschlossen",
+                        "name": "thuesday_closed",
+                        "aria-label": "",
+                        "type": "time_picker",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "display_format": "H:i",
+                        "return_format": "H:i",
+                        "parent_repeater": "field_6119c831a957b"
+                    },
+                    {
+                        "key": "field_612d543571ad8",
+                        "label": "Freitag geöffnet",
+                        "name": "friday_opened",
+                        "aria-label": "",
+                        "type": "time_picker",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "display_format": "H:i",
+                        "return_format": "H:i",
+                        "parent_repeater": "field_6119c831a957b"
+                    },
+                    {
+                        "key": "field_612d54718fece",
+                        "label": "Freitag geschlossen",
+                        "name": "friday_closed",
+                        "aria-label": "",
+                        "type": "time_picker",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "display_format": "H:i",
+                        "return_format": "H:i",
+                        "parent_repeater": "field_6119c831a957b"
+                    },
+                    {
+                        "key": "field_612d549aeefbe",
+                        "label": "Samstag geöffnet",
+                        "name": "saturday_opened",
+                        "aria-label": "",
+                        "type": "time_picker",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "display_format": "H:i",
+                        "return_format": "H:i",
+                        "parent_repeater": "field_6119c831a957b"
+                    },
+                    {
+                        "key": "field_612d5486eefbd",
+                        "label": "Samstag geschlossen",
+                        "name": "saturday_closed",
+                        "aria-label": "",
+                        "type": "time_picker",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "display_format": "H:i",
+                        "return_format": "H:i",
+                        "parent_repeater": "field_6119c831a957b"
+                    }
+                ],
+                "rows_per_page": 20
+            },
+            {
+                "key": "field_6176c374935fe",
+                "label": "Filialen-Marken-Schlagwort",
+                "name": "store-brand-tag",
+                "aria-label": "",
+                "type": "taxonomy",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "taxonomy": "product_tag",
+                "field_type": "checkbox",
+                "add_term": 1,
+                "save_terms": 0,
+                "load_terms": 0,
+                "return_format": "object",
+                "multiple": 0,
+                "allow_null": 0,
+                "bidirectional_target": []
+            },
+            {
+                "key": "field_6119c890a957d",
+                "label": "Außenfoto",
+                "name": "store-aussenfoto",
+                "aria-label": "",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array",
+                "preview_size": "medium",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_6119c8bfa957f",
+                "label": "Bildergalerie",
+                "name": "store-bildergalerie",
+                "aria-label": "",
+                "type": "gallery",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array",
+                "preview_size": "medium",
+                "insert": "append",
+                "library": "all",
+                "min": "",
+                "max": "",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_6119c817a957a",
+                "label": "Google Map",
+                "name": "store-map",
+                "aria-label": "",
+                "type": "google_map",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "center_lat": "",
+                "center_lng": "",
+                "zoom": "",
+                "height": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "stores"
+                }
+            ]
+        ],
+        "menu_order": 3,
+        "position": "acf_after_title",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [
+            "discussion",
+            "comments",
+            "format",
+            "page_attributes",
+            "featured_image",
+            "categories",
+            "tags",
+            "send-trackbacks"
+        ],
+        "active": true,
+        "description": "",
+        "show_in_rest": 0,
+        "display_title": ""
+    }
+]
