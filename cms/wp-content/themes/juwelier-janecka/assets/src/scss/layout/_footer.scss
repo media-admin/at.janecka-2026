@@ -1,125 +1,129 @@
 @use '../abstracts' as *;
 
 // =============================================================================
-// Site Footer
-// Version: 1.2.0 – Fluid Responsive System
-//
-// Änderungen:
-//   - padding: $spacing-8 0 $spacing-4 → var(--space-2xl) 0 var(--space-md)
-//   - gap/padding-bottom → var(--space-*)
-//   - @media (max-width: 767px) → @include respond-below('md')
-//   - font-size → var(--text-*)
+// Site Footer – v2.0.0
 // =============================================================================
 
-.site-footer {
-    background: var(--color-surface);
-    border-top: 1px solid var(--color-border);
-    // Fluid: 64px oben (war: $spacing-8 = 64px fix), 16px unten (war: $spacing-4 = 32px fix)
-    padding:    var(--space-2xl) 0 var(--space-md);
-    margin-top: auto;
+// ── 1. Grauer Nav-Bereich (Full Width) ───────────────────────────────────────
 
-    // ── Oberer Bereich: Logo + Navigation ────────────────────────────────────
+.site-footer__nav-area {
+    background: $color-light;
+    width:      100%;
+    padding:    $spacing-8 0;
+}
 
-    &__inner {
-        display:         flex;
-        align-items:     center;
-        justify-content: space-between;
-        gap:             var(--space-xl);
-        padding-bottom:  var(--space-xl);
-        border-bottom:   1px solid var(--color-border);
-        flex-wrap:       wrap;
+.site-footer__nav-inner {
+    max-width: 1400px;
+    margin:    0 auto;
+    padding:   0 var(--container-padding);
+}
 
-        @include respond-below('md') {
-            flex-direction: column;
-            align-items:    flex-start;
-            gap:            var(--space-md);
+.footer-nav__list {
+    list-style: none;
+    margin:     0;
+    padding:    0;
+    display:    flex;
+    flex-wrap:  nowrap !important;
+    gap:        0;
+    justify-content: flex-start;
+
+    // Top-Level Items = Spalten
+    > li {
+        flex:        0 0 auto;
+        min-width:   0;
+        padding:     0 $spacing-6 0 0;
+        border-left: none;
+
+        // Spalten-Titel
+        > a {
+            font-size:      var(--text-xs);
+            font-weight:    600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-decoration: none;
+            margin-bottom:  $spacing-2;
+            padding-bottom: 0;
+            line-height:    1.3;    // ← kompakter
+            white-space:    nowrap;
+
+            &:hover { color: $color-primary; }
         }
     }
 
-    // ── Brand / Logo ──────────────────────────────────────────────────────────
+    // Sub-Items
+    .sub-menu {
+        list-style: none;
+        margin:     0;
+        padding:    0;
 
-    &__brand {
-        flex-shrink: 0;
-    }
+        li { margin-bottom: 0; }
 
-    &__logo-link {
-        display:     inline-block;
-        line-height: 0;
+        a {
+            font-size:   var(--text-xs);
+            text-decoration: none;
+            line-height: 2.0;       // ← kompakte Zeilenhöhe
+            white-space: nowrap;
+            display:     block;
+            padding:     0;
+            color:       var(--color-text-muted);
 
-        &:focus-visible {
-            outline:        2px solid $color-primary;
-            outline-offset: 3px;
-            border-radius:  $radius-sm;
+            &:hover { color: $color-primary; }
         }
     }
 
-    &__logo {
-        max-height: 40px;
-        width:      auto;
-    }
+    // Bild-Items ausblenden
+    .mega-menu__img-container { display: none; }
 
-    &__site-name {
-        font-size:       var(--text-xl);
-        font-weight:     $font-weight-bold;
-        color:           var(--color-text);
-        text-decoration: none;
-        transition:      color 0.2s ease;
+    @include respond-below('md') {
+        flex-direction: column;
+        gap:            $spacing-6;
 
-        &:hover { color: $color-primary; }
+        > li {
+            border-left:  none;
+            border-top:   1px solid rgba(0,0,0,0.08);
+            padding:      $spacing-4 0 0;
 
-        &:focus-visible {
-            outline:        2px solid $color-primary;
-            outline-offset: 3px;
-            border-radius:  $radius-sm;
+            &:first-child { border-top: none; }
         }
-    }
-
-    // ── Unterer Bereich: Copyright ────────────────────────────────────────────
-
-    &__bottom {
-        display:         flex;
-        align-items:     center;
-        justify-content: center;
-        padding-top:     var(--space-md);
-    }
-
-    &__copyright {
-        font-size: var(--text-sm);
-        color:     var(--color-text-muted);
-        margin:    0;
     }
 }
 
 
-// =============================================================================
-// Footer Navigation
-// =============================================================================
+// ── 2. Middle: Legal + Social ─────────────────────────────────────────────────
 
-.footer-nav {
+.site-footer__middle {
+    background:  var(--color-surface);
+    border-top:  1px solid var(--color-border);
+    padding:     $spacing-5 0;
+}
 
+.site-footer__middle-inner {
+    max-width:       1400px;
+    margin:          0 auto;
+    padding:         0 var(--container-padding);
+    display:         flex;
+    align-items:     center;
+    justify-content: space-between;
+    gap:             $spacing-4;
+
+    @include respond-below('md') {
+        flex-direction: column;
+        align-items:    flex-start;
+    }
+}
+
+.footer-legal {
     &__list {
-        list-style:  none;
-        margin:      0;
-        padding:     0;
-        display:     flex;
-        flex-wrap:   wrap;
-        gap:         $spacing-1 $spacing-4;
+        list-style: none;
+        margin:     0;
+        padding:    0;
+        display:    flex;
+        flex-wrap:  wrap;
+        gap:        $spacing-1 $spacing-4;
         align-items: center;
-
-        @include respond-below('md') {
-            gap: $spacing-1 $spacing-3;
-        }
     }
 
-    li {
-        margin:  0;
-        padding: 0;
-
-        &.current-menu-item > a,
-        &.current_page_item > a {
-            color: $color-primary;
-        }
-    }
+    li { margin: 0; }
 
     a {
         font-size:       var(--text-sm);
@@ -129,105 +133,71 @@
         white-space:     nowrap;
 
         &:hover { color: $color-primary; }
+    }
+}
 
-        &:focus-visible {
-            outline:        2px solid $color-primary;
-            outline-offset: 2px;
-            border-radius:  $radius-sm;
+.footer-social {
+    display:     flex;
+    align-items: center;
+    gap:         $spacing-2;
+
+    &__link {
+        display:         flex;
+        align-items:     center;
+        justify-content: center;
+        width:           40px;
+        height:          40px;
+        border-radius:   $radius-full;
+        border:          1px solid var(--color-border);
+        color:           var(--color-text-muted);
+        text-decoration: none;
+        transition:      border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+
+        &:hover {
+            border-color: var(--color-text);
+            color:        var(--color-text);
+            background:   transparent;
         }
     }
 }
 
 
-// =============================================================================
-// Footer Legal Navigation
-// =============================================================================
+// ── 3. Bottom: Copyright + Agency ─────────────────────────────────────────────
 
 .site-footer__bottom {
-    display: flex;
-    align-items: center;
+    background:  var(--color-surface);
+    border-top:  1px solid var(--color-border);
+    padding:     $spacing-4 0;
+}
+
+.site-footer__bottom-inner {
+    max-width:       1400px;
+    margin:          0 auto;
+    padding:         0 var(--container-padding);
+    display:         flex;
+    align-items:     center;
     justify-content: space-between;
-    gap: $spacing-4;
-    padding-top: $spacing-4;
-    flex-wrap: wrap;
+    gap:             $spacing-4;
 
-    @media (max-width: 767px) {
+    @include respond-below('md') {
         flex-direction: column;
-        align-items: flex-start;
-        gap: $spacing-2;
+        align-items:    flex-start;
+        gap:            $spacing-2;
     }
 }
 
-.footer-legal {
-    &__list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: $spacing-1 $spacing-4;
-        align-items: center;
-
-        @media (max-width: 767px) {
-            gap: $spacing-1 $spacing-3;
-        }
-    }
-
-    li {
-        margin: 0;
-
-        // Trennpunkt zwischen den Links
-        &:not(:last-child) > a::after {
-            content: '·';
-            margin-left: $spacing-4;
-            color: var(--color-text-muted);
-            pointer-events: none;
-        }
-    }
-
-    a {
-        font-size: $font-size-xs;       // z. B. 12px
-        color: var(--color-text-muted);
-        text-decoration: none;
-        transition: color 0.2s ease;
-        white-space: nowrap;
-
-        &:hover,
-        &:focus-visible {
-            color: var(--color-primary);
-            text-decoration: underline;
-        }
-    }
-}
-
-// Credit-Line
+.site-footer__copyright,
 .site-footer__credit {
-    text-align: center;
-    padding-top: $spacing-3;
-    border-top: 1px solid var(--color-border);
-    margin-top: $spacing-3;
-
-    p {
-        font-size: $font-size-xs;
-        color: var(--color-text-muted);
-        opacity: 0.6;
-        margin: 0;
-        transition: opacity 0.2s ease;
-    }
-
-    &:hover p {
-        opacity: 1;
-    }
+    font-size: var(--text-xs);
+    color:     var(--color-text-muted);
+    margin:    0;
+    opacity:   0.7;
 
     a {
-        color: inherit;
+        color:           inherit;
         text-decoration: none;
-        font-weight: 500;
+        font-weight:     500;
 
-        &:hover,
-        &:focus-visible {
-            color: var(--color-primary);
-            text-decoration: underline;
-        }
+        &:hover { color: $color-primary; opacity: 1; }
     }
 }
