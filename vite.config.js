@@ -13,7 +13,7 @@ try {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
-const themeDir   = path.resolve(__dirname, 'cms/wp-content/themes/stadtwirt-theme');
+const themeDir   = path.resolve(__dirname, 'cms/wp-content/themes/juwelier-janecka');
 
 const isDev = process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging';
 
@@ -30,13 +30,13 @@ export default defineConfig({
    */
   base: isDev
     ? 'http://localhost:3000/'
-    : '/cms/wp-content/themes/stadtwirt-theme/assets/dist/',
+    : '/cms/wp-content/themes/juwelier-janecka/assets/dist/',
 
   plugins: [
     // Triggert Full-Page-Reload bei PHP-Änderungen (relativ zum CWD = Projekt-Root)
     liveReload([
-      'cms/wp-content/themes/stadtwirt-theme/**/*.php',
-      'cms/wp-content/themes/stadtwirt-theme/**/*.twig', // falls Twig verwendet wird
+      'cms/wp-content/themes/juwelier-janecka/**/*.php',
+      'cms/wp-content/themes/juwelier-janecka/**/*.twig', // falls Twig verwendet wird
     ]),
     ...(compression
       ? [
