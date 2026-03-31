@@ -12,7 +12,7 @@ if (empty($slides)) {
 }
 ?>
 
-<div class="hero-slider swiper">
+<div class="hero-slider swiper" data-autoplay="true" data-loop="true" data-delay="5000">
     <div class="swiper-wrapper">
         <?php foreach ($slides as $slide) : ?>
             <div class="swiper-slide" style="background-image: url('<?php echo esc_url($slide['image']); ?>');">

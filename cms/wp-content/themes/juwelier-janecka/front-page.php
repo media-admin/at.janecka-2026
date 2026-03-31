@@ -15,6 +15,9 @@ $hero_slides = new WP_Query( [
 <section
     class="hero-slider swiper"
     aria-label="<?php esc_attr_e( 'Hero Slider', 'custom-theme' ); ?>"
+    data-autoplay="true"
+    data-loop="true"
+    data-delay="5000"
 >
     <div class="swiper-wrapper">
 
@@ -70,6 +73,7 @@ $hero_slides = new WP_Query( [
 
     <button class="swiper-button-prev" aria-label="<?php esc_attr_e( 'Vorheriger Slide', 'custom-theme' ); ?>"></button>
     <button class="swiper-button-next" aria-label="<?php esc_attr_e( 'Nächster Slide', 'custom-theme' ); ?>"></button>
+    <div class="swiper-pagination"></div>
 </section>
 <?php endif; ?>
 

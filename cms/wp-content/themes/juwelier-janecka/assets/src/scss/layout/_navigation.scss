@@ -13,40 +13,44 @@
     top:           0;
     z-index:       1000;
     background:    var(--color-surface);
-    border-bottom: 1px solid var(--color-border);
-    box-shadow:    $shadow-sm;
+    box-shadow:    0 4px 24px rgba(0, 0, 0, 0.10); // war box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);  // ← weicherer Schatten
 }
 
 .site-navigation {
     display:        flex;
     flex-direction: column;
-    align-items:    center;
-    padding-top:        $spacing-4 var(--container-padding) $spacing-1 var(--container-padding);
+    align-items:    stretch;      // ← geändert
+    padding:        $spacing-4 var(--container-padding) $spacing-1;
     max-width:      1400px;
     margin:         0 auto;
-    gap:            $spacing-3;
+    gap:            $spacing-2;
 
-    // Mobile: Zeile (Logo links, Toggle rechts)
     @include respond-below('lg') {
         flex-direction:  row;
         justify-content: space-between;
+        align-items:     center;
         gap:             0;
     }
 }
 
-.site-logo {
-    font-size:       var(--text-xl);
-    font-weight:     700;
-    color:           var(--color-text);
-    text-decoration: none;
-    flex-shrink:     0;
+// Logo-Zeile: Logo zentriert, Icons rechts
+.site-navigation__logo-row {
+    display:         grid;
+    grid-template-columns: 1fr auto 1fr;  // Links leer | Logo mitte | Icons rechts
+    align-items:     center;
 
-    &:hover { color: $color-primary; }
+    .site-logo {
+        grid-column: 2;   // Mitte
+        justify-self: center;
+    }
 
-    &:focus-visible {
-        outline:        2px solid $color-primary;
-        outline-offset: 3px;
-        border-radius:  $radius-sm;
+    .header-icons {
+        grid-column:  3;  // Rechts
+        justify-self: end;
+    }
+
+    @include respond-below('lg') {
+        display: none;   // Mobile: Logo direkt in der flex-row
     }
 }
 
@@ -121,6 +125,20 @@
             > .sub-menu { opacity: 1; visibility: visible; transform: translateY(0); }
         }
     }
+
+         > ul > li > a {
+            padding:         $spacing-3 $spacing-4;
+            color:           var(--color-text);
+            text-decoration: none;
+            font-weight:     400;           // ← leichter
+            font-size:       var(--text-sm);
+            letter-spacing:  0.08em;        // ← gesperrt
+            text-transform:  uppercase;     // ← Kapitälchen-Optik
+            white-space:     nowrap;
+            transition:      color 0.2s ease;
+
+            &:hover { color: $color-primary; }
+        }
 
     // ── Dropdown-Basis ────────────────────────────────────────────────────────
 
@@ -201,6 +219,69 @@
 
     .sub-menu.opens-left { left: auto; right: 100%; margin-left: 0; margin-right: $spacing-1; }
 }
+
+
+
+
+
+
+
+
+// ── Header Icons ──────────────────────────────────────────────────────────────
+.header-icons {
+    display:     flex;
+    align-items: center;
+    gap:         $spacing-2;
+    flex-shrink: 0;
+
+    &__btn {
+        display:         flex;
+        align-items:     center;
+        justify-content: center;
+        width:           36px;
+        height:          36px;
+        background:      none;
+        border:          none;
+        cursor:          pointer;
+        color:           var(--color-text);
+        text-decoration: none;
+        border-radius:   $radius-sm;
+        transition:      color 0.2s ease;
+        position:        relative;
+
+        &:hover { color: $color-primary; }
+    }
+
+    &__sep {
+        width:      1px;
+        height:     20px;
+        background: var(--color-border);
+        margin:     0 $spacing-1;
+    }
+
+    &__badge {
+        position:    absolute;
+        top:         2px;
+        right:       2px;
+        background:  $color-primary;
+        color:       #fff;
+        font-size:   10px;
+        font-weight: 600;
+        min-width:   16px;
+        height:      16px;
+        border-radius: 8px;
+        display:     flex;
+        align-items: center;
+        justify-content: center;
+        padding:     0 4px;
+        line-height: 1;
+    }
+}
+
+
+
+
+
 
 
 // ── Mobile Menu Toggle ────────────────────────────────────────────────────────

@@ -23,6 +23,8 @@ $slider-height-mobile:  clamp(280px, 55vw, 480px);
     .swiper-wrapper,
     .swiper-slide {
         height: $slider-height-desktop;
+        aspect-ratio: 1400 / 470;   // ← Bildverhältnis deiner Slider-Bilder
+        height:       auto;          // ← statt fixer Höhe
 
         @include respond-below('md') {
             height: $slider-height-mobile;
@@ -107,30 +109,34 @@ $slider-height-mobile:  clamp(280px, 55vw, 480px);
     .swiper-button-next {
         // Swiper positioniert diese per top: 50% – bleibt innerhalb durch overflow:hidden
         color:           #fff;
-        background:      rgba(0, 0, 0, 0.25);
+        background:      rgba(0, 0, 0, 0.35);
         width:           44px;
         height:          44px;
         border-radius:   50%;
         backdrop-filter: blur(4px);
         transition:      background 0.2s ease;
+        border:          none;
 
-        &:hover  { background: rgba(0, 0, 0, 0.5); }
-        &::after { font-size: 18px; }
+        &:hover  { background: rgba(0, 0, 0, 0.6); }
+        &::after { font-size: 16px; font-weight: 700; }
     }
 
     .swiper-pagination {
         bottom: $spacing-4;
 
         .swiper-pagination-bullet {
-            background:   #fff;
-            opacity:      0.5;
-            width:        10px;
-            height:       10px;
-            transition:   opacity 0.2s ease;
+            background:     #fff;
+            opacity:        0.5;
+            width:          10px;
+            height:         10px;
+            border-radius:  50%;
+            transition:     width 0.3s ease, opacity 0.3s ease, border-radius 0.3s ease;
         }
 
         .swiper-pagination-bullet-active {
-            opacity: 1;
+            opacity:        1;
+            width:          28px;          // ← breiter
+            border-radius:  5px;           // ← Pill-Form
         }
     }
 }

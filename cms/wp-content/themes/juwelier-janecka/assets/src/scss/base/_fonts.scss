@@ -76,8 +76,8 @@
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url('../../fonts/roboto-slab/roboto-slab-300.woff2') format('woff2'),
-       url('../../fonts/roboto-slab/roboto-slab-300.woff')  format('woff');
+  src: url('/../fonts/roboto-slab/roboto-slab-300.woff2') format('woff2'),
+       url('/../fonts/roboto-slab/roboto-slab-300.woff')  format('woff');
 }
 
 @font-face {
@@ -98,7 +98,7 @@
        url('../../fonts/roboto-slab/roboto-slab-700.woff')  format('woff');
 }
 
-// ── Source Sans Pro ───────────────────────────────────────────────────────────
+// ── Source Sans Pro ─────────────────────────────────────────────────────────── 
 @font-face {
   font-family: "Source Sans Pro Regular";
   font-style: normal;

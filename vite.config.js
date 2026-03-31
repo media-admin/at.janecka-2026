@@ -84,6 +84,11 @@ export default defineConfig({
     strictPort: true,
     cors:       true,
 
+    watch: {
+      usePolling:   true,   // ← neu
+      interval:     300,    // ← Polling alle 300ms
+    },
+
     // HMR über expliziten Host – wichtig wenn WordPress auf einer anderen Domain läuft
     hmr: {
       host:     'localhost',

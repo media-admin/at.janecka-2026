@@ -1,38 +1,43 @@
 @use '../abstracts' as *;
 
-// Back to Top Button
 .back-to-top {
-  position: fixed;
-  bottom: $spacing-4;
-  right: $spacing-12;
-  z-index: 999;
-  width: 50px;
-  height: 50px;
-  border-radius: $radius-full;
-  background: $color-primary;
-  color: $color-white;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition: all $transition-base;
-  box-shadow: $shadow-lg;
-  
-  &.is-visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: $shadow-xl;
-  }
-  
-  // Adjust position if theme toggle exists
-  .theme-toggle ~ & {
-    right: calc($spacing-4 + 60px);
-  }
+    position:   fixed;
+    bottom:     $spacing-6;
+    right:      $spacing-6;
+    z-index:    999;
+    width:      44px;
+    height:     44px;
+    border-radius: $radius-full;
+    background: var(--color-surface);
+    color:      var(--color-text);
+    border:     1px solid var(--color-border);
+    cursor:     pointer;
+    opacity:    0;
+    visibility: hidden;
+    transform:  translateY(20px);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display:    flex;
+    align-items:     center;
+    justify-content: center;
+
+    svg {
+        width:  18px;
+        height: 18px;
+        stroke-width: 1.5;
+    }
+
+    &.is-visible {
+        opacity:    1;
+        visibility: visible;
+        transform:  translateY(0);
+    }
+
+    &:hover {
+        background:  var(--color-text);
+        color:       var(--color-surface);
+        border-color: var(--color-text);
+        transform:   translateY(-3px);
+        box-shadow:  0 4px 16px rgba(0, 0, 0, 0.12);
+    }
 }
