@@ -13,7 +13,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname( fileURLToPath( import.meta.url ) );
-const HOT_FILE  = path.resolve( __dirname, '../cms/wp-content/themes/custom-theme/assets/hot' );
+const HOT_FILE  = path.resolve( __dirname, '../cms/wp-content/themes/juwelier-janecka/assets/hot' );
 
 // Hot-Datei erstellen → WordPress wechselt in den Dev-Modus
 function createHotFile() {

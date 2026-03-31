@@ -38,8 +38,8 @@ h1 {
 }
 
 h2 {
-  font-family: $font-subheading;
-  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-family: $font-subheading !important;
+  font-size: $font-size-h2;// war clamp(1.4rem, 3vw, 1.8rem);
   color: $color-text;
   padding: 0.4em 0;
 }
@@ -338,13 +338,5 @@ li.advantage__item {
 // .font-medium   { font-weight: $font-weight-medium;   }
 // .font-semibold { font-weight: $font-weight-semibold; }
 // .font-bold     { font-weight: $font-weight-bold;     }
-
-
-
-
-
-
-
-
 
 

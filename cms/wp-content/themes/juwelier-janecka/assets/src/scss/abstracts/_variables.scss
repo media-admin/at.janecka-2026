@@ -1,6 +1,6 @@
 // =============================================================================
 // DESIGN TOKENS
-// Media Lab Starter Kit – Single Source of Truth
+// Juwelier Janecka – Single Source of Truth
 // Version: 1.2.0 – Fluid Responsive System
 //
 // REGELN:
@@ -11,14 +11,31 @@
 // =============================================================================
 
 
+
+// ── Farben ────────────────────────────────────────────────────────────────────
+
+
+
+
+
+
+
+
+
 // ─────────────────────────────────────────────────────────────────
 // 1. BRAND COLORS
 //    Primärfarben – direkt aus Figma
 // ─────────────────────────────────────────────────────────────────
 
-$color-primary:   #d40000;  // Figma: "Primary" – WCAG AA Fix (war: #ff0000)
-$color-secondary: #ff6b6b;  // Figma: "Secondary"
-$color-accent:    #00d9ff;  // Figma: "Accent"
+$color-primary:   #707070;  
+$color-secondary: #ff6b6b;  
+$color-accent:    #00d9ff;  
+
+$color-text:        rgb(112, 112, 112);
+$color-bg:          #ffffff;
+$color-bg-light:    #f2f2f2;
+$color-bg-dark:     #dedede;
+
 
 // Hero-Slider Gradient (ersetzt hardcodiertes #667eea)
 $color-hero-gradient: #667eea;
@@ -31,9 +48,9 @@ $color-hero-gradient: #667eea;
 
 $color-black:      #000000;
 $color-dark:       #1a1a1a;
-$color-grey-dark:  #4a4a4a;
-$color-grey:       #9b9b9b;
-$color-grey-light: #e0e0e0;
+$color-grey-dark:  #5a5a5a;
+$color-grey:       #979797;
+$color-grey-light: #92918d;
 $color-light:      #f5f5f5;
 $color-white:      #ffffff;
 
@@ -110,7 +127,7 @@ $color-hero-gradient-dark:  #3958e3;  // darken($color-hero-gradient, 10%)
 //    Light Mode defaults – überschrieben durch CSS Custom Properties
 // ─────────────────────────────────────────────────────────────────
 
-$color-text:       $color-dark;
+$color-text:       $color-primary;
 $color-text-muted: $color-grey-dark;
 $color-text-light: $color-grey;
 $color-background: $color-white;
@@ -141,7 +158,7 @@ $color-input-bg:   $color-white;
   --color-light:          #{$color-light};
 
   // Text
-  --color-text:           #{$color-dark};
+  --color-text:           #{$color-primary};
   --color-text-muted:     #{$color-grey-dark};
   --color-text-light:     #{$color-grey};
   --color-text-secondary: #{$color-grey-dark};   // Alias für --color-text-muted
@@ -219,22 +236,6 @@ $color-input-bg:   $color-white;
   --container-padding: clamp(1rem, 4vw, 2rem);         // 16–32px
 }
 
-[data-theme="dark"] {
-  --color-background:     #1a1a1a;
-  --color-surface:        #242424;
-  --color-card-bg:        #2a2a2a;
-  --color-input-bg:       #2a2a2a;
-  --color-dark:           #f5f5f5;   // Invertiert: dark → hell
-  --color-light:          #1a1a1a;   // Invertiert: light → dunkel
-
-  --color-text:           #f5f5f5;
-  --color-text-muted:     #a0a0a0;
-  --color-text-light:     #b0b0b0;
-  --color-text-secondary: #a0a0a0;
-
-  --color-border:         #333333;
-}
-
 // SCSS-Variablen auf CSS Custom Properties umschalten (Dark-Mode-fähig)
 $color-background:     var(--color-background);
 $color-surface:        var(--color-surface);
@@ -252,8 +253,19 @@ $color-border:         var(--color-border);
 //    In Components: CSS Custom Properties (--text-*) bevorzugen.
 // ─────────────────────────────────────────────────────────────────
 
-$font-primary:   'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-$font-secondary: 'Merriweather', Georgia, serif;
+$font-primary:   'Source Sans Pro Regular', sans-serif;
+$font-secondary: 'Roboto Slab Light', serif;
+
+$font-body:         'Source Sans Pro Regular', sans-serif;
+$font-body-bold:    'Source Sans Pro Bold', sans-serif;
+$font-heading:      'Roboto Slab Light', serif;
+$font-heading-bold: 'Roboto Slab Bold', serif;
+$font-subheading:   'Aalto Sans Pro Light It', sans-serif;
+$font-nav:          'Aalto Sans Pro Light', sans-serif;
+$font-nav-bold:     'Aalto Sans Pro Bold', sans-serif;
+$font-nav-semi:     'Aalto Sans Pro Semibold', sans-serif;
+$font-nav-regular:  'Aalto Sans Pro Regular', sans-serif;
+
 
 // Statische Skala (für Kontexte wo clamp() nicht passt, z.B. Icons, Badges)
 $font-size-xs:   12px;
@@ -270,8 +282,8 @@ $font-size-7xl:  56px;
 
 // Heading Aliases (statisch – für Einzelfälle ohne fluid scaling)
 $font-size-h1: $font-size-6xl;  // 48px
-$font-size-h2: 36px;
-$font-size-h3: $font-size-3xl;  // 28px
+$font-size-h2: $font-size-3xl;
+$font-size-h3: $font-size-xl;  // 28px
 $font-size-h4: $font-size-2xl;  // 24px
 $font-size-h5: $font-size-xl;   // 20px
 $font-size-h6: $font-size-lg;   // 18px
@@ -428,53 +440,6 @@ $z-tooltip:  3000;
 
 
 
-
-
-
-
-
-// =============================================================================
-// Variables – Juwelier Janecka
-// =============================================================================
-
-// ── Farben ────────────────────────────────────────────────────────────────────
-$color-primary:     #af0527;
-$color-text:        #707070;
-$color-grey-mid:    #979797;
-$color-grey-light:  #92918d;
-$color-grey-dark:   #5a5a5a;
-$color-bg:          #ffffff;
-$color-bg-light:    #f2f2f2;
-$color-bg-dark:     #dedede;
-
-// ── Typografie ────────────────────────────────────────────────────────────────
-$font-body:         'Source Sans Pro Regular', sans-serif;
-$font-body-bold:    'Source Sans Pro Bold', sans-serif;
-$font-heading:      'Roboto Slab Light', serif;
-$font-heading-bold: 'Roboto Slab Bold', serif;
-$font-subheading:   'Aalto Sans Pro Light It', sans-serif;
-$font-nav:          'Aalto Sans Pro Light', sans-serif;
-$font-nav-bold:     'Aalto Sans Pro Bold', sans-serif;
-$font-nav-semi:     'Aalto Sans Pro Semibold', sans-serif;
-$font-nav-regular:  'Aalto Sans Pro Regular', sans-serif;
-
-// Basis: 18px = 1rem (im html/body gesetzt)
-$font-size-base:    1.125rem;  // 18px
-$font-size-sm:      0.875rem;  // 14px
-$font-size-xs:      0.75rem;   // 12px
-$font-size-h1:      1.8em;
-$font-size-h2:      1.8rem;
-$font-size-h3:      1.2rem;
-$font-size-h3-cover: 1.4em;
-
-// ── Abstände (alle relativ) ───────────────────────────────────────────────────
-$spacing-xs:   0.25rem;
-$spacing-sm:   0.5rem;
-$spacing-md:   1rem;
-$spacing-lg:   1.5rem;
-$spacing-xl:   2rem;
-$spacing-xxl:  3rem;
-
 // ── Header ───────────────────────────────────────────────────────────────────
 $header-height-mobile:  5rem;   // ~80px
 $header-height-desktop: 13.125rem; // ~210px
@@ -483,3 +448,4 @@ $header-height-desktop: 13.125rem; // ~210px
 // ── Transitions ───────────────────────────────────────────────────────────────
 $transition-base: all 0.3s ease;
 $transition-fast: all 0.15s ease-out;
+

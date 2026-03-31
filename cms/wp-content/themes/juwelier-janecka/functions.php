@@ -80,6 +80,7 @@ add_action('after_setup_theme', 'customtheme_setup');
 require_once get_template_directory() . '/inc/enqueue.php';
 require_once get_template_directory() . '/inc/performance.php';
 require_once get_template_directory() . '/inc/shortcode-overrides.php';
+require_once get_template_directory() . '/inc/class-mega-menu-walker.php';
 
 
 // Optional components (only if files exist)

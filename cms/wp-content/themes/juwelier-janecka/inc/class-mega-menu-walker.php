@@ -6,10 +6,12 @@
  *   1. WP Admin → Darstellung → Menü → Bildschirmoptionen → "CSS-Klassen" aktivieren
  *   2. Dem gewünschten Top-Level-Menüpunkt die Klasse "mega-menu" vergeben
  *
- * Optionales Bild:
- *   - ACF-Feld "mega_menu_image" (Typ: Image, Return Format: Array oder URL)
- *     auf dem Top-Level-Menüpunkt anlegen (Location: Menu Item)
- *   - Das Bild erscheint dann als rechte Spalte im Mega Menu Panel
+ * Bild pro Menüpunkt:
+ *   Einen "Individuelle URL"-Eintrag im Untermenü anlegen.
+ *   Als Navigations-Label folgenden HTML-Code eingeben:
+ *   <img class="mega-menu__img" src="URL-ZUM-BILD.jpg" alt="Beschreibung">
+ *   Der Walker erkennt diesen Eintrag, extrahiert das Bild und zeigt
+ *   es als rechte Spalte an — der Eintrag erscheint nicht als Link.
  *
  * Einbindung in functions.php:
  *   require_once get_template_directory() . '/inc/class-mega-menu-walker.php';
@@ -24,18 +26,20 @@ class Janecka_Walker_Mega_Menu extends Walker_Nav_Menu {
 
     // ── State ──────────────────────────────────────────────────────────────────
 
-    /** Ob das aktuell verarbeitete Top-Level-Item ein Mega Menu ist. */
+    /** Ob das aktuelle Top-Level-Item ein Mega Menu ist. */
     private bool $in_mega = false;
 
-    /** Referenz auf das aktuelle Top-Level-Item (für ACF-Bild-Lookup). */
-    private ?object $mega_item = null;
+    /** Gespeichertes Bild-HTML für das aktuelle Mega Menu. */
+    private string $image_html = '';
+
+    /** Ob das aktuelle Element übersprungen werden soll (Bild-Item). */
+    private bool $skip_item = false;
 
 
     // ── Submenu öffnen ─────────────────────────────────────────────────────────
 
     public function start_lvl( &$output, $depth = 0, $args = null ) {
 
-        // Depth 0 + Mega Menu → Panel-Wrapper statt <ul class="sub-menu">
         if ( $depth === 0 && $this->in_mega ) {
             $output .= "\n"
                 . '<div class="mega-menu__panel">'
@@ -45,7 +49,6 @@ class Janecka_Walker_Mega_Menu extends Walker_Nav_Menu {
             return;
         }
 
-        // Standard-Dropdown
         $indent  = str_repeat( "\t", $depth );
         $output .= "\n{$indent}<ul class=\"sub-menu\">\n";
     }
@@ -56,18 +59,13 @@ class Janecka_Walker_Mega_Menu extends Walker_Nav_Menu {
     public function end_lvl( &$output, $depth = 0, $args = null ) {
 
         if ( $depth === 0 && $this->in_mega ) {
-            $output .= "</ul>\n"; // .mega-menu__links
+            $output .= "</ul>\n"; // .mega-menu__links schließen
 
-            // Optionales ACF-Bild als rechte Spalte
-            $image = $this->get_mega_image();
-            if ( $image ) {
-                $output .= '<div class="mega-menu__image">';
-                $output .= '<img'
-                    . ' src="'   . esc_url( $image['url'] )  . '"'
-                    . ' alt="'   . esc_attr( $image['alt'] ) . '"'
-                    . ' loading="lazy"'
-                    . '>';
-                $output .= '</div>';
+            // Bild ausgeben falls vorhanden
+            if ( $this->image_html ) {
+                $output .= '<div class="mega-menu__image">'
+                    . $this->image_html
+                    . '</div>' . "\n";
             }
 
             $output .= '</div></div>' . "\n"; // .mega-menu__inner + .mega-menu__panel
@@ -83,56 +81,49 @@ class Janecka_Walker_Mega_Menu extends Walker_Nav_Menu {
 
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
 
-        // Top-Level: Mega-Menu-Flag + Item-Referenz für Bild-Lookup aktualisieren
+        // Top-Level: Flags zurücksetzen
         if ( $depth === 0 ) {
-            $this->in_mega   = in_array( 'mega-menu', (array) $item->classes, true );
-            $this->mega_item = $item;
+            $this->in_mega    = in_array( 'mega-menu', (array) $item->classes, true );
+            $this->image_html = '';
         }
 
-        // Standard Walker für alle Elemente (HTML-Markup unverändert)
+        // Bild-Item erkennen: Navigations-Label enthält <img class="mega-menu__img">
+        if ( $this->in_mega && $depth >= 1 ) {
+            $title = $item->title ?? '';
+            if ( $this->is_image_item( $title ) ) {
+                $this->image_html = $title; // img-Tag speichern
+                $this->skip_item  = true;
+                return; // kein Output, kein <li>
+            }
+        }
+
+        $this->skip_item = false;
         parent::start_el( $output, $item, $depth, $args, $id );
+    }
+
+
+    // ── Listenelement schließen ────────────────────────────────────────────────
+
+    public function end_el( &$output, $item, $depth = 0, $args = null ) {
+
+        if ( $this->skip_item ) {
+            $this->skip_item = false;
+            return; // kein </li>
+        }
+
+        parent::end_el( $output, $item, $depth, $args );
     }
 
 
     // ── Hilfsmethoden ──────────────────────────────────────────────────────────
 
     /**
-     * ACF-Bild vom gespeicherten Top-Level-Item holen.
-     *
-     * Erwartet ein ACF-Feld "mega_menu_image" (Location: Menu Item)
-     * mit Return Format "array" oder "url".
-     *
-     * @return array{url: string, alt: string}|false
+     * Prüft ob ein Navigations-Label ein Bild-Item ist.
+     * Erkennt: <img class="mega-menu__img" ...>
      */
-    private function get_mega_image(): array|false {
-
-        if ( ! $this->mega_item || ! function_exists( 'get_field' ) ) {
-            return false;
-        }
-
-        $img = get_field( 'mega_menu_image', 'menu_item_' . $this->mega_item->ID );
-
-        if ( empty( $img ) ) {
-            return false;
-        }
-
-        // Return Format: Array
-        if ( is_array( $img ) && ! empty( $img['url'] ) ) {
-            return [
-                'url' => $img['url'],
-                'alt' => $img['alt'] ?? '',
-            ];
-        }
-
-        // Return Format: URL (String)
-        if ( is_string( $img ) && ! empty( $img ) ) {
-            return [
-                'url' => $img,
-                'alt' => '',
-            ];
-        }
-
-        return false;
+    private function is_image_item( string $title ): bool {
+        return str_contains( $title, 'mega-menu__img' )
+            || ( str_contains( $title, '<img' ) && str_contains( $title, 'mega-menu' ) );
     }
 }
 

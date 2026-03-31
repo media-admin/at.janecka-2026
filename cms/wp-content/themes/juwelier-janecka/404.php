@@ -2,7 +2,7 @@
 /**
  * 404 – Seite nicht gefunden
  *
- * @package CustomTheme
+ * @package CustomTheme 
  */
 
 get_header();

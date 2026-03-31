@@ -19,14 +19,14 @@ $hero_slides = new WP_Query( [
     <div class="swiper-wrapper">
 
         <?php while ( $hero_slides->have_posts() ) : $hero_slides->the_post();
-            $subtitle      = get_field( 'subtitle' );
-            $btn_text      = get_field( 'button_text' );
-            $btn_url       = get_field( 'button_url' );
-            $btn_style     = get_field( 'button_style' ) ?: 'primary';
-            $img_desktop   = get_field( 'image_desktop' );
-            $img_mobile    = get_field( 'image_mobile' );
-            $opacity       = get_field( 'overlay_opacity' ) ?? 30;
-            $text_color    = get_field( 'text_color' ) ?: 'light';
+            $subtitle    = get_field( 'subtitle' );
+            $btn_text    = get_field( 'button_text' );
+            $btn_url     = get_field( 'button_url' );
+            $btn_style   = get_field( 'button_style' ) ?: 'primary';
+            $img_desktop = get_field( 'image_desktop' );
+            $img_mobile  = get_field( 'image_mobile' );
+            $opacity     = get_field( 'overlay_opacity' ) ?? 0;
+            $text_color  = get_field( 'text_color' ) ?: 'light';
         ?>
 
         <div
@@ -50,12 +50,9 @@ $hero_slides = new WP_Query( [
             <div class="hero-slide__overlay" aria-hidden="true"></div>
 
             <div class="hero-slide__content container">
-                <h2 class="hero-slide__title"><?php the_title(); ?></h2>
-
                 <?php if ( $subtitle ) : ?>
                     <p class="hero-slide__subtitle"><?php echo esc_html( $subtitle ); ?></p>
                 <?php endif; ?>
-
                 <?php if ( $btn_text && $btn_url ) : ?>
                     <a
                         href="<?php echo esc_url( $btn_url ); ?>"
@@ -73,7 +70,6 @@ $hero_slides = new WP_Query( [
 
     <button class="swiper-button-prev" aria-label="<?php esc_attr_e( 'Vorheriger Slide', 'custom-theme' ); ?>"></button>
     <button class="swiper-button-next" aria-label="<?php esc_attr_e( 'Nächster Slide', 'custom-theme' ); ?>"></button>
-    <div class="swiper-pagination" role="tablist" aria-label="Slides"></div>
 </section>
 <?php endif; ?>
 
