@@ -1,0 +1,136 @@
+// =============================================================================
+// Fonts – Juwelier Janecka
+// Selbst gehostete Schriften – EOT/SVG-Formate entfernt (kein IE-Support)
+// =============================================================================
+
+// ── Font Awesome ──────────────────────────────────────────────────────────────
+@font-face {
+  font-family: 'FontAwesome Solid';
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('../../fonts/FontAwesome/fa-solid-900.woff2') format('woff2'),
+       url('../../fonts/FontAwesome/fa-solid-900.woff')  format('woff'),
+       url('../../fonts/FontAwesome/fa-solid-900.ttf')   format('truetype');
+}
+
+@font-face {
+  font-family: 'FontAwesome Brands';
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('../../fonts/FontAwesome/fa-brands-400.woff2') format('woff2'),
+       url('../../fonts/FontAwesome/fa-brands-400.woff')  format('woff'),
+       url('../../fonts/FontAwesome/fa-brands-400.ttf')   format('truetype');
+}
+
+// ── Aalto Sans Pro ────────────────────────────────────────────────────────────
+@font-face {
+  font-family: 'Aalto Sans Pro Light';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../../fonts/aalto-sans-pro/aalto-sans-pro-light.woff2') format('woff2'),
+       url('../../fonts/aalto-sans-pro/aalto-sans-pro-light.woff')  format('woff');
+}
+
+@font-face {
+  font-family: 'Aalto Sans Pro Light It';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../../fonts/aalto-sans-pro/aalto-sans-pro-light-it.woff2') format('woff2'),
+       url('../../fonts/aalto-sans-pro/aalto-sans-pro-light-it.woff')  format('woff');
+}
+
+@font-face {
+  font-family: 'Aalto Sans Pro Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../fonts/aalto-sans-pro/aalto-sans-pro-regular.woff2') format('woff2'),
+       url('../../fonts/aalto-sans-pro/aalto-sans-pro-regular.woff')  format('woff');
+}
+
+@font-face {
+  font-family: 'Aalto Sans Pro Semibold';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../../fonts/aalto-sans-pro/aalto-sans-pro-semibold.woff2') format('woff2'),
+       url('../../fonts/aalto-sans-pro/aalto-sans-pro-semibold.woff')  format('woff');
+}
+
+@font-face {
+  font-family: 'Aalto Sans Pro Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../../fonts/aalto-sans-pro/aalto-sans-pro-bold.woff2') format('woff2'),
+       url('../../fonts/aalto-sans-pro/aalto-sans-pro-bold.woff')  format('woff');
+}
+
+// ── Roboto Slab ───────────────────────────────────────────────────────────────
+@font-face {
+  font-family: 'Roboto Slab Light';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../../fonts/roboto-slab/roboto-slab-300.woff2') format('woff2'),
+       url('../../fonts/roboto-slab/roboto-slab-300.woff')  format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto Slab Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../fonts/roboto-slab/roboto-slab-regular.woff2') format('woff2'),
+       url('../../fonts/roboto-slab/roboto-slab-regular.woff')  format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto Slab Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../../fonts/roboto-slab/roboto-slab-700.woff2') format('woff2'),
+       url('../../fonts/roboto-slab/roboto-slab-700.woff')  format('woff');
+}
+
+// ── Source Sans Pro ───────────────────────────────────────────────────────────
+@font-face {
+  font-family: 'Source Sans Pro Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../fonts/source-sans-pro/source-sans-pro-regular.woff2') format('woff2'),
+       url('../../fonts/source-sans-pro/source-sans-pro-regular.woff')  format('woff');
+}
+
+@font-face {
+  font-family: 'Source Sans Pro Italic';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../fonts/source-sans-pro/source-sans-pro-italic.woff2') format('woff2'),
+       url('../../fonts/source-sans-pro/source-sans-pro-italic.woff')  format('woff');
+}
+
+@font-face {
+  font-family: 'Source Sans Pro Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../../fonts/source-sans-pro/source-sans-pro-700.woff2') format('woff2'),
+       url('../../fonts/source-sans-pro/source-sans-pro-700.woff')  format('woff');
+}
+
+@font-face {
+  font-family: 'Source Sans Pro Bold Italic';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../../fonts/source-sans-pro/source-sans-pro-700italic.woff2') format('woff2'),
+       url('../../fonts/source-sans-pro/source-sans-pro-700italic.woff')  format('woff');
+}

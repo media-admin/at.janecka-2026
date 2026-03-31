@@ -1,0 +1,123 @@
+@use '../abstracts' as *;
+
+// =============================================================================
+// Animations & Motion Utilities
+// Version: 1.2.0 – Fluid Responsive System
+//
+// Änderungen:
+//   - prefers-reduced-motion: alle Animationen respektieren WCAG 2.3.3
+//   - Animierte Elemente erhalten transition-duration: 0 bei reduced-motion
+// =============================================================================
+
+// ── Scroll-Triggered Animations ───────────────────────────────────────────────
+
+[data-animate] {
+    opacity:    0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+
+    &.is-visible { opacity: 1; }
+}
+
+[data-animate="fade-in"] {
+    &.is-visible { animation: fadeIn 0.6s ease both; }
+}
+
+[data-animate="fade-in-up"] {
+    transform: translateY(30px);
+    &.is-visible { transform: translateY(0); }
+}
+
+[data-animate="fade-in-down"] {
+    transform: translateY(-30px);
+    &.is-visible { transform: translateY(0); }
+}
+
+[data-animate="fade-in-left"] {
+    transform: translateX(-30px);
+    &.is-visible { transform: translateX(0); }
+}
+
+[data-animate="fade-in-right"] {
+    transform: translateX(30px);
+    &.is-visible { transform: translateX(0); }
+}
+
+[data-animate="scale-in"] {
+    transform: scale(0.8);
+    &.is-visible { transform: scale(1); }
+}
+
+[data-animate="rotate-in"] {
+    transform: rotate(-10deg);
+    &.is-visible { transform: rotate(0); }
+}
+
+// ── Staggered Animations ──────────────────────────────────────────────────────
+
+[data-animate-stagger] {
+    > * {
+        opacity:    0;
+        transform:  translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    &.is-visible {
+        > * {
+            opacity:   1;
+            transform: translateY(0);
+
+            @for $i from 1 through 10 {
+                &:nth-child(#{$i}) {
+                    transition-delay: #{$i * 0.1}s;
+                }
+            }
+        }
+    }
+}
+
+// ── Keyframes ─────────────────────────────────────────────────────────────────
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.5; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-10px); }
+}
+
+// ── Utility Classes ───────────────────────────────────────────────────────────
+
+.animate-pulse  { animation: pulse  2s ease-in-out infinite; }
+.animate-bounce { animation: bounce 1s ease-in-out infinite; }
+
+// ── WCAG 2.3.3 – prefers-reduced-motion ──────────────────────────────────────
+// Deaktiviert alle Animationen für Nutzer mit Bewegungsempfindlichkeit.
+// Scroll-triggered Elemente werden sofort sichtbar.
+
+@media (prefers-reduced-motion: reduce) {
+    [data-animate],
+    [data-animate-stagger] > * {
+        opacity:            1 !important;
+        transform:          none !important;
+        transition:         none !important;
+        animation:          none !important;
+        transition-delay:   0s !important;
+    }
+
+    .animate-pulse,
+    .animate-bounce {
+        animation: none !important;
+    }
+}

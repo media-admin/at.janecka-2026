@@ -1,0 +1,201 @@
+@use '../abstracts' as *;
+
+// =============================================================================
+// TOP HEADER
+// Kontaktleiste über dem Haupt-Header.
+// Version: 1.2.0 – Fluid Responsive System
+//
+// Änderungen:
+//   - font-size: 0.8125rem → var(--text-sm)  (gleicher Wert, aber token-basiert)
+//   - @media (max-width: #{$breakpoint-md - 1}) → @include respond-below('md')
+//   - Farben via Modifier-Klassen, gesetzt durch das ACF „Hintergrundfarbe"-Feld
+// =============================================================================
+
+.top-header {
+    width:     100%;
+    font-size: var(--text-sm);
+    line-height: 1;
+    position:  relative;
+    z-index:   $z-header;
+
+    // ── Farbvarianten ──────────────────────────────────────────────
+
+    &--primary {
+        background-color: var(--color-primary);
+        color:            $color-white;
+
+        a       { color: $color-white; opacity: 0.9; }
+        a:hover { opacity: 1; }
+
+        a:focus-visible {
+            outline:        2px solid #fff;
+            outline-offset: 2px;
+            border-radius:  $radius-sm;
+        }
+    }
+
+    &--dark {
+        background-color: $color-dark;
+        color:            $color-grey-light;
+
+        a       { color: $color-grey-light; }
+        a:hover { color: $color-white; }
+
+        a:focus-visible {
+            outline:        2px solid $color-white;
+            outline-offset: 2px;
+            border-radius:  $radius-sm;
+        }
+    }
+
+    &--light {
+        background-color: $color-light;
+        color:            $color-grey-dark;
+        border-bottom:    1px solid $color-border;
+
+        a       { color: $color-grey-dark; }
+        a:hover { color: var(--color-primary); }
+
+        a:focus-visible {
+            outline:        2px solid $color-primary;
+            outline-offset: 2px;
+            border-radius:  $radius-sm;
+        }
+    }
+
+    // ── Layout ────────────────────────────────────────────────────
+
+    &__inner {
+        display:         flex;
+        align-items:     center;
+        justify-content: space-between;
+        gap:             $spacing-2;
+        padding-top:     $spacing-1;
+        padding-bottom:  $spacing-1;
+        flex-wrap:       wrap;
+
+        @include respond-to('lg') {
+            gap: $spacing-3;
+        }
+    }
+
+    &__contact {
+        display:     flex;
+        align-items: center;
+        gap:         $spacing-2;
+        flex-wrap:   wrap;
+
+        @include respond-to('lg') {
+            gap: $spacing-sm;
+        }
+    }
+
+    &__item {
+        display:     inline-flex;
+        align-items: center;
+        gap:         0.35rem;
+        white-space: nowrap;
+
+        svg { flex-shrink: 0; }
+
+        a {
+            text-decoration: none;
+            transition:      $transition-fast;
+        }
+    }
+
+    // ── Social ────────────────────────────────────────────────────
+
+    &__social {
+        display:     flex;
+        align-items: center;
+        gap:         0.6rem;
+    }
+
+    &__social-link {
+        display:         inline-flex;
+        align-items:     center;
+        justify-content: center;
+        // WCAG 2.5.5: Social-Links in der Top-Bar sind optional/dekorativ,
+        // aber wir setzen trotzdem min. 28px (top-bar ist klein, 44px wäre
+        // zu dominant; diese Ausnahme ist dokumentiert).
+        width:           1.75rem;
+        height:          1.75rem;
+        border-radius:   $radius-full;
+        text-decoration: none;
+        opacity:         0.85;
+        transition:      $transition-fast;
+
+        svg {
+            width:  1rem;
+            height: 1rem;
+        }
+
+        &:hover {
+            opacity:   1;
+            transform: translateY(-1px);
+        }
+
+        &:focus-visible {
+            outline:        2px solid currentColor;
+            outline-offset: 2px;
+            border-radius:  $radius-full;
+        }
+    }
+
+    // ── Mobile Verhalten ──────────────────────────────────────────
+
+    // top-header--mobile-hide → unterhalb $breakpoint-md versteckt
+    &--mobile-hide {
+        @include respond-below('md') {
+            display: none;
+        }
+    }
+
+    // top-header--mobile-toggle → eingeklappt auf Mobile, Toggle-Button sichtbar
+    &--mobile-toggle {
+        @include respond-below('md') {
+            .top-header__inner {
+                flex-direction: column;
+                align-items:    flex-start;
+                gap:            $spacing-1;
+                max-height:     0;
+                overflow:       hidden;
+                padding:        0;
+                transition:     max-height 0.3s ease, padding 0.3s ease;
+            }
+
+            &.is-open .top-header__inner {
+                max-height:     20rem;
+                padding-top:    $spacing-1;
+                padding-bottom: $spacing-1;
+            }
+
+            // Toggle-Button (via JS gerendert, siehe top-header.js)
+            .top-header__toggle {
+                display:     flex;
+                align-items: center;
+                gap:         0.4rem;
+                width:       100%;
+                // WCAG 2.5.5: min-height 44px ✅
+                min-height:  44px;
+                padding:     0.4rem $spacing-2;
+                background:  transparent;
+                border:      none;
+                cursor:      pointer;
+                font-size:   var(--text-sm);
+                font-weight: $font-weight-semibold;
+                color:       inherit;
+
+                &:focus-visible {
+                    outline:        2px solid currentColor;
+                    outline-offset: 2px;
+                }
+            }
+        }
+
+        @include respond-to('md') {
+            .top-header__toggle { display: none; }
+        }
+    }
+}

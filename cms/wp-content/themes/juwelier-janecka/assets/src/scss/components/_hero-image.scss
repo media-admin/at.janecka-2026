@@ -1,0 +1,204 @@
+@use '../abstracts' as *;
+
+// =============================================================================
+// Hero Image
+// Version: 1.2.0 – Fluid Responsive System
+//
+// Änderungen:
+//   - @media (max-width: 768px) → @include respond-below('md')
+//   - @media (max-width: 480px) → @include respond-below('sm')
+//   - padding → var(--space-*) / var(--container-padding)
+// =============================================================================
+
+$hero-sm-min:  200px;  $hero-sm-vw: 35vw;  $hero-sm-max: 400px;
+$hero-md-min:  300px;  $hero-md-vw: 40vw;  $hero-md-max: 600px;
+$hero-lg-min:  400px;  $hero-lg-vw: 50vw;  $hero-lg-max: 700px;
+$hero-xl-min:  500px;  $hero-xl-vw: 60vw;  $hero-xl-max: 800px;
+
+$hero-sm-mob:  250px;
+$hero-md-mob:  300px;
+$hero-lg-mob:  360px;
+$hero-xl-mob:  420px;
+
+.hero-image {
+  position: relative;
+  width:    100%;
+  overflow: hidden;
+  display:  flex;
+
+  // ── Höhenvarianten ────────────────────────────────────────────────────────
+
+  &--sm { height: clamp(#{$hero-sm-min}, #{$hero-sm-vw}, #{$hero-sm-max}); }
+  &--md { height: clamp(#{$hero-md-min}, #{$hero-md-vw}, #{$hero-md-max}); }
+  &--lg { height: clamp(#{$hero-lg-min}, #{$hero-lg-vw}, #{$hero-lg-max}); }
+  &--xl { height: clamp(#{$hero-xl-min}, #{$hero-xl-vw}, #{$hero-xl-max}); }
+
+  // Mobile-Mindesthöhen – mixin statt hardcodierter px-Wert
+  @include respond-below('md') {
+    &--sm { height: $hero-sm-mob; }
+    &--md { height: $hero-md-mob; }
+    &--lg { height: $hero-lg-mob; }
+    &--xl { height: $hero-xl-mob; }
+  }
+
+  // ── Vertikalausrichtung ───────────────────────────────────────────────────
+
+  &--vpos-bottom { align-items: flex-end; }
+  &--vpos-middle { align-items: center; }
+  &--vpos-top    { align-items: flex-start; }
+
+  // ── Bild ──────────────────────────────────────────────────────────────────
+
+  &__img,
+  picture {
+    position: absolute;
+    inset:    0;
+    width:    100%;
+    height:   100%;
+  }
+
+  &__img {
+    object-fit:      cover;
+    object-position: center;
+  }
+
+  picture img {
+    position:        absolute;
+    inset:           0;
+    width:           100%;
+    height:          100%;
+    object-fit:      cover;
+    object-position: center;
+  }
+
+  // ── Overlay ───────────────────────────────────────────────────────────────
+
+  &__overlay {
+    position:   absolute;
+    inset:      0;
+    background: rgba(0, 0, 0, var(--hero-opacity, 0.4));
+  }
+
+  // ── Content-Wrapper ───────────────────────────────────────────────────────
+
+  &__content {
+    position: relative;
+    z-index:  1;
+    width:    100%;
+    padding:  var(--space-xl) var(--container-padding);
+
+    @include respond-to('md') {
+      padding: var(--space-2xl) var(--container-padding);
+    }
+  }
+
+  &--vpos-bottom &__content { padding-bottom: var(--space-2xl); }
+  &--vpos-top    &__content { padding-top:    var(--space-2xl); }
+
+  // ── Inner ─────────────────────────────────────────────────────────────────
+
+  &__inner { max-width: 720px; }
+
+  &--align-left &__inner {
+    margin-right: auto;
+    text-align:   left;
+  }
+
+  &--align-center &__inner {
+    margin:     0 auto;
+    text-align: center;
+    .hero-image__buttons { justify-content: center; }
+  }
+
+  &--align-right &__inner {
+    margin-left: auto;
+    text-align:  right;
+    .hero-image__buttons { justify-content: flex-end; }
+  }
+
+  // ── Titel ─────────────────────────────────────────────────────────────────
+
+  &__title {
+    color:       $color-white;
+    font-size:   clamp(1.75rem, 4vw, 3rem);
+    font-weight: $font-weight-bold;
+    line-height: $line-height-tight;
+    margin:      0;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+
+    @include respond-to('md') {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+  }
+
+  // ── Untertitel ────────────────────────────────────────────────────────────
+
+  &__subtitle {
+    color:       rgba(255, 255, 255, 0.88);
+    font-size:   clamp($font-size-base, 2vw, $font-size-xl);
+    line-height: 1.6;
+    margin:      var(--space-sm) 0 0;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+    max-width:   640px;
+
+    .hero-image--align-center & { max-width: none; }
+  }
+
+  // ── Buttons ───────────────────────────────────────────────────────────────
+
+  &__buttons {
+    display:     flex;
+    flex-wrap:   wrap;
+    gap:         var(--space-sm);
+    margin-top:  var(--space-lg);
+    align-items: center;
+
+    // Auf sehr kleinen Screens: Stack
+    @include respond-below('sm') {
+      flex-direction: column;
+      align-items:    flex-start;
+
+      .hero-image--align-center & { align-items: center; }
+      .hero-image--align-right  & { align-items: flex-end; }
+
+      .btn { width: 100%; justify-content: center; }
+    }
+  }
+
+  // ── btn--light (weiße Buttons auf dunklem Hero) ────────────────────────────
+
+  .btn--light {
+    &.btn--primary {
+      background:   $color-white;
+      color:        $color-primary;
+      border-color: $color-white;
+
+      &:hover, &:focus-visible {
+        background:   rgba(255, 255, 255, 0.88);
+        border-color: rgba(255, 255, 255, 0.88);
+      }
+    }
+
+    &.btn--outline {
+      background:   transparent;
+      color:        $color-white;
+      border-color: $color-white;
+
+      &:hover, &:focus-visible {
+        background: $color-white;
+        color:      $color-primary;
+      }
+    }
+
+    &.btn--ghost {
+      background:   transparent;
+      color:        $color-white;
+      border-color: transparent;
+
+      &:hover, &:focus-visible {
+        background:   rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+}

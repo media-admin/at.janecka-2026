@@ -29,13 +29,13 @@ export default defineConfig({
         blocks:              path.resolve(pluginDir, 'assets/src/js/blocks.js'),
         'block-accordion':   path.resolve(pluginDir, 'assets/src/js/block-accordion.js'),
         'block-logo-slider': path.resolve(pluginDir, 'assets/src/js/block-logo-slider.js'),
-        'blocks-scss':       path.resolve(pluginDir, 'assets/src/scss/blocks.scss'),
       },
       output: {
         entryFileNames: 'js/[name].js',
         chunkFileNames: 'js/chunks/[name]-[hash].js',
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name?.endsWith('.css')) return 'css/[name].css';
+          if (!assetInfo.name) return 'assets/[hash][extname]';
+          if (assetInfo.name.endsWith('.css')) return 'css/[name].css';
           return 'assets/[name][extname]';
         },
       },

@@ -1,1 +1,0 @@
-!function(){"use strict";var t={};(function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})})(t),((window.wcShiptastic=window.wcShiptastic||{}).static=window.wcShiptastic.static||{})["preferred-services-styles"]=t}();

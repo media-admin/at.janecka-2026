@@ -410,82 +410,6 @@
             "install-path": "../digitick/sepa-xml"
         },
         {
-            "name": "dvdoug/boxpacker",
-            "version": "3.12.1",
-            "version_normalized": "3.12.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dvdoug/BoxPacker.git",
-                "reference": "04720e946770045b00ea796ba8941240b66cba0b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dvdoug/BoxPacker/zipball/04720e946770045b00ea796ba8941240b66cba0b",
-                "reference": "04720e946770045b00ea796ba8941240b66cba0b",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": "^7.4||^8.0",
-                "psr/log": "^1.0||^2.0||^3.0"
-            },
-            "require-dev": {
-                "behat/behat": "^3.13",
-                "dvdoug/behat-code-coverage": "^5.3.1",
-                "friendsofphp/php-cs-fixer": "^3.22.0",
-                "monolog/monolog": "^2.9.1||^3.4",
-                "phpunit/phpunit": "^9.6.10||^10.2"
-            },
-            "time": "2023-12-02T17:01:46+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "DVDoug\\BoxPacker\\": [
-                        "src/",
-                        "tests/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Doug Wright",
-                    "role": "Developer"
-                }
-            ],
-            "description": "An implementation of the 3D (actually 4D) bin packing/knapsack problem (aka creating parcels by putting items into boxes)",
-            "homepage": "https://boxpacker.io/",
-            "keywords": [
-                "bin packing",
-                "binpacking",
-                "box",
-                "boxes",
-                "boxpacking",
-                "container",
-                "knapsack",
-                "packaging",
-                "packing",
-                "parcel",
-                "parcelpacking",
-                "shipping"
-            ],
-            "support": {
-                "issues": "https://github.com/dvdoug/BoxPacker/issues",
-                "source": "https://github.com/dvdoug/BoxPacker/tree/3.12.1"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/dvdoug",
-                    "type": "github"
-                }
-            ],
-            "install-path": "../dvdoug/boxpacker"
-        },
-        {
             "name": "globalcitizen/php-iban",
             "version": "v4.2.3",
             "version_normalized": "4.2.3.0",
@@ -575,59 +499,6 @@
                 "source": "https://github.com/paragonie/random_compat"
             },
             "install-path": "../paragonie/random_compat"
-        },
-        {
-            "name": "psr/log",
-            "version": "1.1.4",
-            "version_normalized": "1.1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/log.git",
-                "reference": "d49695b909c3b7628b6289db5479a1c204601f11"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
-                "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "time": "2021-05-03T11:20:27+00:00",
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Log\\": "Psr/Log/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for logging libraries",
-            "homepage": "https://github.com/php-fig/log",
-            "keywords": [
-                "log",
-                "psr",
-                "psr-3"
-            ],
-            "support": {
-                "source": "https://github.com/php-fig/log/tree/1.1.4"
-            },
-            "install-path": "../psr/log"
         },
         {
             "name": "ramsey/collection",
@@ -822,130 +693,6 @@
                 }
             ],
             "install-path": "../ramsey/uuid"
-        },
-        {
-            "name": "setasign/fpdf",
-            "version": "1.8.6",
-            "version_normalized": "1.8.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Setasign/FPDF.git",
-                "reference": "0838e0ee4925716fcbbc50ad9e1799b5edfae0a0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Setasign/FPDF/zipball/0838e0ee4925716fcbbc50ad9e1799b5edfae0a0",
-                "reference": "0838e0ee4925716fcbbc50ad9e1799b5edfae0a0",
-                "shasum": ""
-            },
-            "require": {
-                "ext-gd": "*",
-                "ext-zlib": "*"
-            },
-            "time": "2023-06-26T14:44:25+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "classmap": [
-                    "fpdf.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Olivier Plathey",
-                    "email": "oliver@fpdf.org",
-                    "homepage": "http://fpdf.org/"
-                }
-            ],
-            "description": "FPDF is a PHP class which allows to generate PDF files with pure PHP. F from FPDF stands for Free: you may use it for any kind of usage and modify it to suit your needs.",
-            "homepage": "http://www.fpdf.org",
-            "keywords": [
-                "fpdf",
-                "pdf"
-            ],
-            "support": {
-                "source": "https://github.com/Setasign/FPDF/tree/1.8.6"
-            },
-            "install-path": "../setasign/fpdf"
-        },
-        {
-            "name": "setasign/fpdi",
-            "version": "v2.6.4",
-            "version_normalized": "2.6.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Setasign/FPDI.git",
-                "reference": "4b53852fde2734ec6a07e458a085db627c60eada"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Setasign/FPDI/zipball/4b53852fde2734ec6a07e458a085db627c60eada",
-                "reference": "4b53852fde2734ec6a07e458a085db627c60eada",
-                "shasum": ""
-            },
-            "require": {
-                "ext-zlib": "*",
-                "php": "^7.1 || ^8.0"
-            },
-            "conflict": {
-                "setasign/tfpdf": "<1.31"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7",
-                "setasign/fpdf": "~1.8.6",
-                "setasign/tfpdf": "~1.33",
-                "squizlabs/php_codesniffer": "^3.5",
-                "tecnickcom/tcpdf": "^6.8"
-            },
-            "suggest": {
-                "setasign/fpdf": "FPDI will extend this class but as it is also possible to use TCPDF or tFPDF as an alternative. There's no fixed dependency configured."
-            },
-            "time": "2025-08-05T09:57:14+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "setasign\\Fpdi\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jan Slabon",
-                    "email": "jan.slabon@setasign.com",
-                    "homepage": "https://www.setasign.com"
-                },
-                {
-                    "name": "Maximilian Kresse",
-                    "email": "maximilian.kresse@setasign.com",
-                    "homepage": "https://www.setasign.com"
-                }
-            ],
-            "description": "FPDI is a collection of PHP classes facilitating developers to read pages from existing PDF documents and use them as templates in FPDF. Because it is also possible to use FPDI with TCPDF, there are no fixed dependencies defined. Please see suggestions for packages which evaluates the dependencies automatically.",
-            "homepage": "https://www.setasign.com/fpdi",
-            "keywords": [
-                "fpdf",
-                "fpdi",
-                "pdf"
-            ],
-            "support": {
-                "issues": "https://github.com/Setasign/FPDI/issues",
-                "source": "https://github.com/Setasign/FPDI/tree/v2.6.4"
-            },
-            "funding": [
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/setasign/fpdi",
-                    "type": "tidelift"
-                }
-            ],
-            "install-path": "../setasign/fpdi"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -1204,46 +951,37 @@
             "install-path": "../symfony/polyfill-php81"
         },
         {
-            "name": "vendidero/shiptastic-for-woocommerce",
-            "version": "4.8.6",
-            "version_normalized": "4.8.6.0",
+            "name": "vendidero/eu-order-withdrawal-button-for-woocommerce",
+            "version": "1.0.2",
+            "version_normalized": "1.0.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/vendidero/shiptastic-for-woocommerce.git",
-                "reference": "4e73ec313d690eb9527555962ef333fd0ed91d57"
+                "url": "https://github.com/vendidero/eu-order-withdrawal-button-for-woocommerce.git",
+                "reference": "c946d30bca12206a1e898917607d1289de1b15ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vendidero/shiptastic-for-woocommerce/zipball/4e73ec313d690eb9527555962ef333fd0ed91d57",
-                "reference": "4e73ec313d690eb9527555962ef333fd0ed91d57",
+                "url": "https://api.github.com/repos/vendidero/eu-order-withdrawal-button-for-woocommerce/zipball/c946d30bca12206a1e898917607d1289de1b15ed",
+                "reference": "c946d30bca12206a1e898917607d1289de1b15ed",
                 "shasum": ""
             },
             "require": {
-                "automattic/jetpack-autoloader": "2.11.18",
-                "dvdoug/boxpacker": "^3.9.0",
-                "setasign/fpdf": "^1.8.2",
-                "setasign/fpdi": "^2.3"
+                "automattic/jetpack-autoloader": "2.11.18"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.0.0",
                 "woocommerce/woocommerce-sniffs": "^1.0.0",
                 "yoast/phpunit-polyfills": "^3.0"
             },
-            "time": "2026-01-05T09:54:25+00:00",
+            "time": "2026-03-27T10:42:34+00:00",
             "type": "wordpress-plugin",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "Vendidero\\Shiptastic\\": "src"
+                    "Vendidero\\OrderWithdrawalButton\\": "src"
                 }
             },
             "scripts": {
-                "post-install-cmd": [
-                    "sh ./bin/vendor-clean.sh"
-                ],
-                "post-update-cmd": [
-                    "sh ./bin/vendor-clean.sh"
-                ],
                 "phpcs": [
                     "phpcs -s -p"
                 ],
@@ -1257,72 +995,13 @@
             "license": [
                 "GPL-3.0-or-later"
             ],
-            "description": "Shiptastic for WooCommerce",
+            "description": "EU Order Withdrawal Button for WooCommerce",
             "homepage": "https://vendidero.de",
             "support": {
-                "source": "https://github.com/vendidero/shiptastic-for-woocommerce/tree/v4.8.6"
+                "source": "https://github.com/vendidero/eu-order-withdrawal-button-for-woocommerce/tree/v1.0.2",
+                "issues": "https://github.com/vendidero/eu-order-withdrawal-button-for-woocommerce/issues"
             },
-            "install-path": "../../packages/shiptastic-for-woocommerce"
-        },
-        {
-            "name": "vendidero/shiptastic-integration-for-dhl",
-            "version": "4.1.7",
-            "version_normalized": "4.1.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/vendidero/shiptastic-integration-for-dhl.git",
-                "reference": "93452cd86cb87e52df26cda58276698a976c3d9c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/vendidero/shiptastic-integration-for-dhl/zipball/93452cd86cb87e52df26cda58276698a976c3d9c",
-                "reference": "93452cd86cb87e52df26cda58276698a976c3d9c",
-                "shasum": ""
-            },
-            "require": {
-                "automattic/jetpack-autoloader": "2.11.18",
-                "composer/installers": "^1.9.0",
-                "php": ">=5.6|>=7.0"
-            },
-            "require-dev": {
-                "woocommerce/woocommerce-sniffs": "^1.0.0"
-            },
-            "time": "2026-01-05T10:27:10+00:00",
-            "type": "wordpress-plugin",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "Vendidero\\Shiptastic\\DHL\\": "src"
-                }
-            },
-            "scripts": {
-                "post-install-cmd": [
-                    "sh ./bin/package-update.sh",
-                    "python3 ./bin/update-holidays.py"
-                ],
-                "post-update-cmd": [
-                    "sh ./bin/package-update.sh",
-                    "python3 ./bin/update-holidays.py"
-                ],
-                "phpcs": [
-                    "phpcs -s -p"
-                ],
-                "phpcs-pre-commit": [
-                    "phpcs -s -p -n"
-                ],
-                "phpcbf": [
-                    "phpcbf -p"
-                ]
-            },
-            "license": [
-                "GPL-3.0-or-later"
-            ],
-            "description": "DHL & Deutsche Post integration for Shiptastic",
-            "homepage": "https://github.com/vendidero/shiptastic-integration-for-dhl",
-            "support": {
-                "source": "https://github.com/vendidero/shiptastic-integration-for-dhl/tree/v4.1.7"
-            },
-            "install-path": "../../packages/shiptastic-integration-for-dhl"
+            "install-path": "../../packages/eu-order-withdrawal-button-for-woocommerce"
         },
         {
             "name": "vendidero/woocommerce-eu-tax-helper",

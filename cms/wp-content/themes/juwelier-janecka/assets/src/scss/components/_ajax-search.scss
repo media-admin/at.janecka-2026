@@ -1,0 +1,282 @@
+@use '../abstracts' as *;
+
+// =============================================================================
+// AJAX Search
+// Version: 1.2.0 – Fluid Responsive System
+//
+// Änderungen:
+//   - @media (max-width: 768px) → @include respond-below('md')
+//   - font-size → var(--text-*)
+// =============================================================================
+
+.ajax-search {
+  position:  relative;
+  max-width: 600px;
+  margin:    0 auto;
+
+  &__form     { position: relative; width: 100%; }
+
+  &__input-wrapper {
+    position:    relative;
+    display:     flex;
+    align-items: center;
+  }
+
+  &__input {
+    width:         100%;
+    padding:       1rem 3.5rem 1rem 3rem;
+    border:        2px solid $color-border;
+    border-radius: $radius-full;
+    font-size:     var(--text-base);
+    transition:    $transition-base;
+
+    &:focus {
+      outline:      none;
+      border-color: $color-primary;
+      box-shadow:   0 0 0 3px rgba($color-primary, 0.1);
+    }
+
+    &::-webkit-search-cancel-button { display: none; }
+  }
+
+  &__icon {
+    position:       absolute;
+    left:           1rem;
+    color:          $color-text-muted;
+    pointer-events: none;
+    display:        flex;
+    align-items:    center;
+  }
+
+  &__submit {
+    position:        absolute;
+    right:           0.5rem;
+    top:             50%;
+    transform:       translateY(-50%);
+    background:      $color-primary;
+    color:           $color-white;
+    border:          none;
+    border-radius:   $radius-full;
+    width:           2.5rem;
+    height:          2.5rem;
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    cursor:          pointer;
+    transition:      $transition-base;
+    z-index:         2;
+
+    &:hover  { background: $color-primary-dark; transform: translateY(-50%) scale(1.05); }
+    &:active { transform: translateY(-50%) scale(0.95); }
+    &:focus  { outline: none; box-shadow: 0 0 0 3px rgba($color-primary, 0.3); }
+
+    svg { width: 18px; height: 18px; }
+  }
+
+  &__loading {
+    position:  absolute;
+    right:     0.75rem;
+    top:       50%;
+    transform: translateY(-50%);
+    color:     $color-primary;
+    display:   none;
+    z-index:   2;
+
+    svg { animation: spin 1s linear infinite; }
+  }
+
+  &__clear {
+    position:   absolute;
+    right:      1rem;
+    background: transparent;
+    border:     none;
+    color:      $color-text-muted;
+    cursor:     pointer;
+    padding:    0.5rem;
+    display:    flex;
+    align-items: center;
+    transition: $transition-base;
+
+    &:hover { color: $color-text; }
+  }
+
+  &__results {
+    position:    absolute;
+    top:         calc(100% + 0.5rem);
+    left:        0;
+    right:       0;
+    background:  $color-white;
+    border:      1px solid $color-border;
+    border-radius: $radius-lg;
+    box-shadow:  $shadow-xl;
+    max-height:  400px;
+    overflow-y:  auto;
+    z-index:     100;
+
+    &-list { padding: 0.5rem 0; }
+  }
+
+  &__item,
+  &__result {
+    display:         flex;
+    align-items:     flex-start;
+    gap:             1rem;
+    padding:         1rem;
+    text-decoration: none;
+    color:           $color-text;
+    transition:      $transition-base;
+    border-bottom:   1px solid $color-border;
+    border-left:     3px solid transparent;
+
+    &:last-child { border-bottom: none; }
+    &:hover, &.is-active { background: $color-gray-50; }
+
+    &--post    { border-left-color: $color-primary; }
+    &--page    { border-left-color: $color-gray-400; }
+    &--product { border-left-color: $color-success; }
+    &--project { border-left-color: $color-info; }
+    &--service { border-left-color: $color-warning; }
+  }
+
+  &__thumbnail,
+  &__result-thumbnail {
+    flex-shrink:   0;
+    width:         60px;
+    height:        60px;
+    border-radius: $radius-base;
+    overflow:      hidden;
+    background:    $color-gray-100;
+
+    img { width: 100%; height: 100%; object-fit: cover; }
+  }
+
+  &__title,
+  &__result-title {
+    font-size:     var(--text-base);
+    font-weight:   $font-weight-semibold;
+    margin-bottom: 0.25rem;
+    color:         $color-text;
+
+    mark {
+      background:    rgba($color-primary, 0.2);
+      color:         $color-primary;
+      padding:       0 0.2em;
+      border-radius: 2px;
+    }
+  }
+
+  &__excerpt,
+  &__result-excerpt {
+    font-size:   var(--text-sm);
+    color:       $color-text-muted;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  &__meta,
+  &__result-meta {
+    display:     flex;
+    align-items: center;
+    gap:         0.75rem;
+    flex-wrap:   wrap;
+    font-size:   var(--text-xs);
+    color:       $color-text-muted;
+  }
+
+  &__type,
+  &__result-type {
+    padding:        0.25rem 0.5rem;
+    background:     $color-gray-100;
+    border-radius:  $radius-sm;
+    font-weight:    $font-weight-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__price {
+    color:       $color-success;
+    font-weight: $font-weight-bold;
+    font-size:   var(--text-base);
+    margin-left: auto;
+    white-space: nowrap;
+
+    del {
+      color:       $color-text-muted;
+      font-size:   var(--text-sm);
+      font-weight: $font-weight-normal;
+      margin-right: 0.5rem;
+      opacity:     0.7;
+    }
+
+    ins { text-decoration: none; color: $color-error; }
+  }
+
+  &__no-results,
+  &__error {
+    position:      absolute;
+    top:           calc(100% + 0.5rem);
+    left:          0;
+    right:         0;
+    background:    $color-white;
+    border:        1px solid $color-border;
+    border-radius: $radius-lg;
+    box-shadow:    $shadow-xl;
+    padding:       var(--space-lg);
+    text-align:    center;
+    z-index:       100;
+
+    p { color: $color-text-muted; margin: 0; }
+  }
+
+  &__error { border-color: $color-error; p { color: $color-error; } }
+}
+
+// ── Compact Variant ───────────────────────────────────────────────────────────
+
+.ajax-search--compact {
+  .ajax-search__input { padding: 0.75rem 3rem 0.75rem 2.5rem; }
+  .ajax-search__icon  { left: 0.75rem; }
+
+  .ajax-search__item,
+  .ajax-search__result { padding: 0.75rem 1rem; }
+
+  .ajax-search__thumbnail,
+  .ajax-search__result-thumbnail { width: 40px; height: 40px; }
+
+  .ajax-search__title,
+  .ajax-search__result-title { font-size: var(--text-sm); }
+
+  .ajax-search__excerpt,
+  .ajax-search__result-excerpt { display: none; }
+
+  .ajax-search__price { font-size: var(--text-sm); }
+}
+
+// ── Responsive ────────────────────────────────────────────────────────────────
+
+@include respond-below('md') {
+  .ajax-search {
+    max-width: 100%;
+
+    &__item,
+    &__result { padding: 0.75rem; }
+
+    &__thumbnail,
+    &__result-thumbnail { width: 50px; height: 50px; }
+
+    &__price {
+      font-size: var(--text-sm);
+      del { display: none; }
+    }
+
+    &__meta,
+    &__result-meta { font-size: 10px; }
+  }
+}
+
+// ── Animations ────────────────────────────────────────────────────────────────
+
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

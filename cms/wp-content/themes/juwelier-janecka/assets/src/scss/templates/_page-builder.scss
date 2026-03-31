@@ -1,0 +1,110 @@
+@use '../abstracts' as *;
+
+// =============================================================================
+// Page Builder Templates
+// Version: 1.2.0 – Fluid Responsive System
+//
+// Änderungen:
+//   - padding: 2rem → var(--container-padding)
+//   - gap: 3rem → var(--space-2xl)
+//   - font-size: 3rem/2.5rem → clamp()
+//   - Zwei-Spalten-Layouts: @include respond-below('md') ergänzt
+// =============================================================================
+
+.page-builder,
+.page-builder-acf {
+    .container {
+        max-width:    $container-max-width;
+        margin:       0 auto;
+        padding-left: var(--container-padding);
+        padding-right: var(--container-padding);
+    }
+}
+
+.agency-homepage {
+    .container {
+        max-width: $container-max-width;
+        margin:    0 auto;
+        padding:   var(--space-lg) var(--container-padding);
+    }
+}
+
+// ── Hero Section ──────────────────────────────────────────────────────────────
+
+.hero-section {
+    min-height:          600px;
+    display:             flex;
+    align-items:         center;
+    background-size:     cover;
+    background-position: center;
+    position:            relative;
+
+    &::before {
+        content:    '';
+        position:   absolute;
+        inset:      0;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    .container {
+        position: relative;
+        z-index:  1;
+    }
+
+    &__content {
+        max-width:  800px;
+        color:      $color-white;
+        text-align: center;
+        margin:     0 auto;
+    }
+
+    &__title {
+        // fluid: 36px → 48px (war fix 3rem)
+        font-size:     clamp(2.25rem, 5vw, 3rem);
+        margin-bottom: var(--space-sm);
+    }
+}
+
+// ── Two Columns ───────────────────────────────────────────────────────────────
+
+.two-columns {
+    padding: var(--space-section) 0;
+
+    &__wrapper {
+        display:     grid;
+        gap:         var(--space-2xl);
+        align-items: start;
+    }
+
+    // Mobile: immer 1 Spalte
+    &--50-50 .two-columns__wrapper,
+    &--60-40 .two-columns__wrapper,
+    &--40-60 .two-columns__wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    // Desktop: konfigurierbare Spalten
+    @include respond-to('md') {
+        &--50-50 .two-columns__wrapper { grid-template-columns: 1fr 1fr; }
+        &--60-40 .two-columns__wrapper { grid-template-columns: 60fr 40fr; }
+        &--40-60 .two-columns__wrapper { grid-template-columns: 40fr 60fr; }
+    }
+}
+
+// ── CTA Section ───────────────────────────────────────────────────────────────
+
+.cta-section {
+    padding:    var(--space-section) 0;
+    text-align: center;
+
+    &--primary {
+        background: $color-primary;
+        color:      $color-white;
+    }
+
+    &__title {
+        // fluid: 28px → 40px (war fix 2.5rem)
+        font-size:     clamp(1.75rem, 4vw, 2.5rem);
+        margin-bottom: var(--space-md);
+    }
+}

@@ -85,11 +85,19 @@ if ( ! class_exists( 'WC_GZD_Install' ) ) :
 					$note->dismiss();
 				}
 
+				$do_redirect = true;
+
+				if ( isset( $_GET['page'] ) && 'wc-gzd-about' === wc_clean( wp_unslash( $_GET['page'] ) ) ) {
+					$do_redirect = false;
+				}
+
 				delete_transient( '_wc_gzd_activation_redirect' );
 
-				// What's new redirect
-				wp_safe_redirect( esc_url_raw( admin_url( 'index.php?page=wc-gzd-about&wc-gzd-updated=true' ) ) );
-				exit;
+				if ( $do_redirect ) {
+					// What's new redirect
+					wp_safe_redirect( esc_url_raw( admin_url( 'index.php?page=wc-gzd-about&wc-gzd-updated=true' ) ) );
+					exit;
+				}
 			}
 
 			if ( get_transient( '_wc_gzd_setup_wizard_redirect' ) ) {
@@ -556,7 +564,7 @@ if ( ! class_exists( 'WC_GZD_Install' ) ) :
 			add_filter( 'woocommerce_shiptastic_enable_logging', '__return_true', 5 );
 			add_filter( 'oss_woocommerce_enable_extended_logging', '__return_true', 5 );
 
-			if ( ! is_null( $current_db_version ) && version_compare( $current_db_version, '3.19.0', '<' ) ) {
+			if ( get_option( 'woocommerce_gzd_shipments_upload_dir_suffix' ) && ! is_null( $current_db_version ) && version_compare( $current_db_version, '3.19.0', '<' ) ) {
 				self::migrate_shipments_to_shiptastic( false, true );
 			}
 
@@ -576,45 +584,32 @@ if ( ! class_exists( 'WC_GZD_Install' ) ) :
 			// Delete plugin header data for dependency check
 			delete_option( 'woocommerce_gzd_plugin_header_data' );
 
+			if ( ! \Vendidero\Germanized\PluginsHelper::is_shiptastic_plugin_active() && \Vendidero\Germanized\Shiptastic::needs_shiptastic_standalone() ) {
+				update_option( 'woocommerce_gzd_is_shiptastic_standalone_update', 'yes' );
+			} else {
+				delete_option( 'woocommerce_gzd_is_shiptastic_standalone_update' );
+			}
+
+			if ( ! \Vendidero\Germanized\PluginsHelper::is_shiptastic_dhl_plugin_active() && \Vendidero\Germanized\Shiptastic::needs_shiptastic_dhl_standalone() ) {
+				update_option( 'woocommerce_gzd_is_shiptastic_standalone_update', 'yes' );
+				update_option( 'woocommerce_gzd_is_shiptastic_dhl_standalone_update', 'yes' );
+			} else {
+				delete_option( 'woocommerce_gzd_is_shiptastic_dhl_standalone_update' );
+			}
+
 			include_once WC_GERMANIZED_ABSPATH . 'includes/admin/class-wc-gzd-admin-notices.php';
 			$notices = WC_GZD_Admin_Notices::instance();
 
-			// Refresh notes
-			foreach ( $notices->get_notes() as $note ) {
-				$note->delete_note();
-			}
+			self::force_delete_notes();
 
 			// Recheck outdated templates
 			if ( $note = $notices->get_note( 'template_outdated' ) ) {
 				$note->reset();
 			}
 
-			// Show the importer
-			if ( $note = $notices->get_note( 'dhl_importer' ) ) {
-				$note->reset();
-			}
-
-			// Show the importer
-			if ( $note = $notices->get_note( 'internetmarke_importer' ) ) {
-				$note->reset();
-			}
-
 			// Recheck Shiptastic install
 			if ( $note = $notices->get_note( 'shiptastic_install' ) ) {
 				$note->reset();
-
-				if ( ! \Vendidero\Germanized\PluginsHelper::is_shiptastic_plugin_active() && \Vendidero\Germanized\Shiptastic::needs_shiptastic_standalone() ) {
-					update_option( 'woocommerce_gzd_is_shiptastic_standalone_update', 'yes' );
-				} else {
-					delete_option( 'woocommerce_gzd_is_shiptastic_standalone_update' );
-				}
-
-				if ( ! \Vendidero\Germanized\PluginsHelper::is_shiptastic_dhl_plugin_active() && \Vendidero\Germanized\Shiptastic::needs_shiptastic_dhl_standalone() ) {
-					update_option( 'woocommerce_gzd_is_shiptastic_standalone_update', 'yes' );
-					update_option( 'woocommerce_gzd_is_shiptastic_dhl_standalone_update', 'yes' );
-				} else {
-					delete_option( 'woocommerce_gzd_is_shiptastic_dhl_standalone_update' );
-				}
 			}
 
 			// Queue messages and notices
@@ -629,6 +624,14 @@ if ( ! class_exists( 'WC_GZD_Install' ) ) :
 					}
 
 					if ( $note = $notices->get_note( 'theme_supported' ) ) {
+						$note->reset();
+					}
+
+					if ( $note = $notices->get_note( 'dhl_importer' ) ) {
+						$note->reset();
+					}
+
+					if ( $note = $notices->get_note( 'internetmarke_importer' ) ) {
 						$note->reset();
 					}
 				}
@@ -695,33 +698,32 @@ if ( ! class_exists( 'WC_GZD_Install' ) ) :
 			}
 		}
 
-		public static function deactivate() {
-			// Clear Woo sessions to remove WC_GZD_Shipping_Rate instance
-			if ( class_exists( 'WC_REST_System_Status_Tools_Controller' ) ) {
-				$tools_controller = new WC_REST_System_Status_Tools_Controller();
-				$tools_controller->execute_tool( 'clear_sessions' );
-			}
+		/**
+		 * Use direct DB queries to delete WC admin notes as there may be invalid/duplicate notes stored within the DB.
+		 *
+		 * @return void
+		 */
+		public static function force_delete_notes() {
+			global $wpdb;
+			$wpdb->hide_errors();
 
-			/**
-			 * Remove notices.
-			 */
-			$notices = WC_GZD_Admin_Notices::instance();
+			$notes_table  = $wpdb->prefix . 'wc_admin_notes';
+			$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $notes_table ) ) );
 
-			foreach ( $notices->get_notes() as $note ) {
-				$note->delete_note();
-			}
+			if ( $table_exists && $table_exists === $notes_table ) {
+				$notes = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}wc_admin_notes WHERE name LIKE '%-gzd%';" );
 
-			wp_clear_scheduled_hook( 'woocommerce_gzd_customer_cleanup' );
-
-			if ( function_exists( 'as_unschedule_all_actions' ) ) {
-				$hooks = array(
-					'woocommerce_shiptastic_daily_cleanup',
-				);
-
-				foreach ( $hooks as $hook ) {
-					as_unschedule_all_actions( $hook );
+				foreach ( $notes as $note ) {
+					$wpdb->delete( $wpdb->prefix . 'wc_admin_note_actions', array( 'note_id' => $note->note_id ) );
+					$wpdb->delete( $wpdb->prefix . 'wc_admin_notes', array( 'note_id' => $note->note_id ) );
 				}
 			}
+		}
+
+		public static function deactivate() {
+			self::force_delete_notes();
+
+			wp_clear_scheduled_hook( 'woocommerce_gzd_customer_cleanup' );
 		}
 
 		/**
@@ -956,7 +958,6 @@ if ( ! class_exists( 'WC_GZD_Install' ) ) :
 			 * @param array $pages Array containing page data.
 			 *
 			 * @since 1.0.0
-			 *
 			 */
 			$pages = apply_filters(
 				'woocommerce_gzd_create_pages',

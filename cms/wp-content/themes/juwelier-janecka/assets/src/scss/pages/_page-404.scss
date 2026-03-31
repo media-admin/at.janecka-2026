@@ -1,0 +1,129 @@
+@use '../abstracts' as *;
+
+// =============================================================================
+// 404 – Seite nicht gefunden
+// Version: 1.2.0 – Fluid Responsive System
+//
+// Änderungen:
+//   - padding/gap/margin → var(--space-*)
+//   - font-size → var(--text-*)
+// =============================================================================
+
+.error-404 {
+    min-height: 60vh;
+    display:    flex;
+    align-items: center;
+    padding:    var(--space-2xl) 0;
+
+    &__inner {
+        max-width:  640px;
+        margin:     0 auto;
+        text-align: center;
+    }
+
+    &__code {
+        font-size:     clamp(100px, 20vw, 180px);
+        font-weight:   900;
+        line-height:   1;
+        color:         $color-primary;
+        opacity:       0.08;
+        margin-bottom: calc(-1 * var(--space-xl));
+        pointer-events: none;
+        user-select:   none;
+        letter-spacing: -4px;
+    }
+
+    &__title {
+        font-size:     clamp(1.75rem, 4vw, 3rem);
+        font-weight:   700;
+        color:         var(--color-text);
+        margin-bottom: var(--space-sm);
+    }
+
+    &__message {
+        font-size:     var(--text-xl);
+        color:         var(--color-text-muted);
+        line-height:   1.6;
+        margin-bottom: var(--space-xl);
+    }
+
+    &__actions {
+        display:         flex;
+        gap:             var(--space-sm);
+        justify-content: center;
+        flex-wrap:       wrap;
+        margin-bottom:   var(--space-2xl);
+    }
+
+    .search-form {
+        display:   flex;
+        gap:       $spacing-2;
+        max-width: 400px;
+        margin:    0 auto var(--space-2xl);
+
+        .search-field {
+            flex:          1;
+            padding:       $spacing-2 $spacing-3;
+            border:        1px solid $color-border;
+            border-radius: $radius-md;
+            font-size:     var(--text-base);
+            background:    var(--color-input-bg);
+            color:         var(--color-text);
+
+            &:focus {
+                outline:    none;
+                border-color: $color-primary;
+                box-shadow: 0 0 0 3px rgba($color-primary-dark, 0.15);
+            }
+        }
+
+        .search-submit {
+            padding:       $spacing-2 $spacing-3;
+            background:    $color-primary;
+            color:         $color-white;
+            border:        none;
+            border-radius: $radius-md;
+            cursor:        pointer;
+            font-size:     var(--text-base);
+            transition:    background-color 0.2s;
+
+            &:hover { background: $color-primary-dark; }
+        }
+    }
+
+    &__links {
+        border-top: 1px solid $color-border;
+        padding-top: var(--space-xl);
+    }
+
+    &__links-label {
+        font-size:      var(--text-sm);
+        color:          var(--color-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom:  var(--space-sm);
+    }
+
+    &__links-list {
+        list-style:      none;
+        padding:         0;
+        margin:          0;
+        display:         flex;
+        flex-wrap:       wrap;
+        gap:             $spacing-2;
+        justify-content: center;
+
+        a {
+            display:        inline-block;
+            padding:        $spacing-1 $spacing-3;
+            border:         1px solid $color-border;
+            border-radius:  $radius-full;
+            font-size:      var(--text-sm);
+            color:          var(--color-text-muted);
+            text-decoration: none;
+            transition:     border-color 0.2s, color 0.2s;
+
+            &:hover { border-color: $color-primary; color: $color-primary; }
+        }
+    }
+}

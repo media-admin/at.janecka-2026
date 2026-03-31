@@ -1,1 +1,0 @@
-(window.wcShiptastic=window.wcShiptastic||{})["wc-shiptastic-blocks-dhl"]={};

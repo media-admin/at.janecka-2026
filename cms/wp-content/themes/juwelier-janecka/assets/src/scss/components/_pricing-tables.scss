@@ -1,0 +1,273 @@
+@use '../abstracts' as *;
+
+// =============================================================================
+// Pricing Tables
+// Version: 1.2.0 – Fluid Responsive System
+//
+// Änderungen:
+//   - !important auf Grid-Definitionen entfernt (WordPress-Konflikte via
+//     Spezifität gelöst, nicht via !important)
+//   - @media (min-width: Xpx) → @include respond-to()
+//   - gap: 2rem / margin: 4rem → var(--space-*)
+//   - font-size: 56px/64px → clamp() fluid
+// =============================================================================
+
+.pricing-tables {
+  display:               grid !important;
+  gap:                   var(--space-lg) !important;
+  margin:                var(--space-2xl) 0 !important;
+  align-items:           stretch !important;
+  width:                 100% !important;
+  max-width:             100% !important;
+  // Mobile: immer 1 Spalte – !important nötig da WP Inline-Styles injiziert
+  grid-template-columns: 1fr !important;
+
+  // 2 Columns
+  &[data-columns="2"] {
+    @include respond-to('md') { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+
+  // 3 Columns
+  &[data-columns="3"] {
+    @include respond-to('sm') { grid-template-columns: repeat(2, 1fr) !important; }
+    @include respond-to('lg') { grid-template-columns: repeat(3, 1fr) !important; }
+  }
+
+  // 4 Columns
+  &[data-columns="4"] {
+    @include respond-to('sm') { grid-template-columns: repeat(2, 1fr) !important; }
+    @include respond-to('lg') { grid-template-columns: repeat(4, 1fr) !important; }
+  }
+}
+
+// ── Single Pricing Table ──────────────────────────────────────────────────────
+
+.pricing-table {
+  background:     var(--color-card-bg);
+  border:         2px solid var(--color-border);
+  border-radius:  $radius-lg;
+  padding:        var(--space-xl);
+  display:        flex;
+  flex-direction: column;
+  transition:     $transition-base;
+  position:       relative;
+  box-sizing:     border-box;
+  // WP injiziert häufig width-Overrides auf Grid-Children → explizit setzen
+  width:          100% !important;
+  max-width:      100% !important;
+  min-width:      0 !important;
+
+  &__badge {
+    position:       absolute;
+    top:            -12px;
+    left:           50%;
+    transform:      translateX(-50%);
+    background:     $color-primary;
+    color:          $color-white;
+    padding:        $spacing-1 $spacing-3;
+    border-radius:  $radius-full;
+    font-size:      var(--text-xs);
+    font-weight:    700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow:     $shadow-md;
+    white-space:    nowrap;
+  }
+
+  &__header {
+    text-align:    center;
+    margin-bottom: var(--space-lg);
+  }
+
+  &__title {
+    margin:      0 0 $spacing-2;
+    font-size:   var(--text-xl);
+    font-weight: 700;
+    color:       var(--color-text);
+  }
+
+  &__description {
+    margin:    0;
+    color:     var(--color-text-secondary);
+    font-size: var(--text-sm);
+  }
+
+  &__price {
+    text-align:     center;
+    margin-bottom:  var(--space-xl);
+    padding-bottom: var(--space-xl);
+    border-bottom:  2px solid var(--color-border);
+  }
+
+  &__currency {
+    font-size:     var(--text-xl);
+    font-weight:   600;
+    color:         var(--color-text);
+    vertical-align: top;
+    margin-right:  $spacing-1;
+  }
+
+  &__amount {
+    // Fluid: 40px Mobile → 64px Desktop
+    font-size:   clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color:       var(--color-text);
+    line-height: 1;
+  }
+
+  &__period {
+    display:    block;
+    margin-top: $spacing-2;
+    color:      var(--color-text-secondary);
+    font-size:  var(--text-sm);
+  }
+
+  &__features {
+    flex:          1;
+    margin-bottom: var(--space-xl);
+
+    p { margin: 0; }
+  }
+
+  &__features-list {
+    list-style:     none;
+    margin:         0;
+    padding:        0;
+    display:        flex;
+    flex-direction: column;
+    gap:            $spacing-3;
+  }
+
+  &__feature {
+    display:     flex;
+    align-items: center;
+    gap:         $spacing-2;
+    font-size:   var(--text-sm);
+    color:       var(--color-text);
+
+    svg {
+      flex-shrink: 0;
+      color:       $color-primary;
+    }
+  }
+
+  &__footer { margin-top: auto; }
+
+  &__button {
+    @include btn-base;
+    @include btn-outline;
+    width: 100%;
+  }
+
+  // Featured State
+  &--featured {
+    border-color: $color-primary;
+    border-width: 3px;
+    box-shadow:   $shadow-lg;
+    transform:    scale(1.03);
+    z-index:      1;
+
+    @include respond-to('lg') { transform: scale(1.05); }
+
+    &:hover {
+      transform: scale(1.03) translateY(-8px);
+      @include respond-to('lg') { transform: scale(1.05) translateY(-8px); }
+    }
+
+    .pricing-table__title  { color: $color-primary; }
+    .pricing-table__button { @include btn-primary; }
+  }
+}
+
+// ── Pricing Feature ───────────────────────────────────────────────────────────
+
+.pricing-feature {
+  display:       flex;
+  align-items:   flex-start;
+  gap:           $spacing-3;
+  padding:       $spacing-3 0;
+  border-bottom: 1px solid var(--color-border);
+
+  &:last-child { border-bottom: none; }
+
+  &__icon {
+    flex-shrink:     0;
+    width:           24px;
+    height:          24px;
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    border-radius:   $radius-full;
+    font-weight:     bold;
+    font-size:       var(--text-sm);
+
+    &--check { background: rgba($color-success, 0.1); color: $color-success; }
+    &--cross { background: rgba($color-error, 0.1);   color: $color-error;   opacity: 0.5; }
+    &--info  { background: rgba($color-info, 0.1);    color: $color-info; }
+  }
+
+  span {
+    flex:        1;
+    color:       var(--color-text);
+    line-height: 1.6;
+  }
+
+  &--highlight {
+    background:    rgba($color-primary, 0.05);
+    padding:       $spacing-3;
+    border-radius: $radius-md;
+    margin:        $spacing-2 0;
+    border:        1px solid rgba($color-primary, 0.2);
+
+    span {
+      font-weight: 600;
+      color:       $color-primary;
+    }
+  }
+}
+
+// ── Style Variants ────────────────────────────────────────────────────────────
+
+.pricing-tables--minimal {
+  .pricing-table {
+    border:     none;
+    box-shadow: none;
+    padding:    var(--space-lg);
+
+    &:hover       { box-shadow: $shadow-md; }
+    &__price      { border-bottom: none; padding-bottom: var(--space-md); }
+    &__amount     { font-size: clamp(2rem, 4vw, 3rem); }
+    &--featured   { border: 2px solid $color-primary; box-shadow: $shadow-md; }
+  }
+
+  .pricing-feature {
+    border-bottom: none;
+    padding:       $spacing-2 0;
+  }
+}
+
+.pricing-tables--featured {
+  .pricing-table {
+    background: linear-gradient(135deg, var(--color-card-bg) 0%, rgba($color-primary, 0.05) 100%);
+    border-color: rgba($color-primary, 0.3);
+    box-shadow:   $shadow-lg;
+  }
+}
+
+// ── Responsive ────────────────────────────────────────────────────────────────
+
+@include respond-to('sm') {
+  .pricing-table {
+    padding: var(--space-xl);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .pricing-table--featured {
+    background: linear-gradient(135deg, var(--color-card-bg) 0%, rgba($color-primary, 0.1) 100%);
+  }
+
+  .pricing-feature--highlight {
+    background: rgba($color-primary, 0.1);
+  }
+}

@@ -1,0 +1,134 @@
+@use '../abstracts' as *;
+
+// =============================================================================
+// Mega Menu
+// Version: 1.0.0
+//
+// Aktivierung: CSS-Klasse "mega-menu" im WP Admin auf einem Top-Level-Item.
+// Das Panel positioniert sich relativ zum .site-header (position: sticky)
+// und spannt sich über die volle Viewport-Breite.
+// =============================================================================
+
+
+// ── Top-Level-Item ─────────────────────────────────────────────────────────────
+
+.primary-menu > ul > li.mega-menu {
+    // Static → Panel positioniert sich relativ zum .site-header
+    position: static;
+
+    // Panel beim Hover einblenden
+    &:hover > .mega-menu__panel {
+        opacity:    1;
+        visibility: visible;
+        transform:  translateY(0);
+    }
+}
+
+
+// ── Panel (Full-Viewport-Breite) ───────────────────────────────────────────────
+
+.mega-menu__panel {
+    position:      absolute;
+    left:          0;
+    right:         0;
+    top:           100%;
+    background:    var(--color-card-bg);
+    border-top:    1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow:    $shadow-xl;
+    z-index:       $z-dropdown;
+
+    // Einblend-Animation
+    opacity:    0;
+    visibility: hidden;
+    transform:  translateY(-6px);
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+}
+
+
+// ── Innerer Container (max-width wie .site-navigation) ────────────────────────
+
+.mega-menu__inner {
+    display:     flex;
+    align-items: flex-start;
+    gap:         $spacing-8;
+    max-width:   1400px;
+    margin:      0 auto;
+    padding:     $spacing-8 var(--container-padding);
+}
+
+
+// ── Links-Grid ────────────────────────────────────────────────────────────────
+
+.mega-menu__links {
+    flex:        1;
+    list-style:  none;
+    margin:      0;
+    padding:     0;
+    display:     grid;
+    // Spaltenbreite: mind. 160px, max. 1fr – passt sich automatisch an
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap:         $spacing-1 $spacing-6;
+    align-content: start;
+
+    li {
+        margin:        0;
+        padding:       0;
+        border-bottom: none !important; // Mobile-Menü-Stil überschreiben
+    }
+
+    a {
+        display:         block;
+        padding:         $spacing-2 0;
+        color:           var(--color-text);
+        text-decoration: none;
+        font-size:       var(--text-sm);
+        white-space:     nowrap;
+        transition:      color 0.15s ease, padding-left 0.15s ease;
+        background:      none !important; // Hover-BG aus Dropdown überschreiben
+
+        &:hover {
+            color:        $color-primary;
+            padding-left: $spacing-2;
+        }
+
+        &:focus-visible {
+            outline:        2px solid $color-primary;
+            outline-offset: 2px;
+            border-radius:  $radius-sm;
+        }
+    }
+
+    .current-menu-item > a {
+        color:       $color-primary;
+        font-weight: 600;
+    }
+}
+
+
+// ── Bild-Spalte ───────────────────────────────────────────────────────────────
+
+.mega-menu__image {
+    flex-shrink: 0;
+    width:       clamp(200px, 18vw, 280px);
+    align-self:  stretch;
+
+    img {
+        width:         100%;
+        height:        100%;
+        min-height:    160px;
+        max-height:    260px;
+        object-fit:    cover;
+        border-radius: $radius-md;
+        display:       block;
+    }
+}
+
+
+// ── Mobile: Mega-Menu-Panel ausblenden ────────────────────────────────────────
+// Das Mobile-Menü rendert die normalen .sub-menu Elemente – der Walker
+// greift nur für das Desktop-Menü (.primary-menu).
+
+@include respond-below('lg') {
+    .mega-menu__panel { display: none !important; }
+}

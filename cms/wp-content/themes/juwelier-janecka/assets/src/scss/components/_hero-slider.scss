@@ -1,0 +1,155 @@
+@use '../abstracts' as *;
+
+// ==========================================================================
+// Hero Slider
+// Version: 1.2.0 – Fluid Responsive System
+//
+// Änderungen:
+//   - Fixe Heights 600px/700px/500px → clamp() fluid
+//   - @media (min/max-width: 768px) → @include respond-to/respond-below
+//   - font-size: $font-size-4xl/$font-size-7xl → clamp()
+//   - !important bei custom Klassen entfernt (Swiper-Overrides bleiben)
+// ==========================================================================
+
+// Verhindert horizontalen Overflow
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+.hero-slider {
+  position:  relative;
+  width:     100%;
+  max-width: 100vw;
+  // Fluid: 500px Mobile → 700px Desktop (war: fix 600px / 700px / 500px)
+  height:    clamp(480px, 55vw, 700px);
+  overflow:  hidden;
+}
+
+.hero-slide {
+  position:        relative;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+}
+
+.hero-slide__background {
+  position: absolute;
+  top: 0; left: 0;
+  width:    100%;
+  height:   100%;
+  overflow: hidden;
+  z-index:  0;
+
+  picture {
+    display: block;
+    width:   100%;
+    height:  100%;
+  }
+}
+
+.hero-slide__image {
+  position:        absolute;
+  top: 0; left: 0;
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center;
+}
+
+.hero-slide__overlay {
+  position:   absolute;
+  inset:      0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index:    1;
+}
+
+.hero-slide__content {
+  position:   relative;
+  z-index:    2;
+  text-align: center;
+  color:      $color-white;
+  max-width:  800px;
+  padding:    var(--space-xl) var(--space-inner, 1.5rem);
+
+  * { color: $color-white !important; }
+}
+
+.hero-slide__subtitle {
+  font-size:      var(--text-sm);
+  margin-bottom:  var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight:    $font-weight-semibold;
+}
+
+.hero-slide__title {
+  // Fluid: 28px → 56px – ersetzt $font-size-4xl + @media respond-to Kombo
+  font-size:     clamp(1.75rem, 5vw, 3.5rem);
+  font-weight:   $font-weight-bold;
+  margin-bottom: var(--space-sm);
+  line-height:   1.2;
+  color:         $color-white !important;
+  text-shadow:   0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-slide__text {
+  font-size:     clamp(1rem, 2vw, 1.125rem);
+  margin-bottom: var(--space-md);
+  line-height:   1.6;
+
+  p { margin: 0; }
+}
+
+.hero-slide__button {
+  @include btn-base;
+  background:   $color-hero-gradient;
+  border-color: $color-hero-gradient;
+  color:        $color-white;
+
+  &:hover {
+    background:   $color-hero-gradient-dark;
+    border-color: $color-hero-gradient-dark;
+    transform:    translateY(-2px);
+    box-shadow:   $shadow-lg;
+  }
+  &:active { transform: translateY(0); }
+}
+
+// ── Swiper Navigation ──────────────────────────────────────────────────────
+
+.swiper-button-prev,
+.swiper-button-next {
+  width:      50px !important;  // Swiper-API erfordert !important
+  height:     50px !important;
+  background: rgba($color-white, 0.2) !important;
+  border-radius: 50% !important;
+  color:      $color-white !important;
+
+  &::after { font-size: $font-size-xl !important; }
+  &:hover  { background: rgba($color-white, 0.3) !important; }
+
+  @include respond-below('sm') {
+    width:  40px !important;
+    height: 40px !important;
+  }
+}
+
+.swiper-pagination {
+  bottom: 20px !important;
+}
+
+.swiper-pagination-bullet {
+  width:      12px !important;
+  height:     12px !important;
+  background: rgba($color-white, 0.5) !important;
+  opacity:    1 !important;
+
+  &:hover   { background: rgba($color-white, 0.7) !important; }
+}
+
+.swiper-pagination-bullet-active {
+  background:    $color-hero-gradient !important;
+  width:         32px !important;
+  border-radius: 6px !important;
+}

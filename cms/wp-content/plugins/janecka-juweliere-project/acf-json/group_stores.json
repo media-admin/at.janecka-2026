@@ -463,8 +463,8 @@
                 "label": "Google Map",
                 "name": "store-map",
                 "aria-label": "",
-                "type": "google_map",
-                "instructions": "",
+                "type": "post_object",
+                "instructions": "Zuvor angelegte Google Map aus dem Google-Maps-CPT auswählen.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -472,10 +472,17 @@
                     "class": "",
                     "id": ""
                 },
-                "center_lat": "",
-                "center_lng": "",
-                "zoom": "",
-                "height": ""
+                "post_type": [
+                    "gmap"
+                ],
+                "taxonomy": "",
+                "return_format": "object",
+                "multiple": 0,
+                "allow_null": 1,
+                "ui": 1,
+                "allow_in_bindings": 0,
+                "bidirectional": 0,
+                "bidirectional_target": []
             }
         ],
         "location": [

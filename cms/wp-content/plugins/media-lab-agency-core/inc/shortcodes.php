@@ -212,7 +212,8 @@ function modal_shortcode($atts, $content = null) {
     $show_header = $atts['show_header'] === 'true';
     $show_footer = $atts['show_footer'] === 'true';
     
-    $body_content = wpautop(do_shortcode($content));
+    $has_cf7 = strpos($content, 'contact-form-7') !== false || strpos($content, 'wpcf7') !== false;
+    $body_content = $has_cf7 ? do_shortcode($content) : wpautop(do_shortcode($content));
     
     $html = '<div class="modal' . $size_class . '" id="' . $modal_id . '">';
     $html .= '<div class="modal__dialog">';
@@ -747,18 +748,10 @@ function stats_shortcode($atts, $content = null) {
     $columns = intval($atts['columns']);
     $style = esc_attr($atts['style']);
     
-    // INLINE STYLES
-    $inline_style = 'display:grid!important;gap:2rem!important;margin:2rem 0!important;width:100%!important;';
-    
-    if ($columns == 2) {
-        $inline_style .= 'grid-template-columns:repeat(2,1fr)!important;';
-    } elseif ($columns == 3) {
-        $inline_style .= 'grid-template-columns:repeat(3,1fr)!important;';
-    } elseif ($columns == 4) {
-        $inline_style .= 'grid-template-columns:repeat(4,1fr)!important;';
-    } else {
-        $inline_style .= 'grid-template-columns:repeat(' . $columns . ',1fr)!important;';
-    }
+    // grid-template-columns wird NICHT mehr inline gesetzt –
+    // das CSS (_stats.scss) übernimmt das responsiv via data-columns.
+    // Inline !important würde die mobilen Breakpoints überschreiben.
+    $inline_style = 'width:100%!important;';
     
     return '<div class="stats stats--' . $style . '" data-columns="' . $columns . '" style="' . $inline_style . '">' . do_shortcode($content) . '</div>';
 }
@@ -1843,45 +1836,50 @@ add_shortcode('services_query', 'services_query_shortcode');
 
 function spoiler_shortcode($atts, $content = null) {
     $atts = shortcode_atts(array(
-        'open_text' => 'Mehr anzeigen',
+        'open_text'  => 'Mehr anzeigen',
         'close_text' => 'Weniger anzeigen',
-        'open' => 'false',
-        'style' => 'default',
-        'icon' => 'true',
+        'open'       => 'false',
+        'style'      => 'default',
+        'icon'       => 'true',
+        'show_on'    => 'all',
     ), $atts);
-    
-    $open_text = esc_html($atts['open_text']);
+
+    $open_text  = esc_html($atts['open_text']);
     $close_text = esc_html($atts['close_text']);
-    $is_open = $atts['open'] === 'true';
-    $style = esc_attr($atts['style']);
-    $show_icon = $atts['icon'] === 'true';
-    
-    $unique_id = 'spoiler-' . uniqid();
+    $is_open    = $atts['open'] === 'true';
+    $style      = esc_attr($atts['style']);
+    $show_icon  = $atts['icon'] === 'true';
+    $show_on    = in_array($atts['show_on'], ['all', 'desktop', 'mobile'], true)
+                    ? $atts['show_on'] : 'all';
+
+    $unique_id  = 'spoiler-' . uniqid();
     $open_class = $is_open ? ' is-open' : '';
-    $display = $is_open ? 'block' : 'none';
-    $button_text = $is_open ? $close_text : $open_text;
-    
-    $output = '<div class="spoiler spoiler--' . $style . $open_class . '" id="' . $unique_id . '">';
+
+    $output  = '<div class="spoiler spoiler--' . $style . $open_class . '" ';
+    $output .= 'id="' . $unique_id . '" ';
+    $output .= 'data-show-on="' . esc_attr($show_on) . '">';
+
+    $output .= '<div class="spoiler__content">';
+    $output .= wpautop(do_shortcode($content));
+    $output .= '</div>';
+
     $output .= '<button class="spoiler__toggle" ';
-    $output .= 'data-open-text="' . esc_attr($open_text) . '" ';
+    $output .= 'data-open-text="'  . esc_attr($open_text)  . '" ';
     $output .= 'data-close-text="' . esc_attr($close_text) . '" ';
-    $output .= 'aria-expanded="' . ($is_open ? 'true' : 'false') . '">';
-    $output .= '<span class="spoiler__button-text">' . $button_text . '</span>';
-    
+    $output .= 'aria-expanded="' . ($is_open ? 'true' : 'false') . '" ';
+    $output .= 'aria-label="' . esc_attr($open_text) . '">';
+
     if ($show_icon) {
         $output .= '<span class="spoiler__icon">';
-        $output .= '<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">';
-        $output .= '<path d="M8 4l4 4-4 4V4z"/>';
+        $output .= '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">';
+        $output .= '<polyline points="4 7 10 13 16 7"/>';
         $output .= '</svg>';
         $output .= '</span>';
     }
-    
+
     $output .= '</button>';
-    $output .= '<div class="spoiler__content" style="display: ' . $display . ';">';
-    $output .= wpautop(do_shortcode($content));
     $output .= '</div>';
-    $output .= '</div>';
-    
+
     return $output;
 }
 add_shortcode('spoiler', 'spoiler_shortcode');
@@ -1914,18 +1912,10 @@ function pricing_tables_shortcode($atts, $content = null) {
     $columns = intval($atts['columns']);
     $style = esc_attr($atts['style']);
     
-    // INLINE STYLES
-    $inline_style = 'display:grid!important;gap:2rem!important;margin:4rem 0!important;width:100%!important;align-items:stretch!important;';
-    
-    if ($columns == 2) {
-        $inline_style .= 'grid-template-columns:repeat(2,1fr)!important;';
-    } elseif ($columns == 3) {
-        $inline_style .= 'grid-template-columns:repeat(3,1fr)!important;';
-    } elseif ($columns == 4) {
-        $inline_style .= 'grid-template-columns:repeat(4,1fr)!important;';
-    } else {
-        $inline_style .= 'grid-template-columns:repeat(' . $columns . ',1fr)!important;';
-    }
+    // grid-template-columns wird NICHT mehr inline gesetzt –
+    // das CSS (_pricing-tables.scss) übernimmt das responsiv via data-columns.
+    // Inline !important würde die mobilen Breakpoints überschreiben.
+    $inline_style = 'width:100%!important;';
     
     return '<div class="pricing-tables pricing-tables--' . $style . '" data-columns="' . $columns . '" style="' . $inline_style . '">' . do_shortcode($content) . '</div>';
 }

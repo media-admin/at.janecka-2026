@@ -1,0 +1,151 @@
+@use '../abstracts' as *;
+
+// =============================================================================
+// Stats / Counter Component
+// Version: 1.2.0 – Fluid Responsive System
+//
+// Änderungen:
+//   - stat__number: 48px/56px fix → clamp() fluid
+//   - stat__prefix/suffix: 32px/40px fix → clamp() fluid
+//   - Responsive @include respond-to bleiben (strukturell korrekt)
+// =============================================================================
+
+.stats {
+  display: grid;
+  gap:     var(--space-xl);
+  margin:  var(--space-2xl) 0;
+
+  &[data-columns="2"] {
+    grid-template-columns: 1fr;
+    @include respond-to('md') { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  &[data-columns="3"] {
+    grid-template-columns: 1fr;
+    @include respond-to('md') { grid-template-columns: repeat(2, 1fr); }
+    @include respond-to('lg') { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  &[data-columns="4"] {
+    grid-template-columns: 1fr;
+    @include respond-to('sm') { grid-template-columns: repeat(2, 1fr); }
+    @include respond-to('lg') { grid-template-columns: repeat(4, 1fr); }
+  }
+}
+
+.stat {
+  text-align: center;
+  padding:    var(--space-xl);
+
+  &__icon {
+    margin-bottom: $spacing-3;
+
+    .dashicons {
+      font-size: 48px;
+      width:     48px;
+      height:    48px;
+      color:     $color-primary;
+    }
+  }
+
+  &__number {
+    // Fluid: 36px Mobile → 56px Desktop (war: 48px fix + 56px bei lg)
+    font-size:     clamp(2.25rem, 5vw, 3.5rem);
+    font-weight:   700;
+    line-height:   1.2;
+    color:         var(--color-text);
+    margin-bottom: $spacing-2;
+  }
+
+  &__prefix,
+  &__suffix {
+    // Fluid: 24px Mobile → 40px Desktop (war: 32px fix + 40px bei lg)
+    font-size:   clamp(1.5rem, 3.5vw, 2.5rem);
+    font-weight: 600;
+  }
+
+  &__value {
+    display:   inline-block;
+    min-width: 1ch;
+  }
+
+  &__label {
+    font-size:      var(--text-lg);
+    font-weight:    600;
+    color:          var(--color-text);
+    margin-bottom:  $spacing-2;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__description {
+    font-size:   var(--text-sm);
+    color:       var(--color-text-secondary);
+    margin:      $spacing-2 0 0;
+    line-height: 1.6;
+  }
+
+  // ── Color Variants ────────────────────────────────────────────────────────
+
+  &--primary { .stat__number, .stat__icon .dashicons { color: $color-primary; } }
+  &--success { .stat__number, .stat__icon .dashicons { color: $color-success; } }
+  &--error   { .stat__number, .stat__icon .dashicons { color: $color-error; } }
+  &--warning { .stat__number, .stat__icon .dashicons { color: $color-warning-dark; } }
+  &--info    { .stat__number, .stat__icon .dashicons { color: $color-info; } }
+}
+
+// ── Style Variants ────────────────────────────────────────────────────────────
+
+.stats--minimal {
+  .stat {
+    padding: var(--space-md);
+
+    &__number {
+      font-size: clamp(1.75rem, 4vw, 3rem);
+    }
+
+    &__label {
+      font-size:      var(--text-base);
+      text-transform: none;
+      letter-spacing: normal;
+      font-weight:    500;
+    }
+
+    &__icon .dashicons {
+      font-size: 36px;
+      width:     36px;
+      height:    36px;
+    }
+  }
+}
+
+.stats--card {
+  .stat {
+    background:    var(--color-card-bg);
+    border-radius: $radius-lg;
+    box-shadow:    $shadow-sm;
+    transition:    $transition-base;
+
+    &:hover {
+      transform:  translateY(-4px);
+      box-shadow: $shadow-lg;
+    }
+
+    &__icon {
+      width:           80px;
+      height:          80px;
+      margin:          0 auto var(--space-md);
+      background:      rgba($color-primary, 0.1);
+      border-radius:   $radius-full;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .stats--card .stat__icon {
+    background: rgba($color-primary, 0.2);
+  }
+}

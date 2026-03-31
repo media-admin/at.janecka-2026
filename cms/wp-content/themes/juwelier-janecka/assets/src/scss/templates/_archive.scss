@@ -1,0 +1,291 @@
+@use '../abstracts' as *;
+
+// =============================================================================
+// Archive – Header, Post-Grid, Pagination
+// Version: 1.2.0 – Fluid Responsive System
+//
+// Änderungen:
+//   - @media (max-width: Xpx) → @include respond-below()
+//   - padding/margin → var(--space-*)
+//   - gap → var(--space-*)
+//   - font-size → var(--text-*)
+// =============================================================================
+
+// ── Wrapper ───────────────────────────────────────────────────────────────────
+
+.archive-layout {
+    padding-top:    var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+}
+
+// ── Archive-Header ────────────────────────────────────────────────────────────
+
+.archive-header {
+    margin-bottom:  var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom:  2px solid var(--color-border);
+}
+
+.archive-header__badge {
+    display:        inline-block;
+    padding:        4px $spacing-3;
+    background:     rgba($color-primary, 0.1);
+    color:          $color-primary;
+    border-radius:  $radius-full;
+    font-size:      var(--text-sm);
+    font-weight:    $font-weight-semibold;
+    margin-bottom:  var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.archive-header__title {
+    font-size:   clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: $font-weight-bold;
+    line-height: $line-height-tight;
+    color:       var(--color-text);
+    margin:      0 0 var(--space-sm);
+}
+
+.archive-header__description {
+    font-size:     var(--text-lg);
+    color:         var(--color-text-muted);
+    line-height:   1.6;
+    max-width:     640px;
+    margin-bottom: var(--space-sm);
+
+    p { margin: 0; }
+}
+
+.archive-header__count {
+    font-size: var(--text-sm);
+    color:     var(--color-text-muted);
+    margin:    0;
+}
+
+// ── Post-Grid ─────────────────────────────────────────────────────────────────
+
+.post-grid {
+    display:               grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:                   var(--space-xl);
+
+    @include respond-below('lg') { grid-template-columns: repeat(2, 1fr); }
+    @include respond-below('sm') {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+}
+
+// ── Post-Card ─────────────────────────────────────────────────────────────────
+
+.post-card {
+    background:     var(--color-card-bg);
+    border:         1px solid var(--color-border);
+    border-radius:  $radius-lg;
+    overflow:       hidden;
+    display:        flex;
+    flex-direction: column;
+    height:         100%;
+    transition:     box-shadow $transition-base, transform $transition-base;
+
+    &:hover {
+        box-shadow: $shadow-lg;
+        transform:  translateY(-4px);
+    }
+
+    &__thumbnail {
+        display:         block;
+        overflow:        hidden;
+        aspect-ratio:    16 / 9;
+        background:      var(--color-hover-bg);
+        text-decoration: none;
+    }
+
+    &__img {
+        width:      100%;
+        height:     100%;
+        object-fit: cover;
+        display:    block;
+        transition: transform 0.4s ease;
+
+        .post-card:hover & { transform: scale(1.04); }
+    }
+
+    &__content {
+        padding:        var(--space-lg);
+        display:        flex;
+        flex-direction: column;
+        gap:            $spacing-2;
+        flex-grow:      1;
+    }
+
+    &__category-link {
+        display:        inline-block;
+        padding:        2px $spacing-2;
+        background:     rgba($color-primary, 0.08);
+        color:          $color-primary;
+        border-radius:  $radius-sm;
+        font-size:      var(--text-xs);
+        font-weight:    $font-weight-semibold;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+
+        &:hover { background: rgba($color-primary, 0.18); }
+    }
+
+    &__title {
+        font-size:   var(--text-lg);
+        font-weight: $font-weight-bold;
+        line-height: $line-height-tight;
+        margin:      0;
+
+        display:            -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow:           hidden;
+    }
+
+    &__title-link {
+        color:           var(--color-text);
+        text-decoration: none;
+        transition:      color $transition-base;
+
+        &:hover { color: $color-primary; }
+    }
+
+    &__excerpt {
+        font-size:   var(--text-sm);
+        color:       var(--color-text-muted);
+        line-height: 1.6;
+        flex-grow:   1;
+
+        display:            -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow:           hidden;
+    }
+
+    &__footer {
+        display:         flex;
+        align-items:     center;
+        justify-content: space-between;
+        gap:             $spacing-2;
+        padding-top:     $spacing-3;
+        border-top:      1px solid var(--color-border);
+        margin-top:      auto;
+    }
+
+    &__meta {
+        display:     flex;
+        align-items: center;
+        gap:         $spacing-1;
+        flex-wrap:   wrap;
+    }
+
+    &__date,
+    &__author      { font-size: var(--text-xs); color: var(--color-text-muted); }
+    &__meta-sep    { color: var(--color-border); font-size: var(--text-xs); }
+
+    &__link {
+        font-size:       var(--text-sm);
+        font-weight:     $font-weight-semibold;
+        color:           $color-primary;
+        text-decoration: none;
+        white-space:     nowrap;
+        flex-shrink:     0;
+        transition:      $transition-base;
+
+        &:hover { text-decoration: underline; }
+    }
+
+    // ── Horizontal-Variante ───────────────────────────────────────────────────
+
+    &--horizontal {
+        flex-direction: row;
+
+        .post-card__thumbnail {
+            width:        280px;
+            flex-shrink:  0;
+            aspect-ratio: unset;
+        }
+
+        @include respond-below('sm') {
+            flex-direction: column;
+            .post-card__thumbnail { width: 100%; aspect-ratio: 16 / 9; }
+        }
+    }
+}
+
+// ── Keine Treffer ─────────────────────────────────────────────────────────────
+
+.archive-empty {
+    text-align: center;
+    padding:    var(--space-2xl) var(--space-xl);
+    color:      var(--color-text-muted);
+}
+
+.archive-empty__text {
+    font-size:     var(--text-lg);
+    margin-bottom: var(--space-lg);
+}
+
+// ── Pagination ────────────────────────────────────────────────────────────────
+
+.archive-pagination {
+    margin-top:      var(--space-2xl);
+    display:         flex;
+    justify-content: center;
+}
+
+.archive-pagination__list {
+    display:     flex;
+    flex-wrap:   wrap;
+    gap:         $spacing-1;
+    list-style:  none;
+    padding:     0;
+    margin:      0;
+    align-items: center;
+}
+
+.archive-pagination__item {
+    a, span {
+        display:        flex;
+        align-items:    center;
+        justify-content: center;
+        min-width:      40px;
+        height:         40px;
+        padding:        0 $spacing-2;
+        border-radius:  $radius-md;
+        font-size:      var(--text-sm);
+        font-weight:    $font-weight-semibold;
+        text-decoration: none;
+        transition:     background $transition-base, color $transition-base;
+    }
+
+    a {
+        color:      var(--color-text);
+        background: var(--color-card-bg);
+        border:     1px solid var(--color-border);
+
+        &:hover {
+            background:   rgba($color-primary, 0.08);
+            border-color: $color-primary;
+            color:        $color-primary;
+        }
+    }
+
+    .current {
+        background:   $color-primary;
+        color:        $color-white;
+        border:       1px solid $color-primary;
+    }
+
+    .dots {
+        background: transparent;
+        border:     none;
+        color:      var(--color-text-muted);
+        cursor:     default;
+    }
+}

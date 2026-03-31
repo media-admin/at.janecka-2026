@@ -1,0 +1,233 @@
+@use '../abstracts' as *;
+
+// =============================================================================
+// Site Footer
+// Version: 1.2.0 – Fluid Responsive System
+//
+// Änderungen:
+//   - padding: $spacing-8 0 $spacing-4 → var(--space-2xl) 0 var(--space-md)
+//   - gap/padding-bottom → var(--space-*)
+//   - @media (max-width: 767px) → @include respond-below('md')
+//   - font-size → var(--text-*)
+// =============================================================================
+
+.site-footer {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    // Fluid: 64px oben (war: $spacing-8 = 64px fix), 16px unten (war: $spacing-4 = 32px fix)
+    padding:    var(--space-2xl) 0 var(--space-md);
+    margin-top: auto;
+
+    // ── Oberer Bereich: Logo + Navigation ────────────────────────────────────
+
+    &__inner {
+        display:         flex;
+        align-items:     center;
+        justify-content: space-between;
+        gap:             var(--space-xl);
+        padding-bottom:  var(--space-xl);
+        border-bottom:   1px solid var(--color-border);
+        flex-wrap:       wrap;
+
+        @include respond-below('md') {
+            flex-direction: column;
+            align-items:    flex-start;
+            gap:            var(--space-md);
+        }
+    }
+
+    // ── Brand / Logo ──────────────────────────────────────────────────────────
+
+    &__brand {
+        flex-shrink: 0;
+    }
+
+    &__logo-link {
+        display:     inline-block;
+        line-height: 0;
+
+        &:focus-visible {
+            outline:        2px solid $color-primary;
+            outline-offset: 3px;
+            border-radius:  $radius-sm;
+        }
+    }
+
+    &__logo {
+        max-height: 40px;
+        width:      auto;
+    }
+
+    &__site-name {
+        font-size:       var(--text-xl);
+        font-weight:     $font-weight-bold;
+        color:           var(--color-text);
+        text-decoration: none;
+        transition:      color 0.2s ease;
+
+        &:hover { color: $color-primary; }
+
+        &:focus-visible {
+            outline:        2px solid $color-primary;
+            outline-offset: 3px;
+            border-radius:  $radius-sm;
+        }
+    }
+
+    // ── Unterer Bereich: Copyright ────────────────────────────────────────────
+
+    &__bottom {
+        display:         flex;
+        align-items:     center;
+        justify-content: center;
+        padding-top:     var(--space-md);
+    }
+
+    &__copyright {
+        font-size: var(--text-sm);
+        color:     var(--color-text-muted);
+        margin:    0;
+    }
+}
+
+
+// =============================================================================
+// Footer Navigation
+// =============================================================================
+
+.footer-nav {
+
+    &__list {
+        list-style:  none;
+        margin:      0;
+        padding:     0;
+        display:     flex;
+        flex-wrap:   wrap;
+        gap:         $spacing-1 $spacing-4;
+        align-items: center;
+
+        @include respond-below('md') {
+            gap: $spacing-1 $spacing-3;
+        }
+    }
+
+    li {
+        margin:  0;
+        padding: 0;
+
+        &.current-menu-item > a,
+        &.current_page_item > a {
+            color: $color-primary;
+        }
+    }
+
+    a {
+        font-size:       var(--text-sm);
+        color:           var(--color-text-muted);
+        text-decoration: none;
+        transition:      color 0.2s ease;
+        white-space:     nowrap;
+
+        &:hover { color: $color-primary; }
+
+        &:focus-visible {
+            outline:        2px solid $color-primary;
+            outline-offset: 2px;
+            border-radius:  $radius-sm;
+        }
+    }
+}
+
+
+// =============================================================================
+// Footer Legal Navigation
+// =============================================================================
+
+.site-footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-4;
+    padding-top: $spacing-4;
+    flex-wrap: wrap;
+
+    @media (max-width: 767px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $spacing-2;
+    }
+}
+
+.footer-legal {
+    &__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-1 $spacing-4;
+        align-items: center;
+
+        @media (max-width: 767px) {
+            gap: $spacing-1 $spacing-3;
+        }
+    }
+
+    li {
+        margin: 0;
+
+        // Trennpunkt zwischen den Links
+        &:not(:last-child) > a::after {
+            content: '·';
+            margin-left: $spacing-4;
+            color: var(--color-text-muted);
+            pointer-events: none;
+        }
+    }
+
+    a {
+        font-size: $font-size-xs;       // z. B. 12px
+        color: var(--color-text-muted);
+        text-decoration: none;
+        transition: color 0.2s ease;
+        white-space: nowrap;
+
+        &:hover,
+        &:focus-visible {
+            color: var(--color-primary);
+            text-decoration: underline;
+        }
+    }
+}
+
+// Credit-Line
+.site-footer__credit {
+    text-align: center;
+    padding-top: $spacing-3;
+    border-top: 1px solid var(--color-border);
+    margin-top: $spacing-3;
+
+    p {
+        font-size: $font-size-xs;
+        color: var(--color-text-muted);
+        opacity: 0.6;
+        margin: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    &:hover p {
+        opacity: 1;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+        font-weight: 500;
+
+        &:hover,
+        &:focus-visible {
+            color: var(--color-primary);
+            text-decoration: underline;
+        }
+    }
+}

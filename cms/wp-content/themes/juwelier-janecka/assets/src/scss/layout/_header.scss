@@ -1,0 +1,160 @@
+@use '../abstracts' as *;
+
+// =============================================================================
+// Site Header
+// Version: 1.2.0 – Fluid Responsive System
+//
+// Änderungen:
+//   - font-size → var(--text-*)
+//   - @media (max-width: $breakpoint-md - 1) → @include respond-below('md')
+//   - Hardcodiertes top: 60px → CSS Custom Property --header-height
+//   - Mobile Menu padding → var(--space-*)
+// =============================================================================
+
+// ── Header-Höhe als Custom Property ──────────────────────────────────────────
+// Wird von JavaScript und anderen Komponenten (sticky-offset etc.) genutzt.
+:root {
+    --header-height: 64px;
+}
+
+.site-header {
+    background:  var(--color-surface);
+    box-shadow:  $shadow-sm;
+    position:    sticky;
+    top:         0;
+    z-index:     $z-header;
+    padding:     $spacing-2 0;
+    transition:  background 0.3s ease, box-shadow 0.3s ease;
+
+    .container {
+        @include flex-between;
+        padding-top:    $spacing-2;
+        padding-bottom: $spacing-2;
+    }
+}
+
+.site-branding {
+    a {
+        font-size:       var(--text-xl);
+        font-weight:     $font-weight-bold;
+        color:           var(--color-text);
+        text-decoration: none;
+
+        &:focus-visible {
+            outline:        2px solid var(--color-primary);
+            outline-offset: 3px;
+            border-radius:  $radius-sm;
+        }
+    }
+}
+
+.main-navigation {
+    ul {
+        display:    flex;
+        gap:        $spacing-4;
+        list-style: none;
+    }
+
+    a {
+        font-size:       var(--text-xl);
+        font-weight:     $font-weight-bold;
+        color:           var(--color-text);
+        text-decoration: none;
+        transition:      color 0.15s ease;
+
+        &:hover { color: $color-primary; }
+
+        &:focus-visible {
+            outline:        2px solid $color-primary;
+            outline-offset: 3px;
+            border-radius:  $radius-sm;
+        }
+    }
+
+    // Mobile: Navigation ausblenden, via .active einblenden
+    @include respond-below('md') {
+        display: none;
+
+        &.active {
+            display:    block;
+            position:   fixed;
+            // Nutzt --header-height statt hardcodiertem top: 60px
+            top:        var(--header-height);
+            left:       0;
+            right:      0;
+            background: var(--color-surface);
+            padding:    var(--space-md);
+            box-shadow: $shadow-lg;
+            z-index:    $z-dropdown;
+
+            ul { flex-direction: column; }
+        }
+    }
+}
+
+.mobile-menu-toggle {
+    display: none;
+
+    @include respond-below('md') {
+        display:         block;
+        background:      none;
+        border:          none;
+        // WCAG 2.5.5: 44×44px Touch Target ✅
+        width:           44px;
+        height:          44px;
+        display:         flex;
+        align-items:     center;
+        justify-content: center;
+        cursor:          pointer;
+        font-size:       24px;
+        color:           var(--color-text);
+
+        &:focus-visible {
+            outline:        2px solid $color-primary;
+            outline-offset: 3px;
+            border-radius:  $radius-sm;
+        }
+    }
+}
+
+// =============================================================================
+// Logo – Desktop / Mobile Variante
+// =============================================================================
+
+.site-logo {
+    display:         inline-flex;
+    align-items:     center;
+    text-decoration: none;
+
+    &__img {
+        display:    block;
+        width:      auto;
+        height:     auto;
+        max-height: 60px;
+        max-width:  200px;   // verhindert zu breite Logos
+        object-fit: contain; // keine Verzerrung egal welche Proportionen
+    }
+
+    // Mobile-Logo standardmäßig ausblenden
+    &__img--mobile { display: none; }
+
+    // Auf Mobile: Desktop-Logo ausblenden, Mobile-Logo einblenden
+    @include respond-below('md') {
+        &__img--desktop { display: none; }
+
+        &__img--mobile {
+            display:    block;
+            width:      auto;
+            height:     auto;
+            max-height: 44px;  // etwas kompakter auf Mobile
+            max-width:  160px;
+            object-fit: contain;
+        }
+    }
+
+    &__text {
+        font-size:   var(--text-xl);
+        font-weight: $font-weight-bold;
+        color:       inherit;
+    }
+}

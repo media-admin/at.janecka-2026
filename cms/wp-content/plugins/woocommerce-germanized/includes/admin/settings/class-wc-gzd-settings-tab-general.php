@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_GZD_Settings_Tab_General extends WC_GZD_Settings_Tab {
 
 	public function get_description() {
-		return __( 'Adjust general options e.g. legal pages.', 'woocommerce-germanized' );
+		return __( 'Adjust general options e.g. legal pages, withdrawal button, small business regulation.', 'woocommerce-germanized' );
 	}
 
 	public function get_label() {
@@ -40,6 +40,12 @@ class WC_GZD_Settings_Tab_General extends WC_GZD_Settings_Tab {
 			);
 		}
 
+		if ( class_exists( '\Vendidero\OrderWithdrawalButton\Settings' ) ) {
+			$sections = $sections + array(
+				'withdrawal_button' => __( 'Withdrawal Button', 'woocommerce-germanized' ),
+			);
+		}
+
 		return $sections;
 	}
 
@@ -48,6 +54,8 @@ class WC_GZD_Settings_Tab_General extends WC_GZD_Settings_Tab {
 			return sprintf( __( 'Since Feb. 1 2017 regulations regarding alternative dispute resolution take effect. Further information regarding your duty to supply information can be found <a href="%s" target="_blank">here</a>.', 'woocommerce-germanized' ), 'http://shopbetreiber-blog.de/2017/01/05/streitschlichtung-neue-infopflichten-fuer-alle-online-haendler-ab-1-februar/' );
 		} elseif ( 'photovoltaic_systems' === $section ) {
 			return sprintf( __( 'Learn more about the <a href="%s" target="_blank">sale of photovoltaic systems</a> according to §12 paragraph 3 UStG.', 'woocommerce-germanized' ), 'https://vendidero.de/photovoltaikanlagen-in-woocommerce-verkaufen-so-funktionierts' );
+		} elseif ( 'withdrawal_button' === $section ) {
+			return sprintf( __( 'Learn more about the <a href="%s" target="_blank">withdrawal button</a>.', 'woocommerce-germanized' ), 'https://vendidero.de/widerrufsbutton-rechtssicher-in-woocommerce-umsetzen' );
 		}
 
 		return '';
@@ -171,12 +179,30 @@ class WC_GZD_Settings_Tab_General extends WC_GZD_Settings_Tab {
 				'css'      => 'min-width:300px;',
 				'desc_tip' => true,
 			),
+			array(
+				'title'    => _x( 'Withdrawal page', 'owb', 'woocommerce-germanized' ),
+				'id'       => 'woocommerce_withdraw_from_contract_page_id',
+				'type'     => $page_type,
+				'class'    => $class,
+				'desc'     => _x( 'This page should contain your withdrawal form shortcode.', 'owb', 'woocommerce-germanized' ),
+				'args'     => array(
+					'exclude' => array(),
+				),
+				'default'  => '',
+				'css'      => 'min-width:300px;',
+				'autoload' => false,
+				'desc_tip' => true,
+			),
 
 			array(
 				'type' => 'sectionend',
 				'id'   => 'legal_page_options',
 			),
 		);
+	}
+
+	protected function get_withdrawal_button_settings() {
+		return class_exists( '\Vendidero\OrderWithdrawalButton\Settings' ) ? \Vendidero\OrderWithdrawalButton\Settings::get_settings() : array();
 	}
 
 	protected function get_dispute_resolution_settings() {
@@ -659,6 +685,8 @@ class WC_GZD_Settings_Tab_General extends WC_GZD_Settings_Tab {
 			$settings = $this->get_shop_settings();
 		} elseif ( 'photovoltaic_systems' === $current_section ) {
 			$settings = $this->get_photovoltaic_systems_settings();
+		} elseif ( 'withdrawal_button' === $current_section ) {
+			$settings = $this->get_withdrawal_button_settings();
 		}
 
 		return $settings;

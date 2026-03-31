@@ -1,0 +1,350 @@
+// =============================================================================
+// Typography – Juwelier Janecka (Mobile-First, relative Einheiten)
+// =============================================================================
+@use '../abstracts' as *;
+
+body {
+  font-family: $font-body;
+  font-size: $font-size-base;
+  color: $color-text;
+  hyphens: auto;
+
+  @include bp(tablet) {
+    width: 100vw;
+    text-align: center;
+  }
+}
+
+h1 {
+  width: 100%;
+  font-family: $font-heading;
+  font-size: clamp(1.4rem, 4vw, 1.8rem); // fluid zwischen 1.4 und 1.8rem
+  line-height: 1.2;
+  color: $color-text;
+  hyphens: auto;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0.5em 0 0.75em;
+
+  @include bp(tablet) {
+    max-width: 37.5rem; // 600px
+    padding: 0.25rem 0 0.5em;
+
+    &::after {
+      width: 15%;
+      text-align: center;
+    }
+  }
+}
+
+h2 {
+  font-family: $font-subheading;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  color: $color-text;
+  padding: 0.4em 0;
+}
+
+h3 {
+  font-family: $font-heading;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: $color-text;
+  padding: 0.8em 0 0.3em;
+
+  &.cover-img {
+    font-size: clamp(1.2rem, 3vw, 1.4rem);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    margin-top: 0;
+    padding-top: 0.333em;
+  }
+
+  &.color-red { color: red; font-weight: 700; }
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+
+  &.subtitle {
+    font-family: $font-nav-semi;
+    font-size: 1.2em;
+    text-align: left;
+    margin-top: 5rem; // ~80px relativ
+
+    @include bp(tablet) { padding-left: 0.9375rem; }
+  }
+
+  &.text-center {
+    display: block;
+    margin: 1.5625rem auto;
+    margin-top: 5%;
+    padding: 0.9375rem;
+  }
+}
+
+strong {
+  color: $color-text;
+  &.color-red { color: red; font-weight: 700; }
+}
+
+a strong {
+  font-family: $font-nav-semi;
+  font-size: 1.2rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+figure {
+  position: relative;
+  max-width: 100%;
+  margin: 0;
+
+  > img { width: 100%; height: auto; }
+
+  @include bp(tablet) {
+    &.image { margin: 2.5em 2.5em 0; }
+  }
+
+  &.cover-img { margin: 0; }
+}
+
+.cover-img h2 { margin-top: 0; }
+
+table {
+  border-collapse: unset;
+  &.color-red,
+  &.color-red strong { color: red; font-weight: 700; }
+}
+
+article {
+  position: relative;
+  max-width: 100%;
+  width: 100%;
+}
+
+main ul {
+  list-style-type: disc;
+  margin-left: 1.5em;
+}
+
+ul.advantages {
+  width: 80%;
+  margin-left: 2.5rem;
+  margin-bottom: 1.5625rem;
+}
+
+li.list-item,
+li.advantage__item {
+  font-family: $font-body;
+  font-size: 1em;
+  line-height: 1.2;
+  margin-bottom: 0.75em;
+
+  &::before {
+    font-family: 'FontAwesome Solid';
+    content: '\f00c';
+    font-size: 0.8em;
+    margin: 0 0.625rem 0 -1.5625rem;
+    color: $color-primary;
+  }
+}
+
+
+
+
+
+// =============================================================================
+// TYPOGRAPHY
+// Media Lab Starter Kit
+// Version: 1.2.0 – Fluid Responsive System
+//
+// Alle Schriftgrößen nutzen CSS Custom Properties (--text-*) aus _variables.scss.
+// Diese skalieren via clamp() flüssig zwischen Mobile und Desktop –
+// kein manueller @media-Query für Font-Sizes mehr nötig.
+// =============================================================================
+
+
+// ─────────────────────────────────────────────────────────────────
+// BODY
+// ─────────────────────────────────────────────────────────────────
+
+// body {
+//   font-family: $font-primary;
+//   font-size:   var(--text-base);    // clamp(15px → 16px)
+//   font-weight: $font-weight-normal;
+//   color:       var(--color-text);
+//   line-height: $line-height-base;
+// }
+
+
+// // ─────────────────────────────────────────────────────────────────
+// // HEADINGS
+// // ─────────────────────────────────────────────────────────────────
+
+// h1, h2, h3, h4, h5, h6 {
+//   font-weight:   $font-weight-bold;
+//   line-height:   $line-height-tight;
+//   margin-bottom: var(--space-md);   // fluid statt fixem $spacing-3
+//   color:         var(--color-text);
+// }
+
+// // Fluid Heading Scale – skaliert ohne @media-Queries
+// // Werte entsprechen den clamp()-Ranges aus _variables.scss:
+// h1 { font-size: var(--text-h1);  }  // clamp(32px → 48px)
+// h2 { font-size: var(--text-5xl); }  // clamp(32px → 40px)
+// h3 { font-size: var(--text-4xl); }  // clamp(28px → 32px)
+// h4 { font-size: var(--text-2xl); }  // clamp(20px → 24px)
+// h5 { font-size: var(--text-xl);  }  // clamp(18px → 20px)
+// h6 { font-size: var(--text-lg);  }  // clamp(16px → 18px)
+
+
+// // ─────────────────────────────────────────────────────────────────
+// // PARAGRAPHS & INLINE
+// // ─────────────────────────────────────────────────────────────────
+
+// p {
+//   margin-bottom: var(--space-md);
+// }
+
+// strong {
+//   font-weight: $font-weight-bold;
+// }
+
+// em {
+//   font-style: italic;
+// }
+
+// small {
+//   font-size: var(--text-sm);  // clamp(13px → 14px)
+// }
+
+
+// // ─────────────────────────────────────────────────────────────────
+// // LINKS
+// // ─────────────────────────────────────────────────────────────────
+
+// a {
+//   color:      var(--color-primary);
+//   transition: color 0.15s ease;
+
+//   &:hover {
+//     color: #{$color-primary-darker};
+//   }
+
+//   &:focus-visible {
+//     outline:        2px solid var(--color-primary);
+//     outline-offset: 2px;
+//     border-radius:  2px;
+//   }
+// }
+
+
+// // ─────────────────────────────────────────────────────────────────
+// // LISTS
+// // ─────────────────────────────────────────────────────────────────
+
+// ul, ol {
+//   padding-left:  var(--space-md);
+//   margin-bottom: var(--space-md);
+// }
+
+// li {
+//   margin-bottom: var(--space-xs);
+// }
+
+
+// // ─────────────────────────────────────────────────────────────────
+// // BLOCKQUOTE
+// // ─────────────────────────────────────────────────────────────────
+
+// blockquote {
+//   border-left:   4px solid var(--color-primary);
+//   padding-left:  var(--space-md);
+//   margin:        var(--space-lg) 0;
+//   font-size:     var(--text-lg);
+//   font-style:    italic;
+//   color:         var(--color-text-muted);
+//   line-height:   $line-height-relaxed;
+// }
+
+
+// // ─────────────────────────────────────────────────────────────────
+// // CODE & PRE
+// // ─────────────────────────────────────────────────────────────────
+
+// code {
+//   font-family:   'Courier New', Courier, monospace;
+//   font-size:     var(--text-sm);
+//   background:    var(--color-surface);
+//   border:        1px solid var(--color-border);
+//   border-radius: $radius-sm;
+//   padding:       0.1em 0.4em;
+// }
+
+// pre {
+//   font-family:   'Courier New', Courier, monospace;
+//   font-size:     var(--text-sm);
+//   background:    var(--color-surface);
+//   border:        1px solid var(--color-border);
+//   border-radius: $radius-base;
+//   padding:       var(--space-md);
+//   overflow-x:    auto;
+//   margin-bottom: var(--space-md);
+
+//   code {
+//     background:    none;
+//     border:        none;
+//     padding:       0;
+//     font-size:     inherit;
+//   }
+// }
+
+
+// // ─────────────────────────────────────────────────────────────────
+// // HR
+// // ─────────────────────────────────────────────────────────────────
+
+// hr {
+//   border:        none;
+//   border-top:    1px solid var(--color-border);
+//   margin:        var(--space-xl) 0;
+// }
+
+
+// // ─────────────────────────────────────────────────────────────────
+// // UTILITY CLASSES
+// // Fluid Text-Size Helper – direkt im HTML nutzbar
+// // ─────────────────────────────────────────────────────────────────
+
+// .text-xs   { font-size: var(--text-xs);   }
+// .text-sm   { font-size: var(--text-sm);   }
+// .text-base { font-size: var(--text-base); }
+// .text-lg   { font-size: var(--text-lg);   }
+// .text-xl   { font-size: var(--text-xl);   }
+// .text-2xl  { font-size: var(--text-2xl);  }
+// .text-3xl  { font-size: var(--text-3xl);  }
+// .text-4xl  { font-size: var(--text-4xl);  }
+// .text-5xl  { font-size: var(--text-5xl);  }
+// .text-hero { font-size: var(--text-hero); }
+
+// .text-muted   { color: var(--color-text-muted); }
+// .text-light   { color: var(--color-text-light); }
+// .text-primary { color: var(--color-primary);    }
+
+// .font-normal   { font-weight: $font-weight-normal;   }
+// .font-medium   { font-weight: $font-weight-medium;   }
+// .font-semibold { font-weight: $font-weight-semibold; }
+// .font-bold     { font-weight: $font-weight-bold;     }
+
+
+
+
+
+
+
+
+
+

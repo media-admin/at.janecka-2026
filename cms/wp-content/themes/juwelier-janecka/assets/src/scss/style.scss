@@ -1,0 +1,83 @@
+// =============================================================================
+// Main Stylesheet – Media Lab Starter Kit
+// Sass Module System (@use/@forward) – Dart Sass 2.0+ kompatibel
+// =============================================================================
+
+// WCAG 2.1 AA Konformität: Einbindung eines Skip-Links für Tastaturnutzer
+@use 'skip-link';
+
+// Configuration – lädt variables + mixins via abstracts/_index.scss
+@use 'abstracts' as *;
+
+// Base
+@use 'base/reset';
+@use 'base/fonts';
+@use 'base/typography';
+@use 'base/global';
+@use 'base/grid-fix';
+
+// Layout
+@use 'layout/top-header';
+@use 'layout/header';
+@use 'layout/footer';
+@use 'layout/grid';
+@use 'layout/navigation';
+
+// Components
+@use 'components/theme-toggle';
+@use 'components/buttons';
+@use 'components/toggle';
+@use 'components/breadcrumbs';
+@use 'components/cards';
+@use 'components/events';
+@use 'components/hero-image';
+@use 'components/forms';
+@use 'components/hero-slider';
+@use 'components/accordion';
+@use 'components/lightbox';
+@use 'components/modal';
+@use 'components/back-to-top';
+@use 'components/cookie-notice';
+@use 'components/team';
+@use 'components/testimonials';
+@use 'components/services';
+@use 'components/tabs';
+@use 'components/notification';
+@use 'components/notifications';
+@use 'components/stats';
+@use 'components/timeline';
+@use 'components/image-comparison';
+@use 'components/logo-carousel';
+@use 'components/team-cards';
+@use 'components/video-player';
+@use 'components/faq-accordion';
+@use 'components/contact-form-7';
+@use 'components/cpt-grids';
+@use 'components/spoiler';
+@use 'components/pricing-tables';
+@use 'components/ajax-search';
+@use 'components/load-more';
+@use 'components/google-maps';
+@use 'components/projects-grid';
+@use 'components/job-card';
+@use 'components/ajax-filters';
+@use 'components/carousel';
+
+// Templates
+@use 'templates/page-builder';
+@use 'templates/search-results';
+
+// Utilities
+@use 'utilities/helpers';
+@use 'utilities/animations';
+
+// Pages
+@use 'pages/home';
+
+// WooCommerce
+@use 'pages/page-404';
+@use 'woocommerce/woocommerce';
+@use 'pages/welcome-page';
+
+// Swiper Overrides – muss zuletzt stehen
+@use 'components/swiper-overrides';

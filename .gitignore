@@ -28,7 +28,7 @@
 # PLUGINS - Third Party (ignorieren)
 # ============================================
 /cms/wp-content/plugins/git sta
-!/cms/wp-content/plugins/janecka-juweliere-project/
+/cms/wp-content/plugins/*
 !/cms/wp-content/plugins/media-lab-agency-core/
 !/cms/wp-content/plugins/media-lab-analytics/
 !/cms/wp-content/plugins/media-lab-seo/
@@ -96,6 +96,6 @@ docs-backup/
 # Janecka Plugin (wird committed)
 !/cms/wp-content/plugins/janecka-juweliere-project/
 
-# Stadtwirt Theme (wird committed)
-!/cms/wp-content/themes/custom-theme/
+# Juwelier Janecka Theme (wird committed)
+!/cms/wp-content/themes/juwelier-janecka/
 /cms/wp-content/themes/custom-theme/assets/hot

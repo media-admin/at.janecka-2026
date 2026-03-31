@@ -23,9 +23,12 @@ define('WP_DEBUG_DISPLAY', true);
 define('SCRIPT_DEBUG', true);
 // define('ACF_DEBUG', true);
 
+// Activate Trash for Media
+define( 'MEDIA_TRASH', true );
+
 
 // Environment
 define('WP_ENVIRONMENT_TYPE', 'local');
 
 // Google Maps API Key
-define('GOOGLE_MAPS_API_KEY', 'DEIN_API_KEY_HIER');
+define('GOOGLE_MAPS_API_KEY', 'AIzaSyB3wh26KQVyeyH33VXhe2lMOzAUaIJxgiQ');

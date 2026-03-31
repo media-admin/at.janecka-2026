@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-03-22 13:29:52+0000\n"
+"PO-Revision-Date: 2026-03-30 20:29:22+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2188,13 +2188,13 @@ msgstr "Die Entitäts-ID ist erforderlich."
 msgid "The order ID is required."
 msgstr "Die Bestell-ID ist erforderlich."
 
-#: includes/rest-api/Controllers/Version4/class-wc-rest-v4-controller.php:52
-msgid "Sorry, you are not allowed to perform this action."
-msgstr "Du bist leider nicht berechtigt, diese Aktion durchzuführen."
-
 #: includes/gateways/paypal/includes/settings-paypal.php:93
 msgid "When enabled, PayPal will use the address provided by the checkout form, and prevent the buyer from changing it inside the PayPal payment page. Disable this to let buyers choose a shipping address from their PayPal account. PayPal verifies addresses therefore this setting can cause errors (we recommend keeping it disabled)."
 msgstr "Wenn diese Option aktiviert ist, verwendet PayPal die im Bezahlformular angegebene Adresse und verhindert, dass der Käufer diese auf der PayPal-Zahlungsseite ändert. Deaktiviere diese Option, damit Käufer in ihrem PayPal-Konto eine Lieferadresse auswählen können. PayPal verifiziert Adressen, daher können bei dieser Einstellung Fehler auftreten. (Deaktivierung empfohlen)"
+
+#: includes/rest-api/Controllers/Version4/class-wc-rest-v4-controller.php:52
+msgid "Sorry, you are not allowed to perform this action."
+msgstr "Du bist leider nicht berechtigt, diese Aktion auszuführen."
 
 #: includes/gateways/paypal/includes/settings-paypal.php:92
 msgid "Prevent buyers from changing the shipping address."
@@ -13415,14 +13415,6 @@ msgctxt "block style label"
 msgid "Outline"
 msgstr "Umriss"
 
-#: assets/client/blocks/inner-blocks/mini-cart-cart-button-block/block.json
-#: assets/client/blocks/inner-blocks/mini-cart-checkout-button-block/block.json
-#: assets/client/blocks/inner-blocks/mini-cart-shopping-button-block/block.json
-#: assets/client/blocks/product-button/block.json
-msgctxt "block style label"
-msgid "Fill"
-msgstr "Ausfüllen"
-
 #: assets/client/admin/product-editor/blocks/generic/product-tab/block.json
 #: assets/client/admin/product-editor/blocks/generic/tab/block.json
 msgctxt "block title"
@@ -13862,6 +13854,14 @@ msgstr "Galerie"
 msgctxt "block keyword"
 msgid "summary"
 msgstr "Übersicht"
+
+#: assets/client/blocks/inner-blocks/mini-cart-cart-button-block/block.json
+#: assets/client/blocks/inner-blocks/mini-cart-checkout-button-block/block.json
+#: assets/client/blocks/inner-blocks/mini-cart-shopping-button-block/block.json
+#: assets/client/blocks/product-button/block.json
+msgctxt "block style label"
+msgid "Fill"
+msgstr "Gefüllt"
 
 #: src/Admin/Features/PaymentGatewaySuggestions/DefaultPaymentGateways.php:939
 msgid "Give your customers the power to pay later, interest free and watch your sales grow."
@@ -34101,6 +34101,16 @@ msgstr "Azad Kashmir"
 msgid "Balochistan"
 msgstr "Balochistan"
 
+#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:1644
+#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1085
+#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1716
+#: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:151
+#: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:258
+#: includes/rest-api/Controllers/Version3/class-wc-rest-products-controller.php:747
+#: src/Internal/RestApi/Routes/V4/Products/Controller.php:814
+msgid "To manipulate product variations you should use the /products/&lt;product_id&gt;/variations/&lt;id&gt; endpoint."
+msgstr "Um Produktvarianten zu bearbeiten, solltest du den Endpunkt /products/&lt;product_id&gt;/variations/&lt;id&gt; verwenden."
+
 #: includes/rest-api/Controllers/Version2/class-wc-rest-payment-gateways-v2-controller.php:192
 #: includes/rest-api/Controllers/Version2/class-wc-rest-shipping-zone-methods-v2-controller.php:321
 #: includes/rest-api/Controllers/Version3/class-wc-rest-controller.php:392
@@ -34134,16 +34144,6 @@ msgstr "Taraba"
 #: i18n/states.php:1405
 msgid "Sokoto"
 msgstr "Sokoto"
-
-#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:1644
-#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1085
-#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:1716
-#: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:151
-#: includes/rest-api/Controllers/Version3/class-wc-rest-posts-controller.php:258
-#: includes/rest-api/Controllers/Version3/class-wc-rest-products-controller.php:747
-#: src/Internal/RestApi/Routes/V4/Products/Controller.php:814
-msgid "To manipulate product variations you should use the /products/&lt;product_id&gt;/variations/&lt;id&gt; endpoint."
-msgstr "Um Produktvarianten zu bearbeiten, solltest du den Endpunkt /products/&lt;product_id&gt;/variations/&lt;id&gt; verwenden."
 
 #: i18n/states.php:1404
 msgid "Rivers"
@@ -37624,21 +37624,6 @@ msgstr "Bestellpositions-ID."
 msgid "Order key."
 msgstr "Schlüssel der Bestellung."
 
-#: includes/rest-api/Controllers/Version1/class-wc-rest-coupons-v1-controller.php:110
-#: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:107
-#: includes/rest-api/Controllers/Version1/class-wc-rest-product-reviews-v1-controller.php:118
-#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:109
-#: includes/rest-api/Controllers/Version2/class-wc-rest-coupons-v2-controller.php:113
-#: includes/rest-api/Controllers/Version2/class-wc-rest-orders-v2-controller.php:121
-#: includes/rest-api/Controllers/Version2/class-wc-rest-product-variations-v2-controller.php:170
-#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:198
-#: includes/rest-api/Controllers/Version2/class-wc-rest-shipping-zone-methods-v2-controller.php:87
-#: includes/rest-api/Controllers/Version2/class-wc-rest-shipping-zones-v2-controller.php:77
-#: includes/rest-api/Controllers/Version3/class-wc-rest-product-reviews-controller.php:110
-#: src/Internal/RestApi/Routes/V4/Orders/Controller.php:186
-msgid "Whether to bypass trash and force deletion."
-msgstr "Ob der Papierkorb übersprungen und unwiderruflich gelöscht werden soll."
-
 #: includes/rest-api/Controllers/Version1/class-wc-rest-order-refunds-v1-controller.php:366
 #: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:1270
 #: includes/rest-api/Controllers/Version2/class-wc-rest-order-refunds-v2-controller.php:447
@@ -37927,6 +37912,21 @@ msgstr "Minimale Bestellmenge, die im Warenkorb enthalten sein muss, damit der G
 #: includes/admin/views/html-notice-no-shipping-methods.php:31
 msgid "Setup shipping zones"
 msgstr "Versandzonen einrichten"
+
+#: includes/rest-api/Controllers/Version1/class-wc-rest-coupons-v1-controller.php:110
+#: includes/rest-api/Controllers/Version1/class-wc-rest-orders-v1-controller.php:107
+#: includes/rest-api/Controllers/Version1/class-wc-rest-product-reviews-v1-controller.php:118
+#: includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php:109
+#: includes/rest-api/Controllers/Version2/class-wc-rest-coupons-v2-controller.php:113
+#: includes/rest-api/Controllers/Version2/class-wc-rest-orders-v2-controller.php:121
+#: includes/rest-api/Controllers/Version2/class-wc-rest-product-variations-v2-controller.php:170
+#: includes/rest-api/Controllers/Version2/class-wc-rest-products-v2-controller.php:198
+#: includes/rest-api/Controllers/Version2/class-wc-rest-shipping-zone-methods-v2-controller.php:87
+#: includes/rest-api/Controllers/Version2/class-wc-rest-shipping-zones-v2-controller.php:77
+#: includes/rest-api/Controllers/Version3/class-wc-rest-product-reviews-controller.php:110
+#: src/Internal/RestApi/Routes/V4/Orders/Controller.php:186
+msgid "Whether to bypass trash and force deletion."
+msgstr "Ob der Papierkorb umgangen und die Löschung erzwungen werden soll."
 
 #: includes/admin/views/html-notice-legacy-shipping.php:18
 msgid "New:"
