@@ -118,5 +118,19 @@ $slider-height-mobile:  clamp(280px, 55vw, 480px);
         &::after { font-size: 18px; }
     }
 
-    .swiper-pagination { display: none; }
+    .swiper-pagination {
+        bottom: $spacing-4;
+
+        .swiper-pagination-bullet {
+            background:   #fff;
+            opacity:      0.5;
+            width:        10px;
+            height:       10px;
+            transition:   opacity 0.2s ease;
+        }
+
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+        }
+    }
 }
