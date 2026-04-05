@@ -1,0 +1,180 @@
+// WooCommerce Cart & Checkout
+// Grundlegende Stile – alles via WC-Hooks, keine Templates.
+
+@use '../abstracts' as *;
+
+// ---------------------------------------------------------------------------
+// Gemeinsame Wrapper
+// ---------------------------------------------------------------------------
+
+.woocommerce-cart,
+.woocommerce-checkout {
+	.woocommerce {
+		max-width: var(--container-max, 1200px);
+		margin-inline: auto;
+		padding-inline: var(--space-md);
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Warenkorb-Tabelle
+// ---------------------------------------------------------------------------
+
+.woocommerce-cart-form {
+	overflow-x: auto;
+
+	table.cart {
+		width: 100%;
+		border-collapse: collapse;
+
+		th, td {
+			padding: 1rem 0.75rem;
+			border-bottom: 1px solid var(--color-border);
+			vertical-align: middle;
+		}
+
+		th { font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+
+		.product-thumbnail img { width: 72px; height: 72px; object-fit: cover; border-radius: var(--radius-sm); }
+		.product-name a { color: var(--color-text); text-decoration: none; font-weight: 500; &:hover { color: var(--color-primary); } }
+		.product-price  { color: var(--color-text-muted); }
+		.product-total  { font-weight: 700; }
+
+		.qty {
+			width: 4rem;
+			padding: 0.375rem;
+			border: 1px solid var(--color-border);
+			border-radius: var(--radius-sm);
+			text-align: center;
+		}
+
+		.remove {
+			color: var(--color-text-muted);
+			font-size: 1.25rem;
+			text-decoration: none;
+			&:hover { color: var(--color-sale, #c62828); }
+		}
+	}
+
+	.actions {
+		display: flex;
+		gap: 0.75rem;
+		justify-content: flex-end;
+		padding-top: var(--space-sm);
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Warenkorb-Summe
+// ---------------------------------------------------------------------------
+
+.cart-collaterals {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: var(--space-lg);
+
+	.cart_totals {
+		width: 100%;
+		max-width: 400px;
+
+		h2 { font-size: 1.125rem; margin-block-end: var(--space-sm); }
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+
+			th, td {
+				padding: 0.625rem 0.75rem;
+				border-bottom: 1px solid var(--color-border);
+				font-size: 0.9375rem;
+			}
+
+			th { font-weight: 600; }
+			.order-total td { font-size: 1.125rem; font-weight: 700; }
+		}
+
+		.wc-proceed-to-checkout {
+			margin-top: var(--space-sm);
+
+			.checkout-button { width: 100%; }
+		}
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Checkout
+// ---------------------------------------------------------------------------
+
+.woocommerce-checkout {
+	.woocommerce {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-lg);
+
+		@include bp(md) { grid-template-columns: 1fr 400px; }
+	}
+
+	h3 {
+		font-size: 1.125rem;
+		font-weight: 700;
+		margin-block-end: var(--space-sm);
+		padding-block-end: 0.5rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	label {
+		display: block;
+		font-size: 0.875rem;
+		font-weight: 500;
+		margin-block-end: 0.25rem;
+	}
+
+	input[type='text'],
+	input[type='email'],
+	input[type='tel'],
+	input[type='password'],
+	select,
+	textarea {
+		width: 100%;
+		padding: 0.625rem 0.875rem;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-sm);
+		font-size: 0.9375rem;
+		background: var(--color-surface);
+		transition: border-color 0.2s;
+
+		&:focus {
+			outline: none;
+			border-color: var(--color-primary);
+			box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 0,0,0), 0.08);
+		}
+	}
+
+	.form-row {
+		margin-block-end: var(--space-sm);
+
+		.required { color: var(--color-sale, #c62828); }
+	}
+
+	// Bestellübersicht
+	.woocommerce-checkout-review-order {
+		background: var(--color-bg-alt, #f9f9f9);
+		border-radius: var(--radius-md);
+		padding: var(--space-md);
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+
+			th, td {
+				padding: 0.5rem 0.75rem;
+				border-bottom: 1px solid var(--color-border);
+				font-size: 0.9rem;
+			}
+
+			.order-total td { font-weight: 700; font-size: 1.0625rem; }
+		}
+
+		#place_order { width: 100%; margin-top: var(--space-sm); }
+	}
+}

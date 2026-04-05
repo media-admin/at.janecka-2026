@@ -1,0 +1,134 @@
+// WooCommerce Base
+// Setzt WooCommerce-Standard-Styles zurück und definiert das Layout-Grundgerüst.
+
+@use '../abstracts' as *;
+
+// ---------------------------------------------------------------------------
+// Layout: Filter-Sidebar + Produktgrid nebeneinander
+// ---------------------------------------------------------------------------
+
+.wc-archive {
+	width: 100%;
+}
+
+.wc-layout {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+}
+
+.wc-main {
+	width: 100%;
+	max-width: var(--container-max, 1400px);
+	margin-inline: auto;
+}
+
+.wc-filter-sidebar  { grid-area: sidebar; }
+.wc-main            { grid-area: main; }
+
+// Mobile Filter-Toggle nur unter lg anzeigen
+.wc-filter-toggle-mobile {
+	grid-area: filter-toggle;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.625rem 1rem;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-sm);
+	background: var(--color-surface);
+	cursor: pointer;
+	font-size: 0.875rem;
+	font-weight: 500;
+	transition: border-color 0.2s;
+	width: fit-content;
+
+	&:hover { border-color: var(--color-primary); }
+
+	@include bp(lg) { display: none; }
+
+	&__count {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 1.25rem;
+		height: 1.25rem;
+		padding: 0 0.25rem;
+		background: var(--color-primary);
+		color: var(--color-primary-contrast);
+		border-radius: 999px;
+		font-size: 0.75rem;
+		font-weight: 700;
+	}
+}
+
+// ---------------------------------------------------------------------------
+// WooCommerce Notices
+// ---------------------------------------------------------------------------
+
+.woocommerce-message,
+.woocommerce-error,
+.woocommerce-info {
+	padding: 1rem 1.25rem;
+	border-radius: var(--radius-sm);
+	margin-block-end: var(--space-md);
+	font-size: 0.9375rem;
+	list-style: none;
+
+	a { color: inherit; text-decoration: underline; }
+}
+
+.woocommerce-message { background: #e8f5e9; border-left: 4px solid #43a047; }
+.woocommerce-error   { background: #fce4ec; border-left: 4px solid #e53935; }
+.woocommerce-info    { background: #e3f2fd; border-left: 4px solid #1e88e5; }
+
+// ---------------------------------------------------------------------------
+// Breadcrumb
+// ---------------------------------------------------------------------------
+
+.breadcrumb {
+	font-size: 0.8125rem;
+	margin-block-end: var(--space-sm);
+	padding-top: $spacing-4;
+	padding-left: $spacing-2;
+	color: var(--color-text-muted);
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.25rem;
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	&__sep { color: var(--color-border); }
+
+	a {
+		color: inherit;
+		text-decoration: none;
+		&:hover { color: var(--color-primary); }
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Empty State
+// ---------------------------------------------------------------------------
+
+.wc-empty {
+	padding: var(--space-xl) var(--space-md);
+	text-align: center;
+
+	&__text {
+		font-size: 1.0625rem;
+		color: var(--color-text-muted);
+		margin-block-end: var(--space-md);
+	}
+}
+
+.wc-no-products {
+	padding: var(--space-lg);
+	text-align: center;
+	color: var(--color-text-muted);
+	font-size: 1rem;
+}

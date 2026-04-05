@@ -19,6 +19,7 @@ const isDev = process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 
 
 export default defineConfig({
   root: path.resolve(themeDir, 'assets'),
+  publicDir: path.resolve(themeDir, 'assets/public'),
 
   /**
    * FIX: Im Dev-Modus zeigt base auf den Vite Dev Server (localhost:3000).
@@ -52,7 +53,8 @@ export default defineConfig({
 
     rollupOptions: {
       input: {
-        main: path.resolve(themeDir, 'assets/src/js/main.js'),
+        main:                  path.resolve(themeDir, 'assets/src/js/main.js'),
+        'woocommerce-filters': path.resolve(themeDir, 'assets/src/js/woocommerce-filters.js'),
       },
       output: {
         entryFileNames: 'js/[name].js',

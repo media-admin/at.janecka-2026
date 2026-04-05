@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 6.9.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-03-30 12:23:43+0000\n"
+"PO-Revision-Date: 2026-03-31 10:55:11+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3434,7 +3434,7 @@ msgstr "Zwei Begriffe, die du kennen solltest, sind die WordPress-URL und die We
 
 #: wp-admin/options-general.php:28
 msgid "Most themes show the site title at the top of every page, in the title bar of the browser, and as the identifying name for syndicated feeds. Many themes also show the tagline."
-msgstr "Die meisten Themes zeigen den Website-Titel oben auf jeder Seite, in der Titelleiste des Browsers und als eindeutigen Namen für Feeds an. Viele Themes zeigen auch den Untertitel an."
+msgstr "Die meisten Themes zeigen den Website-Titel oben auf jeder Seite, in der Titelleiste des Browsers und als eindeutigen Namen für Feeds an. Viele Themes zeigen auch den Website-Untertitel an."
 
 #: wp-admin/options-general.php:27
 msgid "The fields on this screen determine some of the basics of your site setup."
@@ -13626,7 +13626,7 @@ msgstr "Du kannst wählen, ob du den Header-Text anzeigen lassen möchtest oder 
 #. translators: %s: URL to General Settings screen.
 #: wp-admin/includes/class-custom-image-header.php:134
 msgid "For most themes, the header text is your Site Title and Tagline, as defined in the <a href=\"%s\">General Settings</a> section."
-msgstr "Bei den meisten Themes ist der Header-Text gleichzeitig der Website-Titel und Untertitel deiner Website, wie es im Abschnitt <a href=\"%s\">Allgemeine Einstellungen</a> definiert ist."
+msgstr "Bei den meisten Themes ist der Header-Text dein Website-Titel und -Untertitel, wie im Abschnitt <a href=\"%s\">Allgemeine Einstellungen</a> definiert."
 
 #: wp-admin/includes/class-custom-image-header.php:130
 #: wp-admin/includes/class-custom-image-header.php:759
@@ -13652,7 +13652,7 @@ msgstr "Du kannst ein individuelles Header-Bild für deine Website festlegen. La
 
 #: wp-admin/includes/class-custom-image-header.php:111
 msgid "You can choose from the theme&#8217;s default header images, or use one of your own. You can also customize how your Site Title and Tagline are displayed."
-msgstr "Du kannst aus den Standard-Header-Bildern wählen oder ein eigenes Bild nutzen. Du kannst auch definieren, wie der Website-Titel und die Beschreibung dargestellt werden sollen."
+msgstr "Du kannst aus den Standard-Header-Bildern des Themes wählen oder ein eigenes Bild nutzen. Außerdem kannst du anpassen, wie dein Website-Titel und -Untertitel dargestellt werden."
 
 #: wp-admin/includes/class-custom-image-header.php:110
 msgid "This screen is used to customize the header section of your theme."

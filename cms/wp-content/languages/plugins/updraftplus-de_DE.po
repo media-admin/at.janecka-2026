@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - UpdraftPlus: WP Backup &amp; Migration Plugin - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-03-23 01:44:11+0000\n"
+"PO-Revision-Date: 2026-03-31 14:47:52+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -90,9 +90,17 @@ msgstr "Abgebrochen"
 msgid "Successful"
 msgstr "Erfolgreich"
 
+#: templates/wp-admin/settings/tab-addons.php:333
+msgid "More great plugins by TeamUpdraft"
+msgstr "Weitere großartige Plugins von TeamUpdraft"
+
 #: central/modules/core.php:172
 msgid "Required data URI is either missing or invalid."
 msgstr "Die erforderliche Daten-URI fehlt oder ist ungültig."
+
+#: templates/wp-admin/settings/updraftcentral-connect.php:71
+msgid "I consent to teamupdraft.com account terms and policies"
+msgstr "Ich stimme den Nutzungsbedingungen und Richtlinien von teamupdraft.com zu"
 
 #: templates/wp-admin/settings/migrator-no-migrator.php:9
 msgid "UpdraftPlus Premium can perform a direct site-to-site migration."
@@ -142,6 +150,10 @@ msgstr "YouTube"
 #: includes/updraftplus-notices.php:169
 msgid "Twitter/X"
 msgstr "Twitter/X"
+
+#: includes/updraftplus-notices.php:167
+msgid "Follow TeamUpdraft"
+msgstr "TeamUpdraft folgen"
 
 #: includes/updraftplus-notices.php:160
 msgid "Translate"
@@ -355,6 +367,10 @@ msgstr "Du darfst diesen Befehl nicht ausführen."
 #: central/translations-central.php:119
 msgid "No such command found."
 msgstr "Kein solcher Befehl gefunden."
+
+#: central/translations-central.php:118
+msgid "If refreshing the page does not help then perhaps you do not have sufficient privilege to manage WP-Optimize."
+msgstr "Wenn das Aktualisieren der Seite nicht hilft, verfügst du möglicherweise nicht über ausreichende Berechtigungen, um WP-Optimize zu verwalten."
 
 #: central/translations-central.php:118
 msgid "Security check failed; try refreshing the page."
@@ -597,6 +613,10 @@ msgid "UpdraftPlus is not able to directly restore this kind of entity."
 msgstr "UpdraftPlus ist nicht in der Lage, diese Art von Entität direkt wiederherzustellen."
 
 #: restorer.php:565
+msgid "If you had anything necessary in your WordPress directory then you will need to re-add it manually from the zip file."
+msgstr "Falls sich in deinem WordPress-Verzeichnis wichtige Dateien befanden, musst du diese manuell aus der ZIP-Datei wieder hinzufügen."
+
+#: restorer.php:565
 msgid "Skipping restoration of WordPress core when importing a single site into a multisite installation."
 msgstr "Überspringen der Wiederherstellung des WordPress-Core beim Importieren einer einzelnen Seite in eine Multisite."
 
@@ -612,6 +632,10 @@ msgstr "Beim Herstellen der Verbindung mit Vault ist ein unbekannter Fehler aufg
 #: methods/updraftvault.php:502
 msgid "Your web server's PHP installation does not include a <strong>required</strong> (for %1$s) module %2$s."
 msgstr "Die PHP-Installation deines Webservers enthält kein <strong>erforderliches</strong> (für %s) Modul (%s)."
+
+#: methods/updraftvault.php:332
+msgid "If you do not wish this to happen, then you should renew as soon as possible."
+msgstr "Wenn du das nicht möchtest, solltest du so bald wie möglich verlängern."
 
 #: methods/updraftvault.php:332
 msgid "In a few days' time, your stored data will be permanently removed."
@@ -2765,7 +2789,7 @@ msgstr "Benutze STRG / CMD und klicke auf mehrere Elemente oder STRG / UMSCHALT 
 #. translators: %s: human-readable time difference
 #: includes/updraftclone/temporary-clone-dash-notice.php:37
 msgid "%s from now"
-msgstr "%s ab jetzt"
+msgstr "in %s"
 
 #: admin.php:1130
 msgid "You have not selected a restore path for your chosen backups"
@@ -6235,6 +6259,12 @@ msgstr "Alle Support-Anfragen, die mit %s zu tun haben, sollten an deinen Webhos
 msgid "This is significantly newer than the server which you are now restoring onto (version %s)."
 msgstr "Das ist signifikant neuer als die Server-Version auf der du die Sicherung wiederherstellst (Version %s)."
 
+#. translators: 1: Old PHP version, 2: PHP
+#. translators: 1: PHP version, 2: PHP
+#: class-updraftplus.php:5340 class-updraftplus.php:5349
+msgid "The site in this backup was running on a webserver with version %1$s of %2$s."
+msgstr "Die Website in dieser Sicherung lief auf einem Webserver mit der Version %1$s von %2$s."
+
 #. translators: %s: Old WP versions
 #: class-updraftplus.php:5247
 msgid "(version: %s)"
@@ -6357,6 +6387,16 @@ msgstr "Die ZIP-Engine meldete die Meldung: %s"
 msgid "Your free space in your hosting account is very low - only %s Mb remain"
 msgstr "Der freie Speicherplatz auf deinem Hosting-Account ist gering - nur noch %s Mb verbleiben"
 
+#. translators: 1: File name, 2: File size in MB
+#: backup.php:4081
+msgid "A very large file was encountered: %1$s (size: %2$s Mb)"
+msgstr "Es wurde eine sehr große Datei gefunden: %1$s (Größe: %2$s Mb)"
+
+#. translators: 1: Zip file path, 2: Error message
+#: backup.php:4045 backup.php:4372
+msgid "Failed to open the zip file (%1$s) - %2$s"
+msgstr "Konnte die ZIP-Datei (%1$s) nicht öffnen - %2$s"
+
 #. translators: %s: File path
 #: backup.php:3235 backup.php:3265
 msgid "%s: unreadable file - could not be backed up"
@@ -6382,6 +6422,11 @@ msgstr "Beim Schließen der finalen Datenbankdatei ist ein Fehler aufgetreten."
 #: backup.php:1982
 msgid "Failed to open database file for reading:"
 msgstr "Konnte Datenbank zum Lesen nicht öffnen:"
+
+#. translators: 1: Table name, 2: Row count
+#: backup.php:2126
+msgid "Table %1$s has very many rows (%2$s) - we hope your web hosting company gives you enough resources to dump out that table in the backup."
+msgstr "Die Tabelle %1$s enthält sehr viele Zeilen (%2$s) - wir hoffen, dass dein Webhoster dir genügend Ressourcen zur Verfügung stellt, um diese Tabelle in die Sicherung einzuschließen."
 
 #: backup.php:1655
 msgid "No database tables found"
@@ -6548,6 +6593,10 @@ msgstr "Wenn du mehr Sicherungen siehst, als du erwartest, dann könnte es darin
 #: admin.php:5297 admin.php:5299
 msgid "(Not finished)"
 msgstr "(nicht fertig)"
+
+#: admin.php:5120 admin.php:5259
+msgid "You are missing one or more archives from this multi-archive set."
+msgstr "Es fehlen ein oder mehrere Archive aus diesem Multi-Archiv-Set."
 
 #. translators: %s: Backup Source.
 #: admin.php:5095 admin.php:5235
@@ -7419,7 +7468,7 @@ msgstr "Sicherungs-Set nicht gefunden"
 #. translators: %s: List of missing archives with description
 #: includes/class-wpadmin-commands.php:213
 msgid "This multi-archive backup set appears to have the following archives missing: %s"
-msgstr "Die Multi-Archiv-Sicherung scheint folrgende Archive zu benötigen (nicht vorhanden): %s"
+msgstr "Die Multi-Archiv-Sicherung scheint folgende Archive zu benötigen (nicht vorhanden): %s"
 
 #. translators: %s: File name
 #: includes/class-wpadmin-commands.php:191

@@ -87,8 +87,6 @@ require_once get_template_directory() . '/inc/class-mega-menu-walker.php';
 $optional_components = array(
     'walker-nav-menu.php',
     'helpers.php',
-    'woocommerce.php',
-    'woocommerce-emails.php',
     'acf-welcome.php',   // ACF-Felder: Welcome Page
     'welcome-mode.php',  // Weiterleitung: Welcome Mode (auskommentieren zum Deaktivieren)
 );
@@ -179,3 +177,21 @@ if ( ! function_exists('medialab_toggle') ) {
     }
 }
 
+// WooCommerce nur laden wenn aktiv
+if ( class_exists( 'WooCommerce' ) ) {
+
+	// 1. Kategorie-Filter-Konfiguration (wird von anderen Dateien verwendet)
+	require_once get_stylesheet_directory() . '/inc/woocommerce/category-filters-config.php';
+
+	// 2. Theme-Support, Bild-Größen, Scripts
+	require_once get_stylesheet_directory() . '/inc/woocommerce/setup.php';
+
+	// 3. AJAX-Filter-Handler + Sidebar-Render
+	require_once get_stylesheet_directory() . '/inc/woocommerce/ajax-filters.php';
+
+	// 4. Archiv-/Shop-Hooks (Produkt-Karte, Grid, Layout)
+	require_once get_stylesheet_directory() . '/inc/woocommerce/hooks-archive.php';
+
+	// 5. Einzelprodukt-Hooks (Galerie, Summary, Tabs, Schema)
+	require_once get_stylesheet_directory() . '/inc/woocommerce/hooks-single.php';
+}

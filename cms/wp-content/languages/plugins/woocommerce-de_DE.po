@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-03-30 20:29:22+0000\n"
+"PO-Revision-Date: 2026-04-02 18:07:12+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1932,6 +1932,10 @@ msgstr "Beschreibung für das Einstellungsfeld."
 msgid "Available options for select/multiselect fields."
 msgstr "Verfügbare Optionen für Auswahl-/Mehrfachauswahl-Felder."
 
+#: src/Internal/RestApi/Routes/V4/Settings/General/Schema/GeneralSettingsSchema.php:209
+msgid "Set your store's address, visibility, currency, language, and timezone."
+msgstr "Lege die Adresse, Sichtbarkeit, Währung, Sprache und Zeitzone deines Shops fest."
+
 #: src/Internal/RestApi/Routes/V4/Settings/Account/Schema/AccountSettingsSchema.php:54
 #: src/Internal/RestApi/Routes/V4/Settings/Email/Schema/EmailSettingsSchema.php:61
 #: src/Internal/RestApi/Routes/V4/Settings/Emails/Schema/EmailsSettingsSchema.php:128
@@ -1941,10 +1945,6 @@ msgstr "Verfügbare Optionen für Auswahl-/Mehrfachauswahl-Felder."
 #: src/Internal/RestApi/Routes/V4/Settings/Tax/Schema/TaxSettingsSchema.php:54
 msgid "Flat key-value mapping of all setting field values."
 msgstr "Flaches Schlüssel-Wert-Mapping aller Einstellungsfeldwerte."
-
-#: src/Internal/RestApi/Routes/V4/Settings/General/Schema/GeneralSettingsSchema.php:209
-msgid "Set your store's address, visibility, currency, language, and timezone."
-msgstr "Lege die Adresse, Sichtbarkeit, Währung, Sprache und Zeitzone deines Shops fest."
 
 #. translators: Alt text for video play button icon.
 #: packages/email-editor/src/Integrations/Core/Renderer/Blocks/class-video.php:156
@@ -3101,12 +3101,6 @@ msgstr "Einige Details deiner Sendung wurden kürzlich aktualisiert. Dies kann I
 msgid "Here’s the latest info we have:"
 msgstr "Hier sind die neuesten Informationen, die uns vorliegen:"
 
-#: templates/emails/block/customer-fulfillment-deleted.php:32
-#: templates/emails/customer-fulfillment-deleted.php:32
-#: templates/emails/plain/customer-fulfillment-deleted.php:24
-msgid "We wanted to let you know that one of the previously fulfilled shipments from your order has been removed from our system. This may have been due to a correction or an update in our fulfillment records. Don’t worry — this won’t affect any items you’ve already received."
-msgstr "Wir möchten dir mitteilen, dass eine der zuvor ausgeführten Sendungen aus deiner Bestellung aus unserem System entfernt wurde. Dies ist möglicherweise auf eine Korrektur oder Aktualisierung in unseren Ausführungsprotokollen zurückzuführen. Keine Sorge – dies betrifft keine Artikel, die du bereits erhalten hast."
-
 #: templates/emails/email-fulfillment-details.php:31
 #: templates/emails/plain/email-fulfillment-details.php:25
 msgid "No tracking information available for this fulfillment at the moment."
@@ -3126,6 +3120,12 @@ msgstr "Sendung verfolgen"
 #: templates/emails/email-fulfillment-details.php:42
 msgid "You can access to more details of your order by visiting <a href=\"%s\" target=\"_blank\">My Account > Orders</a> and select the order you wish to see the latest status of the delivery."
 msgstr "Weitere Details zu deiner Bestellung findest du unter „<a href=\"%s\" target=\"_blank\">Mein Konto > Bestellungen</a>“. Wähle dann die Bestellung aus, für die du den aktuellen Zustellungsstatus anzeigen möchtest."
+
+#: templates/emails/block/customer-fulfillment-deleted.php:32
+#: templates/emails/customer-fulfillment-deleted.php:32
+#: templates/emails/plain/customer-fulfillment-deleted.php:24
+msgid "We wanted to let you know that one of the previously fulfilled shipments from your order has been removed from our system. This may have been due to a correction or an update in our fulfillment records. Don’t worry — this won’t affect any items you’ve already received."
+msgstr "Wir möchten dir mitteilen, dass eine der zuvor ausgeführten Sendungen aus deiner Bestellung aus unserem System entfernt wurde. Dies ist möglicherweise auf eine Korrektur oder Aktualisierung in unseren Ausführungsprotokollen zurückzuführen. Keine Sorge – dies betrifft keine Artikel, die du bereits erhalten hast."
 
 #: templates/emails/email-fulfillment-details.php:63
 #: templates/emails/plain/email-fulfillment-details.php:49
@@ -6749,13 +6749,13 @@ msgstr "Sichere und zuverlässig Zahlungen über das PayPal-Konto deines Kunden.
 msgid "Paymob is a leading payment gateway in the Middle East and Africa. Accept payments online and in-store with Paymob."
 msgstr "Paymob ist ein führendes Zahlungs-Gateway im Nahen Osten und Afrika. Akzeptiere Zahlungen online und in Geschäften mit Paymob."
 
-#: src/Internal/Admin/Suggestions/PaymentsExtensionSuggestions.php:3405
-msgid "Paymob"
-msgstr "Paymob"
-
 #: src/Internal/Admin/Suggestions/PaymentsExtensionSuggestions.php:3372
 msgid "The Payfast extension for WooCommerce enables you to accept payments by Credit Card and EFT via one of South Africa's most popular payment gateways. No setup fees or monthly subscription costs. Selecting this extension will configure your store to use South African rands as the selected currency."
 msgstr "Mithilfe der PayFast-Erweiterung für WooCommerce kannst du über eines der beliebtesten Zahlungs-Gateways Südafrikas Zahlungen per Kreditkarte und elektronischer Überweisung entgegennehmen. Keine Einrichtungsgebühren oder monatlichen Abonnementkosten. Durch die Auswahl dieser Erweiterung wird dein Shop darauf konfiguriert, den südafrikanischen Rand als ausgewählte Währung zu verwenden."
+
+#: src/Internal/Admin/Suggestions/PaymentsExtensionSuggestions.php:3405
+msgid "Paymob"
+msgstr "Paymob"
 
 #: src/Internal/Admin/Suggestions/PaymentsExtensionSuggestions.php:3286
 msgid "Your trusted payments partner in Asia and around the world."
@@ -9510,17 +9510,6 @@ msgstr "Vielleicht solltest du für die Protokollspeicherung zur Datenbank wechs
 #: src/Internal/Admin/Logging/Settings.php:303
 msgid "⚠️ The file system is not configured for direct writes. This could cause problems for the logger."
 msgstr "⚠️ Das Dateisystem ist nicht für direkte Schreibzugriffe konfiguriert. Dies könnte zu Problemen mit dem Logger führen."
-
-#. translators: no need to translate it. It's a link.
-#: src/Admin/Features/LaunchYourStore.php:198
-msgid ""
-"\n"
-"\t\t\tThis page is in \"Coming soon\" mode and is only visible to you and those who have permission. To make it public to everyone,&nbsp;<a href='%s'>change visibility settings</a>\n"
-"\t\t"
-msgstr ""
-"\n"
-"\t\t\tDiese Seite befindet sich im „Demnächst verfügbar“-Modus und wird nur dir und denjenigen angezeigt, die eine entsprechende Berechtigung haben. Um sie für alle zu veröffentlichen, <a href='%s'>ändere die Sichtbarkeitseinstellungen</a>\n"
-"\t\t"
 
 #: src/Admin/API/Reports/Orders/Controller.php:472
 #: assets/client/admin/chunks/analytics-report-orders.js:1
@@ -19832,7 +19821,7 @@ msgstr "Mit Smart Shopping-Kampagnen und kostenlosen Einträgen steigerst du dei
 #: src/Admin/Features/OnboardingTasks/Task.php:208
 #: src/Admin/Features/OnboardingTasks/Tasks/Tax.php:107
 msgid "Let's go"
-msgstr "Los geht's"
+msgstr "Los geht’s"
 
 #: src/Admin/API/Notes.php:414
 msgid "Please provide an array of IDs through the noteIds param."
@@ -37857,6 +37846,10 @@ msgstr "Bestellhinweis."
 msgid "The date the order note was created, in the site's timezone."
 msgstr "Das Datum, an dem der Bestellhinweis erstellt wurde (in der Zeitzone der Website)."
 
+#: includes/class-wc-rest-authentication.php:517
+msgid "Invalid nonce - nonce has already been used."
+msgstr "Ungültiger Nonce – Nonce wurde bereits verwendet."
+
 #: includes/rest-api/Controllers/Version1/class-wc-rest-order-notes-v1-controller.php:187
 #: includes/rest-api/Controllers/Version1/class-wc-rest-order-notes-v1-controller.php:227
 #: includes/rest-api/Controllers/Version1/class-wc-rest-order-notes-v1-controller.php:269
@@ -37877,10 +37870,6 @@ msgstr "Das Datum, an dem der Bestellhinweis erstellt wurde (in der Zeitzone der
 #: src/StoreApi/Utilities/OrderAuthorizationTrait.php:69
 msgid "Invalid order ID."
 msgstr "Ungültige Bestell-ID."
-
-#: includes/class-wc-rest-authentication.php:517
-msgid "Invalid nonce - nonce has already been used."
-msgstr "Ungültiger Nonce – Nonce wurde bereits verwendet."
 
 #: includes/rest-api/Controllers/Version1/class-wc-rest-customers-v1-controller.php:796
 #: includes/rest-api/Controllers/Version2/class-wc-rest-customers-v2-controller.php:214

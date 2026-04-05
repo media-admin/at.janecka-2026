@@ -11,22 +11,20 @@ namespace WooCommerce\PayPalCommerce\OrderTracking;
 use Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController;
 use Exception;
 use WC_Order;
+use WooCommerce\PayPalCommerce\ApiClient\Endpoint\OrderEndpoint;
 use WooCommerce\PayPalCommerce\Vendor\Inpsyde\Modularity\Module\ExecutableModule;
-use WooCommerce\PayPalCommerce\Vendor\Inpsyde\Modularity\Module\ExtendingModule;
 use WooCommerce\PayPalCommerce\Vendor\Inpsyde\Modularity\Module\ModuleClassNameIdTrait;
 use WooCommerce\PayPalCommerce\Vendor\Inpsyde\Modularity\Module\ServiceModule;
 use WooCommerce\PayPalCommerce\Vendor\Psr\Container\ContainerInterface;
-use WooCommerce\PayPalCommerce\Vendor\Psr\Log\LoggerInterface;
 use WooCommerce\PayPalCommerce\OrderTracking\Assets\OrderEditPageAssets;
 use WooCommerce\PayPalCommerce\OrderTracking\Endpoint\OrderTrackingEndpoint;
 use WooCommerce\PayPalCommerce\WcGateway\Exception\NotFoundException;
 use WooCommerce\PayPalCommerce\WcGateway\Processor\TransactionIdHandlingTrait;
 use WP_Post;
-use function WooCommerce\PayPalCommerce\Api\ppcp_get_paypal_order;
 /**
  * Class OrderTrackingModule
  */
-class OrderTrackingModule implements ServiceModule, ExtendingModule, ExecutableModule
+class OrderTrackingModule implements ServiceModule, ExecutableModule
 {
     use ModuleClassNameIdTrait;
     use \WooCommerce\PayPalCommerce\OrderTracking\TrackingAvailabilityTrait;
@@ -38,13 +36,6 @@ class OrderTrackingModule implements ServiceModule, ExtendingModule, ExecutableM
     public function services(): array
     {
         return require __DIR__ . '/../services.php';
-    }
-    /**
-     * {@inheritDoc}
-     */
-    public function extensions(): array
-    {
-        return require __DIR__ . '/../extensions.php';
     }
     /**
      * {@inheritDoc}
@@ -90,8 +81,10 @@ class OrderTrackingModule implements ServiceModule, ExtendingModule, ExecutableM
                 if (!$wc_order instanceof WC_Order) {
                     return;
                 }
+                $order_endpoint = $c->get('api.endpoint.order.cached');
+                assert($order_endpoint instanceof OrderEndpoint);
                 try {
-                    $paypal_order = ppcp_get_paypal_order($wc_order);
+                    $paypal_order = $order_endpoint->order($wc_order);
                 } catch (Exception $exception) {
                     return;
                 }

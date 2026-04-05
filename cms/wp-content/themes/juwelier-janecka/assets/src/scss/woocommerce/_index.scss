@@ -1,0 +1,9 @@
+// WooCommerce SCSS – Einstiegspunkt
+// Alle Partials werden hier in der richtigen Reihenfolge importiert.
+// Eingebunden in assets/scss/style.scss via: @use 'woocommerce' as *;
+@forward 'nouislider';
+@forward 'base';
+@forward 'archive';
+@forward 'filters';
+@forward 'single';
+@forward 'cart-checkout';

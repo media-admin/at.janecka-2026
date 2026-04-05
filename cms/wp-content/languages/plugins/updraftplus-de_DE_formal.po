@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - UpdraftPlus: WP Backup &amp; Migration Plugin - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-03-12 21:02:48+0000\n"
+"PO-Revision-Date: 2026-03-31 14:46:44+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -661,7 +661,7 @@ msgstr "%s-Testversion beginnen"
 #. translators: %s: human-readable time difference
 #: includes/updraftclone/temporary-clone-dash-notice.php:37
 msgid "%s from now"
-msgstr "%s ab jetzt"
+msgstr "in %s"
 
 #: admin.php:1150
 msgid "Begun"
@@ -4585,11 +4585,6 @@ msgstr "Bekannte Sicherungen (RAW)"
 msgid "Backup set not found"
 msgstr "Backup-Set nicht gefunden"
 
-#. translators: %s: List of missing archives with description
-#: includes/class-wpadmin-commands.php:213
-msgid "This multi-archive backup set appears to have the following archives missing: %s"
-msgstr "Die Multi-Archiv-Sicherung scheint folrgende Archive zu benötigen (nicht vorhanden): %s"
-
 #. translators: %s: File name
 #: includes/class-wpadmin-commands.php:191
 msgid "File was found, but is zero-sized (you need to re-upload it): %s"
@@ -4874,6 +4869,16 @@ msgstr "Suchen nach diesem Objekt begonnen"
 msgid "Trying..."
 msgstr "Versuche …"
 
+#: admin.php:954
+msgid "The new user's RackSpace console password is (this will not be shown again):"
+msgstr "Das RackSpace Konsolenpasswort des neuen Benutzers lautet (wird nicht erneut angezeigt):"
+
+#: admin.php:952 central/translations-central.php:109 methods/remotesend.php:87
+#: methods/remotesend.php:95 methods/remotesend.php:257
+#: methods/remotesend.php:273
+msgid "Unexpected response:"
+msgstr "Unerwartete Antwort:"
+
 #: admin.php:108 admin.php:966 admin.php:1603
 #: includes/class-remote-send.php:362 includes/class-remote-send.php:409
 #: includes/class-remote-send.php:415 includes/class-remote-send.php:417
@@ -4888,16 +4893,6 @@ msgstr "Versuche …"
 #: restorer.php:626 restorer.php:2381 restorer.php:4460
 msgid "Error:"
 msgstr "Fehler:"
-
-#: admin.php:954
-msgid "The new user's RackSpace console password is (this will not be shown again):"
-msgstr "Das RackSpace Konsolenpasswort des neuen Benutzers lautet (wird nicht erneut angezeigt):"
-
-#: admin.php:952 central/translations-central.php:109 methods/remotesend.php:87
-#: methods/remotesend.php:95 methods/remotesend.php:257
-#: methods/remotesend.php:273
-msgid "Unexpected response:"
-msgstr "Unerwartete Antwort:"
 
 #: admin.php:947
 msgid "If you exclude both the database and the files, then you have excluded everything!"
@@ -4987,3 +4982,8 @@ msgstr "Wird berechnet …"
 #: admin.php:962
 msgid "Warnings:"
 msgstr "Warnungen:"
+
+#. translators: %s: List of missing archives with description
+#: includes/class-wpadmin-commands.php:213
+msgid "This multi-archive backup set appears to have the following archives missing: %s"
+msgstr "Die Multi-Archiv-Sicherung scheint folgende Archive zu benötigen (nicht vorhanden): %s"

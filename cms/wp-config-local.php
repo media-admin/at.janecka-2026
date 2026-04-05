@@ -23,6 +23,7 @@ define('WP_DEBUG_DISPLAY', true);
 define('SCRIPT_DEBUG', true);
 // define('ACF_DEBUG', true);
 
+
 // Activate Trash for Media
 define( 'MEDIA_TRASH', true );
 
