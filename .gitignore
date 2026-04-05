@@ -88,6 +88,7 @@ docs-backup/
 # ============================================
 .env
 .env.local
+.vscode/sftp.json
 
 # ============================================
 # PROJEKT SPEZIFISCH - Janecka Juweliere
@@ -99,3 +100,4 @@ docs-backup/
 # Juwelier Janecka Theme (wird committed)
 !/cms/wp-content/themes/juwelier-janecka/
 /cms/wp-content/themes/custom-theme/assets/hot
+cms/wp-content/updraft/
