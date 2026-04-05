@@ -81,6 +81,9 @@ require_once get_template_directory() . '/inc/enqueue.php';
 require_once get_template_directory() . '/inc/performance.php';
 require_once get_template_directory() . '/inc/shortcode-overrides.php';
 require_once get_template_directory() . '/inc/class-mega-menu-walker.php';
+require_once get_template_directory() . '/inc/shortcode-booking-button.php';
+require_once get_template_directory() . '/inc/cpt-stores.php';
+
 
 
 // Optional components (only if files exist)
@@ -194,4 +197,109 @@ if ( class_exists( 'WooCommerce' ) ) {
 
 	// 5. Einzelprodukt-Hooks (Galerie, Summary, Tabs, Schema)
 	require_once get_stylesheet_directory() . '/inc/woocommerce/hooks-single.php';
+}
+
+
+
+// API-Key als Konstante in wp-config.php definieren:
+//   define( 'GOOGLE_MAPS_API_KEY', 'AIza...' );
+add_action( 'wp_enqueue_scripts', 'janecka_enqueue_google_maps' );
+
+function janecka_enqueue_google_maps() {
+
+	if ( ! is_singular( 'stores' ) ) {
+		return;
+	}
+
+	$api_key = defined( 'GOOGLE_MAPS_API_KEY' ) ? GOOGLE_MAPS_API_KEY : '';
+
+	if ( empty( $api_key ) ) {
+		return;
+	}
+
+	wp_enqueue_script(
+		'google-maps',
+		'https://maps.googleapis.com/maps/api/js?key=' . esc_attr( $api_key ) . '&libraries=marker',
+		[],
+		null,
+		true
+	);
+
+	wp_enqueue_script(
+		'janecka-store-map',
+		get_template_directory_uri() . '/assets/dist/js/store-map.js',
+		[ 'google-maps' ],
+		wp_get_theme()->get( 'Version' ),
+		true
+	);
+}
+
+
+add_filter( 'script_loader_tag', 'janecka_add_async_to_google_maps', 10, 2 );
+
+function janecka_add_async_to_google_maps( $tag, $handle ) {
+    if ( 'google-maps' !== $handle ) {
+        return $tag;
+    }
+    return str_replace( '<script ', '<script async ', $tag );
+}
+
+
+// booking-modal.js auch auf Store-Singular-Seiten laden
+add_action( 'wp_enqueue_scripts', 'janecka_enqueue_store_booking_modal' );
+
+function janecka_enqueue_store_booking_modal() {
+    if ( ! is_singular( 'stores' ) ) return;
+    janecka_enqueue_booking_modal_assets();
+}
+
+
+
+// ── Produktkategorie-URLs ohne Präfix ─────────────────────────────────────────
+// Ziel: /schmuck/, /schmuck/halsschmuck/ statt /kategorien/schmuck/
+
+add_action( 'init', 'janecka_register_category_rewrites' );
+
+function janecka_register_category_rewrites() {
+    $categories = get_terms( [
+        'taxonomy'   => 'product_cat',
+        'hide_empty' => false,
+    ] );
+
+    if ( empty( $categories ) || is_wp_error( $categories ) ) return;
+
+    foreach ( $categories as $term ) {
+        $ancestors = get_ancestors( $term->term_id, 'product_cat', 'taxonomy' );
+        $path = '';
+        foreach ( array_reverse( $ancestors ) as $ancestor_id ) {
+            $ancestor = get_term( $ancestor_id, 'product_cat' );
+            if ( ! $ancestor || is_wp_error( $ancestor ) ) continue;
+            $path .= $ancestor->slug . '/';
+        }
+        $path .= $term->slug;
+
+        add_rewrite_rule(
+            '^' . $path . '/?$',
+            'index.php?product_cat=' . $term->slug,
+            'top' // Kategorie gewinnt vor gleichnamigen WordPress-Seiten
+        );
+    }
+}
+
+// Kategorie-Links korrigieren
+add_filter( 'term_link', 'janecka_fix_category_link', 10, 3 );
+
+function janecka_fix_category_link( $link, $term, $taxonomy ) {
+    if ( $taxonomy !== 'product_cat' ) return $link;
+
+    $ancestors = get_ancestors( $term->term_id, 'product_cat', 'taxonomy' );
+    $path = '';
+    foreach ( array_reverse( $ancestors ) as $ancestor_id ) {
+        $ancestor = get_term( $ancestor_id, 'product_cat' );
+        if ( ! $ancestor || is_wp_error( $ancestor ) ) continue;
+        $path .= $ancestor->slug . '/';
+    }
+    $path .= $term->slug . '/';
+
+    return home_url( '/' . $path );
 }

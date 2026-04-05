@@ -27,3 +27,57 @@
         }
     }
 }
+
+
+// Search Overlay
+.search-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 8rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+
+    &.is-active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    &__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        cursor: pointer;
+    }
+
+    &__inner {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 var(--space-md);
+        background: var(--color-surface, #fff);
+        border-radius: var(--radius-md, 8px);
+        padding: var(--space-md);
+        padding-top: 3rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    &__close {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.25rem;
+        color: var(--color-text-muted, #888);
+        line-height: 1;
+
+        &:hover { color: var(--color-text); }
+    }
+}

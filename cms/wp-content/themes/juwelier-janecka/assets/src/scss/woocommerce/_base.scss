@@ -90,7 +90,7 @@
 	margin-block-end: var(--space-sm);
 	padding-top: $spacing-4;
 	padding-left: $spacing-2;
-	color: var(--color-text-muted);
+	color: var(--color-text-muted, #888);
 
 	&__list {
 		display: flex;
@@ -102,13 +102,32 @@
 		list-style: none;
 	}
 
-	&__sep { color: var(--color-border); }
+	&__sep { 
+		margin: 0 0.4rem;
+        color: var(--color-text-muted, #888);
+	}
 
 	a {
 		color: inherit;
 		text-decoration: none;
 		&:hover { color: var(--color-primary); }
 	}
+
+	&__item {
+        display: inline;
+
+        a {
+            color: var(--color-text-muted, #888);
+            text-decoration: none;
+            &:hover { text-decoration: underline; }
+        }
+
+        // Letztes Element (aktuelles Produkt) grau ohne Link
+        &:last-child { color: var(--color-text-muted, #888); }
+
+        // Vorletztes Element (Kategorie) fett
+        &:nth-last-child(3) a { font-weight: 600; color: var(--color-text); }
+    }
 }
 
 // ---------------------------------------------------------------------------

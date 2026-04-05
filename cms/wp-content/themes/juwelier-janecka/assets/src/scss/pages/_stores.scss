@@ -1,0 +1,454 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Store Single — _stores.scss
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── Hero ──────────────────────────────────────────────────────────────────────
+
+.store-hero {
+	position: relative;
+	overflow: hidden;
+	max-height: 28rem;
+
+	&__image {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	&__overlay {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: flex-end;
+		padding: 2rem;
+		background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, transparent 60%);
+	}
+
+	&__title {
+		color: #fff;
+		font-size: clamp(1.75rem, 4vw, 3rem);
+		margin: 0;
+	}
+
+	&--no-image {
+		background-color: var(--color-surface-alt, #f5f5f5);
+		padding: 3rem 0;
+		max-height: none;
+	}
+
+	&__title--plain {
+		color: var(--color-text, #1a1a1a);
+	}
+}
+
+
+// ── Aktuelle Meldung ──────────────────────────────────────────────────────────
+
+.store-notification {
+	background-color: var(--color-accent-light, #fff8e6);
+	border-left: 4px solid var(--color-accent, #c8a96e);
+	padding: 1.5rem 0;
+	margin-block: 2rem;
+
+	&__header {
+		font-size: 1.125rem;
+		font-weight: 700;
+		margin-bottom: 0.5rem;
+	}
+
+	&__content {
+		margin: 0;
+	}
+}
+
+
+// ── Kurzbeschreibung ──────────────────────────────────────────────────────────
+
+.store-description {
+	padding-block: 2.5rem;
+	border-bottom: 1px solid var(--color-border, #e0e0e0);
+
+	p {
+		max-width: 72ch;
+	}
+}
+
+
+// ── Kontakt + Karte — Grid-Fix ────────────────────────────────────────────────
+
+.store-contact {
+    padding-block: 3rem;
+    border-bottom: 1px solid var(--color-border, #e0e0e0);
+
+    &__grid {
+        display: grid;
+        gap: 3rem;
+
+        @include bp(lg) {
+            grid-template-columns: 38rem 1fr; // feste Breite linke Spalte
+            align-items: start;
+        }
+    }
+
+    &__heading {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    &__details-block {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--color-border, #e0e0e0);
+    }
+
+    &__address {
+        font-style: normal;
+        line-height: 1.8;
+        margin-bottom: 1rem;
+        font-size: 0.9375rem;
+    }
+
+    &__details {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        font-size: 0.9375rem;
+    }
+
+    &__label {
+        font-weight: 600;
+        margin-right: 0.4rem;
+    }
+
+    &__link {
+        color: var(--color-accent, #c8a96e);
+        text-decoration: none;
+
+        &:hover { text-decoration: underline; }
+    }
+
+    &__cta {
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    &__map {
+        width: 100%;
+    }
+}
+
+
+// ── Öffnungszeiten ────────────────────────────────────────────────────────────
+
+.store-hours {
+    &__heading {
+        font-size: 1.375rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        margin-top: 0;
+    }
+
+    &__table {
+        width: auto; // KEIN width: 100% — verhindert riesige Lücke
+        border-collapse: collapse;
+    }
+
+    &__row {
+        border-bottom: 1px solid var(--color-border, #e0e0e0);
+
+        &:last-child { border-bottom: none; }
+    }
+
+    &__day {
+        padding: 0.5rem 3rem 0.5rem 0; // rechts Abstand zur Zeit-Spalte
+        white-space: nowrap;
+        color: var(--color-text, #1a1a1a);
+        font-size: 0.9375rem;
+    }
+
+    &__time {
+        padding: 0.5rem 0;
+        font-size: 0.9375rem;
+        white-space: nowrap;
+
+        strong { font-weight: 600; }
+    }
+}
+
+
+// ── Google Map ────────────────────────────────────────────────────────────────
+
+.acf-map {
+	width: 100%;
+	height: 30rem;
+	border-radius: 0.5rem;
+	overflow: hidden;
+	border: 1px solid var(--color-border, #e0e0e0);
+
+	// Fix potential theme img conflict
+	img {
+		max-width: none !important;
+	}
+}
+
+
+// ── Zahlungsmöglichkeiten ─────────────────────────────────────────────────────
+
+.store-payment {
+	padding-block: 3rem;
+	border-bottom: 1px solid var(--color-border, #e0e0e0);
+
+	&__heading {
+		font-size: 1.125rem;
+		font-weight: 700;
+		margin-bottom: 1.5rem;
+	}
+
+	&__list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		text-align: center;
+	}
+
+	&__icon {
+		width: 3.5rem;
+		height: auto;
+		object-fit: contain;
+	}
+
+	&__name {
+		font-size: 0.8125rem;
+		color: var(--color-text-muted, #666);
+	}
+}
+
+
+// ── Marken ────────────────────────────────────────────────────────────────────
+
+.store-brands {
+	padding-block: 3rem;
+	border-bottom: 1px solid var(--color-border, #e0e0e0);
+
+	&__intro {
+		max-width: 70ch;
+		margin-bottom: 2.5rem;
+
+		p {
+			margin-bottom: 0.75rem;
+		}
+
+		a {
+			color: var(--color-accent, #c8a96e);
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	&__heading {
+		font-size: 1.5rem;
+		margin-bottom: 1rem;
+	}
+
+	&__grid {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+
+		@include bp(sm) {
+			grid-template-columns: repeat(4, 1fr);
+		}
+
+		@include bp(md) {
+			grid-template-columns: repeat(5, 1fr);
+		}
+	}
+
+	&__item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&__link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.75rem;
+		transition: opacity 0.2s ease;
+
+		&:hover {
+			opacity: 0.7;
+		}
+	}
+
+	&__logo {
+		width: 100%;
+		max-width: 8rem;
+		height: 4rem;
+		object-fit: contain;
+	}
+
+	&__name {
+		font-size: 0.875rem;
+		font-weight: 600;
+		text-align: center;
+		color: var(--color-text, #1a1a1a);
+	}
+}
+
+
+// ── Bildergalerie ─────────────────────────────────────────────────────────────
+
+.store-gallery {
+	padding-block: 3rem;
+	border-bottom: 1px solid var(--color-border, #e0e0e0);
+
+	&__heading {
+		font-size: 1.25rem;
+		font-weight: 700;
+		margin-bottom: 1.5rem;
+	}
+
+	&__grid {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1rem;
+
+		@include bp(sm) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include bp(md) {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	&__item {
+		overflow: hidden;
+		border-radius: 0.375rem;
+	}
+
+	&__image {
+		display: block;
+		width: 100%;
+		height: 16rem;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+
+		&:hover {
+			transform: scale(1.03);
+		}
+	}
+
+	&__caption {
+		font-size: 0.8125rem;
+		color: var(--color-text-muted, #666);
+		margin-top: 0.375rem;
+		padding-inline: 0.25rem;
+	}
+}
+
+
+// ── Service-Bereich ───────────────────────────────────────────────────────────
+
+.store-service {
+	padding-block: 3rem;
+}
+
+
+
+// ── Booking Modal ─────────────────────────────────────────────────────────────
+
+body.modal-open {
+    overflow: hidden;
+}
+
+.store-booking-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &[hidden] {
+        display: none;
+    }
+
+    &__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        backdrop-filter: blur(2px);
+    }
+
+    &__dialog {
+        position: relative;
+        z-index: 1;
+        background: #fff;
+        border-radius: 0.75rem;
+        width: min(90vw, 40rem);
+        max-height: 90dvh;
+        overflow-y: auto;
+        padding: 2.5rem;
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
+
+        @include bp(md) {
+            padding: 3rem;
+        }
+    }
+
+    &__close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.25rem;
+        color: var(--color-text-muted, #666);
+        line-height: 1;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: var(--color-text, #1a1a1a);
+        }
+    }
+
+    &__content {
+        margin-top: 0.5rem;
+    }
+}

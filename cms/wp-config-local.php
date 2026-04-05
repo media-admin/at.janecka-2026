@@ -33,3 +33,4 @@ define('WP_ENVIRONMENT_TYPE', 'local');
 
 // Google Maps API Key
 define('GOOGLE_MAPS_API_KEY', 'AIzaSyB3wh26KQVyeyH33VXhe2lMOzAUaIJxgiQ');
+// define( 'GOOGLE_MAPS_MAP_ID', 'd6ba3625b8d9f005db8458d8' );

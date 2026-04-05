@@ -1,132 +1,286 @@
 // WooCommerce Single Product
-// Galerie, Summary, Attribute, USPs, Tabs, Related Products.
+// Gallery | Summary | Related Products
 
 @use '../abstracts' as *;
 
 // ---------------------------------------------------------------------------
-// Seiten-Layout
+// 1. Archiv-Sidebar-Grid auf Single Product zurücksetzen
+// ---------------------------------------------------------------------------
+
+body.single-product {
+	.wc-layout {
+		display: block;
+	}
+
+	.wc-main {
+		width: 100%;
+	}
+}
+
+// ---------------------------------------------------------------------------
+// 2. Produkt-Grid: Gallery links, Summary rechts
 // ---------------------------------------------------------------------------
 
 .woocommerce div.product {
 	display: grid;
-	grid-template-columns: 1fr;
-	gap: var(--space-lg);
+	grid-template-columns: 50% 1fr;
+	grid-template-rows: auto auto;
+	gap: var(--space-xl);
+	align-items: start;
 
-	@include bp(md) {
-		grid-template-columns: 1fr 1fr;
-		grid-template-areas:
-			'gallery summary'
-			'tabs    tabs'
-			'related related';
+	> .woocommerce-product-gallery {
+		grid-column: 1;
+		grid-row: 1;
 	}
 
-	.woocommerce-product-gallery { grid-area: gallery; }
-	.summary                     { grid-area: summary; }
-	.woocommerce-tabs            { grid-area: tabs; }
-	.related                     { grid-area: related; }
+	> .summary.entry-summary {
+		grid-column: 2;
+		grid-row: 1;
+		text-align: left;
+	}
+
+	> .related.products {
+		grid-column: 1 / -1;
+		grid-row: 2;
+	}
+
+	@media (max-width: 767px) {
+		grid-template-columns: 1fr;
+
+		> .woocommerce-product-gallery,
+		> .summary.entry-summary,
+		> .related.products {
+			grid-column: 1;
+			grid-row: auto;
+		}
+	}
+
+	// WC-GZD Lieferzeit die separat vor der Meta-Tabelle erscheint, ausblenden
+	> .wc-gzd-additional-info.delivery-time-info {
+		display: none;
+	}
+
+
 }
 
 // ---------------------------------------------------------------------------
-// Produktgalerie
+// 3. Produktgalerie
 // ---------------------------------------------------------------------------
 
 .woocommerce-product-gallery {
 	position: relative;
+	background: #f5f5f5;
+	border-radius: var(--radius-md, 8px);
 	overflow: hidden;
-	border-radius: var(--radius-md);
+	opacity: 1 !important;
 
-	&__image {
-		border-radius: var(--radius-md);
-		overflow: hidden;
+	// WooCommerce columns-* Grid komplett deaktivieren
+	&--columns-1,
+	&--columns-2,
+	&--columns-3,
+	&--columns-4,
+	&--columns-5 {
+		display: block !important;
 
-		img {
-			width: 100%;
-			height: auto;
-			display: block;
+		.woocommerce-product-gallery__wrapper {
+			display: block !important;
 		}
 	}
 
-	// Thumbnails
+	// Wrapper + Image: kein Grid, volle Fläche
+	&__wrapper {
+		display: block !important;
+		flex-direction: unset !important;
+	}
+
+	// Flexslider-Hauptbild-Container
+	.flex-viewport {
+		display: block !important;
+		width: 100% !important;
+	}
+
+	// Flexslider-Liste (enthält das Hauptbild)
+	.slides {
+		display: block !important;
+		width: 100% !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		list-style: none !important;
+
+		> li {
+			width: 100% !important;
+			margin: 0 !important;
+		}
+	}
+
+	&__image {
+		display: block;
+
+		a { display: block; }
+
+		img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+	}
+
+	// Thumbnails darunter
 	.flex-control-thumbs {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 0.5rem;
-		margin-top: 0.5rem;
-		overflow-x: auto;
-		padding-bottom: 0.25rem;
+		padding: 0.75rem;
+		list-style: none;
+		margin: 0;
 
 		li {
-			flex-shrink: 0;
-			width: 72px;
-			height: 72px;
-			border-radius: var(--radius-sm);
+			width: 64px;
+			height: 64px;
+			border-radius: var(--radius-sm, 4px);
 			overflow: hidden;
 			border: 2px solid transparent;
 			cursor: pointer;
 			transition: border-color 0.2s;
+			background: #fff;
+			flex-shrink: 0;
 
-			&.flex-active { border-color: var(--color-primary); }
+			&.flex-active,
+			&:hover { border-color: var(--color-primary); }
 
-			img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
+			img { width: 100%; height: 100%; object-fit: cover; }
 		}
 	}
 
-	// Sale-Badge
-	.woocommerce-badge {
+	// Alle Buttons als Overlay — nehmen keinen Platz weg
+	.tinv-wraper,
+	.woocommerce-product-gallery__trigger {
+		position: absolute;
+		top: 0.75rem;
+		z-index: 3;
+		pointer-events: auto;
+	}
+
+	.tinv-wraper { left: 0.75rem; }
+	.woocommerce-product-gallery__trigger { right: 0.75rem; }
+
+	span.onsale {
 		position: absolute;
 		top: 0.75rem;
 		left: 0.75rem;
 		background: var(--color-sale, #c62828);
 		color: #fff;
-		padding: 0.2rem 0.5rem;
-		border-radius: var(--radius-xs, 2px);
+		padding: 0.2rem 0.6rem;
+		border-radius: 2px;
 		font-size: 0.75rem;
 		font-weight: 700;
 		text-transform: uppercase;
-		z-index: 1;
+		z-index: 2;
 	}
 }
 
 // ---------------------------------------------------------------------------
-// Summary
+// 4. Summary (rechte Spalte)
 // ---------------------------------------------------------------------------
 
-.summary {
+.summary.entry-summary {
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-sm);
 
-	// Produkttitel
+	// 4a. Marke
+	.single-product__brand {
+		font-size: 0.8125rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-text-muted, #888);
+
+		a {
+			color: inherit;
+			text-decoration: none;
+			&:hover { color: var(--color-primary); }
+		}
+	}
+
+	// 4b. Titel
 	.product_title {
 		font-size: clamp(1.5rem, 3vw, 2.25rem);
 		font-weight: 700;
-		line-height: 1.2;
+		line-height: 1.25;
 		margin: 0;
+    	text-align: left;
 	}
 
-	// Preis
+	// 4c. SKU + Lieferzeit als Tabelle
+	.single-product__meta-table {
+		display: block;
+		border-top: 1px solid var(--color-border, #e0e0e0);
+	}
+
+	.single-product__meta-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		padding: 0.625rem 0;
+		border-bottom: 1px solid var(--color-border, #e0e0e0);
+		font-size: 0.875rem;
+		font-weight: 700;
+		width: 100%;
+
+	}
+
+	.single-product__meta-label {
+		color: var(--color-text-muted, #888);
+		flex-shrink: 0;
+		padding-right: 1rem;
+		font-weight: 400;
+	}
+
+	.single-product__meta-value {
+		font-weight: 700;
+		text-align: right;
+		color: var(--color-text);
+	}
+
+	// 4d. Preis
 	.price {
-		font-size: 1.5rem;
+		font-size: 1.625rem;
 		font-weight: 700;
 		color: var(--color-text);
+		margin: 0.25rem 0 0;
 
-		del { color: var(--color-text-muted); font-size: 1.125rem; font-weight: 400; }
+		del { color: var(--color-text-muted, #888); font-size: 1.125rem; font-weight: 400; }
 		ins { color: var(--color-sale, #c62828); text-decoration: none; }
 	}
 
-	// Kurzbeschreibung
-	.woocommerce-product-details__short-description {
-		font-size: 0.9375rem;
-		line-height: 1.7;
-		color: var(--color-text);
+	// 4e. MwSt + Versand
+	.single-product__tax-shipping {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 0.4rem;
+		font-size: 0.8125rem;
+		color: var(--color-text-muted, #888);
+		margin-top: -0.25rem;
 
-		p { margin: 0; }
+		a { color: inherit; text-decoration: underline; &:hover { color: var(--color-primary); } }
 	}
 
-	// Varianten-Auswahl
+	// WC-GZD eigene Infos (falls Germanized direkt rendert)
+	.wc-gzd-additional-info {
+		font-size: 0.8125rem;
+		color: var(--color-text-muted, #888);
+		margin: 0;
+
+		a { color: inherit; text-decoration: underline; }
+	}
+
+	// 4f. Lagerbestand
+	.single-product__stock--low,
+	p.stock { font-size: 0.875rem; color: var(--color-sale, #c62828); margin: 0; }
+
+	// 4g. Varianten
 	.variations {
 		width: 100%;
 		border-collapse: collapse;
@@ -145,12 +299,25 @@
 			background-repeat: no-repeat;
 			background-position: right 0.5rem center;
 			min-width: 160px;
-
 			&:focus { outline: 2px solid var(--color-primary); }
 		}
 	}
 
-	// Menge + ATC
+	.reset_variations {
+		display: inline-block;
+		font-size: 0.8125rem;
+		color: var(--color-text-muted);
+		text-decoration: underline;
+	}
+
+	// 4h. Menge-Label
+	.single-product__qty-label {
+		font-size: 0.8125rem;
+		font-weight: 600;
+		color: var(--color-text-muted);
+	}
+
+	// 4i. ATC-Row
 	.cart {
 		display: flex;
 		gap: 0.75rem;
@@ -169,158 +336,107 @@
 		.single_add_to_cart_button {
 			flex: 1;
 			min-width: 160px;
+			font-size: 0.9rem;
+			font-weight: 700;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			text-align: center;
 		}
 	}
 
-	// Meta (SKU, Kategorie, Tags)
-	.product_meta {
-		font-size: 0.8125rem;
-		color: var(--color-text-muted);
-		border-top: 1px solid var(--color-border);
-		padding-top: var(--space-sm);
+	// TI Wishlist direkt in Summary ausblenden (ist in Gallery)
+	> .tinv-wishlist { display: none; }
 
-		span { display: block; }
-		a { color: var(--color-text-muted); text-decoration: underline; }
-	}
-}
+	// 4j. Produktbeschreibung innerhalb Summary
+	.single-product__description {
+		padding-top: var(--space-md);
+		border-top: 1px solid var(--color-border, #e0e0e0);
 
-// ---------------------------------------------------------------------------
-// Produkt-Attribute (custom highlights)
-// ---------------------------------------------------------------------------
-
-.product-attrs {
-	display: grid;
-	grid-template-columns: auto 1fr;
-	gap: 0.25rem 1rem;
-	margin: 0;
-	font-size: 0.875rem;
-
-	&__row {
-		display: contents;
-	}
-
-	&__label {
-		color: var(--color-text-muted);
-		white-space: nowrap;
-	}
-
-	&__value {
-		color: var(--color-text);
-		font-weight: 500;
-	}
-}
-
-// ---------------------------------------------------------------------------
-// USP-Leiste
-// ---------------------------------------------------------------------------
-
-.product-usps {
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-	padding: var(--space-sm) 0;
-	border-top: 1px solid var(--color-border);
-	border-bottom: 1px solid var(--color-border);
-	margin: 0;
-	list-style: none;
-
-	&__item {
-		display: flex;
-		align-items: center;
-		gap: 0.625rem;
-		font-size: 0.875rem;
-		color: var(--color-text-muted);
-
-		svg { flex-shrink: 0; color: var(--color-primary); }
-	}
-}
-
-// ---------------------------------------------------------------------------
-// Tabs
-// ---------------------------------------------------------------------------
-
-.woocommerce-tabs {
-	border-top: 1px solid var(--color-border);
-	padding-top: var(--space-lg);
-
-	ul.tabs {
-		display: flex;
-		gap: 0;
-		padding: 0;
-		margin: 0 0 -1px;
-		list-style: none;
-		overflow-x: auto;
-
-		li {
-			flex-shrink: 0;
-
-			a {
-				display: block;
-				padding: 0.625rem 1.25rem;
-				border: 1px solid var(--color-border);
-				border-bottom: none;
-				border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-				font-size: 0.9375rem;
-				font-weight: 500;
-				color: var(--color-text-muted);
-				text-decoration: none;
-				background: var(--color-bg-alt, #f5f5f5);
-				transition: color 0.2s, background 0.2s;
-
-				&:hover { color: var(--color-text); }
-			}
-
-			&.active a {
-				background: var(--color-surface);
-				color: var(--color-text);
-				font-weight: 700;
-				z-index: 1;
-			}
-		}
-	}
-
-	.panel {
-		border: 1px solid var(--color-border);
-		border-radius: 0 var(--radius-sm) var(--radius-sm) var(--radius-sm);
-		padding: var(--space-md);
-		background: var(--color-surface);
-
-		h2 { font-size: 1.125rem; margin-block-end: var(--space-sm); }
-		p  { font-size: 0.9375rem; line-height: 1.7; margin-block-end: var(--space-sm); }
-	}
-
-	// Attribute-Tabelle
-	.shop_attributes {
-		width: 100%;
-		border-collapse: collapse;
-		font-size: 0.875rem;
-
-		th, td {
-			padding: 0.5rem 0.75rem;
-			border: 1px solid var(--color-border);
-			text-align: left;
+		h2 {
+			font-size: 1.5rem;
+			font-weight: 400;
+			font-style: italic;
+			color: var(--color-text-muted, #888);
+			margin: 0;
 		}
 
-		th { background: var(--color-bg-alt, #f5f5f5); font-weight: 600; width: 30%; }
+		p { font-size: 0.9375rem; line-height: 1.7; color: var(--color-text); margin: 0 0 0.5em; }
+		strong { font-weight: 600; }
+		ul, ol { list-style: none; padding: 0; margin: 0; }
+	}
+
+	.single-product__description-content {
+		white-space: pre-line;
 	}
 }
 
 // ---------------------------------------------------------------------------
-// Related Products
+// 5. Related Products – dezenter
 // ---------------------------------------------------------------------------
 
-.related {
+.related.products {
+	padding-top: var(--space-xl);
+	margin-bottom: var(--space-xl);
+
 	> h2 {
-		font-size: 1.25rem;
-		font-weight: 700;
-		margin-block-end: var(--space-md);
+		font-size: 1.5rem;
+		font-weight: 400;
+		font-style: italic;
+		color: var(--color-text-muted, #888);
+		letter-spacing: 0.06em;
+		margin: 0;
+		margin-bottom: var(--space-md);
 	}
 
-	ul.products {
+	ul.products,
+	ul.wc-products-grid {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 		gap: var(--space-md);
-
-		@include bp(md) { grid-template-columns: repeat(4, 1fr); }
+		list-style: none;
+		padding: 0;
+		margin: 0;
 	}
+
+	.product-card__brand {
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-text-muted, #888);
+		margin-bottom: 0.25rem;
+	}
+}
+
+// ---------------------------------------------------------------------------
+// 6. Notices
+// ---------------------------------------------------------------------------
+
+.woocommerce-notices-wrapper {
+	.woocommerce-message,
+	.woocommerce-error,
+	.woocommerce-info {
+		border-radius: var(--radius-sm);
+		padding: 0.75rem 1rem;
+		margin-bottom: var(--space-sm);
+		font-size: 0.9375rem;
+	}
+}
+
+
+// ---------------------------------------------------------------------------
+// 7. WooCommerce Buttons global
+// ---------------------------------------------------------------------------
+
+.woocommerce {
+    .button,
+    button.button,
+    a.button,
+    input.button {
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-align: center;
+    }
 }

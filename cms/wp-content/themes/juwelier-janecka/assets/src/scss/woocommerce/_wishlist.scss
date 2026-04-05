@@ -1,0 +1,131 @@
+// TI WooCommerce Wishlist
+@use '../abstracts' as *;
+
+.tinv-wishlist {
+    margin-bottom: var(--space-xl);
+
+    // Seitenüberschrift
+    .tinv-wishlist-clear + h2,
+    h2 {
+        font-size: 0.875rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-text);
+        margin: 0 0 var(--space-lg);
+    }
+
+    // Tabelle
+    table.tinvwl-table-manage-list {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.875rem;
+
+        th, td {
+            padding: 0.75rem 0.5rem;
+            border-bottom: 1px solid var(--color-border, #e0e0e0);
+            text-align: left;
+            vertical-align: middle;
+            color: var(--color-text-muted, #888);
+        }
+
+        th {
+            font-weight: 700;
+            font-size: 0.8125rem;
+            color: var(--color-text);
+        }
+
+        // Produktbild
+        .product-thumbnail img {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: #f5f5f5;
+        }
+
+        // Produktname
+        .product-name a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+
+            &:hover { text-decoration: underline; }
+        }
+
+        // Preis
+        .product-price {
+            white-space: nowrap;
+        }
+
+        // Lagerbestand
+        .product-stock {
+            .tinvwl-txt { color: var(--color-text-muted, #888); }
+        }
+
+        // Button-Zelle
+        .product-action {
+            text-align: right;
+
+            .button {
+                font-size: 0.6875rem;
+                font-weight: 400;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                padding: 0.625rem 1.25rem;
+                border-radius: 2rem;
+                white-space: normal;
+                text-align: center;
+                min-width: 120px;
+                border: 1px solid var(--color-text);
+                background: transparent;
+                color: var(--color-text);
+
+                &:hover {
+                    background: var(--color-text);
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    // Aktions-Buttons am Ende
+    .tinvwl-to-cart-form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: var(--space-md);
+
+        select {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+        }
+
+        .button {
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+    }
+
+    // Teilen-Bereich
+    .tinvwl-share {
+        margin-top: var(--space-lg);
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        font-size: 0.875rem;
+        color: var(--color-text-muted, #888);
+        justify-content: flex-end;
+
+        a {
+            color: var(--color-text-muted, #888);
+            &:hover { color: var(--color-text); }
+
+            svg, i { width: 18px; height: 18px; }
+        }
+    }
+}

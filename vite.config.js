@@ -55,6 +55,8 @@ export default defineConfig({
       input: {
         main:                  path.resolve(themeDir, 'assets/src/js/main.js'),
         'woocommerce-filters': path.resolve(themeDir, 'assets/src/js/woocommerce-filters.js'),
+        'store-map':           path.resolve(themeDir, 'assets/src/js/store-map.js'),
+        'booking-modal': path.resolve(themeDir, 'assets/src/js/booking-modal.js'),
       },
       output: {
         entryFileNames: 'js/[name].js',

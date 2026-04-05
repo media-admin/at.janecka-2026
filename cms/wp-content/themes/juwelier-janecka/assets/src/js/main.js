@@ -157,9 +157,44 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
+// Search Overlay
+const searchBtn = document.querySelector( '.header-icons__search-btn' );
+const searchOverlay = document.getElementById( 'search-overlay' );
+const searchClose = searchOverlay?.querySelector( '.search-overlay__close' );
+const searchBackdrop = searchOverlay?.querySelector( '.search-overlay__backdrop' );
+
+function openSearch() {
+    searchOverlay.classList.add( 'is-active' );
+    searchOverlay.setAttribute( 'aria-hidden', 'false' );
+    searchBtn.setAttribute( 'aria-expanded', 'true' );
+    searchOverlay.querySelector( 'input[type="search"]' )?.focus();
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSearch() {
+    searchOverlay.classList.remove( 'is-active' );
+    searchOverlay.setAttribute( 'aria-hidden', 'true' );
+    searchBtn.setAttribute( 'aria-expanded', 'false' );
+    document.body.style.overflow = '';
+}
+
+searchBtn?.addEventListener( 'click', openSearch );
+searchClose?.addEventListener( 'click', closeSearch );
+searchBackdrop?.addEventListener( 'click', closeSearch );
+
+document.addEventListener( 'keydown', ( e ) => {
+    if ( e.key === 'Escape' && searchOverlay?.classList.contains( 'is-active' ) ) {
+        closeSearch();
+    }
+} );
+
+
+
 // DOM Ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initApp);
 } else {
   initApp();
 }
+

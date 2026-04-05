@@ -17,6 +17,10 @@ remove_action( 'woocommerce_after_main_content',  'woocommerce_output_content_wr
 add_action( 'woocommerce_before_main_content', 'janecka_single_open_wrapper', 10 );
 add_action( 'woocommerce_after_main_content',  'janecka_single_close_wrapper', 10 );
 
+add_filter( 'woocommerce_product_thumbnails_columns', function(): int {
+    return 1;
+} );
+
 function janecka_single_open_wrapper(): void {
 	if ( ! is_product() ) {
 		echo '<div class="container">';
@@ -51,10 +55,18 @@ add_action( 'woocommerce_single_product_summary', 'janecka_single_brand',       
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title',          10 );
 add_action( 'woocommerce_single_product_summary', 'janecka_single_sku_delivery',                15 );
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price',          20 );
-add_action( 'woocommerce_single_product_summary', 'janecka_single_tax_shipping',                25 );
-add_action( 'woocommerce_single_product_summary', 'janecka_single_stock_notice',                27 );
+// add_action( 'woocommerce_single_product_summary', 'janecka_single_tax_shipping',                25 );
+// add_action( 'woocommerce_single_product_summary', 'janecka_single_stock_notice',                27 );
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart',    30 );
-add_action( 'woocommerce_single_product_summary', 'janecka_single_wishlist',                    35 );
+
+// WC Standard-Lagerstand entfernen
+add_filter( 'woocommerce_get_stock_html', '__return_empty_string' );
+
+// WC-GZD Lieferzeit vor Meta-Tabelle entfernen (wir zeigen sie in der Tabelle)
+add_filter( 'woocommerce_gzd_product_delivery_time_html', '__return_empty_string' );
+
+// Versandkosten aus Produkt-Loop entfernen
+add_filter( 'woocommerce_gzd_show_shipping_costs_info', '__return_false' );
 
 // ===========================================================================
 // 3. MARKE (Brand) über dem Titel
@@ -108,24 +120,28 @@ function janecka_single_sku_delivery(): void {
 		if ( $gzd_product && method_exists( $gzd_product, 'get_delivery_time' ) ) {
 			$delivery_obj = $gzd_product->get_delivery_time();
 			if ( $delivery_obj ) {
-				$delivery = $delivery_obj->get_name();
+				$delivery = $delivery_obj->name;
 			}
 		}
 	}
 
 	echo '<div class="single-product__meta-row">';
+		if ( $sku ) {
+			echo '<span class="single-product__sku">';
+			echo '<span class="single-product__meta-label">' . esc_html__( 'Artikelnummer', 'juwelier-janecka' ) . '</span>';
+			echo esc_html( $sku );
+			echo '</span>';
+		}
+	echo '</div>';
 
-	if ( $sku ) {
-		echo '<span class="single-product__sku">';
-		echo '<span class="single-product__meta-label">' . esc_html__( 'Artikelnummer', 'juwelier-janecka' ) . '</span>';
-		echo esc_html( $sku );
-		echo '</span>';
-	}
 
-	if ( $delivery ) {
-		echo '<span class="single-product__delivery">' . esc_html( $delivery ) . '</span>';
-	}
-
+	echo '<div class="single-product__meta-row">';
+		if ( $delivery ) {
+			echo '<span class="single-product__delivery">';
+			echo '<span class="single-product__meta-label">' . esc_html__( 'Lieferzeit', 'juwelier-janecka' ) . '</span>';
+			echo esc_html( $delivery );
+			echo '</span>';
+		}
 	echo '</div>';
 }
 
@@ -133,45 +149,28 @@ function janecka_single_sku_delivery(): void {
 // 5. STEUER + VERSANDKOSTEN
 // ===========================================================================
 
-function janecka_single_tax_shipping(): void {
-	?>
-	<div class="single-product__tax-shipping">
-		<?php if ( wc_tax_enabled() ) : ?>
-			<span><?php echo esc_html( WC()->countries->inc_tax_or_vat() ); ?></span>
-		<?php endif; ?>
-		<?php
-		$shipping_page = wc_get_page_permalink( 'terms' );
-		$shipping_link = get_option( 'woocommerce_ship_to_countries' ) !== 'disabled'
-			? '<a href="' . esc_url( home_url( '/bezahlmoeglichkeiten/' ) ) . '" target="_blank">'
-			  . esc_html__( 'zuzüglich Versandkosten', 'juwelier-janecka' )
-			  . '</a>'
-			: '';
-		if ( $shipping_link ) echo $shipping_link;
-		?>
-	</div>
-	<?php
-}
+
 
 // ===========================================================================
 // 6. LAGERBESTAND-HINWEIS
 // ===========================================================================
 
-function janecka_single_stock_notice(): void {
-	global $product;
+// function janecka_single_stock_notice(): void {
+// 	global $product;
 
-	$stock = $product->get_stock_quantity();
+// 	$stock = $product->get_stock_quantity();
 
-	if ( ! $product->managing_stock() || $stock === null ) return;
+// 	if ( ! $product->managing_stock() || $stock === null ) return;
 
-	if ( $stock > 0 && $stock <= 3 ) {
-		echo '<p class="single-product__stock single-product__stock--low">';
-		printf(
-			esc_html__( 'Nur noch %d Stück auf Lager', 'juwelier-janecka' ),
-			$stock
-		);
-		echo '</p>';
-	}
-}
+// 	if ( $stock > 0 && $stock <= 3 ) {
+// 		echo '<p class="single-product__stock single-product__stock--low">';
+// 		printf(
+// 			esc_html__( 'Nur noch %d Stück auf Lager', 'juwelier-janecka' ),
+// 			$stock
+// 		);
+// 		echo '</p>';
+// 	}
+// }
 
 // ===========================================================================
 // 7. WUNSCHLISTE
@@ -211,8 +210,8 @@ add_action( 'woocommerce_before_add_to_cart_quantity', function() {
 // Tabs komplett entfernen
 remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
 
-// Eigene Beschreibungs-Sektion
-add_action( 'woocommerce_after_single_product_summary', 'janecka_single_description_section', 10 );
+// Anzeige innerhalb der Summary (rechte Spalte)
+add_action( 'woocommerce_single_product_summary', 'janecka_single_description_section', 35 );
 
 function janecka_single_description_section(): void {
 	global $product;
@@ -266,7 +265,7 @@ function janecka_single_product_schema(): void {
 	$schema = [
 		'@context'  => 'https://schema.org/',
 		'@type'     => 'Product',
-		'name'      => $product->get_name(),
+		'name'      => $product->name,
 		'image'     => wp_get_attachment_url( $product->get_image_id() ),
 		'sku'       => $product->get_sku(),
 		'offers'    => [
@@ -288,4 +287,35 @@ function janecka_single_product_schema(): void {
 	echo '<script type="application/ld+json">'
 		. wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
 		. '</script>' . "\n";
+}
+
+// ===========================================================================
+// 13. BRAND IN PRODUKT-LOOP (Related Products etc.)
+// ===========================================================================
+
+add_action( 'woocommerce_shop_loop_item_title', 'janecka_loop_brand', 5 );
+
+function janecka_loop_brand(): void {
+    global $product;
+    if ( ! $product ) return;
+
+    $brand = '';
+    foreach ( [ 'pa_brand', 'pa_marke' ] as $tax ) {
+        $terms = wc_get_product_terms( $product->get_id(), $tax, [ 'fields' => 'names' ] );
+        if ( ! empty( $terms ) ) {
+            $brand = $terms[0];
+            break;
+        }
+    }
+
+    if ( ! $brand ) {
+        $tags = wc_get_product_terms( $product->get_id(), 'product_tag', [ 'fields' => 'names' ] );
+        if ( ! empty( $tags ) ) {
+            $brand = $tags[0];
+        }
+    }
+
+    if ( $brand ) {
+        echo '<div class="product-card__brand">' . esc_html( strtoupper( $brand ) ) . '</div>';
+    }
 }
