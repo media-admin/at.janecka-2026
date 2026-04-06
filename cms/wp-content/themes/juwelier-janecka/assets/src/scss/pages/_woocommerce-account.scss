@@ -1,0 +1,167 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ── Mein Konto — Login/Registrierung ─────────────────────────────────────────
+
+.woocommerce-account:not(.logged-in) {
+
+    // ── 2-Spalten-Grid ────────────────────────────────────────────────────────
+
+    .col2-set {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        align-items: start;
+
+        @media ( max-width: 767px ) {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .col-1 {
+            padding-right: 3rem;
+
+            // Kein Trennstrich mehr
+            @media ( max-width: 767px ) {
+                padding-right: 0;
+                padding-bottom: 2.5rem;
+                border-bottom: 1px solid var( --color-border, #e0e0e0 );
+            }
+        }
+
+        .col-2 {
+            padding-left: 3rem;
+
+            @media ( max-width: 767px ) {
+                padding-left: 0;
+            }
+        }
+    }
+
+    // ── Überschriften ─────────────────────────────────────────────────────────
+
+    .col2-set h2 {
+        font-size: 1.125rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var( --color-border, #e0e0e0 );
+    }
+
+    // ── Labels ────────────────────────────────────────────────────────────────
+
+    .woocommerce-form__label {
+        display: block;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+        color: var( --color-text-muted, #666 );
+    }
+
+    // Checkbox-Labels NICHT in Großbuchstaben
+    .woocommerce-form__label.woocommerce-form__label-for-checkbox,
+    label.woocommerce-form__label-for-checkbox {
+        text-transform: none;
+        letter-spacing: 0;
+        font-weight: 400;
+        font-size: 0.9375rem;
+        color: var( --color-text, #1a1a1a );
+    }
+
+    // ── Inputs ────────────────────────────────────────────────────────────────
+
+    .woocommerce-Input,
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        border: 1px solid var( --color-border, #e0e0e0 );
+        border-radius: 0;
+        padding: 0.75rem 1rem;
+        font-size: 0.9375rem;
+        margin-bottom: 1rem; // Reduziert für weniger Abstand
+        transition: border-color 0.2s ease;
+        box-sizing: border-box;
+
+        &:focus {
+            outline: none;
+            border-color: var( --color-accent, #c8a96e );
+        }
+    }
+
+    // ── Formular-Zeilen — weniger Abstand ─────────────────────────────────────
+
+    .woocommerce-form-row {
+        margin-bottom: 0.75rem;
+    }
+
+    // ── Checkbox-Zeile ────────────────────────────────────────────────────────
+
+    .woocommerce-form-login__rememberme {
+        display: block;
+        margin-bottom: 1rem; // Weniger Abstand nach oben
+        margin-top: 0;
+    }
+
+    // ── Buttons — kein min-width, kein full-width ─────────────────────────────
+
+    .woocommerce-button,
+    button[type="submit"],
+    input[type="submit"] {
+        width: auto !important;
+        min-width: unset !important;
+        display: inline-block;
+    }
+
+    // ── Passwort vergessen ────────────────────────────────────────────────────
+
+    .woocommerce-LostPassword {
+        margin-top: 0.75rem;
+        font-size: 0.875rem;
+
+        a {
+            color: var( --color-text-muted, #666 );
+            text-decoration: none;
+
+            &:hover {
+                color: var( --color-accent, #c8a96e );
+            }
+        }
+    }
+
+    // ── Passwort-Feld mit Show-Button ─────────────────────────────────────────────
+
+    .password-input {
+        position: relative;
+        display: block;
+
+        input[type="password"],
+        input[type="text"] {
+            padding-right: 3rem; // Platz für den Button
+            margin-bottom: 0; // Reset da .password-input den Abstand übernimmt
+        }
+
+        .show-password-input {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY( -50% );
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            color: var( --color-text-muted, #888 );
+            line-height: 1;
+            width: auto !important;
+            min-width: unset !important;
+
+            &:hover {
+                color: var( --color-accent, #c8a96e );
+            }
+        }
+    }
+}

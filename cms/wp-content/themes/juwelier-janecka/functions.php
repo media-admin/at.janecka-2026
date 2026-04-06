@@ -82,7 +82,6 @@ require_once get_template_directory() . '/inc/performance.php';
 require_once get_template_directory() . '/inc/shortcode-overrides.php';
 require_once get_template_directory() . '/inc/class-mega-menu-walker.php';
 require_once get_template_directory() . '/inc/shortcode-booking-button.php';
-require_once get_template_directory() . '/inc/cpt-stores.php';
 
 
 
@@ -302,4 +301,27 @@ function janecka_fix_category_link( $link, $term, $taxonomy ) {
     $path .= $term->slug . '/';
 
     return home_url( '/' . $path );
+}
+
+
+
+
+// ── WooCommerce Login-Seite: Überschriften anpassen ──────────────────────────
+
+add_filter( 'woocommerce_login_form_start', function() {
+    // Wird vor dem Login-Formular ausgegeben — Heading wird per CSS überschrieben
+} );
+
+// Überschriften-Texte filtern
+add_filter( 'gettext', 'janecka_wc_account_strings', 20, 3 );
+
+function janecka_wc_account_strings( $translated, $original, $domain ) {
+    if ( $domain !== 'woocommerce' ) return $translated;
+
+    $replacements = [
+        'Login'    => 'Anmelden',
+        'Register' => 'Neues Kundenkonto',
+    ];
+
+    return $replacements[ $original ] ?? $translated;
 }
