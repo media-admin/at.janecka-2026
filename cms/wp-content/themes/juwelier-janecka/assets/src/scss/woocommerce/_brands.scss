@@ -1,0 +1,330 @@
+// =============================================================================
+// _brands.scss
+// WooCommerce Brands – Logo-Grid und Marken-Detailseite
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+
+// =============================================================================
+// Brand Grid
+// Verwendet auf: page-marken.php, Shortcodes [janecka_alle_marken] + [janecka_marken]
+// =============================================================================
+
+.brand-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0.75rem;
+	margin-block: 2rem;
+
+	@include bp(sm) {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	@include bp(md) {
+		grid-template-columns: repeat(5, 1fr);
+		gap: 1rem;
+	}
+
+	@include bp(lg) {
+		grid-template-columns: repeat(6, 1fr);
+	}
+
+	// ----------------------------------------------------------------
+	// Kachel
+	// ----------------------------------------------------------------
+
+	&__item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		aspect-ratio: 1 / 1;
+		padding: 1rem;
+		background-color: var(--color-surface, #fff);
+		border: 1px solid var(--color-border, #e8e8e8);
+		text-decoration: none;
+		transition:
+			border-color 0.2s ease,
+			box-shadow 0.2s ease;
+
+		@include bp(md) {
+			padding: 1.25rem;
+		}
+
+		&:hover,
+		&:focus-visible {
+			border-color: var(--color-primary, #333);
+			box-shadow: 0 4px 20px rgb(0 0 0 / 0.08);
+			outline: none;
+		}
+	}
+
+	// ----------------------------------------------------------------
+	// Logo-Bild
+	// ----------------------------------------------------------------
+
+	&__logo {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		// Kein Verzerrung, behält Seitenverhältnis bei
+	}
+
+	// ----------------------------------------------------------------
+	// Fallback: Markenname als Text (wenn kein Logo vorhanden)
+	// ----------------------------------------------------------------
+
+	&__name {
+		display: block;
+		font-size: clamp(0.6875rem, 1.2vw, 0.875rem);
+		font-weight: 600;
+		text-align: center;
+		color: var(--color-text, #333);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		line-height: 1.3;
+		word-break: break-word;
+		hyphens: auto;
+	}
+
+	// ----------------------------------------------------------------
+	// Leer-Zustand
+	// ----------------------------------------------------------------
+
+	&__empty {
+		grid-column: 1 / -1;
+		text-align: center;
+		color: var(--color-text-muted, #888);
+		padding-block: 3rem;
+	}
+}
+
+
+// =============================================================================
+// Brand Archive Header
+// Verwendet auf: WooCommerce product_brand Archivseite (/marken/[slug]/)
+// Wird per Hook (woocommerce_before_shop_loop) eingefügt – kein Template-Override
+// =============================================================================
+
+.brand-archive-header {
+	margin-bottom: 2.5rem;
+
+	// ----------------------------------------------------------------
+	// Banner-Bild (1400 × 470 px)
+	// ----------------------------------------------------------------
+
+	&__banner {
+		width: 100%;
+		margin-bottom: 1.5rem;
+		overflow: hidden;
+	}
+
+	&__banner-img {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+		aspect-ratio: 1400 / 470;
+
+		// Mobile: etwas höheres Seitenverhältnis damit Banner nicht zu schmal wird
+		@media (max-width: 47.99em) {
+			aspect-ratio: 2 / 1;
+		}
+	}
+
+	// ----------------------------------------------------------------
+	// Beschreibungstext (Term-Description)
+	// ----------------------------------------------------------------
+
+	&__description {
+		max-width: 48rem;
+		margin-inline: auto;
+		text-align: center;
+		font-size: 1rem;
+		line-height: 1.75;
+		color: var(--color-text, #333);
+
+		@include bp(md) {
+			font-size: 1.0625rem;
+		}
+
+		p {
+			margin-bottom: 1em;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		a {
+			color: var(--color-primary, #333);
+			text-decoration: underline;
+
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+
+// =============================================================================
+// Brand Slider (Swiper)
+// Verwendet via Shortcode ansicht="slider"
+// =============================================================================
+
+// Wrapper: positioniert die Nav-Buttons außerhalb des Swipers
+.brand-slider-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-block: 2rem;
+
+	@include bp(md) {
+		gap: 1rem;
+	}
+}
+
+// Swiper-Container: nimmt den verbleibenden Platz ein
+.brand-slider {
+	flex: 1;
+	min-width: 0; // Flex-Kind darf schrumpfen
+	overflow: hidden;
+
+	// ----------------------------------------------------------------
+	// Slide
+	// ----------------------------------------------------------------
+
+	&__slide {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: auto;
+	}
+
+	// ----------------------------------------------------------------
+	// Logo-Link — kein Rahmen, kein Hintergrund
+	// ----------------------------------------------------------------
+
+	&__item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		min-height: 150px;  // ← neu, damit alle Slides gleich hoch sind
+		height: 4rem;  // ← neu, gleich wie __logo
+		padding: 0.5rem;
+		text-decoration: none;
+		opacity: 0.65;
+		transition: opacity 0.2s ease;
+
+		@include bp(md) {
+			height: 5rem;  // ← neu
+		}
+
+		&:hover,
+		&:focus-visible {
+			opacity: 1;
+			outline: none;
+		}
+	}
+
+	// ----------------------------------------------------------------
+	// Logo-Bild
+	// ----------------------------------------------------------------
+
+	&__logo {
+		display: block;
+		width: 100%;
+		min-height: 150px;
+		height: auto;
+		height: 4rem;
+		object-fit: contain;
+
+		@include bp(md) {
+			height: 5rem;
+		}
+	}
+
+	// ----------------------------------------------------------------
+	// Fallback: Markenname als Text
+	// ----------------------------------------------------------------
+
+	&__name {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;  // ← füllt __item aus statt fester Höhe
+		font-size: 1.5rem;
+		font-weight: 600;
+		text-align: center;
+		color: var(--color-text, #333);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		line-height: 1.2;
+
+		@include bp(md) {
+			font-size: 1.75rem;
+		}
+	}
+}
+
+// ----------------------------------------------------------------
+// Nav-Buttons (leben im Wrapper, nicht im Swiper)
+// ----------------------------------------------------------------
+
+.brand-slider__prev,
+.brand-slider__next {
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	background: var(--color-surface, #fff);
+	border: 1px solid var(--color-border, #d0d0d0);
+	border-radius: 50%;
+	cursor: pointer;
+	color: var(--color-text, #333);
+	transition:
+		background-color 0.2s ease,
+		border-color 0.2s ease,
+		color 0.2s ease;
+
+	@include bp(md) {
+		width: 3rem;
+		height: 3rem;
+	}
+
+	&:hover {
+		background-color: var(--color-primary, #333);
+		border-color: var(--color-primary, #333);
+		color: #fff;
+	}
+
+	&.swiper-button-disabled {
+		opacity: 0.3;
+		pointer-events: none;
+	}
+
+	// Pfeil-Icon via CSS
+	&::before {
+		content: '';
+		display: block;
+		width: 0.4rem;
+		height: 0.4rem;
+		border-top: 2px solid currentColor;
+		border-right: 2px solid currentColor;
+	}
+}
+
+.brand-slider__prev::before {
+	transform: rotate(-135deg) translate(-1px, 1px);
+}
+
+.brand-slider__next::before {
+	transform: rotate(45deg) translate(-1px, 1px);
+}

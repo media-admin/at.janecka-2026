@@ -1,0 +1,267 @@
+<?php
+/**
+ * WooCommerce Brands Setup
+ *
+ * - Setzt den Taxonomy-URL-Slug auf /marken/ (statt /product-brand/)
+ * - Registriert ACF-Felder für Brand-Terme (Banner-Bild + Logo)
+ * - Injiziert Banner + Beschreibung auf Brand-Archivseiten (kein Template-Override)
+ * - Stellt Helper-Funktionen für Brand-Logos und Kategorie-Filterung bereit
+ *
+ * @package JuwelierJanecka
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+
+// ============================================================
+// 1. Taxonomy-URL-Slug → /marken/[slug]/
+// ============================================================
+
+add_filter( 'woocommerce_taxonomy_args_product_brand', function ( array $args ): array {
+	$args['rewrite'] = [
+		'slug'         => 'marken',
+		'with_front'   => false,
+		'hierarchical' => false,
+	];
+	return $args;
+} );
+
+// Hinweis: Nach dieser Änderung einmal unter Einstellungen → Permalinks speichern,
+// um die Rewrite-Regeln neu zu generieren!
+
+
+// ============================================================
+// 2. ACF-Felder für product_brand-Terme
+// ============================================================
+
+add_action( 'acf/init', 'janecka_register_brand_acf_fields' );
+function janecka_register_brand_acf_fields(): void {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+
+	acf_add_local_field_group( [
+		'key'    => 'group_brand_fields',
+		'title'  => 'Marken-Felder',
+		'fields' => [
+			[
+				'key'           => 'field_brand_banner',
+				'label'         => 'Banner-Bild',
+				'name'          => 'brand_banner',
+				'type'          => 'image',
+				'return_format' => 'array',
+				'preview_size'  => 'medium',
+				'library'       => 'all',
+				'instructions'  => 'Breites Bannerbild für die Marken-Detailseite (empfohlen: 1400 × 470 px)',
+			],
+			[
+				'key'           => 'field_brand_logo',
+				'label'         => 'Logo (quadratisch)',
+				'name'          => 'brand_logo',
+				'type'          => 'image',
+				'return_format' => 'array',
+				'preview_size'  => 'thumbnail',
+				'library'       => 'all',
+				'instructions'  => 'Quadratisches Logo für die Marken-Übersichtsseiten (empfohlen: 400 × 400 px, weißer Hintergrund)',
+			],
+		],
+		'location' => [
+			[
+				[
+					'param'    => 'taxonomy',
+					'operator' => '==',
+					'value'    => 'product_brand',
+				],
+			],
+		],
+		'active' => true,
+	] );
+}
+
+
+// ============================================================
+// 3. Brand-Archiv-Header (Banner + Beschreibung) per Hook
+// ============================================================
+
+add_action( 'woocommerce_before_shop_loop', 'janecka_brand_archive_header', 5 );
+function janecka_brand_archive_header(): void {
+	if ( ! is_tax( 'product_brand' ) ) {
+		return;
+	}
+
+	$term = get_queried_object();
+	if ( ! ( $term instanceof WP_Term ) ) {
+		return;
+	}
+
+	// Banner-Bild: zuerst ACF-Feld, Fallback auf WC thumbnail_id
+	$banner_url = '';
+	$acf_banner = get_field( 'brand_banner', 'product_brand_' . $term->term_id );
+	if ( ! empty( $acf_banner['url'] ) ) {
+		$banner_url = $acf_banner['url'];
+	} else {
+		$thumbnail_id = (int) get_term_meta( $term->term_id, 'thumbnail_id', true );
+		if ( $thumbnail_id ) {
+			$src        = wp_get_attachment_image_src( $thumbnail_id, 'full' );
+			$banner_url = $src ? $src[0] : '';
+		}
+	}
+
+	// Term-Beschreibung (aus dem WC-Brand-Feld "Beschreibung")
+	$description = term_description( $term->term_id, 'product_brand' );
+
+	if ( ! $banner_url && ! $description ) {
+		return;
+	}
+
+	?>
+	<div class="brand-archive-header">
+		<?php if ( $banner_url ) : ?>
+			<div class="brand-archive-header__banner">
+				<img
+					src="<?php echo esc_url( $banner_url ); ?>"
+					alt="<?php echo esc_attr( $term->name ); ?>"
+					class="brand-archive-header__banner-img"
+					width="1400"
+					height="470"
+					loading="eager"
+					decoding="async"
+				>
+			</div>
+		<?php endif; ?>
+
+		<?php if ( $description ) : ?>
+			<div class="brand-archive-header__description">
+				<?php echo wp_kses_post( $description ); ?>
+			</div>
+		<?php endif; ?>
+	</div>
+	<?php
+}
+
+
+// ============================================================
+// 4. Helper: Brands einer Produktkategorie ermitteln (1 DB-Query)
+// ============================================================
+
+/**
+ * Gibt alle product_brand-Terme zurück, die Produkte in der
+ * angegebenen product_cat-Kategorie (inkl. Unterkategorien) haben.
+ *
+ * @param  string $category_slug WooCommerce product_cat Slug
+ * @return WP_Term[]             Alphabetisch sortierte Brand-Terme
+ */
+function janecka_get_brands_by_category( string $category_slug ): array {
+	global $wpdb;
+
+	if ( empty( $category_slug ) ) {
+		return [];
+	}
+
+	$cat_term = get_term_by( 'slug', $category_slug, 'product_cat' );
+	if ( ! $cat_term ) {
+		return [];
+	}
+
+	// Alle Unter-Kategorie-IDs einsammeln
+	$cat_ids   = get_term_children( $cat_term->term_id, 'product_cat' );
+	$cat_ids[] = $cat_term->term_id;
+	$cat_ids   = array_map( 'intval', $cat_ids );
+
+	// Dynamische Platzhalter für IN-Klausel
+	$placeholders = implode( ', ', array_fill( 0, count( $cat_ids ), '%d' ) );
+
+	// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+	$query = $wpdb->prepare(
+		"SELECT DISTINCT tt2.term_id
+		 FROM {$wpdb->term_relationships} tr1
+		 INNER JOIN {$wpdb->term_taxonomy} tt1
+			 ON tr1.term_taxonomy_id = tt1.term_taxonomy_id
+			AND tt1.taxonomy = 'product_cat'
+			AND tt1.term_id IN ({$placeholders})
+		 INNER JOIN {$wpdb->term_relationships} tr2
+			 ON tr1.object_id = tr2.object_id
+		 INNER JOIN {$wpdb->term_taxonomy} tt2
+			 ON tr2.term_taxonomy_id = tt2.term_taxonomy_id
+			AND tt2.taxonomy = 'product_brand'
+		 INNER JOIN {$wpdb->posts} p
+			 ON tr1.object_id = p.ID
+			AND p.post_type  = 'product'
+			AND p.post_status = 'publish'",
+		...$cat_ids
+	);
+	// phpcs:enable
+
+	$brand_ids = $wpdb->get_col( $query );
+
+	if ( empty( $brand_ids ) ) {
+		return [];
+	}
+
+	$brands = array_filter(
+		array_map( fn( $id ) => get_term( (int) $id, 'product_brand' ), $brand_ids ),
+		fn( $t ) => $t instanceof WP_Term
+	);
+
+	usort( $brands, fn( $a, $b ) => strcmp( $a->name, $b->name ) );
+
+	return array_values( $brands );
+}
+
+
+// ============================================================
+// 5. Helper: Brand-Logo-URL ermitteln
+// ============================================================
+
+/**
+ * Gibt die Logo-URL einer Marke zurück.
+ * Priorät: ACF brand_logo → WC thumbnail_id → leer.
+ *
+ * @param  WP_Term $term
+ * @param  string  $size  WordPress-Bildgröße (default 'large')
+ * @return string         URL oder leerer String
+ */
+function janecka_get_brand_logo_url( WP_Term $term, string $size = 'large' ): string {
+	// 1. ACF brand_logo
+	$acf_logo = get_field( 'brand_logo', 'product_brand_' . $term->term_id );
+	if ( ! empty( $acf_logo['url'] ) ) {
+		return $acf_logo['url'];
+	}
+
+	// 2. WooCommerce thumbnail_id (Standard-Brand-Logo)
+	$thumbnail_id = (int) get_term_meta( $term->term_id, 'thumbnail_id', true );
+	if ( $thumbnail_id ) {
+		$src = wp_get_attachment_image_src( $thumbnail_id, $size );
+		if ( $src ) {
+			return $src[0];
+		}
+	}
+
+	return '';
+}
+
+
+// ============================================================
+// 6. Breadcrumb: "Start / Marken / [Brand]" auf Brand-Archivseiten
+// ============================================================
+
+add_filter( 'woocommerce_get_breadcrumb', 'janecka_brand_breadcrumb', 20, 2 );
+function janecka_brand_breadcrumb( array $crumbs, object $breadcrumb ): array {
+	if ( ! is_tax( 'product_brand' ) ) {
+		return $crumbs;
+	}
+
+	$result = [];
+	foreach ( $crumbs as $i => $crumb ) {
+		$result[] = $crumb;
+		// Nach dem ersten Crumb (= "Start") "Marken" einfügen
+		if ( $i === 0 ) {
+			$result[] = [
+				__( 'Marken', 'juwelier-janecka' ),
+				'', // kein Link – es gibt keine einzelne globale Markenseite
+			];
+		}
+	}
+
+	return $result;
+}
