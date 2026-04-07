@@ -1,12 +1,9 @@
 <?php
 /**
- * Kategorie-Filter-Konfiguration
+ * Produktfilter-Konfiguration
  *
- * Definiert, welche WooCommerce-Attribute-Filter pro Kategorie angezeigt werden.
- * Neuer Kategorien einfach hier ergänzen – kein Template nötig.
- *
- * Attribut-Slugs müssen in WooCommerce unter
- * Produkte → Attribute angelegt sein (z. B. pa_material, pa_edelstein …).
+ * Liest Filter-Einstellungen aus ACF-Feldern auf product_cat-Taxonomy.
+ * Unterstützt Vererbung von Elternkategorien.
  *
  * @package JuwelierJanecka
  */
@@ -14,137 +11,123 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Gibt die Filter-Konfiguration pro Kategorie zurück.
+ * Gibt die Filter-Konfiguration für eine bestimmte Kategorie zurück.
+ * Vererbungslogik: Eigene Config → Elternkategorie → Fallback.
  *
- * @return array<string, array{label: string, attributes: string[], show_price: bool}>
+ * @param int|null $term_id Term-ID der Produktkategorie (null = aktuelle Seite)
+ * @return array{
+ *     attributes: string[],
+ *     show_price: bool,
+ *     show_brands: bool,
+ *     show_subcategories: bool,
+ *     source: string
+ * }
  */
-function janecka_get_category_filter_config(): array {
-    return [
+function janecka_get_category_filter_config( ?int $term_id = null ): array {
+	if ( $term_id === null ) {
+		if ( is_product_category() ) {
+			$term_id = get_queried_object_id();
+		} else {
+			return janecka_get_default_filter_config();
+		}
+	}
 
-        // ── Schmuck ────────────────────────────────────────────────────────
-        'ringe' => [
-            'label'       => 'Ringe',
-            'attributes'  => [ 'pa_filter-material', 'pa_filter-stein', 'pa_ringweite', 'pa_kollektion' ],
-            'show_price'  => true,
-        ],
-        'armschmuck' => [
-            'label'       => 'Armschmuck',
-            'attributes'  => [ 'pa_filter-material', 'pa_filter-stein', 'pa_laenge', 'pa_kollektion' ],
-            'show_price'  => true,
-        ],
-        'halsschmuck' => [
-            'label'       => 'Halsschmuck',
-            'attributes'  => [ 'pa_filter-material', 'pa_filter-stein', 'pa_laenge-halskette', 'pa_kollektion' ],
-            'show_price'  => true,
-        ],
-        'ohrschmuck' => [
-            'label'       => 'Ohrschmuck',
-            'attributes'  => [ 'pa_filter-material', 'pa_filter-stein', 'pa_geschlecht', 'pa_kollektion' ],
-            'show_price'  => true,
-        ],
-        'anhaenger' => [
-            'label'       => 'Anhänger',
-            'attributes'  => [ 'pa_filter-material', 'pa_filter-stein', 'pa_kollektion' ],
-            'show_price'  => true,
-        ],
-        'solitaerschmuck' => [
-            'label'       => 'Solitärschmuck',
-            'attributes'  => [ 'pa_filter-material', 'pa_filter-stein', 'pa_kollektion' ],
-            'show_price'  => true,
-        ],
-        'charms' => [
-            'label'       => 'Charms',
-            'attributes'  => [ 'pa_filter-material', 'pa_kollektion' ],
-            'show_price'  => true,
-        ],
-
-        // ── Uhren ──────────────────────────────────────────────────────────
-        'damenuhren' => [
-            'label'       => 'Damenuhren',
-            'attributes'  => [ 'pa_brand', 'pa_filter-material', 'pa_zifferblatt', 'pa_uhrband' ],
-            'show_price'  => true,
-        ],
-        'herrenuhren' => [
-            'label'       => 'Herrenuhren',
-            'attributes'  => [ 'pa_brand', 'pa_filter-material', 'pa_zifferblatt', 'pa_uhrband' ],
-            'show_price'  => true,
-        ],
-
-        // ── Liebe & Hochzeit ───────────────────────────────────────────────
-        'eheringe' => [
-            'label'       => 'Eheringe',
-            'attributes'  => [ 'pa_filter-material', 'pa_filter-stein', 'pa_ringweite', 'pa_kollektion' ],
-            'show_price'  => true,
-        ],
-        'verlobungsringe' => [
-            'label'       => 'Verlobungsringe',
-            'attributes'  => [ 'pa_filter-material', 'pa_filter-stein', 'pa_ringweite', 'pa_kollektion' ],
-            'show_price'  => true,
-        ],
-        'morgengabe' => [
-            'label'       => 'Morgengabe',
-            'attributes'  => [ 'pa_filter-material', 'pa_filter-stein', 'pa_kollektion' ],
-            'show_price'  => true,
-        ],
-
-        // ── Fallback ───────────────────────────────────────────────────────
-        '_default' => [
-            'label'       => 'Alle Produkte',
-            'attributes'  => [ 'pa_filter-material', 'pa_kollektion' ],
-            'show_price'  => true,
-        ],
-    ];
+	return janecka_resolve_filter_config( $term_id, [] );
 }
 
 /**
- * Gibt die Filter-Konfiguration für die aktuelle Kategorie zurück.
+ * Alias für Abwärtskompatibilität
  */
 function janecka_get_current_category_filter_config(): array {
-	$config = janecka_get_category_filter_config();
+	return janecka_get_category_filter_config();
+}
 
-	if ( is_product_category() ) {
-		$term = get_queried_object();
-		$slug = $term->slug ?? '';
+/**
+ * Rekursive Auflösung der Filter-Konfiguration mit Vererbung.
+ */
+function janecka_resolve_filter_config( int $term_id, array $visited ): array {
+	if ( in_array( $term_id, $visited, true ) ) {
+		return janecka_get_default_filter_config();
+	}
+	$visited[] = $term_id;
 
-		if ( isset( $config[ $slug ] ) ) {
-			return $config[ $slug ];
+	$inherit      = (bool) get_field( 'filter_inherit_parent',     'product_cat_' . $term_id );
+	$show_price   = get_field( 'filter_show_price',                'product_cat_' . $term_id );
+	$attributes   = get_field( 'filter_attributes',                'product_cat_' . $term_id );
+	$show_brands  = get_field( 'filter_brands',                    'product_cat_' . $term_id );
+	$show_subcats = get_field( 'filter_show_subcategories',        'product_cat_' . $term_id );
+	$order_raw    = get_field( 'filter_order',                     'product_cat_' . $term_id );
+
+	$has_own_config = ! empty( $attributes ) || $show_brands;
+
+	// Vererbung: keine eigene Config → Elternkategorie prüfen
+	if ( $inherit && ! $has_own_config ) {
+		$term = get_term( $term_id, 'product_cat' );
+		if ( $term && ! is_wp_error( $term ) && $term->parent > 0 ) {
+			$parent_config                       = janecka_resolve_filter_config( $term->parent, $visited );
+			$parent_config['source']             = 'parent:' . $term->parent;
+			$parent_config['show_subcategories'] = (bool) $show_subcats;
+			return $parent_config;
 		}
+		return janecka_get_default_filter_config();
+	}
 
-		// Eltern-Kategorie prüfen
-		if ( ! empty( $term->parent ) ) {
-			$parent = get_term( $term->parent, 'product_cat' );
-			if ( $parent && isset( $config[ $parent->slug ] ) ) {
-				return $config[ $parent->slug ];
+	// Attribute aufbauen
+	$attribute_slugs = is_array( $attributes ) ? $attributes : [];
+
+	// Marken-Filter einbauen
+	if ( $show_brands ) {
+		foreach ( [ 'pa_brand', 'pa_marke' ] as $brand_slug ) {
+			if ( taxonomy_exists( $brand_slug ) && ! in_array( $brand_slug, $attribute_slugs, true ) ) {
+				$attribute_slugs[] = $brand_slug;
+				break;
 			}
 		}
 	}
 
-	return $config['_default'];
+	// Reihenfolge anwenden
+	if ( $order_raw ) {
+		$ordered         = array_filter( array_map( 'trim', explode( "\n", $order_raw ) ) );
+		$rest            = array_diff( $attribute_slugs, $ordered );
+		$attribute_slugs = array_values( array_merge(
+			array_intersect( $ordered, $attribute_slugs ),
+			$rest
+		) );
+	}
+
+	return [
+		'attributes'         => $attribute_slugs,
+		'show_price'         => $show_price !== false ? (bool) $show_price : true,
+		'show_brands'        => (bool) $show_brands,
+		'show_subcategories' => (bool) $show_subcats,
+		'source'             => 'term:' . $term_id,
+	];
 }
 
 /**
- * Gibt alle registrierten WooCommerce-Attribute zurück,
- * inkl. Label-Mapping für die Darstellung im Filter.
- *
- * Neue Attribute hier ergänzen.
+ * Standard-Konfiguration wenn keine ACF-Einstellungen vorhanden.
+ */
+function janecka_get_default_filter_config(): array {
+	return [
+		'attributes'         => [],
+		'show_price'         => true,
+		'show_brands'        => false,
+		'show_subcategories' => false,
+		'source'             => 'default',
+	];
+}
+
+/**
+ * Labels für Attribut-Slugs.
  */
 function janecka_get_attribute_labels(): array {
-    return [
-        'pa_filter-material' => 'Material',
-        'pa_filter-stein'    => 'Edelstein',
-        'pa_ringweite'       => 'Ringgröße',
-        'pa_laenge'          => 'Länge',
-        'pa_laenge-halskette'=> 'Länge',
-        'pa_kollektion'      => 'Kollektion',
-        'pa_geschlecht'      => 'Für',
-        'pa_brand'           => 'Marke',
-        'pa_filter-farbe'    => 'Farbe',
-        'pa_uhrband'         => 'Armband',
-        'pa_zifferblatt'     => 'Zifferblatt',
-        'pa_uhrwerk'         => 'Uhrwerk',
-        'pa_ringbreite'      => 'Ringbreite',
-        'pa_gravur'          => 'Gravur',
-        'pa_anlass'          => 'Anlass',
-        'pa_extras'          => 'Extras',
-    ];
+	$labels     = [];
+	$attributes = wc_get_attribute_taxonomies();
+
+	foreach ( $attributes as $attr ) {
+		$slug            = wc_attribute_taxonomy_name( $attr->attribute_name );
+		$labels[ $slug ] = $attr->attribute_label;
+	}
+
+	return $labels;
 }
