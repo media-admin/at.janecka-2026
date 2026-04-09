@@ -29,6 +29,8 @@
 # PLUGINS – Drittanbieter (nicht versionieren)
 # ============================================
 /cms/wp-content/plugins/*
+/cms/wp-content/languages/plugins/
+/cms/wp-content/languages/themes/
 
 # Agentur-Plugins (werden versioniert)
 !/cms/wp-content/plugins/media-lab-agency-core/
