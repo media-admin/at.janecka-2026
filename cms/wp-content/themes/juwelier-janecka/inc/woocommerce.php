@@ -54,10 +54,13 @@ add_filter('woocommerce_output_related_products_args', function($args) {
     return $args;
 });
 
-/**
- * Remove breadcrumbs (we'll add custom ones)
- */
-remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+// Remove WooCommerce default breadcrumb
+remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
+
+// Custom breadcrumb an derselben Position
+add_action( 'woocommerce_before_main_content', function() {
+    get_template_part( 'template-parts/components/breadcrumbs' );
+}, 20 );
 
 /**
  * Custom Add to Cart button text

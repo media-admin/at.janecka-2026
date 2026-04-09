@@ -20,6 +20,7 @@ import BackToTop     from './components/back-to-top';
 import ScrollProgress from './components/scroll-progress';
 import Notifications from './components/notifications';
 import initTopHeader from './components/top-header';
+import { initFooterAccordion } from './modules/footer-accordion.js';
 
 // ─── Helfer ──────────────────────────────────────────────────────────────────
 // Fehler immer sichtbar – nie still schlucken
@@ -49,10 +50,19 @@ const initApp = async () => {
   if (has('.scroll-progress')) safeInit('ScrollProgress', () => new ScrollProgress());
 
   // ── Lazy: nur laden wenn DOM-Element vorhanden ────────────────────────────
-
   if (has('.accordion, [data-accordion]')) {
     const { default: Accordion } = await import('./components/accordion');
     safeInit('Accordion', () => new Accordion());
+  }
+
+  if (has('.lightbox, [data-lightbox], .wp-lightbox-container')) {
+    const { default: Lightbox } = await import('./components/lightbox');
+    safeInit('Lightbox', () => new Lightbox());
+  }
+
+  // ── Footer Accordion ────────────────────────────
+  if (document.querySelector('.footer-nav')) {
+    initFooterAccordion();
   }
 
   // Hero Slider: Klasse aus PHP → .hero-slider.swiper
@@ -60,6 +70,11 @@ const initApp = async () => {
     const { default: HeroSlider } = await import('./components/hero-slider');
     safeInit('HeroSlider', () => new HeroSlider());
   }
+
+  if (has('.brand-slider')) {
+    const { initBrandSliders } = await import('./modules/brand-slider');
+    safeInit('BrandSlider', () => initBrandSliders());
+}
 
   // Testimonials: Klasse aus PHP → .testimonials--slider.swiper
   if (has('.testimonials--slider')) {

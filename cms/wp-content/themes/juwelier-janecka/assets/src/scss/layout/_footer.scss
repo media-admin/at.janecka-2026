@@ -9,7 +9,7 @@
 .site-footer__nav-area {
     background: $color-light;
     width:      100%;
-    padding:    $spacing-8 0;
+    padding:    $spacing-4 0;
 }
 
 .site-footer__nav-inner {
@@ -25,26 +25,27 @@
     display:    flex;
     flex-wrap:  nowrap !important;
     gap:        0;
-    justify-content: flex-start;
+    justify-content: space-evenly;
 
     // Top-Level Items = Spalten
     > li {
         flex:        0 0 auto;
         min-width:   0;
-        padding:     0 $spacing-6 0 0;
+        padding:     0;
         border-left: none;
+        text-align:  center;
 
         // Spalten-Titel
         > a {
-            font-size:      var(--text-xs);
-            font-weight:    600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            display:         block;
+            font-size:       var(--text-xs);
+            font-weight:     600;
+            letter-spacing:  0.05em;
+            text-transform:  uppercase;
             text-decoration: none;
-            margin-bottom:  $spacing-2;
-            padding-bottom: 0;
-            line-height:    1.3;    // ← kompakter
-            white-space:    nowrap;
+            margin-bottom:   $spacing-0 !important;
+            line-height:     1.3;
+            white-space:     nowrap;
 
             &:hover { color: $color-primary; }
         }
@@ -55,17 +56,18 @@
         list-style: none;
         margin:     0;
         padding:    0;
+        text-align: center;
 
         li { margin-bottom: 0; }
 
         a {
-            font-size:   var(--text-xs);
+            font-size:       var(--text-xs);
             text-decoration: none;
-            line-height: 2.0;       // ← kompakte Zeilenhöhe
-            white-space: nowrap;
-            display:     block;
-            padding:     0;
-            color:       var(--color-text-muted);
+            line-height:     1.7;
+            white-space:     nowrap;
+            display:         block;
+            padding:         0;
+            color:           var(--color-text-muted);
 
             &:hover { color: $color-primary; }
         }
@@ -73,19 +75,6 @@
 
     // Bild-Items ausblenden
     .mega-menu__img-container { display: none; }
-
-    @include respond-below('md') {
-        flex-direction: column;
-        gap:            $spacing-6;
-
-        > li {
-            border-left:  none;
-            border-top:   1px solid rgba(0,0,0,0.08);
-            padding:      $spacing-4 0 0;
-
-            &:first-child { border-top: none; }
-        }
-    }
 }
 
 
@@ -105,11 +94,6 @@
     align-items:     center;
     justify-content: space-between;
     gap:             $spacing-4;
-
-    @include respond-below('md') {
-        flex-direction: column;
-        align-items:    flex-start;
-    }
 }
 
 .footer-legal {
@@ -178,12 +162,6 @@
     align-items:     center;
     justify-content: space-between;
     gap:             $spacing-4;
-
-    @include respond-below('md') {
-        flex-direction: column;
-        align-items:    flex-start;
-        gap:            $spacing-2;
-    }
 }
 
 .site-footer__copyright,
@@ -199,5 +177,199 @@
         font-weight:     500;
 
         &:hover { color: $color-primary; opacity: 1; }
+    }
+}
+
+
+// ── 4. Desktop: Dropdown-Styles vom globalen Nav überschreiben ────────────────
+
+@media (min-width: 768px) {
+
+    // Sub-Menus: statisch, immer sichtbar, kein Dropdown-Verhalten
+    .footer-nav .sub-menu,
+    .footer-nav__list .sub-menu {
+        display:    block !important;
+        position:   static !important;
+        visibility: visible !important;
+        opacity:    1 !important;
+        transform:  none !important;
+        background: none !important;
+        box-shadow: none !important;
+        border:     none !important;
+        min-width:  0 !important;
+        padding:    0 !important;
+        margin:     0 !important;
+        pointer-events: auto !important;
+    }
+
+    // JS-erzeugte Toggle-Buttons verstecken
+    .footer-nav__toggle {
+        display: none !important;
+    }
+
+    // JS-versteckte Original-Links wiederherstellen
+    .footer-nav__link--hidden {
+        display: block !important;
+    }
+
+    // Chevrons verstecken
+    .footer-nav__chevron {
+        display: none !important;
+    }
+
+    // Pfeile/Chevrons vom Standard-Walker hinter Level-1-Links entfernen
+    .footer-nav__list > li > a::after,
+    .footer-nav__list > li > a::before {
+        display: none !important;
+        content: none !important;
+    }
+
+    // Falls die Navigation eine separate Pfeil-Klasse nutzt
+    .footer-nav__list > li > a .sub-arrow,
+    .footer-nav__list > li > a + .sub-arrow {
+        display: none !important;
+    }
+}
+
+
+// ── 5. Mobile: Accordion ──────────────────────────────────────────────────────
+
+@media (max-width: 767.98px) {
+
+    .site-footer__nav-area {
+        padding: 0;
+    }
+
+    .site-footer__nav-inner {
+        padding: 0;
+    }
+
+    .footer-nav {
+        background-color: #c4c4c4;
+        margin: 0;
+    }
+
+    .footer-nav__list {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        > li {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+            &:last-child { border-bottom: none; }
+        }
+    }
+
+    // Original-Link verstecken (durch Toggle-Button ersetzt)
+    .footer-nav__link--hidden {
+        display: none !important;
+    }
+
+    // Toggle-Button
+    .footer-nav__toggle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 1rem 1.25rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #333;
+        font-size: 1rem;
+        font-weight: 500;
+        text-align: left;
+        letter-spacing: 0.02em;
+
+        .footer-nav__chevron {
+            flex-shrink: 0;
+            width: 10px;
+            height: 10px;
+            border-right: 2px solid #333;
+            border-bottom: 2px solid #333;
+            transform: rotate(45deg);
+            margin-top: -4px;
+            transition: transform 0.25s ease;
+        }
+
+        &.is-open .footer-nav__chevron {
+            transform: rotate(-135deg);
+            margin-top: 2px;
+        }
+    }
+
+    // Items ohne Kinder
+    .footer-nav__list > li:not(.menu-item-has-children) > a {
+        display: block;
+        padding: 1rem 1.25rem;
+        color: #333;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    // Sub-Menu versteckt, per JS aufklappbar
+    .footer-nav__list .sub-menu {
+        display: none !important;
+        list-style: none;
+        margin: 0;
+        padding: 0 1.25rem 0.75rem;
+
+        &.is-open {
+            display: block !important;
+        }
+
+        li { list-style: none; }
+
+        a {
+            display: block;
+            padding: 0.4rem 0;
+            color: rgba(0, 0, 0, 0.65);
+            font-size: 0.9rem;
+        }
+    }
+
+    // Legal-Links: einspaltig zentriert
+    .footer-legal {
+        padding: 1.5rem 1rem;
+    }
+
+    .footer-legal__list {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center;
+        gap: 0;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            display: block;
+            text-align: center;
+        }
+
+        a {
+            display: block;
+            padding: 0.5rem 0;
+        }
+    }
+
+    .site-footer__middle-inner {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .site-footer__bottom-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $spacing-2;
+    }
+
+    // Social-Icons zentriert
+    .footer-social {
+        justify-content: center;
+        padding: 0.5rem 0 1.5rem;
     }
 }

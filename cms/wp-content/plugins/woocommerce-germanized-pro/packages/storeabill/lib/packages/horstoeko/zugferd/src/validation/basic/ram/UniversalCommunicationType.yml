@@ -1,7 +1,0 @@
-Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\basic\ram\UniversalCommunicationType:
-    properties:
-        uRIID:
-            -
-                NotNull:
-                    groups:
-                        - xsd_rules

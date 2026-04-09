@@ -1,34 +1,29 @@
 <?php
 /**
  * Template für einzelne Filialen (CPT: stores)
- *
- * Kein Inline-CSS, kein Inline-JS — alles ausgelagert in _stores.scss
- * und via wp_enqueue_scripts in functions.php geladen.
  */
 
 get_header(); ?>
 
 <main class="content store-single">
 
+	<?php get_template_part( 'template-parts/components/breadcrumbs' ); ?>
+
 	<?php while ( have_posts() ) : the_post(); ?>
 
-	<?php // ── Hero ─────────────────────────────────────────────────────────── ?>
+	<?php // ── Seitentitel (zentriert, über Hero) ───────────────────────────── ?>
+	<header class="page-header">
+		<h1 class="page-header__title"><?php the_title(); ?></h1>
+	</header>
+
+	<?php // ── Hero-Bild (full-width, kein Overlay) ────────────────────────── ?>
 	<?php if ( has_post_thumbnail() ) : ?>
-	<section class="store-hero">
+	<div class="store-hero">
 		<?php the_post_thumbnail( 'full', [
 			'class' => 'store-hero__image',
 			'alt'   => get_the_title(),
 		] ); ?>
-		<div class="store-hero__overlay">
-			<h1 class="store-hero__title"><?php the_title(); ?></h1>
-		</div>
-	</section>
-	<?php else : ?>
-	<section class="store-hero store-hero--no-image">
-		<div class="container">
-			<h1 class="store-hero__title store-hero__title--plain"><?php the_title(); ?></h1>
-		</div>
-	</section>
+	</div>
 	<?php endif; ?>
 
 
@@ -53,15 +48,15 @@ get_header(); ?>
 	<?php endif; ?>
 
 
-	<?php // ── Kontakt + Karte ───────────────────────────────────────────────── ?>
+	<?php // ── Öffnungszeiten + Kontakt (links) + Karte (rechts) ───────────── ?>
 	<section class="store-contact">
 		<div class="container">
 			<div class="store-contact__grid">
 
-				<?php // Linke Spalte: Kontakt & Öffnungszeiten ?>
-				<div class="store-contact__info">
+				<?php // ── Linke Spalte ──────────────────────────────────────── ?>
+				<div class="store-contact__left">
 
-					<?php // ── Öffnungszeiten ZUERST ────────────────────────── ?>
+					<?php // Öffnungszeiten ?>
 					<?php if ( have_rows( 'store-oeffnungszeiten' ) ) : ?>
 					<div class="store-hours">
 						<h2 class="store-hours__heading"><?php _e( 'Unsere Öffnungszeiten', 'juwelier-janecka' ); ?></h2>
@@ -96,22 +91,13 @@ get_header(); ?>
 					</div>
 					<?php endif; ?>
 
-					<?php // ── Terminwunsch-Button ─────────────────────────────── ?>
-					<?php $mlb_location = get_field( 'store-mlb-location' ); ?>
-					<?php if ( $mlb_location ) : ?>
+					<?php // Termin-Button via Shortcode (Standard-Standort aus Theme-Optionen) ?>
 					<div class="store-contact__cta">
-						<button
-							class="btn btn--primary store-booking__trigger"
-							data-modal-target="booking-modal-<?php echo esc_attr( $mlb_location->ID ); ?>"
-							aria-haspopup="dialog"
-						>
-							<?php _e( 'Termin vereinbaren', 'juwelier-janecka' ); ?>
-						</button>
+						<?php echo do_shortcode( '[janecka_booking_button]' ); ?>
 					</div>
-					<?php endif; ?>
 
-					<?php // ── Kontakt DARUNTER ────────────────────────────────── ?>
-					<div class="store-contact__details-block">
+					<?php // Kontakt ?>
+					<div class="store-contact__info">
 						<h2 class="store-contact__heading"><?php _e( 'Kontakt', 'juwelier-janecka' ); ?></h2>
 
 						<address class="store-contact__address">
@@ -123,7 +109,7 @@ get_header(); ?>
 						<ul class="store-contact__details">
 							<?php if ( get_field( 'store-telefon', get_the_ID() ) ) : ?>
 							<li>
-								<span class="store-contact__label"><?php _e( 'Telefon:', 'juwelier-janecka' ); ?></span>
+								<?php _e( 'Telefon:', 'juwelier-janecka' ); ?>
 								<a class="store-contact__link" href="tel:<?php the_field( 'store-telefon', get_the_ID() ); ?>">
 									<?php the_field( 'store-telefon', get_the_ID() ); ?>
 								</a>
@@ -131,7 +117,7 @@ get_header(); ?>
 							<?php endif; ?>
 							<?php if ( get_field( 'store-email', get_the_ID() ) ) : ?>
 							<li>
-								<span class="store-contact__label"><?php _e( 'E-Mail:', 'juwelier-janecka' ); ?></span>
+								<?php _e( 'E-Mail:', 'juwelier-janecka' ); ?>
 								<a class="store-contact__link" href="mailto:<?php the_field( 'store-email', get_the_ID() ); ?>">
 									<?php the_field( 'store-email', get_the_ID() ); ?>
 								</a>
@@ -140,9 +126,9 @@ get_header(); ?>
 						</ul>
 					</div>
 
-				</div>
+				</div><!-- .store-contact__left -->
 
-				<?php // Rechte Spalte: Google Map ?>
+				<?php // ── Rechte Spalte: Google Map ─────────────────────────── ?>
 				<?php $location = get_field( 'store-map' ); ?>
 				<?php if ( $location ) : ?>
 				<div class="store-contact__map">
@@ -156,13 +142,12 @@ get_header(); ?>
 							class="marker"
 							data-lat="<?php echo esc_attr( $location['lat'] ); ?>"
 							data-lng="<?php echo esc_attr( $location['lng'] ); ?>"
-							data-map-id="<?php echo esc_attr( defined('GOOGLE_MAPS_MAP_ID') ? GOOGLE_MAPS_MAP_ID : '' ); ?>"
 						></div>
 					</div>
 				</div>
 				<?php endif; ?>
 
-			</div>
+			</div><!-- .store-contact__grid -->
 		</div>
 	</section>
 
@@ -172,6 +157,7 @@ get_header(); ?>
 	<?php if ( ! empty( $payment_terms ) && ! is_wp_error( $payment_terms ) ) : ?>
 	<section class="store-payment">
 		<div class="container">
+			<hr class="store-divider">
 			<h3 class="store-payment__heading"><?php _e( 'Zahlungsmöglichkeiten in dieser Filiale', 'juwelier-janecka' ); ?></h3>
 			<ul class="store-payment__list">
 				<?php foreach ( $payment_terms as $term ) :
@@ -184,8 +170,6 @@ get_header(); ?>
 						class="store-payment__icon"
 						src="<?php echo esc_url( $image_src[0] ); ?>"
 						alt="<?php echo esc_attr( $term->name ); ?>"
-						width="<?php echo esc_attr( $image_src[1] ); ?>"
-						height="<?php echo esc_attr( $image_src[2] ); ?>"
 					>
 					<?php endif; ?>
 					<span class="store-payment__name"><?php echo esc_html( $term->name ); ?></span>
@@ -197,12 +181,12 @@ get_header(); ?>
 	<?php endif; ?>
 
 
-	<?php // ── Marken ────────────────────────────────────────────────────────── ?>
+	<?php // ── Marken (filialspezifisch via ACF) ───────────────────────────── ?>
 	<?php $brand_names = get_field( 'store-brand-tag' ); ?>
 	<?php if ( $brand_names ) : ?>
 	<section class="store-brands">
 		<div class="container">
-
+			<hr class="store-divider">
 			<div class="store-brands__intro">
 				<h2 class="store-brands__heading">
 					<?php _e( 'An diesem Standort umfasst unser Sortiment folgende Marken', 'juwelier-janecka' ); ?>
@@ -215,30 +199,31 @@ get_header(); ?>
 					<a href="tel:+4319113728"><?php _e( 'telefonisch', 'juwelier-janecka' ); ?></a>.
 				</p>
 			</div>
-
-			<ul class="store-brands__grid">
+			<div class="brand-grid">
 				<?php foreach ( $brand_names as $brand ) :
 					setup_postdata( $brand );
 					$logo = get_field( 'brand-logo-main', $brand );
 					$link = get_term_link( $brand->slug, $brand->taxonomy );
 				?>
-				<li class="store-brands__item">
-					<a class="store-brands__link" href="<?php echo esc_url( $link ); ?>">
-						<?php if ( $logo ) : ?>
-							<img
-								class="store-brands__logo"
-								src="<?php echo esc_url( $logo['url'] ); ?>"
-								alt="<?php echo esc_attr( $logo['alt'] ?: $brand->name ); ?>"
-							>
-						<?php else : ?>
-							<span class="store-brands__name"><?php echo esc_html( $brand->name ); ?></span>
-						<?php endif; ?>
-					</a>
-				</li>
-				<?php endforeach; ?>
-				<?php wp_reset_postdata(); ?>
-			</ul>
-
+				
+					class="brand-grid__item"
+					href="<?php echo esc_url( $link ); ?>"
+					title="<?php echo esc_attr( $brand->name ); ?>"
+				>
+					<?php if ( $logo ) : ?>
+						<img
+							class="brand-grid__logo"
+							src="<?php echo esc_url( $logo['url'] ); ?>"
+							alt="<?php echo esc_attr( $logo['alt'] ?: $brand->name ); ?>"
+							loading="lazy"
+							decoding="async"
+						>
+					<?php else : ?>
+						<span class="brand-grid__name"><?php echo esc_html( $brand->name ); ?></span>
+					<?php endif; ?>
+				</a>
+				<?php endforeach; wp_reset_postdata(); ?>
+			</div>
 		</div>
 	</section>
 	<?php endif; ?>
@@ -274,34 +259,17 @@ get_header(); ?>
 		<?php echo do_shortcode( '[content_schmuckservice]' ); ?>
 	</section>
 
+
+	<?php // ── Booking Modal (wird durch [janecka_booking_button] gerendert) ── ?>
+	<?php
+	// Das Modal wird vom Shortcode [janecka_booking_button] direkt ausgegeben.
+	// Hier zusätzlich das store-spezifische Modal für den fall dass store-mlb-location
+	// gesetzt ist und der Button den richtigen Standort vorauswählen soll.
+	$mlb_location = get_field( 'store-mlb-location' );
+	?>
+
 	<?php endwhile; ?>
 
 </main>
-
-<?php // ── Booking Modal ─────────────────────────────────────── ?>
-<?php $mlb_location = get_field( 'store-mlb-location' ); ?>
-<?php if ( $mlb_location ) : ?>
-<div
-    class="store-booking-modal"
-    id="booking-modal-<?php echo esc_attr( $mlb_location->ID ); ?>"
-    role="dialog"
-    aria-modal="true"
-    aria-label="<?php esc_attr_e( 'Termin vereinbaren', 'juwelier-janecka' ); ?>"
-    data-location-id="<?php echo esc_attr( $mlb_location->ID ); ?>"
-    hidden
->
-    <div class="store-booking-modal__backdrop"></div>
-    <div class="store-booking-modal__dialog">
-        <button class="store-booking-modal__close" aria-label="<?php _e( 'Schließen', 'juwelier-janecka' ); ?>">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-            </svg>
-        </button>
-        <div class="store-booking-modal__content">
-			<?php echo do_shortcode( '[mlb_booking_form]' ); // kein location-Attribut ?>
-		</div>
-    </div>
-</div>
-<?php endif; ?>
 
 <?php get_footer(); ?>

@@ -7,7 +7,7 @@
             while (have_posts()) : the_post();
                 ?>
                 <article <?php post_class(); ?>>
-                    <header class="entry-header">
+                    <header class="entry-header page-header">
                         <?php the_title('<h1>', '</h1>'); ?>
                     </header>
                     <div class="entry-content">

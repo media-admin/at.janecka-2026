@@ -24,17 +24,18 @@
 }
 
 .stores-grid {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr; // direkt 2-spaltig
+    gap: 2.5rem;
 
-	@include bp(sm) {
-		grid-template-columns: repeat( 2, 1fr );
-		gap: 2.5rem;
-	}
+    // Mobile: untereinander
+    @media ( max-width: 767px ) {
+        grid-template-columns: 1fr; 
+        gap: 1.5rem;
+    }
 }
 
 

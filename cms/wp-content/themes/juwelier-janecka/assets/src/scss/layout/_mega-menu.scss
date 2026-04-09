@@ -40,7 +40,7 @@
 // ── Links: fix 2 Spalten ──────────────────────────────────────────────────────
 
 .mega-menu__links {
-    flex:        1;           // ← nimmt linke Hälfte
+    flex:        0 0 38%;     // ← fixe 38 %
     flex-wrap: wrap;
     justify-content: flex-start;
     list-style:  none;
@@ -48,7 +48,7 @@
     padding:     0 $spacing-8 0 0;
     display:     grid;
     grid-template-columns: repeat(2, 1fr);
-    gap:         $spacing-1 $spacing-6;
+    gap:         $spacing-4 $spacing-6;
     align-content: start;
 
     li {
@@ -80,7 +80,7 @@
 // ── Bild-Spalte ───────────────────────────────────────────────────────────────
 
 .mega-menu__image {
-    flex:        1;           // ← gleiche Breite wie Links
+    flex:        1;           // ← nimmt verbleibende ~62 %
     flex-shrink: 0;
     align-self:  stretch;
 

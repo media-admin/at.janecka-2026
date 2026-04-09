@@ -101,7 +101,7 @@ function janecka_woocommerce_assets(): void {
 	// AJAX-URL & Nonce für JS
 	wp_localize_script( 'janecka-wc-filters', 'janeckaWC', [
 		'ajaxUrl'  => admin_url( 'admin-ajax.php' ),
-		'nonce'    => wp_create_nonce( 'janecka_filter_nonce' ),
+		'nonce'    => wp_create_nonce( 'mlwf_filter_nonce' ),
 		'currency' => get_woocommerce_currency_symbol(),
 		'i18n'     => [
 			'loading'     => __( 'Produkte werden geladen …', 'juwelier-janecka' ),

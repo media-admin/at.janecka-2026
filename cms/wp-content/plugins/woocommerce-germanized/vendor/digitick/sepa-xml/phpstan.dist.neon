@@ -1,9 +1,0 @@
-parameters:
-	level: 4
-	paths:
-		- src
-		- tests
-		- rector.php
-	excludePaths:
-	    - vendor/*/
-	errorFormat: table

@@ -1,7 +1,0 @@
-{
-    "git.enabled": true,
-    "git.enableSmartCommit": true,
-    "github.copilot.nextEditSuggestions.enabled": false,
-    "git.allowForcePush": true,
-    "git.addAICoAuthor": "all"
-}

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 6.9.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-04-02 20:11:34+0000\n"
+"PO-Revision-Date: 2026-04-05 02:00:42+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3271,41 +3271,6 @@ msgstr "%1$s &lsaquo; %2$s &#8211; WordPress"
 msgid "Add a navigation menu to your sidebar."
 msgstr "Der Seitenleiste ein Navigationsmenü hinzufügen."
 
-#. translators: Do not translate DESCRIPTION, CONFIRM_URL, SITENAME, SITEURL:
-#. those are placeholders.
-#: wp-includes/user.php:4894
-msgid ""
-"Howdy,\n"
-"\n"
-"A request has been made to perform the following action on your account:\n"
-"\n"
-"     ###DESCRIPTION###\n"
-"\n"
-"To confirm this, please click on the following link:\n"
-"###CONFIRM_URL###\n"
-"\n"
-"You can safely ignore and delete this email if you do not want to\n"
-"take this action.\n"
-"\n"
-"Regards,\n"
-"All at ###SITENAME###\n"
-"###SITEURL###"
-msgstr ""
-"Hallo,\n"
-"\n"
-"die folgende Anfrage wurde zur Ausführung auf Ihrem Konto eingereicht:\n"
-"\n"
-"     ###DESCRIPTION###\n"
-"\n"
-"Um diese Aktion zu bestätigen, klicken Sie bitte auf den folgenden Link:\n"
-"###CONFIRM_URL###\n"
-"\n"
-"Falls Sie diese Aktion nicht ausführen wollen, können Sie diese E-Mail ignorieren und löschen.\n"
-"\n"
-"Viele Grüße\n"
-"Alle von ###SITENAME###\n"
-"###SITEURL###"
-
 #: wp-includes/user.php:4692
 msgid "Action has been confirmed."
 msgstr "Aktion wurde bestätigt."
@@ -3391,96 +3356,11 @@ msgstr "Personenbezogene Daten löschen"
 msgid "[%1$s] Confirm Action: %2$s"
 msgstr "[%1$s] Aktion bestätigen: %2$s"
 
-#. translators: Do not translate SITENAME, USER_EMAIL, DESCRIPTION, MANAGE_URL,
-#. SITEURL; those are placeholders.
-#: wp-includes/user.php:4281
-msgid ""
-"Howdy,\n"
-"\n"
-"A user data privacy request has been confirmed on ###SITENAME###:\n"
-"\n"
-"User: ###USER_EMAIL###\n"
-"Request: ###DESCRIPTION###\n"
-"\n"
-"You can view and manage these data privacy requests here:\n"
-"\n"
-"###MANAGE_URL###\n"
-"\n"
-"Regards,\n"
-"All at ###SITENAME###\n"
-"###SITEURL###"
-msgstr ""
-"Hallo,\n"
-"\n"
-"auf folgender Website wurde eine Anfrage zum Schutz der Benutzerdaten bestätigt: ###SITENAME###\n"
-"\n"
-"Benutzer: ###USER_EMAIL###\n"
-"Anfrage: ###DESCRIPTION###\n"
-"\n"
-"Diese Datenschutzanfragen können Sie hier einsehen und verwalten:\n"
-"\n"
-"###MANAGE_URL###\n"
-"\n"
-"Viele Grüße\n"
-"Alle von ###SITENAME###\n"
-"###SITEURL###"
-
 #. translators: Erasure request fulfilled notification email subject. %s: Site
 #. title.
 #: wp-includes/user.php:4458
 msgid "[%s] Erasure Request Fulfilled"
 msgstr "[%s] Löschauftrag ausgeführt"
-
-#. translators: Do not translate SITENAME, SITEURL; those are placeholders.
-#: wp-includes/user.php:4511
-msgid ""
-"Howdy,\n"
-"\n"
-"Your request to erase your personal data on ###SITENAME### has been completed.\n"
-"\n"
-"If you have any follow-up questions or concerns, please contact the site administrator.\n"
-"\n"
-"Regards,\n"
-"All at ###SITENAME###\n"
-"###SITEURL###"
-msgstr ""
-"Hallo,\n"
-"\n"
-"die von Ihnen angefragte Löschung Ihrer personenbezogenen Daten auf ###SITENAME### wurde ausgeführt.\n"
-"\n"
-"Wenn Sie weitere Fragen oder Bedenken haben, wenden Sie sich bitte an den Administrator der Website.\n"
-"\n"
-"Viele Grüße\n"
-"Alle von ###SITENAME###\n"
-"###SITEURL###"
-
-#. translators: Do not translate SITENAME, SITEURL, PRIVACY_POLICY_URL; those
-#. are placeholders.
-#: wp-includes/user.php:4525
-msgid ""
-"Howdy,\n"
-"\n"
-"Your request to erase your personal data on ###SITENAME### has been completed.\n"
-"\n"
-"If you have any follow-up questions or concerns, please contact the site administrator.\n"
-"\n"
-"For more information, you can also read our privacy policy: ###PRIVACY_POLICY_URL###\n"
-"\n"
-"Regards,\n"
-"All at ###SITENAME###\n"
-"###SITEURL###"
-msgstr ""
-"Hallo,\n"
-"\n"
-"die von Ihnen angefragte Löschung Ihrer personenbezogenen Daten auf ###SITENAME### wurde ausgeführt.\n"
-"\n"
-"Wenn Sie weitere Fragen oder Bedenken haben, wenden Sie sich bitte an den Administrator der Website.\n"
-"\n"
-"Für weitere Informationen können Sie auch unsere Datenschutzerklärung lesen: ###PRIVACY_POLICY_URL###\n"
-"\n"
-"Viele Grüße\n"
-"Alle von ###SITENAME###\n"
-"###SITEURL###"
 
 #: wp-includes/user.php:4697
 msgid "Thanks for confirming your export request."
@@ -3538,10 +3418,6 @@ msgstr "Das aktuelle Bild hat keinen Alternativtext. Der Dateiname ist: %s"
 #: wp-includes/widgets/class-wp-widget-media-gallery.php:218
 msgid "Additional images added to this gallery: %s"
 msgstr "Weitere Bilder wurden dieser Galerie hinzugefügt: %s"
-
-#: wp-includes/user.php:4769
-msgid "An incomplete personal data request for this email address already exists."
-msgstr "Es existiert bereits eine unvollständige Benutzer-Datenschutz-Anfrage für diese E-Mail-Adresse."
 
 #: wp-includes/widgets/class-wp-widget-calendar.php:34
 msgid "A calendar of your site’s posts."
@@ -3705,10 +3581,6 @@ msgstr "Der Anfragestatus ist ungültig."
 msgid "Invalid personal data request."
 msgstr "Die Anfrage personenbezogener Daten ist ungültig."
 
-#: wp-includes/user.php:5029
-msgid "This personal data request has expired."
-msgstr "Die Datenschutz-Anfrage ist abgelaufen."
-
 #: wp-includes/user.php:5033
 msgid "The confirmation key is missing from this personal data request."
 msgstr "Der Bestätigungsschlüssel für diese Anfrage personenbezogener Daten fehlt."
@@ -3856,6 +3728,134 @@ msgstr "Sie muss aus mindestens vier Zeichen bestehen, wobei nur Buchstaben und 
 #: wp-signup.php:382
 msgid "Welcome back, %s. By filling out the form below, you can <strong>add another site to your account</strong>. There is no limit to the number of sites you can have, so create to your heart&#8217;s content, but write responsibly!"
 msgstr "Willkommen zurück, %s. Wenn Sie dieses Formular ausfüllen, können Sie <strong>Ihrem Konto eine weitere Website</strong> hinzufügen. Es gibt keine Begrenzung für die Anzahl der Websites, die Sie haben können, also erstellen Sie diese ganz nach Belieben, aber schreiben Sie bitte verantwortungsvoll!"
+
+#: wp-includes/user.php:5029
+msgid "This personal data request has expired."
+msgstr "Diese Anfrage zu personenbezogenen Daten ist abgelaufen."
+
+#: wp-includes/user.php:4769
+msgid "An incomplete personal data request for this email address already exists."
+msgstr "Für diese E-Mail-Adresse existiert bereits eine offene Anfrage zu personenbezogenen Daten."
+
+#. translators: Do not translate SITENAME, USER_EMAIL, DESCRIPTION, MANAGE_URL,
+#. SITEURL; those are placeholders.
+#: wp-includes/user.php:4281
+msgid ""
+"Howdy,\n"
+"\n"
+"A user data privacy request has been confirmed on ###SITENAME###:\n"
+"\n"
+"User: ###USER_EMAIL###\n"
+"Request: ###DESCRIPTION###\n"
+"\n"
+"You can view and manage these data privacy requests here:\n"
+"\n"
+"###MANAGE_URL###\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Hallo,\n"
+"\n"
+"auf folgender Website wurde eine Datenschutzanfrage bestätigt: ###SITENAME###\n"
+"\n"
+"Benutzer: ###USER_EMAIL###\n"
+"Anfrage: ###DESCRIPTION###\n"
+"\n"
+"Diese Datenschutzanfragen können Sie hier einsehen und verwalten:\n"
+"\n"
+"###MANAGE_URL###\n"
+"\n"
+"Viele Grüße\n"
+"Das Team von ###SITENAME###\n"
+"###SITEURL###"
+
+#. translators: Do not translate DESCRIPTION, CONFIRM_URL, SITENAME, SITEURL:
+#. those are placeholders.
+#: wp-includes/user.php:4894
+msgid ""
+"Howdy,\n"
+"\n"
+"A request has been made to perform the following action on your account:\n"
+"\n"
+"     ###DESCRIPTION###\n"
+"\n"
+"To confirm this, please click on the following link:\n"
+"###CONFIRM_URL###\n"
+"\n"
+"You can safely ignore and delete this email if you do not want to\n"
+"take this action.\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Hallo,\n"
+"\n"
+"die folgende Anfrage wurde zur Ausführung für Ihr Konto eingereicht:\n"
+"\n"
+"     ###DESCRIPTION###\n"
+"\n"
+"Um dies zu bestätigen, klicken Sie bitte auf den folgenden Link:\n"
+"###CONFIRM_URL###\n"
+"\n"
+"Sie können diese E-Mail ruhig ignorieren und löschen, wenn Sie das nicht tun möchten.\n"
+"\n"
+"Viele Grüße\n"
+"Das Team von ###SITENAME###\n"
+"###SITEURL###"
+
+#. translators: Do not translate SITENAME, SITEURL; those are placeholders.
+#: wp-includes/user.php:4511
+msgid ""
+"Howdy,\n"
+"\n"
+"Your request to erase your personal data on ###SITENAME### has been completed.\n"
+"\n"
+"If you have any follow-up questions or concerns, please contact the site administrator.\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Hallo,\n"
+"\n"
+"Ihre Anfrage auf Löschung Ihrer personenbezogenen Daten auf ###SITENAME### wurde abgeschlossen.\n"
+"\n"
+"Wenn Sie weitere Fragen oder Bedenken haben, wenden Sie sich bitte an den Administrator der Website.\n"
+"\n"
+"Viele Grüße\n"
+"Das Team von ###SITENAME###\n"
+"###SITEURL###"
+
+#. translators: Do not translate SITENAME, SITEURL, PRIVACY_POLICY_URL; those
+#. are placeholders.
+#: wp-includes/user.php:4525
+msgid ""
+"Howdy,\n"
+"\n"
+"Your request to erase your personal data on ###SITENAME### has been completed.\n"
+"\n"
+"If you have any follow-up questions or concerns, please contact the site administrator.\n"
+"\n"
+"For more information, you can also read our privacy policy: ###PRIVACY_POLICY_URL###\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Hallo,\n"
+"\n"
+"Ihre Anfrage auf Löschung Ihrer personenbezogenen Daten auf ###SITENAME### wurde abgeschlossen.\n"
+"\n"
+"Wenn Sie weitere Fragen oder Bedenken haben, wenden Sie sich bitte an den Administrator der Website.\n"
+"\n"
+"Für weitere Informationen können Sie auch unsere Datenschutzerklärung lesen: ###PRIVACY_POLICY_URL###\n"
+"\n"
+"Viele Grüße\n"
+"Das Team von ###SITENAME###\n"
+"###SITEURL###"
 
 #. translators: Hidden accessibility text.
 #: wp-includes/revision.php:34 wp-includes/js/dist/block-library.js:25465
@@ -4051,10 +4051,6 @@ msgstr "<strong>Fehler:</strong> Das Feld für den Benutzernamen ist leer."
 #: wp-includes/user.php:175 wp-includes/user.php:265
 msgid "<strong>Error:</strong> The password field is empty."
 msgstr "<strong>Fehler:</strong> Das Passwortfeld ist leer."
-
-#: wp-includes/user.php:568
-msgid "<strong>Error:</strong> Your account has been marked as a spammer."
-msgstr "<strong>Fehler:</strong> Ihr Konto wurde als Spam-Versender markiert."
 
 #: wp-includes/user.php:3215
 msgid "<strong>Error:</strong> Please enter a username or email address."
@@ -4446,65 +4442,6 @@ msgstr "Code-Tag schließen"
 #: wp-includes/shortcodes.php:407
 msgid "Attempting to parse a shortcode without a valid callback: %s"
 msgstr "Es wurde versucht, einen Shortcode ohne gültigen Callback zu parsen: %s"
-
-#. translators: Do not translate USERNAME, ADMIN_EMAIL, EMAIL, SITENAME,
-#. SITEURL: those are placeholders.
-#: wp-includes/user.php:2762
-msgid ""
-"Hi ###USERNAME###,\n"
-"\n"
-"This notice confirms that your password was changed on ###SITENAME###.\n"
-"\n"
-"If you did not change your password, please contact the Site Administrator at\n"
-"###ADMIN_EMAIL###\n"
-"\n"
-"This email has been sent to ###EMAIL###\n"
-"\n"
-"Regards,\n"
-"All at ###SITENAME###\n"
-"###SITEURL###"
-msgstr ""
-"Hallo ###USERNAME###,\n"
-"\n"
-"diese Nachricht bestätigt die Änderung Ihres Passworts auf ###SITENAME###.\n"
-"\n"
-"Wenn Sie keine Änderung vorgenommen haben, kontaktieren Sie bitte den Administrator der Website über\n"
-"###ADMIN_EMAIL###.\n"
-"\n"
-"Diese E-Mail wurde an ###EMAIL### gesendet.\n"
-"\n"
-"Viele Grüße\n"
-"Alle von ###SITENAME###\n"
-"###SITEURL###"
-
-#. translators: Do not translate USERNAME, ADMIN_EMAIL, NEW_EMAIL, EMAIL,
-#. SITENAME, SITEURL: those are placeholders.
-#: wp-includes/user.php:2820
-msgid ""
-"Hi ###USERNAME###,\n"
-"\n"
-"This notice confirms that your email address on ###SITENAME### was changed to ###NEW_EMAIL###.\n"
-"\n"
-"If you did not change your email, please contact the Site Administrator at\n"
-"###ADMIN_EMAIL###\n"
-"\n"
-"This email has been sent to ###EMAIL###\n"
-"\n"
-"Regards,\n"
-"All at ###SITENAME###\n"
-"###SITEURL###"
-msgstr ""
-"Hallo ###USERNAME###,\n"
-"\n"
-"diese Nachricht bestätigt, dass die E-Mail-Adresse bei ###SITENAME### zu ###NEW_EMAIL### geändert wurde.\n"
-"\n"
-"Wenn Sie Ihre E-Mail-Adresse nicht geändert haben, kontaktieren Sie bitte den Administrator der Website über ###ADMIN_EMAIL###.\n"
-"\n"
-"Diese E-Mail wurde an ###EMAIL### gesendet.\n"
-"\n"
-"Viele Grüße\n"
-"Alle von ###SITENAME###\n"
-"###SITEURL###"
 
 #: wp-includes/script-loader.php:1223
 msgctxt "password strength"
@@ -5323,11 +5260,6 @@ msgctxt "Theme starter content"
 msgid "You might be an artist who would like to introduce yourself and your work here or maybe you are a business with a mission to describe."
 msgstr "Vielleicht sind Sie künstlerisch tätig und möchten sich und Ihre Arbeiten hier vorstellen. Oder Sie haben vielleicht ein Unternehmen, dessen Mission Sie hier beschreiben möchten."
 
-#: wp-includes/theme.php:2469
-msgctxt "Theme starter content"
-msgid "This is a page with some basic contact information, such as an address and phone number. You might also try a plugin to add a contact form."
-msgstr "Das ist eine Seite mit einigen klassischen Kontakt-Informationen, wie Adresse und Telefonnummer. Sie könnten hier aber auch ein Plugin nutzen, um ein Kontakt-Formular einzufügen."
-
 #: wp-includes/theme.php:2478
 msgctxt "Theme starter content"
 msgid "News"
@@ -5835,40 +5767,6 @@ msgstr "&larr; Zu den Link-Kategorien"
 #: wp-includes/user.php:3833
 msgid "<strong>Error:</strong> The email address is already used."
 msgstr "<strong>Fehler:</strong> Diese E-Mail-Adresse wird bereits verwendet."
-
-#. translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL:
-#. those are placeholders.
-#: wp-includes/user.php:3853
-msgid ""
-"Howdy ###USERNAME###,\n"
-"\n"
-"You recently requested to have the email address on your account changed.\n"
-"\n"
-"If this is correct, please click on the following link to change it:\n"
-"###ADMIN_URL###\n"
-"\n"
-"You can safely ignore and delete this email if you do not want to\n"
-"take this action.\n"
-"\n"
-"This email has been sent to ###EMAIL###\n"
-"\n"
-"Regards,\n"
-"All at ###SITENAME###\n"
-"###SITEURL###"
-msgstr ""
-"Hallo ###USERNAME###,\n"
-" \n"
-"Sie haben vor kurzem angefordert, die E-Mail-Adresse zu Ihrem Konto zu ändern.\n"
-"Wenn das stimmt, klicken Sie bitte zur Änderung auf den folgenden Link:\n"
-" ###ADMIN_URL###\n"
-" \n"
-"Sie können diese E-Mail ruhig ignorieren und löschen, wenn Sie das nicht tun möchten.\n"
-"\n"
-"Diese E-Mail wurde an ###EMAIL### versandt.\n"
-"\n"
-"Viele Grüße\n"
-"Alle von ###SITENAME###\n"
-"###SITEURL###"
 
 #. translators: %s: Site name.
 #: wp-includes/user.php:3323
@@ -7511,12 +7409,6 @@ msgstr "Sie sind leider nicht berechtigt, auf diese Schriftfamilie zuzugreifen."
 msgid "%s parameter must be a valid JSON string."
 msgstr "Der Parameter %s muss eine gültige JSON-Zeichenfolge sein."
 
-#. translators: %s: Name of parameter being updated:
-#. font_family_settings[slug]".
-#: wp-includes/rest-api/endpoints/class-wp-rest-font-families-controller.php:114
-msgid "%s cannot be updated."
-msgstr "%s kann nicht aktualisiert werden."
-
 #. translators: %s: Font family slug.
 #: wp-includes/rest-api/endpoints/class-wp-rest-font-families-controller.php:190
 msgid "A font family with slug \"%s\" already exists."
@@ -7778,6 +7670,116 @@ msgstr "Die übergebene Instanz ist ungültig strukturiert."
 #: wp-includes/rest-api/endpoints/class-wp-rest-url-details-controller.php:260
 msgid "URL not found. Response returned a non-200 status code for this URL."
 msgstr "Die URL wurde nicht gefunden. Die Antwort gab einen anderen Statuscode als 200 zurück."
+
+#: wp-includes/user.php:568
+msgid "<strong>Error:</strong> Your account has been marked as a spammer."
+msgstr "<strong>Fehler:</strong> Ihr Konto wurde als Spam markiert."
+
+#. translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL:
+#. those are placeholders.
+#: wp-includes/user.php:3853
+msgid ""
+"Howdy ###USERNAME###,\n"
+"\n"
+"You recently requested to have the email address on your account changed.\n"
+"\n"
+"If this is correct, please click on the following link to change it:\n"
+"###ADMIN_URL###\n"
+"\n"
+"You can safely ignore and delete this email if you do not want to\n"
+"take this action.\n"
+"\n"
+"This email has been sent to ###EMAIL###\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Hallo ###USERNAME###,\n"
+"\n"
+"Sie haben kürzlich darum gebeten, die E-Mail-Adresse Ihres Kontos zu ändern.\n"
+"\n"
+"Wenn das zutrifft, klicken Sie bitte zur Änderung auf den folgenden Link:\n"
+"###ADMIN_URL###\n"
+"\n"
+"Sie können diese E-Mail ruhig ignorieren und löschen, wenn Sie das nicht tun möchten.\n"
+"\n"
+"Diese E-Mail wurde an ###EMAIL### gesendet.\n"
+"\n"
+"Viele Grüße\n"
+"Das Team von ###SITENAME###\n"
+"###SITEURL###"
+
+#. translators: Do not translate USERNAME, ADMIN_EMAIL, NEW_EMAIL, EMAIL,
+#. SITENAME, SITEURL: those are placeholders.
+#: wp-includes/user.php:2820
+msgid ""
+"Hi ###USERNAME###,\n"
+"\n"
+"This notice confirms that your email address on ###SITENAME### was changed to ###NEW_EMAIL###.\n"
+"\n"
+"If you did not change your email, please contact the Site Administrator at\n"
+"###ADMIN_EMAIL###\n"
+"\n"
+"This email has been sent to ###EMAIL###\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Hallo ###USERNAME###,\n"
+"\n"
+"diese Nachricht bestätigt, dass die E-Mail-Adresse bei ###SITENAME### in ###NEW_EMAIL### geändert wurde.\n"
+"\n"
+"Wenn Sie Ihre E-Mail-Adresse nicht geändert haben, wenden Sie sich bitte an den Administrator der Website unter\n"
+"###ADMIN_EMAIL###.\n"
+"\n"
+"Diese E-Mail wurde an ###EMAIL### gesendet.\n"
+"\n"
+"Viele Grüße\n"
+"Das Team von ###SITENAME###\n"
+"###SITEURL###"
+
+#. translators: Do not translate USERNAME, ADMIN_EMAIL, EMAIL, SITENAME,
+#. SITEURL: those are placeholders.
+#: wp-includes/user.php:2762
+msgid ""
+"Hi ###USERNAME###,\n"
+"\n"
+"This notice confirms that your password was changed on ###SITENAME###.\n"
+"\n"
+"If you did not change your password, please contact the Site Administrator at\n"
+"###ADMIN_EMAIL###\n"
+"\n"
+"This email has been sent to ###EMAIL###\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Hallo ###USERNAME###,\n"
+"\n"
+"diese Nachricht bestätigt die Änderung Ihres Passworts auf ###SITENAME###.\n"
+"\n"
+"Wenn Sie keine Änderung vorgenommen haben, wenden Sie sich bitte an den Administrator der Website unter\n"
+"###ADMIN_EMAIL###.\n"
+"\n"
+"Diese E-Mail wurde an ###EMAIL### gesendet.\n"
+"\n"
+"Viele Grüße\n"
+"Das Team von ###SITENAME###\n"
+"###SITEURL###"
+
+#. translators: %s: Name of parameter being updated:
+#. font_family_settings[slug]".
+#: wp-includes/rest-api/endpoints/class-wp-rest-font-families-controller.php:114
+msgid "%s cannot be updated."
+msgstr "%s konnte nicht aktualisiert werden."
+
+#: wp-includes/theme.php:2469
+msgctxt "Theme starter content"
+msgid "This is a page with some basic contact information, such as an address and phone number. You might also try a plugin to add a contact form."
+msgstr "Das ist eine Seite mit einigen grundlegenden Kontaktinformationen, wie Adresse und Telefonnummer. Sie können auch ein Plugin nutzen, um ein Kontaktformular einzufügen."
 
 #: wp-includes/post.php:1326 wp-includes/post.php:1346
 #: wp-includes/script-loader.php:1301 wp-includes/js/dist/edit-site.js:46420
@@ -10485,6 +10487,18 @@ msgstr "Ergebnissatz auf Kommentare begrenzen, denen ein bestimmter Status zugew
 msgid "Limit result set to comments assigned a specific type. Requires authorization."
 msgstr "Ergebnissatz auf Kommentare begrenzen, denen ein bestimmter Typ zugewiesen ist. Erfordert eine Autorisierung."
 
+#: wp-includes/rest-api/endpoints/class-wp-rest-abilities-v1-categories-controller.php:279
+#: wp-includes/rest-api/endpoints/class-wp-rest-abilities-v1-list-controller.php:344
+#: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:345
+msgid "Current page of the collection."
+msgstr "Aktuelle Seite der Sammlung."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-abilities-v1-categories-controller.php:285
+#: wp-includes/rest-api/endpoints/class-wp-rest-abilities-v1-list-controller.php:350
+#: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:353
+msgid "Maximum number of items to be returned in result set."
+msgstr "Maximale Anzahl der im Ergebnissatz zurückzugebenden Elemente."
+
 #. translators: %s: Method name.
 #: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:70
 #: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:87
@@ -10500,18 +10514,6 @@ msgstr "Ergebnissatz auf Kommentare begrenzen, denen ein bestimmter Typ zugewies
 #: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:258
 msgid "Method '%s' not implemented. Must be overridden in subclass."
 msgstr "Die Methode ‚%s‘ wurde nicht implementiert. Sie muss in der Unterklasse überschrieben werden."
-
-#: wp-includes/rest-api/endpoints/class-wp-rest-abilities-v1-categories-controller.php:279
-#: wp-includes/rest-api/endpoints/class-wp-rest-abilities-v1-list-controller.php:344
-#: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:345
-msgid "Current page of the collection."
-msgstr "Aktuelle Seite der Sammlung."
-
-#: wp-includes/rest-api/endpoints/class-wp-rest-abilities-v1-categories-controller.php:285
-#: wp-includes/rest-api/endpoints/class-wp-rest-abilities-v1-list-controller.php:350
-#: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:353
-msgid "Maximum number of items to be returned in result set."
-msgstr "Maximale Anzahl der im Ergebnissatz zurückzugebenden Elemente."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:362
 msgid "Limit results to those matching a string."
@@ -10790,34 +10792,6 @@ msgstr "(kein Autor)"
 msgid "Only UUID V4 is supported at this time."
 msgstr "Zurzeit wird nur UUID V4 unterstützt."
 
-#. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
-#. are placeholders.
-#: wp-includes/functions.php:8167
-msgid ""
-"Hi,\n"
-"\n"
-"This notice confirms that the admin email address was changed on ###SITENAME###.\n"
-"\n"
-"The new admin email address is ###NEW_EMAIL###.\n"
-"\n"
-"This email has been sent to ###OLD_EMAIL###\n"
-"\n"
-"Regards,\n"
-"All at ###SITENAME###\n"
-"###SITEURL###"
-msgstr ""
-"Hallo,\n"
-"\n"
-"diese Mitteilung bestätigt die Änderung der E-Mail-Adresse des Administrators auf ###SITENAME###.\n"
-"\n"
-"Die neue E-Mail-Adresse des Administrators lautet ###NEW_EMAIL###.\n"
-"\n"
-"Diese E-Mail wurde an ###OLD_EMAIL### versandt.\n"
-"\n"
-"Viele Grüße\n"
-"Alle von ###SITENAME###\n"
-"###SITEURL###"
-
 #: wp-includes/load.php:1869
 msgid "Scrape key check failed. Please try again."
 msgstr "Die Scrape-Nonce-Prüfung ist fehlgeschlagen. Bitte versuchen Sie es erneut."
@@ -10825,70 +10799,6 @@ msgstr "Die Scrape-Nonce-Prüfung ist fehlgeschlagen. Bitte versuchen Sie es ern
 #: wp-includes/ms-functions.php:191
 msgid "User cannot be added to this site."
 msgstr "Benutzer kann nicht zu dieser Website hinzugefügt werden."
-
-#. translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL:
-#. those are placeholders.
-#: wp-includes/ms-functions.php:2796
-msgid ""
-"Howdy ###USERNAME###,\n"
-"\n"
-"You recently requested to have the network admin email address on\n"
-"your network changed.\n"
-"\n"
-"If this is correct, please click on the following link to change it:\n"
-"###ADMIN_URL###\n"
-"\n"
-"You can safely ignore and delete this email if you do not want to\n"
-"take this action.\n"
-"\n"
-"This email has been sent to ###EMAIL###\n"
-"\n"
-"Regards,\n"
-"All at ###SITENAME###\n"
-"###SITEURL###"
-msgstr ""
-"Hallo ###USERNAME###,\n"
-"\n"
-"Sie haben vor kurzem angefordert, dass die E-Mail-Adresse des Netzwerkadministrators in Ihrem Netzwerk geändert werden soll.\n"
-"\n"
-"Wenn das richtig ist, klicken Sie bitte zur Änderung auf den folgenden Link:\n"
-"###ADMIN_URL###\n"
-"\n"
-"Sie können diese E-Mail ruhig ignorieren und löschen, wenn Sie das nicht tun möchten.\n"
-"\n"
-"Diese E-Mail wurde an ###EMAIL### versandt.\n"
-"\n"
-"Viele Grüße\n"
-"Alle von ###SITENAME###\n"
-"###SITEURL###"
-
-#. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
-#. are placeholders.
-#: wp-includes/ms-functions.php:2895
-msgid ""
-"Hi,\n"
-"\n"
-"This notice confirms that the network admin email address was changed on ###SITENAME###.\n"
-"\n"
-"The new network admin email address is ###NEW_EMAIL###.\n"
-"\n"
-"This email has been sent to ###OLD_EMAIL###\n"
-"\n"
-"Regards,\n"
-"All at ###SITENAME###\n"
-"###SITEURL###"
-msgstr ""
-"Hallo,\n"
-" \n"
-"diese Mitteilung bestätigt, dass die E-Mail-Adresse des Netzwerkadministrators auf ###SITENAME### geändert wurde.\n"
-" \n"
-"Die neue E-Mail-Adresse des Netzwerkadministrators lautet ###NEW_EMAIL###.\n"
-" \n"
-"Diese E-Mail wurde an ###OLD_EMAIL### versandt.\n"
-"\n"
-"Viele Grüße\n"
-"Alle von ###SITENAME###\n"
-"###SITEURL###"
 
 #. translators: 1: Trackback/pingback website name, 2: Website IP address, 3:
 #. Website hostname.
@@ -13630,6 +13540,98 @@ msgstr "Antwort auf Kommentare einschränken, die nach einem bestimmten ISO8601-
 msgid "Limit response to comments published before a given ISO8601 compliant date."
 msgstr "Antwort auf Kommentare einschränken, die vor einem bestimmten ISO8601-konformen Datum veröffentlicht wurden."
 
+#. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
+#. are placeholders.
+#: wp-includes/ms-functions.php:2895
+msgid ""
+"Hi,\n"
+"\n"
+"This notice confirms that the network admin email address was changed on ###SITENAME###.\n"
+"\n"
+"The new network admin email address is ###NEW_EMAIL###.\n"
+"\n"
+"This email has been sent to ###OLD_EMAIL###\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Hallo,\n"
+"\n"
+"diese Mitteilung bestätigt, dass die E-Mail-Adresse des Netzwerkadministrators auf ###SITENAME### geändert wurde.\n"
+"\n"
+"Die neue E-Mail-Adresse des Netzwerkadministrators lautet ###NEW_EMAIL###.\n"
+"\n"
+"Diese E-Mail wurde an ###OLD_EMAIL### gesendet.\n"
+"\n"
+"Viele Grüße\n"
+"Das Team von ###SITENAME###\n"
+"###SITEURL###"
+
+#. translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL:
+#. those are placeholders.
+#: wp-includes/ms-functions.php:2796
+msgid ""
+"Howdy ###USERNAME###,\n"
+"\n"
+"You recently requested to have the network admin email address on\n"
+"your network changed.\n"
+"\n"
+"If this is correct, please click on the following link to change it:\n"
+"###ADMIN_URL###\n"
+"\n"
+"You can safely ignore and delete this email if you do not want to\n"
+"take this action.\n"
+"\n"
+"This email has been sent to ###EMAIL###\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Hallo ###USERNAME###,\n"
+"\n"
+"Sie haben kürzlich darum gebeten, die E-Mail-Adresse des Netzwerkadministrators in Ihrem Netzwerk zu ändern.\n"
+"\n"
+"Wenn das zutrifft, klicken Sie bitte zur Änderung auf den folgenden Link:\n"
+"###ADMIN_URL###\n"
+"\n"
+"Sie können diese E-Mail ruhig ignorieren und löschen, wenn Sie das nicht tun möchten.\n"
+"\n"
+"Diese E-Mail wurde an ###EMAIL### gesendet.\n"
+"\n"
+"Viele Grüße\n"
+"Das Team von ###SITENAME###\n"
+"###SITEURL###"
+
+#. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
+#. are placeholders.
+#: wp-includes/functions.php:8167
+msgid ""
+"Hi,\n"
+"\n"
+"This notice confirms that the admin email address was changed on ###SITENAME###.\n"
+"\n"
+"The new admin email address is ###NEW_EMAIL###.\n"
+"\n"
+"This email has been sent to ###OLD_EMAIL###\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Hallo,\n"
+"\n"
+"diese Mitteilung bestätigt die Änderung der E-Mail-Adresse des Administrators auf ###SITENAME###.\n"
+"\n"
+"Die neue E-Mail-Adresse des Administrators lautet ###NEW_EMAIL###.\n"
+"\n"
+"Diese E-Mail wurde an ###OLD_EMAIL### gesendet.\n"
+"\n"
+"Viele Grüße\n"
+"Das Team von ###SITENAME###\n"
+"###SITEURL###"
+
 #: wp-includes/class-wp-post-type.php:999
 #: wp-includes/js/dist/block-library.js:25843
 msgid "No posts found."
@@ -16056,10 +16058,6 @@ msgstr "Nummerierte Liste"
 msgid "Increase indent"
 msgstr "Einzug vergrößern"
 
-#: wp-includes/class-wp-editor.php:1165
-msgid "Clear formatting"
-msgstr "Formatierung löschen"
-
 #: wp-includes/class-wp-editor.php:1173
 #: wp-includes/js/dist/block-editor.js:17741
 msgid "Align center"
@@ -17141,12 +17139,6 @@ msgstr "Menüeintrag entfernen: %1$s (%2$s)"
 msgctxt "Word count type. Do not translate!"
 msgid "words"
 msgstr "words"
-
-#. translators: Hidden accessibility text.
-#: wp-includes/class-wp-customize-nav-menus.php:1187
-#: wp-includes/class-wp-customize-widgets.php:947
-msgid "Clear Results"
-msgstr "Suchergebnisse löschen"
 
 #. translators: %s: Document title from the preview.
 #: wp-includes/class-wp-customize-manager.php:4593
@@ -18280,10 +18272,6 @@ msgstr "WordPress.org-Themes"
 msgid "Homepage Settings"
 msgstr "Homepage-Einstellungen"
 
-#: wp-includes/class-wp-customize-manager.php:5642
-msgid "You can choose what&#8217;s displayed on the homepage of your site. It can be posts in reverse chronological order (classic blog), or a fixed/static page. To set a static homepage, you first need to create two Pages. One will become the homepage, and the other will be where your posts are displayed."
-msgstr "Sie können auswählen, was auf der Homepage Ihrer Website angezeigt wird. Das können Beiträge in umgekehrter chronologischer Reihenfolge (klassischer Blog) oder eine feststehende/statische Seite sein. Um eine statische Homepage festzulegen, müssen Sie erst zwei Seiten erstellen. Eine wird die Homepage und die andere wird die, auf der Ihre Beiträge angezeigt werden."
-
 #: wp-includes/class-wp-customize-manager.php:5659
 #: wp-admin/options-reading.php:85
 msgid "Your homepage displays"
@@ -18310,6 +18298,10 @@ msgstr "Im Bearbeitungsbereich fügt die Tab-Taste ein Tab-Zeichen ein."
 #: wp-admin/plugin-editor.php:147 wp-admin/theme-editor.php:36
 msgid "To move away from this area, press the Esc key followed by the Tab key."
 msgstr "Zum Verlassen dieses Bereichs drücken Sie die Escape-Taste und dann die Tab-Taste."
+
+#: wp-includes/class-wp-customize-manager.php:5642
+msgid "You can choose what&#8217;s displayed on the homepage of your site. It can be posts in reverse chronological order (classic blog), or a fixed/static page. To set a static homepage, you first need to create two Pages. One will become the homepage, and the other will be where your posts are displayed."
+msgstr "Sie können auswählen, was auf der Homepage Ihrer Website angezeigt wird. Das können Beiträge in umgekehrter chronologischer Reihenfolge (klassischer Blog) oder eine feststehende/statische Seite sein. Um eine statische Homepage festzulegen, müssen Sie erst zwei Seiten erstellen. Eine wird die Homepage und die andere wird die, auf der Ihre Beiträge angezeigt werden."
 
 #: wp-includes/class-wp-customize-manager.php:5721
 #: wp-includes/widgets/class-wp-widget-custom-html.php:328
@@ -18858,6 +18850,16 @@ msgstr "Bitte kontaktieren Sie Ihr Hosting-Unternehmen, um Unterstützung bei de
 msgid "In this case, WordPress caught an error with one of your plugins, %s."
 msgstr "In diesem Fall hat WordPress einen Fehler in einem Ihrer Plugins, %s, abgefangen."
 
+#. translators: %s: Theme name.
+#: wp-includes/class-wp-recovery-mode-email-service.php:286
+msgid "In this case, WordPress caught an error with your theme, %s."
+msgstr "In diesem Fall hat WordPress einen Fehler in Ihrem Theme „%s“ abgefangen."
+
+#: wp-includes/customize/class-wp-customize-theme-control.php:98
+#: wp-admin/themes.php:450 wp-admin/themes.php:848
+msgid "New version available."
+msgstr "Neue Version verfügbar."
+
 #. translators: Do not translate LINK, EXPIRES, CAUSE, DETAILS, SITEURL,
 #. PAGEURL, SUPPORT. DEBUG: those are placeholders.
 #: wp-includes/class-wp-recovery-mode-email-service.php:153
@@ -18899,16 +18901,6 @@ msgstr ""
 "###DEBUG###\n"
 "\n"
 "###DETAILS###"
-
-#. translators: %s: Theme name.
-#: wp-includes/class-wp-recovery-mode-email-service.php:286
-msgid "In this case, WordPress caught an error with your theme, %s."
-msgstr "In diesem Fall hat WordPress einen Fehler in Ihrem Theme „%s“ abgefangen."
-
-#: wp-includes/customize/class-wp-customize-theme-control.php:98
-#: wp-admin/themes.php:450 wp-admin/themes.php:848
-msgid "New version available."
-msgstr "Neue Version verfügbar."
 
 #: wp-includes/class-wp-xmlrpc-server.php:669 wp-includes/option.php:2959
 msgid "Allow people to submit comments on new posts."
@@ -19059,6 +19051,20 @@ msgstr "Benachrichtigungen"
 msgid "This theme does not work with your versions of WordPress and PHP."
 msgstr "Dieses Theme funktioniert nicht mit Ihren Versionen von WordPress und PHP."
 
+#: wp-includes/customize/class-wp-customize-theme-control.php:209
+#: wp-admin/includes/theme.php:1013 wp-admin/theme-install.php:366
+#: wp-admin/theme-install.php:571 wp-admin/themes.php:554
+#: wp-admin/themes.php:949 wp-admin/themes.php:1129
+msgid "This theme does not work with your version of WordPress."
+msgstr "Dieses Theme funktioniert nicht mit Ihrer WordPress-Version."
+
+#: wp-includes/customize/class-wp-customize-theme-control.php:220
+#: wp-admin/includes/theme.php:1024 wp-admin/theme-install.php:377
+#: wp-admin/theme-install.php:582 wp-admin/themes.php:563
+#: wp-admin/themes.php:960 wp-admin/themes.php:1140
+msgid "This theme does not work with your version of PHP."
+msgstr "Dieses Theme funktioniert nicht mit Ihrer PHP-Version."
+
 #. translators: 1: URL to WordPress Updates screen, 2: URL to Update PHP page.
 #: wp-includes/customize/class-wp-customize-theme-control.php:122
 #: wp-includes/customize/class-wp-customize-theme-control.php:187
@@ -19120,20 +19126,6 @@ msgstr "<a href=\"%s\">Bitte aktualisieren Sie WordPress</a>."
 #: wp-admin/upgrade.php:106
 msgid "<a href=\"%s\">Learn more about updating PHP</a>."
 msgstr "<a href=\"%s\">Erfahren Sie mehr über die PHP-Aktualisierung (engl.)</a>."
-
-#: wp-includes/customize/class-wp-customize-theme-control.php:209
-#: wp-admin/includes/theme.php:1013 wp-admin/theme-install.php:366
-#: wp-admin/theme-install.php:571 wp-admin/themes.php:554
-#: wp-admin/themes.php:949 wp-admin/themes.php:1129
-msgid "This theme does not work with your version of WordPress."
-msgstr "Dieses Theme funktioniert nicht mit Ihrer WordPress-Version."
-
-#: wp-includes/customize/class-wp-customize-theme-control.php:220
-#: wp-admin/includes/theme.php:1024 wp-admin/theme-install.php:377
-#: wp-admin/theme-install.php:582 wp-admin/themes.php:563
-#: wp-admin/themes.php:960 wp-admin/themes.php:1140
-msgid "This theme does not work with your version of PHP."
-msgstr "Dieses Theme funktioniert nicht mit Ihrer PHP-Version."
 
 #. translators: %s: Theme name.
 #: wp-includes/customize/class-wp-customize-theme-control.php:116
@@ -20073,6 +20065,16 @@ msgstr "Umschalttaste + Klick, um dieses Widget zu bearbeiten."
 #: wp-includes/class-wp-editor.php:1413
 msgid "Shift + Alt + letter:"
 msgstr "Umschalttaste + Alt + Zeichen:"
+
+#: wp-includes/class-wp-editor.php:1165
+msgid "Clear formatting"
+msgstr "Formatierung entfernen"
+
+#. translators: Hidden accessibility text.
+#: wp-includes/class-wp-customize-nav-menus.php:1187
+#: wp-includes/class-wp-customize-widgets.php:947
+msgid "Clear Results"
+msgstr "Ergebnisse leeren"
 
 #: wp-activate.php:126
 msgid "Activation Key Required"
@@ -21971,6 +21973,10 @@ msgstr "Zeigt ein Archiv für Beiträge eines einzelnen Autors an. Dieses Templa
 msgid "Displays a post category archive. This template will serve as a fallback when a more specific template (e.g. Category: Recipes) cannot be found."
 msgstr "Zeigt ein Archiv für eine Beitragskategorie an. Dieses Template wird als Fallback ausgeliefert, wenn kein spezifischeres Template (z. B. Kategorie: Rezepte) gefunden werden kann."
 
+#: wp-includes/block-template-utils.php:181
+msgid "Displays a custom taxonomy archive. Like categories and tags, taxonomies have terms which you use to classify things. For example: a taxonomy named \"Art\" can have multiple terms, such as \"Modern\" and \"18th Century.\" This template will serve as a fallback when a more specific template (e.g. Taxonomy: Art) cannot be found."
+msgstr "Zeigt ein Archiv für eine individuelle Taxonomie an. Wie Kategorien und Schlagwörter haben Taxonomien Begriffe, die Sie benutzen, um Dinge zu klassifizieren. Zum Beispiel: Eine Taxonomie namens „Kunst“ kann mehrere Begriffe beinhalten, wie „Modern“ und „18. Jahrhundert“. Dieses Template wird als Fallback ausgeliefert, wenn kein spezifischeres Template (z. B. Taxonomie: Kunst) gefunden werden kann."
+
 #: wp-includes/block-template-utils.php:185
 msgid "Displays a post archive when a specific date is visited (e.g., example.com/2023/)."
 msgstr "Zeigt ein Beitragsarchiv an, wenn ein spezifisches Datum angegeben ist (z. B. example.com/2023/)."
@@ -21994,10 +22000,6 @@ msgstr "Zeigt die Datenschutzerklärungs-Seite Ihrer Website an."
 #: wp-includes/block-template-utils.php:205
 msgid "Displays when a visitor views a non-existent page, such as a dead link or a mistyped URL."
 msgstr "Wird angezeigt, wenn ein Besucher eine nicht vorhandene Seite anzeigt, wie etwa einen toten Link oder eine falsch getippte URL."
-
-#: wp-includes/block-template-utils.php:181
-msgid "Displays a custom taxonomy archive. Like categories and tags, taxonomies have terms which you use to classify things. For example: a taxonomy named \"Art\" can have multiple terms, such as \"Modern\" and \"18th Century.\" This template will serve as a fallback when a more specific template (e.g. Taxonomy: Art) cannot be found."
-msgstr "Zeigt ein Archiv für eine individuelle Taxonomie an. Wie Kategorien und Schlagwörter haben Taxonomien Begriffe, die Sie benutzen, um Dinge zu klassifizieren. Zum Beispiel: Eine Taxonomie namens „Kunst“ kann mehrere Begriffe beinhalten, wie „Modern“ und „18. Jahrhundert“. Dieses Template wird als Fallback ausgeliefert, wenn kein spezifischeres Template (z. B. Taxonomie: Kunst) gefunden werden kann."
 
 #: wp-includes/admin-bar.php:176 wp-admin/about.php:60
 #: wp-admin/contribute.php:13 wp-admin/contribute.php:33

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 6.9.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-03-31 10:54:27+0000\n"
+"PO-Revision-Date: 2026-04-06 23:21:55+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -151,7 +151,7 @@ msgstr "Benutzer von dieser Website entfernt."
 
 #: wp-admin/users.php:712
 msgid "Other users have been deleted."
-msgstr "Andere Benutzer sind gelöscht worden."
+msgstr "Andere Benutzer wurden gelöscht."
 
 #: wp-admin/users.php:704
 msgid "You cannot delete the current user."
@@ -159,7 +159,7 @@ msgstr "Sie können den aktuellen Benutzer nicht löschen."
 
 #: wp-admin/users.php:694
 msgid "Other user roles have been changed."
-msgstr "Die Rollen der anderen Benutzer sind verändert worden."
+msgstr "Die Rollen anderer Benutzer wurden geändert."
 
 #: wp-admin/users.php:686
 msgid "The current user&#8217;s role must have user editing capabilities."
@@ -373,7 +373,7 @@ msgstr "Legen Sie einen neuen Benutzer an und fügen Sie ihn dieser Website hinz
 
 #: wp-admin/user-new.php:489 wp-admin/user-new.php:656
 msgid "Add the user without sending an email that requires their confirmation"
-msgstr "Benutzer hinzufügen, ohne eine E-Mail zu versenden, die eine Bestätigung erfordert"
+msgstr "Benutzer hinzufügen, ohne eine E-Mail zu senden, die eine Bestätigung seinerseits erfordert"
 
 #: wp-admin/user-new.php:486 wp-admin/user-new.php:653
 msgid "Skip Confirmation Email"
@@ -419,7 +419,7 @@ msgstr "Der Benutzer wurde zu Ihrer Website hinzugefügt."
 
 #: wp-admin/user-new.php:353
 msgid "Invitation email sent to user. A confirmation link must be clicked for them to be added to your site."
-msgstr "Die Einladungs-E-Mail wurde versandt. Der Benutzer muss den Bestätigungslink anklicken, um Ihrer Website hinzugefügt zu werden."
+msgstr "Die Einladungs-E-Mail wurde gesendet. Der Benutzer muss den Bestätigungslink anklicken, um Ihrer Website hinzugefügt zu werden."
 
 #: wp-admin/user-new.php:350
 msgid "Invitation email sent to new user. A confirmation link must be clicked before their account is created."
@@ -2139,7 +2139,7 @@ msgstr "https://de.wordpress.org/about/stats/"
 #. translators: %s: https://wordpress.org/about/stats
 #: wp-admin/privacy.php:61
 msgid "This data is used to provide general enhancements to WordPress, which includes helping to protect your site by finding and automatically installing new updates. It is also used to calculate statistics, such as those shown on the <a href=\"%s\">WordPress.org stats page</a>."
-msgstr "Diese Daten werden genutzt, um durchgängig Verbesserungen an WordPress zu ermöglichen, welche auch das Finden und automatische Installieren von neuen Updates beinhalten, um Ihre Website zu schützen. Auch werden die Daten verwendet, um Statistiken zu erstellen, wie solche, die auf der <a href=\"%s\">Seite mit den Statistiken bei WordPress.org</a> zu sehen sind."
+msgstr "Diese Daten werden genutzt, um WordPress stetig zu verbessern. Dazu gehört auch das Finden und automatische Installieren neuer Updates zum Schutz Ihrer Website. Auch werden die Daten verwendet, um Statistiken zu erstellen, wie solche, die auf der <a href=\"%s\">Seite mit den Statistiken bei WordPress.org</a> zu sehen sind."
 
 #: wp-admin/privacy.php:55
 msgid "From time to time, your WordPress site may send data to WordPress.org &#8212; including, but not limited to &#8212; the version you are using, and a list of installed plugins and themes."
@@ -2857,7 +2857,7 @@ msgstr "Eine neue Seite für die Datenschutzerklärung erstellen"
 #. Accessibility text.
 #: wp-admin/options-privacy.php:239
 msgid "Need help putting together your new Privacy Policy page? <a href=\"%1$s\" %2$s>Check out the privacy policy guide%3$s</a> for recommendations on what content to include, along with policies suggested by your plugins and theme."
-msgstr "Brauchen Sie Hilfe beim Zusammenstellen Ihrer neuen Seite zur Datenschutzerklärung? <a href=\"%1$s\" %2$s>Sehen Sie sich den Datenschutzerklärungs-Leitfaden an%3$s</a> mit Empfehlungen, welcher Inhalt zusammen mit vorgeschlagenen Erklärungen Ihrer Plugins und Themes eingefügt werden sollte."
+msgstr "Brauchen Sie Hilfe beim Zusammenstellen Ihrer neuen Seite zur Datenschutzerklärung? <a href=\"%1$s\" %2$s>Sehen Sie sich den Leitfaden zur Datenschutzerklärung an%3$s</a> mit Empfehlungen, welcher Inhalt zusammen mit vorgeschlagenen Erklärungen Ihrer Plugins und Themes eingefügt werden sollte."
 
 #. translators: 1: URL to edit Privacy Policy page, 2: URL to preview Privacy
 #. Policy page.
@@ -2943,11 +2943,11 @@ msgstr "<a href=\"https://wordpress.org/documentation/article/settings-privacy-s
 
 #: wp-admin/options-privacy.php:41
 msgid "This screen includes suggestions to help you write your own privacy policy. However, it is your responsibility to use these resources correctly, to provide the information required by your privacy policy, and to keep this information current and accurate."
-msgstr "Diese Ansicht enthält Vorschläge, die Ihnen beim Schreiben Ihrer eigenen Datenschutzerklärung helfen sollen. Sie sind jedoch selbst dafür verantwortlich, diese Ressourcen korrekt zu verwenden, die für Ihre Datenschutzerklärung erforderlichen Informationen bereitzustellen und diese Informationen aktuell und fehlerfrei zu halten."
+msgstr "Diese Ansicht enthält Vorschläge, die Ihnen beim Schreiben Ihrer eigenen Datenschutzerklärung helfen sollen. Sie sind jedoch selbst dafür verantwortlich, diese Ressourcen korrekt zu verwenden, die für Ihre Datenschutzerklärung erforderlichen Informationen bereitzustellen und diese Informationen aktuell und korrekt zu halten."
 
 #: wp-admin/options-privacy.php:40
 msgid "The Privacy screen lets you either build a new privacy-policy page or choose one you already have to show."
-msgstr "In der Datenschutz-Ansicht können Sie entweder eine neue Datenschutzerklärung erstellen oder eine bereits vorhandene zum Anzeigen auswählen."
+msgstr "In der Datenschutz-Ansicht können Sie entweder eine neue Seite für die Datenschutzerklärung erstellen oder eine bereits vorhandene zum Anzeigen auswählen."
 
 #: wp-admin/options-privacy.php:13 wp-admin/privacy-policy-guide.php:13
 msgid "Sorry, you are not allowed to manage privacy options on this site."
@@ -2966,7 +2966,7 @@ msgstr "Wenn Sie das Stammverzeichnis Ihrer Website kurzfristig beschreibbar mac
 #. translators: 1: Documentation URL, 2: web.config, 3: Ctrl + A, 4: ⌘ + A
 #: wp-admin/options-permalink.php:495
 msgid "<strong>Error:</strong> The root directory of your site is not <a href=\"%1$s\">writable</a>, so creating a file automatically was not possible. This is the URL rewrite rule you should have in your %2$s file. Create a new file called %2$s in the root directory of your site. Click in the field and press %3$s (or %4$s on Mac) to select all. Then insert this code into the %2$s file."
-msgstr "<strong>Fehler:</strong> Das Hauptverzeichnis Ihrer Website ist nicht <a href=\"%1$s\">beschreibbar (engl.)</a>, sodass die automatische Dateierstellung nicht möglich war. Darum finden Sie hier die URL-Umschreibungsregel, die Sie in der %2$s-Datei speichern sollten. Erstellen Sie eine neue Datei namens %2$s im Hauptverzeichnis Ihrer Website. Klicken Sie in das Feld und drücken Sie %3$s (oder %4$s am Mac), um alles auszuwählen. Fügen Sie diesen Code dann in die %2$s-Datei ein."
+msgstr "<strong>Fehler:</strong> Das Stammverzeichnis Ihrer Website ist nicht <a href=\"%1$s\">beschreibbar (engl.)</a>, sodass die automatische Dateierstellung nicht möglich war. Darum finden Sie hier die URL-Umschreibungsregel, die Sie in der %2$s-Datei speichern sollten. Erstellen Sie eine neue Datei namens %2$s im Stammverzeichnis Ihrer Website. Klicken Sie in das Feld und drücken Sie %3$s (oder %4$s am Mac), um alles auszuwählen. Fügen Sie diesen Code dann in die %2$s-Datei ein."
 
 #. translators: %s: web.config
 #: wp-admin/options-permalink.php:485
@@ -5157,7 +5157,7 @@ msgstr "Template-Bearbeitung"
 
 #: wp-admin/includes/theme.php:345
 msgid "Sticky Post"
-msgstr "Beitrag oben halten"
+msgstr "Oben gehaltener Beitrag"
 
 #: wp-admin/includes/theme.php:343
 msgid "Full Width Template"
@@ -5177,11 +5177,11 @@ msgstr "Beitragsbilder"
 
 #: wp-admin/includes/theme.php:339
 msgid "Featured Image Header"
-msgstr "Individuelles Header-Bild"
+msgstr "Beitragsbild-Header"
 
 #: wp-admin/includes/theme.php:338
 msgid "Editor Style"
-msgstr "Stylesheet für Editor"
+msgstr "Editor-Stil"
 
 #: wp-admin/includes/theme.php:337
 msgid "Custom Logo"
@@ -5213,7 +5213,7 @@ msgstr "Fotografie"
 
 #: wp-admin/includes/theme.php:324
 msgid "Holiday"
-msgstr "Feiertage"
+msgstr "Urlaub"
 
 #: wp-admin/includes/theme.php:323
 msgid "Food & Drink"
@@ -5713,11 +5713,11 @@ msgstr "Entfernt"
 
 #: wp-admin/includes/privacy-tools.php:945
 msgid "Invalid request ID when processing personal data to erase."
-msgstr "Ungültige Anfrage-ID bei der Verarbeitung von zu löschenden personenbezogenen Daten."
+msgstr "Ungültige Anfrage-ID bei der Verarbeitung zu löschender personenbezogener Daten."
 
 #: wp-admin/includes/privacy-tools.php:794
 msgid "Invalid request ID when merging personal data to export."
-msgstr "Ungültige Anfrage-ID beim Zusammenführen von personenbezogenen Daten für den Export."
+msgstr "Ungültige Anfrage-ID beim Zusammenführen personenbezogener Daten für den Export."
 
 #: wp-admin/includes/privacy-tools.php:747
 msgid "Unable to send personal data export email."
@@ -5742,12 +5742,12 @@ msgid ""
 msgstr ""
 "Hallo,\n"
 "\n"
-"Ihre Anfrage für den Export personenbezogener Daten wurde abgeschlossen. Sie können Ihre personenbezogenen Daten durch Klick auf den Link unten herunterladen. Aus Gründen des Datenschutzes und der Sicherheit wird diese Datei am ###EXPIRATION### automatisch gelöscht. Laden Sie sie also bitte vorher herunter.\n"
+"Ihre Anfrage auf den Export personenbezogener Daten wurde abgeschlossen. Sie können Ihre personenbezogenen Daten über den unten stehenden Link herunterladen. Aus Gründen des Datenschutzes und der Sicherheit wird diese Datei am ###EXPIRATION### automatisch gelöscht. Bitte laden Sie sie daher rechtzeitig herunter.\n"
 "\n"
 "###LINK###\n"
 "\n"
-"Viele Grüße,\n"
-"von allen auf ###SITENAME###\n"
+"Viele Grüße\n"
+"Das Team von ###SITENAME###\n"
 "###SITEURL###"
 
 #. translators: Personal data export notification email subject. %s: Site
@@ -5766,11 +5766,11 @@ msgstr "Die Exportdatei mit personenbezogenen Daten (Archiv) konnte nicht zum Sc
 
 #: wp-admin/includes/privacy-tools.php:545
 msgid "Unable to archive the personal data export file (HTML format)."
-msgstr "Die Exportdatei (HTML-Format) mit personenbezogenen Daten kann nicht archiviert werden."
+msgstr "Die Exportdatei (HTML-Format) mit personenbezogenen Daten konnte nicht archiviert werden."
 
 #: wp-admin/includes/privacy-tools.php:541
 msgid "Unable to archive the personal data export file (JSON format)."
-msgstr "Die Exportdatei (JSON-Format) mit personenbezogenen Daten kann nicht archiviert werden."
+msgstr "Die Exportdatei (JSON-Format) mit personenbezogenen Daten konnte nicht archiviert werden."
 
 #: wp-admin/includes/privacy-tools.php:467
 msgid "Personal Data Export"
@@ -5778,7 +5778,7 @@ msgstr "Export personenbezogener Daten"
 
 #: wp-admin/includes/privacy-tools.php:447
 msgid "Unable to open personal data export (HTML report) for writing."
-msgstr "Die Exportdatei für den Benutzer-Datenschutz (HTML-Bericht) konnte nicht zum Schreiben geöffnet werden."
+msgstr "Die Exportdatei mit personenbezogenen Daten (HTML-Bericht) konnte nicht zum Schreiben geöffnet werden."
 
 #: wp-admin/includes/privacy-tools.php:432
 msgid "Unable to open personal data export file (JSON report) for writing."
@@ -5787,7 +5787,7 @@ msgstr "Die Exportdatei mit personenbezogenen Daten (JSON-Bericht) konnte nicht 
 #. translators: %s: Error message.
 #: wp-admin/includes/privacy-tools.php:419
 msgid "Unable to encode the personal data for export. Error: %s"
-msgstr "Die persönlichen Daten können nicht für den Export kodiert werden. Fehler: %s"
+msgstr "Die personenbezogenen Daten konnten nicht für den Export kodiert werden. Fehler: %s"
 
 #. translators: %s: Post meta key.
 #: wp-admin/includes/privacy-tools.php:404
@@ -5824,7 +5824,7 @@ msgstr "Übersicht über den Exportbericht."
 #: wp-admin/includes/privacy-tools.php:368
 msgctxt "personal data group label"
 msgid "About"
-msgstr "Über"
+msgstr "Informationen"
 
 #. translators: %s: User's email address.
 #: wp-admin/includes/privacy-tools.php:361
@@ -5833,11 +5833,11 @@ msgstr "Export personenbezogener Daten für %s"
 
 #: wp-admin/includes/privacy-tools.php:341
 msgid "Unable to protect personal data export folder from browsing."
-msgstr "Der Exportordner für den Benutzer-Datenschutz konnte nicht vor dem Durchsuchen geschützt werden."
+msgstr "Der Exportordner für personenbezogene Daten konnte nicht vor Verzeichnisauflistung geschützt werden."
 
 #: wp-admin/includes/privacy-tools.php:333
 msgid "Unable to create personal data export folder."
-msgstr "Der Exportordner für den Benutzer-Datenschutz konnte nicht erstellt werden."
+msgstr "Der Exportordner für personenbezogene Daten konnte nicht erstellt werden."
 
 #: wp-admin/includes/privacy-tools.php:325
 msgid "Invalid email address when generating personal data export file."
@@ -5874,15 +5874,15 @@ msgstr "Diese Anfrage kann nicht hinzugefügt werden. Es muss eine gültige E-Ma
 #: wp-admin/includes/privacy-tools.php:107
 #: wp-admin/includes/privacy-tools.php:124
 msgid "Invalid personal data action."
-msgstr "Die Aktion für personenbezogene Daten ist ungültig."
+msgstr "Ungültige Aktion für personenbezogene Daten."
 
 #: wp-admin/includes/privacy-tools.php:91
 msgid "Confirmation request sent again successfully."
-msgstr "Die Bestätigungsanfrage wurde erfolgreich erneut versendet."
+msgstr "Die Bestätigungsanfrage wurde erfolgreich erneut gesendet."
 
 #: wp-admin/includes/privacy-tools.php:31
 msgid "Unable to initiate confirmation for personal data request."
-msgstr "Eine Bestätigung der Anfrage nach personenbezogenen Daten kann nicht initiiert werden."
+msgstr "Eine Bestätigung der Anfrage personenbezogener Daten konnte nicht initiiert werden."
 
 #: wp-admin/includes/post.php:1929
 msgid "Your latest changes were saved as a revision."
@@ -6557,13 +6557,12 @@ msgstr ""
 "Um diese Änderung zu bestätigen, klicken Sie bitte auf den folgenden Link:\n"
 "###ADMIN_URL###\n"
 "\n"
-"Wenn Sie keine Änderung vornehmen möchten, können Sie diese\n"
-"E-Mail ignorieren und löschen. \n"
+"Sie können diese E-Mail ruhig ignorieren und löschen, wenn Sie keine Änderung vornehmen möchten.\n"
 "\n"
-"Diese E-Mail wurde an die Adresse ###EMAIL### versandt. \n"
+"Diese E-Mail wurde an die Adresse ###EMAIL### gesendet.\n"
 "\n"
-"Viele Grüße, \n"
-"von allen auf ###SITENAME### \n"
+"Viele Grüße\n"
+"Das Team von ###SITENAME###\n"
 "###SITEURL###"
 
 #. translators: %s: Date and time.
@@ -7290,7 +7289,7 @@ msgstr "Blogger"
 
 #: wp-admin/includes/image.php:171
 msgid "The attached file cannot be found."
-msgstr "Die angehängte Datei kann nicht gefunden werden."
+msgstr "Die angehängte Datei konnte nicht gefunden werden."
 
 #: wp-admin/includes/image-edit.php:1161
 msgid "Image saved"
@@ -8115,7 +8114,7 @@ msgstr "Hervorragende Arbeit! Ihre Website besteht derzeit alle Tests zum Websit
 #. translators: %s: URL to Site Health screen.
 #: wp-admin/includes/dashboard.php:2004
 msgid "Site health checks will automatically run periodically to gather information about your site. You can also <a href=\"%s\">visit the Site Health screen</a> to gather information about your site now."
-msgstr "In regelmäßigen Abständen werden automatisch Tests zum Website-Zustand durchgeführt, um Informationen über Ihre Website zu sammeln. Sie können auch die Seite <a href=\"%s\">Website-Zustand</a> besuchen, um jetzt Informationen über Ihre Website zu sammeln."
+msgstr "In regelmäßigen Abständen werden automatisch Tests zum Website-Zustand durchgeführt, um Informationen über Ihre Website zu ermitteln. Sie können auch die Seite <a href=\"%s\">Website-Zustand</a> besuchen, um jetzt Informationen über Ihre Website zu sammeln."
 
 #: wp-admin/includes/dashboard.php:1993 wp-admin/site-health.php:137
 msgid "Results are still loading&hellip;"
@@ -8659,7 +8658,7 @@ msgstr "Das Paket ist nicht verfügbar."
 #. translators: %s: Directory name.
 #: wp-admin/includes/class-wp-upgrader.php:197
 msgid "Unable to locate needed folder (%s)."
-msgstr "Der benötigte Ordner (%s) kann nicht gefunden werden."
+msgstr "Der benötigte Ordner (%s) konnte nicht gefunden werden."
 
 #: wp-admin/includes/class-wp-upgrader.php:195 wp-admin/includes/theme.php:72
 msgid "Unable to locate WordPress theme directory."
@@ -8667,11 +8666,11 @@ msgstr "Das WordPress-Theme-Verzeichnis konnte nicht gefunden werden."
 
 #: wp-admin/includes/class-wp-upgrader.php:194 wp-admin/includes/plugin.php:958
 msgid "Unable to locate WordPress plugin directory."
-msgstr "Das Plugin-Verzeichnis von WordPress kann nicht gefunden werden."
+msgstr "Das Plugin-Verzeichnis von WordPress konnte nicht gefunden werden."
 
 #: wp-admin/includes/class-wp-upgrader.php:191
 msgid "Unable to locate WordPress root directory."
-msgstr "Das Stamm-Verzeichnis von WordPress kann nicht gefunden werden."
+msgstr "Das Stammverzeichnis von WordPress konnte nicht gefunden werden."
 
 #: wp-admin/includes/class-wp-upgrader.php:190 wp-admin/includes/plugin.php:952
 #: wp-admin/includes/theme.php:66
@@ -9066,13 +9065,13 @@ msgstr "Es wurden keine Client-Cache-Antwort-Header erkannt."
 #. threshold in milliseconds.
 #: wp-admin/includes/class-wp-site-health.php:2481
 msgid "Median server response time was %1$s milliseconds. It should be less than the recommended %2$s milliseconds threshold."
-msgstr "Die mittlere Antwortzeit des Servers betrug %1$s Millisekunden. Sie sollte unter dem empfohlenen Schwellenwert von %2$s Millisekunden liegen."
+msgstr "Der Median der Server-Antwortzeit betrug %1$s Millisekunden. Sie sollte unter dem empfohlenen Schwellenwert von %2$s Millisekunden liegen."
 
 #. translators: 1: The response time in milliseconds, 2: The recommended
 #. threshold in milliseconds.
 #: wp-admin/includes/class-wp-site-health.php:2474
 msgid "Median server response time was %1$s milliseconds. This is less than the recommended %2$s milliseconds threshold."
-msgstr "Die mittlere Antwortzeit des Servers betrug %1$s Millisekunden. Dies ist weniger als der empfohlene Schwellenwert von %2$s Millisekunden."
+msgstr "Der Median der Server-Antwortzeit betrug %1$s Millisekunden. Dies ist weniger als der empfohlene Schwellenwert von %2$s Millisekunden."
 
 #: wp-admin/includes/class-wp-site-health.php:2467
 msgid "Server response time could not be determined. Verify that loopback requests are working."
@@ -9097,7 +9096,7 @@ msgstr "Seiten-Cache wurde nicht erkannt, aber die Antwortzeit des Servers ist O
 #. translators: 1: Error message, 2: Error code.
 #: wp-admin/includes/class-wp-site-health.php:2439
 msgid "Unable to detect page cache due to possible loopback request problem. Please verify that the loopback request test is passing. Error: %1$s (Code: %2$s)"
-msgstr "Seiten-Cache kann wegen eines möglichen Loopback-Anfrageproblems nicht erkannt werden. Bitte überprüfen Sie, ob der Loopback-Anforderungstest erfolgreich ist. Fehler: %1$s (Code: %2$s)"
+msgstr "Seiten-Cache kann wegen eines möglichen Loopback-Anfrageproblems nicht erkannt werden. Bitte überprüfen Sie, ob der Loopback-Anfragetest erfolgreich ist. Fehler: %1$s (Code: %2$s)"
 
 #: wp-admin/includes/class-wp-site-health.php:2435
 msgid "Unable to detect the presence of page cache"
@@ -9332,7 +9331,7 @@ msgstr "Das Verzeichnis %s kann nicht gefunden werden."
 
 #: wp-admin/includes/class-wp-site-health.php:1931
 msgid "Unable to locate WordPress content directory"
-msgstr "Das Verzeichnis für die WordPress-Inhalte kann nicht gefunden werden"
+msgstr "Das Verzeichnis für die WordPress-Inhalte konnte nicht gefunden werden"
 
 #: wp-admin/includes/class-wp-site-health.php:1922
 msgid "Could not access filesystem"
@@ -9505,7 +9504,7 @@ msgstr "Mehr darüber lesen, warum man HTTPS verwenden sollte"
 
 #: wp-admin/includes/class-wp-site-health.php:1479
 msgid "An HTTPS connection is a more secure way of browsing the web. Many services now have HTTPS as a requirement. HTTPS allows you to take advantage of new features that can increase site speed, improve search rankings, and gain the trust of your visitors by helping to protect their online privacy."
-msgstr "Eine HTTPS-Verbindung ist eine sicherere Möglichkeit, im Internet zu surfen. Viele Dienste haben nun HTTPS als Vorgabe. HTTPS ermöglicht es Ihnen, neue Funktionen zu nutzen, die die Geschwindigkeit der Website erhöhen, das Suchranking verbessern und das Vertrauen Ihrer Besucher gewinnen können, indem sie zum Schutz ihrer Online-Privatsphäre beitragen."
+msgstr "Eine HTTPS-Verbindung ist eine sicherere Möglichkeit, im Internet zu surfen. Viele Dienste setzen mittlerweile HTTPS voraus. HTTPS ermöglicht es Ihnen, neue Funktionen zu nutzen, die die Geschwindigkeit der Website erhöhen, das Suchranking verbessern und das Vertrauen Ihrer Besucher gewinnen können, indem sie zum Schutz ihrer Online-Privatsphäre beitragen."
 
 #: wp-admin/includes/class-wp-site-health.php:1471
 msgid "Your website is using an active HTTPS connection"
@@ -9920,7 +9919,7 @@ msgstr "Ihre Version von WordPress (%s) ist auf dem neuesten Stand"
 
 #: wp-admin/includes/class-wp-site-health.php:323
 msgid "A new minor update is available for your site. Because minor updates often address security, it&#8217;s important to install them."
-msgstr "Eine neue, kleinere Aktualisierung ist für Ihre Website verfügbar. Weil kleinere Aktualisierungen oft die Sicherheit betreffen, ist es wichtig, diese zu installieren."
+msgstr "Eine neue Nebenversion ist für Ihre Website verfügbar. Da Nebenversionen oft die Sicherheit betreffen, ist es wichtig, sie zu installieren."
 
 #: wp-admin/includes/class-wp-site-health.php:320
 #: wp-admin/includes/class-wp-site-health.php:360
@@ -10229,22 +10228,22 @@ msgstr "Wenn Sie einer regulierten Branche angehören oder zusätzlichen Datensc
 #. translators: Default privacy policy heading.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:654
 msgid "Industry regulatory disclosure requirements"
-msgstr "Vorausgesetzte Offenlegungspflichten der Industrie"
+msgstr "Branchenspezifische Offenlegungspflichten"
 
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:649
 msgid "If your website provides a service which includes automated decision making - for example, allowing customers to apply for credit, or aggregating their data into an advertising profile - you must note that this is taking place, and include information about how that information is used, what decisions are made with that aggregated data, and what rights users have over decisions made without human intervention."
-msgstr "Falls Ihre Website einen Dienst anbietet, der automatisierte Entscheidungsfindung beinhaltet, z. B. für Kreditanfragen von Benutzern oder das Sammeln derer Daten für ein Werbeprofil, müssen Sie darauf hinweisen, dass dies geschieht und darüber informieren, wie diese Informationen genutzt werden, welche Entscheidungen aufgrund dieser zusammengetragenen Daten getroffen werden und welche Rechte Benutzer an den Entscheidungen haben, die ohne menschliches Zutun getroffen werden."
+msgstr "Falls Ihre Website einen Dienst anbietet, der automatisierte Entscheidungsfindung beinhaltet, z. B. für Kreditanfragen von Benutzern oder das Zusammenführen ihrer Daten zu einem Werbeprofil, müssen Sie darauf hinweisen, dass dies geschieht und darüber informieren, wie diese Informationen genutzt werden, welche Entscheidungen aufgrund dieser zusammengetragenen Daten getroffen werden und welche Rechte Benutzern bei Entscheidungen zustehen, die ohne menschliches Zutun getroffen werden."
 
 #. translators: Default privacy policy heading.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:647
 msgid "What automated decision making and/or profiling we do with user data"
-msgstr "Welche automatisierte Entscheidungsfindung und/oder Profilerstellung wir mit Benutzerdaten durchführen"
+msgstr "Welche automatisierte Entscheidungsfindung und/oder welches Profiling wir mit Benutzerdaten durchführen"
 
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:642
 msgid "If your website receives data about users from third parties, including advertisers, this information must be included within the section of your privacy policy dealing with third party data."
-msgstr "Falls Ihre Website von Dritten Daten über Benutzer erhält, inklusive Werbetreibenden, muss diese Information innerhalb des Abschnitts Ihrer Datenschutzerklärung enthalten sein, der Auskunft über Daten von Dritten gibt."
+msgstr "Falls Ihre Website Daten über Benutzer von Dritten erhält, einschließlich Werbetreibender, muss diese Information in dem Abschnitt Ihrer Datenschutzerklärung enthalten sein, der sich mit Daten von Drittanbietern befasst."
 
 #. translators: Default privacy policy heading.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:640
@@ -10254,12 +10253,12 @@ msgstr "Von welchen Drittanbietern wir Daten erhalten"
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:635
 msgid "In this section you should explain what procedures you have in place to deal with data breaches, either potential or real, such as internal reporting systems, contact mechanisms, or bug bounties."
-msgstr "In diesem Bereich sollten Sie erläutern, welche Maßnahmen Sie ergriffen haben, um mit potentiellen oder realen Datenlecks umzugehen, beispielsweise interne Reporting-Systeme, Kontaktmechanismen oder Bug-Bounty-Programme."
+msgstr "In diesem Abschnitt sollten Sie erläutern, welche Maßnahmen Sie ergriffen haben, um mit potenziellen oder realen Datenschutzverletzungen umzugehen, beispielsweise interne Meldeprozesse, Kontaktmechanismen oder Bug-Bounty-Programme."
 
 #. translators: Default privacy policy heading.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:633
 msgid "What data breach procedures we have in place"
-msgstr "Welche Maßnahmen wir bei Datenschutzverletzungen anbieten"
+msgstr "Welche Maßnahmen wir bei Datenschutzverletzungen ergreifen"
 
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:628
@@ -10274,7 +10273,7 @@ msgstr "Wie wir Ihre Daten schützen"
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:621
 msgid "If you use your site for commercial purposes and you engage in more complex collection or processing of personal data, you should note the following information in your privacy policy in addition to the information we have already discussed."
-msgstr "Wenn Sie Ihre Website für kommerzielle Zwecke nutzen und weitergehende personenbezogene Daten sammeln bzw. verarbeiten, sollten Sie die folgende Information in Ihre Datenschutzerklärung aufnehmen, zusätzlich zu den Informationen, die wir bereits erwähnt haben."
+msgstr "Wenn Sie Ihre Website für kommerzielle Zwecke nutzen und eine komplexere Erfassung oder Verarbeitung personenbezogener Daten vornehmen, sollten Sie die folgende Information in Ihre Datenschutzerklärung aufnehmen, zusätzlich zu den Informationen, die wir bereits erwähnt haben."
 
 #. translators: Default privacy policy heading.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:619
@@ -10294,14 +10293,12 @@ msgstr "Kontaktinformationen"
 #. translators: Default privacy policy text.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:607
 msgid "Visitor comments may be checked through an automated spam detection service."
-msgstr "Besucher-Kommentare könnten von einem automatisierten Dienst zur Spam-Erkennung untersucht werden."
+msgstr "Besucher-Kommentare können von einem automatisierten Dienst zur Spam-Erkennung untersucht werden."
 
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:604
 msgid "European data protection law requires data about European residents which is transferred outside the European Union to be safeguarded to the same standards as if the data was in Europe. So in addition to listing where data goes, you should describe how you ensure that these standards are met either by yourself or by your third party providers, whether that is through an agreement such as Privacy Shield, model clauses in your contracts, or binding corporate rules."
-msgstr ""
-"Das europäische Datenschutzgesetz sieht vor, dass Daten über europäische Bewohner, die außerhalb der EU übertragen werden, mit denselben Standards geschützt werden müssen, als wenn die Daten in Europa verarbeitet würden.\n"
-"Zusätzlich zu einer Auflistung, wohin die Daten übertragen werden, sollten Sie beschreiben, wie die Einhaltung der Standards durch Sie oder Drittanbieter gewährleistet wird und ob dies durch eine Vereinbarung wie das Privacy Shield, eigene Vertragsklauseln oder auch Unternehmensrichtlinien erreicht wird."
+msgstr "Das europäische Datenschutzrecht sieht vor, dass Daten von betroffenen Personen, die sich in der EU befinden, bei einer Übermittlung in Länder außerhalb der EU mit denselben Standards geschützt werden müssen, als würden die Daten in der EU verarbeitet. Zusätzlich zu einer Auflistung, wohin die Daten übertragen werden, sollten Sie beschreiben, wie die Einhaltung der Standards durch Sie oder Drittanbieter gewährleistet wird, unabhängig davon, ob dies durch eine Vereinbarung wie das Privacy Shield, Standardvertragsklauseln oder auch verbindliche interne Datenschutzvorschriften geschieht."
 
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:602
@@ -10316,7 +10313,7 @@ msgstr "Wohin Ihre Daten gesendet werden"
 #. translators: Default privacy policy text.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:594
 msgid "If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes."
-msgstr "Wenn Sie ein Konto auf dieser Website besitzen oder Kommentare geschrieben haben, können Sie einen Export Ihrer personenbezogenen Daten bei uns anfordern, inklusive aller Daten, die Sie uns mitgeteilt haben. Darüber hinaus können Sie die Löschung aller personenbezogenen Daten, die wir von Ihnen gespeichert haben, anfordern. Dies umfasst nicht die Daten, die wir aufgrund administrativer, rechtlicher oder sicherheitsrelevanter Notwendigkeiten aufbewahren müssen."
+msgstr "Wenn Sie ein Konto auf dieser Website besitzen oder Kommentare geschrieben haben, können Sie einen Export Ihrer personenbezogenen Daten bei uns anfordern, inklusive aller Daten, die Sie uns mitgeteilt haben. Darüber hinaus können Sie die Löschung aller personenbezogenen Daten, die wir über Sie gespeichert haben, anfordern. Dies umfasst nicht die Daten, die wir für administrative, rechtliche oder sicherheitsrelevante Zwecke aufbewahren müssen."
 
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:591
@@ -10331,7 +10328,7 @@ msgstr "Welche Rechte Sie an Ihren Daten haben"
 #. translators: Default privacy policy text.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:583
 msgid "For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information."
-msgstr "Für Benutzer, die sich auf unserer Website registrieren, speichern wir zusätzlich die persönlichen Informationen, die sie in ihren Benutzerprofilen angeben. Alle Benutzer können jederzeit ihre persönlichen Informationen einsehen, verändern oder löschen (der Benutzername kann nicht verändert werden). Administratoren der Website können diese Informationen ebenfalls einsehen und verändern."
+msgstr "Für Benutzer, die sich auf unserer Website registrieren, speichern wir zusätzlich die personenbezogenen Daten, die sie in ihren Benutzerprofilen angeben. Alle Benutzer können jederzeit ihre persönlichen Informationen einsehen, verändern oder löschen (der Benutzername kann nicht verändert werden). Administratoren der Website können diese Informationen ebenfalls einsehen und verändern."
 
 #. translators: Default privacy policy text.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:581
@@ -10341,7 +10338,7 @@ msgstr "Wenn Sie einen Kommentar schreiben, wird dieser inklusive Metadaten zeit
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:578
 msgid "In this section you should explain how long you retain personal data collected or processed by the website. While it is your responsibility to come up with the schedule of how long you keep each dataset for and why you keep it, that information does need to be listed here. For example, you may want to say that you keep contact form entries for six months, analytics records for a year, and customer purchase records for ten years."
-msgstr "In diesem Abschnitt sollten Sie erläutern, wie lange Sie die personenbezogenen Daten, die auf der Website gesammelt oder verarbeitet werden, aufbewahrt werden. Während es in Ihrer Verantwortung liegt, eine Übersicht darüber, wie lange Sie jeden einzelnen Datensatz aufbewahren und warum Sie das machen, zu erstellen, müssen Sie diese hier im Detail aufführen. Beispielsweise können Sie eintragen, dass Sie Kontaktformulardaten für sechs Monate, Statistikdaten für ein Jahr und Bestelldaten für zehn Jahre aufbewahren."
+msgstr "In diesem Abschnitt sollten Sie erläutern, wie lange Sie personenbezogene Daten aufbewahren, die auf der Website erfasst oder verarbeitet werden. Während es in Ihrer Verantwortung liegt, festzulegen, wie lange Sie jeden einzelnen Datensatz aufbewahren und warum, müssen diese Informationen hier zwingend aufgeführt werden. Beispielsweise können Sie eintragen, dass Sie Kontaktformulardaten für sechs Monate, Analysedaten für ein Jahr und Bestelldaten für zehn Jahre aufbewahren."
 
 #. translators: Default privacy policy heading.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:574
@@ -10361,7 +10358,7 @@ msgstr "Standardmäßig teilt WordPress keinerlei personenbezogene Daten mit Dri
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:565
 msgid "In this section you should name and list all third party providers with whom you share site data, including partners, cloud-based services, payment processors, and third party service providers, and note what data you share with them and why. Link to their own privacy policies if possible."
-msgstr "In diesem Abschnitt sollten Sie alle Drittanbieter mit Namen auflisten, mit denen Sie Daten der Website teilen, inklusive Partner, Cloud-basierte Dienstleister, Zahlungsdienstleister und Dritt-Dienstanbieter und aufzeigen, welche Daten Sie mit ihnen teilen und warum. Falls möglich fügen Sie Links zu deren eigenen Datenschutzbestimmungen hinzu."
+msgstr "In diesem Abschnitt sollten Sie alle Drittanbieter namentlich auflisten, mit denen Sie Website-Daten teilen, darunter Partner, Cloud-basierte Dienstleister, Zahlungsdienstleister und sonstige Drittanbieter, und angeben, welche Daten Sie mit ihnen teilen und warum. Fügen Sie nach Möglichkeit Links zu deren eigenen Datenschutzerklärungen hinzu."
 
 #. translators: Default privacy policy heading.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:561
@@ -10371,12 +10368,12 @@ msgstr "Mit wem wir Ihre Daten teilen"
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:557
 msgid "By default WordPress does not collect any analytics data. However, many web hosting accounts collect some anonymous analytics data. You may also have installed a WordPress plugin that provides analytics services. In that case, add information from that plugin here."
-msgstr "Standardmäßig sammelt WordPress keine Analysedaten. Allerdings sammeln viele Webhosting-Konten einige anonyme Analysedaten. Möglicherweise haben Sie auch ein WordPress-Plugin installiert, das Analysedienste bereitstellt. In diesem Fall fügen Sie Informationen aus diesem Plugin hier hinzu."
+msgstr "Standardmäßig erhebt WordPress keine Analysedaten. Allerdings erfassen viele Webhosting-Anbieter einige anonyme Analysedaten. Möglicherweise haben Sie auch ein WordPress-Plugin installiert, das Analysedienste bereitstellt. In diesem Fall fügen Sie hier Informationen zu diesem Plugin hinzu."
 
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:555
 msgid "In this subsection you should note what analytics package you use, how users can opt out of analytics tracking, and a link to your analytics provider&#8217;s privacy policy, if any."
-msgstr "In diesem Unterabschnitt sollten Sie angeben, welche Analysedienste Sie verwenden, wie Benutzer das Analyse-Tracking ablehnen können sowie einen Link zur Datenschutzerklärung Ihres Analysedienst-Anbieters einfügen, falls vorhanden."
+msgstr "In diesem Unterabschnitt sollten Sie angeben, welche Analysedienste Sie verwenden und wie Benutzer das Analyse-Tracking ablehnen können. Fügen Sie außerdem einen Link zur Datenschutzerklärung Ihres Analysedienst-Anbieters ein, falls vorhanden."
 
 #. translators: Default privacy policy heading.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:553
@@ -10386,7 +10383,7 @@ msgstr "Analysedienste"
 #. translators: Default privacy policy text.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:548
 msgid "These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website."
-msgstr "Diese Websites können Daten über Sie sammeln, Cookies benutzen, zusätzliche Tracking-Dienste von Dritten einbetten und Ihre Interaktion mit diesem eingebetteten Inhalt aufzeichnen, inklusive Ihrer Interaktion mit dem eingebetteten Inhalt, falls Sie ein Konto haben und auf dieser Website angemeldet sind."
+msgstr "Diese Websites können Daten über Sie erheben, Cookies benutzen, zusätzliche Tracking-Dienste von Dritten einbetten und Ihre Interaktion mit diesem eingebetteten Inhalt aufzeichnen, inklusive Ihrer Interaktion mit dem eingebetteten Inhalt, falls Sie ein Konto haben und auf dieser Website angemeldet sind."
 
 #. translators: Default privacy policy text.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:546
@@ -10401,22 +10398,22 @@ msgstr "Eingebettete Inhalte von anderen Websites"
 #. translators: Default privacy policy text.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:539
 msgid "If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day."
-msgstr "Wenn Sie einen Artikel bearbeiten oder veröffentlichen, wird ein zusätzlicher Cookie in Ihrem Browser gespeichert. Dieser Cookie enthält keine personenbezogenen Daten und verweist nur auf die Beitrags-ID des Artikels, den Sie gerade bearbeitet haben. Der Cookie verfällt nach einem Tag."
+msgstr "Wenn Sie einen Artikel bearbeiten oder veröffentlichen, wird ein zusätzliches Cookie in Ihrem Browser gespeichert. Dieses Cookie enthält keine personenbezogenen Daten und verweist nur auf die Beitrags-ID des Artikels, den Sie gerade bearbeitet haben. Das Cookie verfällt nach einem Tag."
 
 #. translators: Default privacy policy text.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:537
 msgid "When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select &quot;Remember Me&quot;, your login will persist for two weeks. If you log out of your account, the login cookies will be removed."
-msgstr "Wenn Sie sich anmelden, werden wir einige Cookies einrichten, um Ihre Anmeldeinformationen und Anzeigeoptionen zu speichern. Anmelde-Cookies verfallen nach zwei Tagen und Cookies für die Anzeigeoptionen nach einem Jahr. Falls Sie bei der Anmeldung „Angemeldet bleiben“ auswählen, wird Ihre Anmeldung zwei Wochen lang aufrechterhalten. Mit der Abmeldung aus Ihrem Konto werden die Anmelde-Cookies gelöscht."
+msgstr "Wenn Sie sich anmelden, werden wir einige Cookies setzen, um Ihre Anmeldeinformationen und Anzeigeoptionen zu speichern. Anmelde-Cookies verfallen nach zwei Tagen und Cookies für die Anzeigeoptionen nach einem Jahr. Falls Sie bei der Anmeldung „Angemeldet bleiben“ auswählen, wird Ihre Anmeldung zwei Wochen lang aufrechterhalten. Mit der Abmeldung aus Ihrem Konto werden die Anmelde-Cookies gelöscht."
 
 #. translators: Default privacy policy text.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:535
 msgid "If you visit our login page, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser."
-msgstr "Falls Sie ein Konto haben und Sie sich auf dieser Website anmelden, werden wir ein temporäres Cookie setzen, um festzustellen, ob Ihr Browser Cookies akzeptiert. Dieses Cookie enthält keine personenbezogenen Daten und wird verworfen, wenn Sie Ihren Browser schließen."
+msgstr "Wenn Sie unsere Anmeldeseite besuchen, werden wir ein temporäres Cookie setzen, um festzustellen, ob Ihr Browser Cookies akzeptiert. Dieses Cookie enthält keine personenbezogenen Daten und wird verworfen, wenn Sie Ihren Browser schließen."
 
 #. translators: Default privacy policy text.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:533
 msgid "If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year."
-msgstr "Wenn Sie einen Kommentar auf unserer Website schreiben, kann das eine Einwilligung sein, Ihren Namen, E-Mail-Adresse und Website in Cookies zu speichern. Dies ist eine Komfortfunktion, damit Sie nicht, wenn Sie einen weiteren Kommentar schreiben, all diese Daten erneut eingeben müssen. Diese Cookies werden ein Jahr lang gespeichert."
+msgstr "Wenn Sie einen Kommentar auf unserer Website schreiben, können Sie einwilligen, Ihren Namen, Ihre E-Mail-Adresse und Ihre Website in Cookies zu speichern. Dies ist eine Komfortfunktion, damit Sie all diese Daten nicht erneut eingeben müssen, wenn Sie einen weiteren Kommentar schreiben. Diese Cookies werden ein Jahr lang gespeichert."
 
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:530
@@ -10431,7 +10428,7 @@ msgstr "Cookies"
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:522
 msgid "By default, WordPress does not include a contact form. If you use a contact form plugin, use this subsection to note what personal data is captured when someone submits a contact form, and how long you keep it. For example, you may note that you keep contact form submissions for a certain period for customer service purposes, but you do not use the information submitted through them for marketing purposes."
-msgstr "Standardmäßig beinhaltet WordPress kein Kontaktformular. Falls Sie ein Kontaktformular-Plugin benutzen, nutzen Sie diesen Unterabschnitt, um anzugeben, welche personenbezogenen Daten bei der Übermittlung eines Kontaktformulars aufgezeichnet werden und wie lange Sie diese speichern. Sie könnten zum Beispiel angeben, dass übermittelte Kontaktformulare für den Kundenservice für eine bestimmte Zeit gespeichert werden, während Sie solche nicht für Marketing-Zwecke verwenden."
+msgstr "Standardmäßig beinhaltet WordPress kein Kontaktformular. Falls Sie ein Kontaktformular-Plugin benutzen, nutzen Sie diesen Unterabschnitt, um anzugeben, welche personenbezogenen Daten bei der Übermittlung eines Kontaktformulars aufgezeichnet werden und wie lange Sie diese speichern. Sie könnten zum Beispiel angeben, dass Sie übermittelte Kontaktformulare für Kundenservice-Zwecke eine bestimmte Zeit lang aufbewahren, aber die darüber übermittelten Informationen nicht für Marketingzwecke verwenden."
 
 #. translators: Default privacy policy heading.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:520
@@ -10441,12 +10438,12 @@ msgstr "Kontaktformulare"
 #. translators: Default privacy policy text.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:515
 msgid "If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website."
-msgstr "Wenn Sie ein registrierter Benutzer sind und Fotos auf diese Website laden, sollten Sie vermeiden, Fotos mit einem EXIF-GPS-Standort hochzuladen. Besucher dieser Website könnten Fotos, die auf dieser Website gespeichert sind, herunterladen und deren Standort-Informationen extrahieren."
+msgstr "Wenn Sie Bilder auf die Website hochladen, sollten Sie vermeiden, Bilder mit eingebetteten Standortdaten (EXIF-GPS) hochzuladen. Besucher der Website können Bilder von der Website herunterladen und daraus beliebige Standortdaten extrahieren."
 
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:512
 msgid "In this subsection you should note what information may be disclosed by users who can upload media files. All uploaded files are usually publicly accessible."
-msgstr "In diesem Unterabschnitt sollten Sie angeben, welche Informationen von Benutzern offengelegt werden, die Mediendateien hochladen können. Auf alle hochgeladenen Dateien kann in der Regel öffentlich zugegriffen werden."
+msgstr "In diesem Unterabschnitt sollten Sie angeben, welche Informationen von Benutzern offengelegt werden, die Mediendateien hochladen können. Alle hochgeladenen Dateien sind in der Regel öffentlich zugänglich."
 
 #. translators: Default privacy policy text.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:504
@@ -10461,37 +10458,37 @@ msgstr "Wenn Besucher Kommentare auf der Website hinterlassen, erfassen wir die 
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:499
 msgid "In this subsection you should note what information is captured through comments. We have noted the data which WordPress collects by default."
-msgstr "In diesem Unterabschnitt sollten Sie angeben, welche Informationen in Kommentaren erfasst werden. Wir haben die Daten angegeben, die WordPress standardmäßig sammelt."
+msgstr "In diesem Unterabschnitt sollten Sie angeben, welche Informationen in Kommentaren erfasst werden. Wir haben die Daten angegeben, die WordPress standardmäßig erhebt."
 
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:491
 msgid "By default WordPress does not collect any personal data about visitors, and only collects the data shown on the User Profile screen from registered users. However some of your plugins may collect personal data. You should add the relevant information below."
-msgstr "Standardmäßig sammelt WordPress keine personenbezogenen Daten über Benutzer und sammelt nur die Daten, die im Profil eines registrierten Benutzers angezeigt werden. Einige Ihrer Plugins können aber zusätzliche personenbezogene Daten sammeln. Fügen Sie die relevanten Informationen unten hinzu."
+msgstr "Standardmäßig erhebt WordPress keine personenbezogenen Daten über Benutzer und erfasst nur die Daten, die im Profil eines registrierten Benutzers angezeigt werden. Einige Ihrer Plugins können aber zusätzliche personenbezogene Daten erheben. Fügen Sie die relevanten Informationen unten hinzu."
 
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:489
 msgid "Personal data is not just created by a user&#8217;s interactions with your site. Personal data is also generated from technical processes such as contact forms, comments, cookies, analytics, and third party embeds."
-msgstr "Personenbezogene Daten werden nicht nur bei Interaktionen eines Benutzers mit Ihrer Website erstellt. Personenbezogene Daten werden auch bei technischen Prozessen wie bei Kontaktformularen, Kommentaren, Cookies, Analysewerkzeugen und Einbettungen von Drittanbietern erzeugt."
+msgstr "Personenbezogene Daten werden nicht nur bei Interaktionen eines Benutzers mit Ihrer Website erstellt. Personenbezogene Daten werden auch bei technischen Prozessen wie Kontaktformularen, Kommentaren, Cookies, Analysewerkzeugen und Einbettungen von Drittanbietern erzeugt."
 
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:487
 msgid "In addition to listing what personal data you collect, you need to note why you collect it. These explanations must note either the legal basis for your data collection and retention or the active consent the user has given."
-msgstr "Zusätzlich zu der Auflistung der Art personenbezogener Daten, die Sie sammeln, müssen Sie den Grund dafür darlegen. Diese Erklärungen müssen entweder die Rechtsgrundlage der Sammlung und Speicherung von Daten erwähnen oder die Einverständniserklärung, in die der Benutzer eingewilligt hat."
+msgstr "Zusätzlich zu der Auflistung der Art personenbezogener Daten, die Sie erfassen, müssen Sie den Grund dafür darlegen. Diese Erklärungen müssen entweder die Rechtsgrundlage für die Erfassung und Speicherung der Daten nennen oder die aktive Einwilligung, die der Benutzer erteilt hat."
 
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:485
 msgid "You should also note any collection and retention of sensitive personal data, such as data concerning health."
-msgstr "Sie müssen auch jede Erfassung und Speicherung sensibler personenbezogener Daten, wie Gesundheitsdaten, deutlich machen."
+msgstr "Sie sollten auch jede Erfassung und Speicherung sensibler personenbezogener Daten, wie Gesundheitsdaten, angeben."
 
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:483
 msgid "In this section you should note what personal data you collect from users and site visitors. This may include personal data, such as name, email address, personal account preferences; transactional data, such as purchase information; and technical data, such as information about cookies."
-msgstr "In diesem Abschnitt sollten Sie angeben, welche personenbezogenen Daten Sie von Benutzern und Besuchern Ihrer Website sammeln. Dies können personenbezogene Daten wie Name, E-Mail-Adresse, persönliche Kontoeinstellungen, Transaktionsdaten wie z. B. Kaufinformationen sowie technische Daten wie z. B. Informationen über Cookies sein."
+msgstr "In diesem Abschnitt sollten Sie angeben, welche personenbezogenen Daten Sie von Benutzern und Besuchern Ihrer Website erfassen. Dies können personenbezogene Daten wie Name, E-Mail-Adresse, persönliche Kontoeinstellungen sein; Transaktionsdaten wie z. B. Kaufinformationen; sowie technische Daten wie z. B. Informationen über Cookies."
 
 #. translators: Default privacy policy heading.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:481
 msgid "What personal data we collect and why we collect it"
-msgstr "Welche personenbezogenen Daten wir sammeln und warum wir sie sammeln"
+msgstr "Welche personenbezogenen Daten wir erfassen und warum wir diese erheben"
 
 #. translators: Default privacy policy text. %s: Site URL.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:476
@@ -10506,7 +10503,7 @@ msgstr "Die Menge an Informationen, die Sie möglicherweise angeben müssen, var
 #. translators: Privacy policy tutorial.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:471
 msgid "In this section you should note your site URL, as well as the name of the company, organization, or individual behind it, and some accurate contact information."
-msgstr "In diesem Abschnitt sollten Sie die URL Ihrer Website nennen sowie den Namen des Unternehmens, der Organisation oder des Individuums hinter dem Projekt und auch korrekte Kontakt-Informationen."
+msgstr "In diesem Abschnitt sollten Sie die URL Ihrer Website nennen sowie den Namen des Unternehmens, der Organisation oder der Einzelperson hinter dem Projekt und auch korrekte Kontaktinformationen."
 
 #. translators: Default privacy policy heading.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:467
@@ -10534,7 +10531,7 @@ msgstr "Aktualisiert am %s."
 #. translators: %s: Date of plugin deactivation.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:396
 msgid "You deactivated this plugin on %s and may no longer need this policy."
-msgstr "Sie haben dieses Plugin am %s deaktiviert und benötigen möglicherweise dessen Datenschutzerklärung nicht mehr."
+msgstr "Sie haben dieses Plugin am %s deaktiviert und benötigen möglicherweise dessen Abschnitt für die Datenschutzerklärung nicht mehr."
 
 #. translators: %s: Date of plugin deactivation.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:393
@@ -10543,7 +10540,7 @@ msgstr "Entfernt am %s."
 
 #: wp-admin/includes/class-wp-privacy-policy-content.php:338
 msgid "View Privacy Policy Guide."
-msgstr "Anleitung zur Datenschutzerklärung anzeigen."
+msgstr "Leitfaden zur Datenschutzerklärung anzeigen."
 
 #: wp-admin/includes/class-wp-privacy-policy-content.php:336
 msgid "Need help putting together your new Privacy Policy page? Check out the guide for recommendations on what content to include, along with policies suggested by your plugins and theme."
@@ -14511,15 +14508,15 @@ msgstr "Dieses Werkzeug hilft Website-Betreibern bei der Einhaltung lokaler Gese
 
 #: wp-admin/export-personal-data.php:96
 msgid "Export personal data list"
-msgstr "Liste der personenbezogenen Daten exportieren"
+msgstr "Liste „Personenbezogene Daten exportieren“"
 
 #: wp-admin/export-personal-data.php:95
 msgid "Export personal data list navigation"
-msgstr "Exportieren der Navigation in der Liste der personenbezogenen Daten"
+msgstr "Listen-Navigation für „Personenbezogene Daten exportieren“"
 
 #: wp-admin/export-personal-data.php:94
 msgid "Filter export personal data list"
-msgstr "Filter-Liste der personenbezogenen Daten exportieren"
+msgstr "Liste für „Personenbezogene Daten exportieren“ filtern"
 
 #: wp-admin/export-personal-data.php:65
 msgid "<a href=\"https://wordpress.org/documentation/article/tools-export-personal-data-screen/\">Documentation on Export Personal Data</a>"
@@ -14531,12 +14528,12 @@ msgstr "Plugin-Autoren können hier mehr darüber erfahren, <a href=\"https://de
 
 #: wp-admin/export-personal-data.php:57
 msgid "Many plugins may collect or store personal data either in the WordPress database or remotely. Any Export Personal Data request should include data from plugins as well."
-msgstr "Viele Plugins erfassen oder speichern möglicherweise personenbezogene Daten entweder in der WordPress-Datenbank oder auf einem externen Server. Jede Anfrage zum Export personenbezogener Daten sollte auch die Daten von Plugins umfassen."
+msgstr "Viele Plugins erfassen oder speichern möglicherweise personenbezogene Daten entweder in der WordPress-Datenbank oder auf einem externen Server. Jede Anfrage auf den Export personenbezogener Daten sollte auch die Daten von Plugins umfassen."
 
 #. translators: %s: URL to Privacy Policy Guide screen.
 #: wp-admin/export-personal-data.php:48
 msgid "If you are not sure, check the plugin documentation or contact the plugin author to see if the plugin collects data and if it supports the Data Exporter tool. This information may be available in the <a href=\"%s\">Privacy Policy Guide</a>."
-msgstr "Wenn Sie sich nicht sicher sind, schauen Sie in die Dokumentation des Plugins oder kontaktieren Sie den Autor, um zu erfahren, ob das Plugin Daten sammelt und ob es die Funktionen zum Datenexport unterstützt. Diese Informationen finden Sie möglicherweise in der <a href=\"%s\">Datenschutzerklärung</a>."
+msgstr "Wenn Sie sich nicht sicher sind, schauen Sie in die Dokumentation des Plugins oder kontaktieren Sie den Autor, um zu erfahren, ob das Plugin Daten erhebt und ob es die Funktionen zum Datenexport unterstützt. Diese Informationen finden Sie möglicherweise im <a href=\"%s\">Leitfaden zur Datenschutzerklärung</a>."
 
 #: wp-admin/export-personal-data.php:42
 msgid "<strong>Media</strong> &mdash; A list of URLs for media files the user uploads."
@@ -14552,19 +14549,19 @@ msgstr "<strong>Community Events Location</strong> &ndash; Die IP-Adresse des Be
 
 #: wp-admin/export-personal-data.php:37
 msgid "WordPress collects (but <em>never</em> publishes) a limited amount of data from registered users who have logged in to the site. Generally, these users are people who contribute to the site in some way -- content, store management, and so on. With rare exceptions, these users do not include occasional visitors who might have registered to comment on articles or buy products. The data WordPress retains can include:"
-msgstr "WordPress sammelt (aber veröffentlicht <em>niemals</em>) eine begrenzte Menge an Daten von registrierten Benutzern, die auf der Website angemeldet sind. Grundsätzlich sind diese Benutzer Menschen, die auf irgendeine Weise auf der Website mitwirken – mit Inhalt, in der Shop-Verwaltung oder ähnliches. Mit wenigen Ausnahmen gehören zu diesen Benutzern keine gelegentlichen Besucher, die sich möglicherweise registriert haben, um Artikel zu kommentieren oder Produkte zu kaufen. Die von WordPress gespeicherten Daten können Folgendes umfassen:"
+msgstr "WordPress erhebt (aber veröffentlicht <em>niemals</em>) eine begrenzte Menge an Daten von registrierten Benutzern, die auf der Website angemeldet sind. Grundsätzlich sind diese Benutzer Menschen, die auf irgendeine Weise auf der Website mitwirken – mit Inhalt, in der Shop-Verwaltung oder Ähnlichem. Mit wenigen Ausnahmen gehören zu diesen Benutzern keine gelegentlichen Besucher, die sich möglicherweise registriert haben, um Artikel zu kommentieren oder Produkte zu kaufen. Die von WordPress gespeicherten Daten können Folgendes umfassen:"
 
 #: wp-admin/export-personal-data.php:28
 msgid "Note: Since this tool only gathers data from WordPress and participating plugins, you may need to do more to comply with export requests. For example, you should also send the requester some of the data collected from or stored with the 3rd party services your organization uses."
-msgstr "Hinweis: Da dieses Werkzeug nur Daten von WordPress und teilnehmenden Plugins sammelt, müssen Sie möglicherweise mehr tun, um Anfragen für einen Export nachzukommen. Sie sollten der antragstellenden Person auch alle Daten senden, die von Drittanbieter-Diensten, die von Ihrem Unternehmen oder Ihrer Website verwendet werden, gesammelt oder bei diesen gespeichert wurden."
+msgstr "Hinweis: Da dieses Werkzeug nur Daten von WordPress und teilnehmenden Plugins zusammenträgt, müssen Sie möglicherweise mehr tun, um Anfragen für einen Export nachzukommen. Sie sollten der antragstellenden Person auch alle Daten senden, die von Drittanbieter-Diensten, die von Ihrem Unternehmen oder Ihrer Website verwendet werden, erhoben oder bei diesen gespeichert wurden."
 
 #: wp-admin/export-personal-data.php:26
 msgid "Privacy Laws around the world require businesses and online services to provide an export of some of the data they collect about an individual, and to deliver that export on request. The rights those laws enshrine are sometimes called the \"Right of Data Portability\". It allows individuals to obtain and reuse their personal data for their own purposes across different services. It allows them to move, copy or transfer personal data easily from one IT environment to another."
-msgstr "Datenschutzgesetze rund um die Welt verlangen von Unternehmen und Online-Dienste, einen Export einiger Daten bereitzustellen, die sie über eine Einzelperson sammeln, und diesen Export auf Nachfrage zu übermitteln. Die in diesen Gesetzen verankerten Rechte werden manchmal das „Recht auf Datenübertragbarkeit“ genannt. Es ermöglicht Einzelpersonen, ihre personenbezogenen Daten für ihre eigenen Zwecke über verschiedene Dienste hinweg zu erhalten und wiederzuverwenden. Sie können personenbezogene Daten problemlos von einer IT-Umgebung in eine andere verschieben, kopieren oder übertragen."
+msgstr "Datenschutzgesetze rund um die Welt verlangen von Unternehmen und Online-Diensten, den Export bestimmter Daten anzubieten, die sie über eine Einzelperson erfassen, und diesen Export auf Nachfrage zu übermitteln. Die in diesen Gesetzen verankerten Rechte werden manchmal das „Recht auf Datenübertragbarkeit“ genannt. Es ermöglicht Einzelpersonen, ihre personenbezogenen Daten für ihre eigenen Zwecke über verschiedene Dienste hinweg zu erhalten und wiederzuverwenden. Diese können personenbezogene Daten problemlos von einer IT-Umgebung in eine andere verschieben, kopieren oder übertragen."
 
 #: wp-admin/export-personal-data.php:25
 msgid "This screen is where you manage requests for an export of personal data."
-msgstr "In dieser Ansicht können Sie Anfragen für einen Export von personenbezogenen Daten verwalten."
+msgstr "In dieser Ansicht können Sie Anfragen zum Export personenbezogener Daten verwalten."
 
 #: wp-admin/export-personal-data.php:13
 msgid "Sorry, you are not allowed to export personal data on this site."
@@ -14600,15 +14597,15 @@ msgstr "Dieses Werkzeug hilft Website-Betreibern bei der Einhaltung lokaler Gese
 
 #: wp-admin/erase-personal-data.php:96
 msgid "Erase personal data list"
-msgstr "Liste der personenbezogenen Daten löschen"
+msgstr "Liste „Personenbezogene Daten löschen“"
 
 #: wp-admin/erase-personal-data.php:95
 msgid "Erase personal data list navigation"
-msgstr "Navigation in der Liste der personenbezogenen Daten löschen"
+msgstr "Listen-Navigation für „Personenbezogene Daten löschen“"
 
 #: wp-admin/erase-personal-data.php:94
 msgid "Filter erase personal data list"
-msgstr "Filter-Liste der personenbezogenen Daten löschen"
+msgstr "Liste für „Personenbezogene Daten löschen“ filtern"
 
 #: wp-admin/erase-personal-data.php:65
 msgid "<a href=\"https://wordpress.org/documentation/article/tools-erase-personal-data-screen/\">Documentation on Erase Personal Data</a>"
@@ -14620,7 +14617,7 @@ msgstr "Plugin-Autoren können hier mehr darüber erfahren, <a href=\"https://de
 
 #: wp-admin/erase-personal-data.php:57
 msgid "Many plugins may collect or store personal data either in the WordPress database or remotely. Any Erase Personal Data request should delete data from plugins as well."
-msgstr "Viele Plugins erfassen oder speichern möglicherweise personenbezogene Daten entweder in der WordPress-Datenbank oder auf einem externen Server. Jede Anfrage zur Löschung personenbezogener Daten sollte auch die Daten von Plugins löschen."
+msgstr "Viele Plugins erfassen oder speichern möglicherweise personenbezogene Daten entweder in der WordPress-Datenbank oder auf einem externen Server. Jede Anfrage auf Löschung personenbezogener Daten sollte auch die Daten von Plugins löschen."
 
 #: wp-admin/erase-personal-data.php:55 wp-admin/export-personal-data.php:55
 msgid "Plugin Data"
@@ -14629,7 +14626,7 @@ msgstr "Plugindaten"
 #. translators: %s: URL to Privacy Policy Guide screen.
 #: wp-admin/erase-personal-data.php:48
 msgid "If you are not sure, check the plugin documentation or contact the plugin author to see if the plugin collects data and if it supports the Data Eraser tool. This information may be available in the <a href=\"%s\">Privacy Policy Guide</a>."
-msgstr "Wenn Sie sich nicht sicher sind, schauen Sie in die Dokumentation des Plugins oder kontaktieren Sie den Autor, um zu erfahren, ob das Plugin Daten sammelt und ob es die Funktionen zum Löschen der personenbezogenen Daten unterstützt. Diese Informationen finden Sie möglicherweise in der <a href=\"%s\">Datenschutzerklärung</a>."
+msgstr "Wenn Sie sich nicht sicher sind, schauen Sie in die Dokumentation des Plugins oder kontaktieren Sie den Autor, um zu erfahren, ob das Plugin Daten erhebt und ob es die Funktionen zum Löschen der personenbezogenen Daten unterstützt. Diese Informationen finden Sie möglicherweise im <a href=\"%s\">Leitfaden zur Datenschutzerklärung</a>."
 
 #: wp-admin/erase-personal-data.php:42
 msgid "<strong>Media</strong> &mdash; A list of URLs for all media file uploads made by the user."
@@ -14653,7 +14650,7 @@ msgstr "<strong>Profilinformationen</strong> &ndash; E-Mail-Adresse des Benutzer
 
 #: wp-admin/erase-personal-data.php:37
 msgid "WordPress collects (but <em>never</em> publishes) a limited amount of data from logged-in users but then deletes it or anonymizes it. That data can include:"
-msgstr "WordPress sammelt (aber veröffentlicht <em>niemals</em>) eine begrenzte Menge von Daten angemeldeter Benutzer, aber löscht diese dann oder anonymisiert sie. Diese Daten können beinhalten:"
+msgstr "WordPress erhebt (aber veröffentlicht <em>niemals</em>) eine begrenzte Menge von Daten angemeldeter Benutzer, löscht diese aber dann oder anonymisiert sie. Diese Daten können beinhalten:"
 
 #: wp-admin/erase-personal-data.php:35 wp-admin/export-personal-data.php:35
 msgid "Default Data"
@@ -14661,7 +14658,7 @@ msgstr "Standarddaten"
 
 #: wp-admin/erase-personal-data.php:28
 msgid "Note: As this tool only gathers data from WordPress and participating plugins, you may need to do more to comply with erasure requests. For example, you are also responsible for ensuring that data collected by or stored with the 3rd party services your organization uses gets deleted."
-msgstr "Hinweis: Da dieses Werkzeug nur Daten von WordPress und teilnehmenden Plugins sammelt, müssen Sie möglicherweise mehr tun, um Anfragen für eine Löschung nachzukommen. Sie sind beispielsweise auch dafür verantwortlich, sicherzustellen, dass Daten gelöscht werden, die von Drittanbieter-Diensten, die von Ihrem Unternehmen oder Ihrer Website verwendet werden, gesammelt oder bei diesen gespeichert wurden."
+msgstr "Hinweis: Da dieses Werkzeug nur Daten von WordPress und teilnehmenden Plugins zusammenträgt, müssen Sie möglicherweise mehr tun, um Anfragen für eine Löschung nachzukommen. Sie sind beispielsweise auch dafür verantwortlich, sicherzustellen, dass Daten gelöscht werden, die von Drittanbieter-Diensten, die von Ihrem Unternehmen oder Ihrer Website verwendet werden, erhoben oder bei diesen gespeichert wurden."
 
 #: wp-admin/erase-personal-data.php:27 wp-admin/export-personal-data.php:27
 msgid "The tool associates data stored in WordPress with a supplied email address, including profile data and comments."
@@ -14669,11 +14666,11 @@ msgstr "Das Werkzeug verknüpft die in WordPress gespeicherten Daten mit einer a
 
 #: wp-admin/erase-personal-data.php:26
 msgid "Privacy Laws around the world require businesses and online services to delete, anonymize, or forget the data they collect about an individual. The rights those laws enshrine are sometimes called the \"Right to be Forgotten\"."
-msgstr "Datenschutzgesetze rund um die Welt fordern von Unternehmen und Online-Dienste, Daten zu löschen, zu anonymisierten oder zu vergessen, die sie über eine Einzelperson sammeln. Die in diesen Gesetzen verankerten Rechte werden manchmal das „Recht auf Vergessenwerden“ genannt."
+msgstr "Datenschutzgesetze rund um die Welt fordern von Unternehmen und Online-Diensten, Daten zu löschen, zu anonymisieren oder zu vergessen, die sie über eine Einzelperson erfassen. Die in diesen Gesetzen verankerten Rechte werden manchmal als „Recht auf Vergessenwerden“ bezeichnet."
 
 #: wp-admin/erase-personal-data.php:25
 msgid "This screen is where you manage requests to erase personal data."
-msgstr "In dieser Ansicht können Sie Anfragen zum Anonymisieren oder Löschen von personenbezogenen Daten verwalten."
+msgstr "In dieser Ansicht können Sie Anfragen zum Löschen personenbezogener Daten verwalten."
 
 #: wp-admin/erase-personal-data.php:13
 msgid "Sorry, you are not allowed to erase personal data on this site."
@@ -15294,7 +15291,7 @@ msgstr "Sie können Mediendateien einfügen, indem Sie den Button oberhalb des B
 
 #: wp-admin/edit-form-advanced.php:288
 msgid "The Code mode allows you to enter HTML along with your post text. Note that &lt;p&gt; and &lt;br&gt; tags are converted to line breaks when switching to the Code editor to make it less cluttered. When you type, a single line break can be used instead of typing &lt;br&gt;, and two line breaks instead of paragraph tags. The line breaks are converted back to tags automatically."
-msgstr "Der Code-Modus ermöglicht es Ihnen, den Beitragstext mit HTML zu formatieren. Beachten Sie, dass die Tags &lt;p&gt; und &lt;br&gt; in Zeilenumbrüche konvertiert werden, wenn Sie zurück auf den Code-Editor schalten. Bei der Eingabe kann ein einzelner Zeilenumbruch anstatt &lt;br&gt; zu tippen verwendet werden und zwei Umbrüche anstelle von Absatz-Tags. Die Zeilenumbrüche werden automatisch in Tags zurückgewandelt."
+msgstr "Der Code-Modus ermöglicht es Ihnen, den Beitragstext mit HTML zu formatieren. Beachten Sie, dass die Tags &lt;p&gt; und &lt;br&gt; in Zeilenumbrüche konvertiert werden, wenn Sie zurück auf den Code-Editor schalten. Bei der Eingabe kann ein einzelner Zeilenumbruch verwendet werden, anstatt &lt;br&gt; zu tippen, und zwei Umbrüche anstelle von Absatz-Tags. Die Zeilenumbrüche werden automatisch in Tags zurückgewandelt."
 
 #: wp-admin/edit-form-advanced.php:287
 msgid "Visual mode gives you an editor that is similar to a word processor. Click the Toolbar Toggle button to get a second row of controls."
@@ -15976,7 +15973,7 @@ msgstr "<a href=\"https://wordpress.org/documentation/article/comments-screen/\"
 #: wp-admin/network/themes.php:337 wp-admin/network/upgrade.php:36
 #: wp-admin/network/user-new.php:28 wp-admin/network/users.php:241
 msgid "For more information:"
-msgstr "Für weitere Informationen:"
+msgstr "Weitere Informationen:"
 
 #: wp-admin/comment.php:66
 msgid "You can also moderate the comment from this screen using the Status box, where you can also change the timestamp of the comment."
@@ -16070,7 +16067,7 @@ msgstr "Ihre Website scheint die Basis-Authentifizierung zu verwenden, die derze
 #: wp-admin/authorize-application.php:88 wp-admin/authorize-application.php:95
 #: wp-admin/authorize-application.php:113
 msgid "Cannot Authorize Application"
-msgstr "Anwendung kann nicht autorisiert werden"
+msgstr "Anwendung konnte nicht autorisiert werden"
 
 #: wp-admin/authorize-application.php:87
 msgid "The Authorize Application request is not allowed."
@@ -16106,7 +16103,7 @@ msgstr "Sie sind leider nicht berechtigt, Inhalte in diese Website zu importiere
 #. translators: %s: Admin page generated by a plugin.
 #: wp-admin/admin.php:274
 msgid "Cannot load %s."
-msgstr "%s kann nicht geladen werden."
+msgstr "%s konnte nicht geladen werden."
 
 #: wp-admin/admin.php:267
 msgid "Invalid plugin page."

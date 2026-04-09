@@ -21,6 +21,11 @@ remove_action( 'woocommerce_sidebar',             'woocommerce_get_sidebar', 10 
 add_action( 'woocommerce_before_main_content', 'janecka_wc_open_wrapper', 10 );
 add_action( 'woocommerce_after_main_content',  'janecka_wc_close_wrapper', 10 );
 
+// GZD Marken-Info im Loop entfernen (wird manuell über subtitle gerendert)
+add_action( 'woocommerce_init', function() {
+    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_product_units', 9 );
+} );
+
 function janecka_wc_open_wrapper(): void {
 	echo '<div class="wc-archive">';
 	echo '<div class="container">';
@@ -29,7 +34,7 @@ function janecka_wc_open_wrapper(): void {
 }
 
 function janecka_wc_close_wrapper(): void {
-	echo '</div><!-- .wc-main -->';
+	
 	echo '</div><!-- .wc-layout -->';
 	echo '</div><!-- .container -->';
 	echo '</div><!-- .wc-archive -->';
@@ -53,7 +58,13 @@ remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count',     2
 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
 
 // 1. Filter-Bar
-add_action( 'woocommerce_before_shop_loop', 'janecka_render_filter_bar', 5 );
+add_action( 'woocommerce_before_shop_loop', function() {
+    if ( function_exists( 'mlwf_render_filter_bar' ) ) {
+        mlwf_render_filter_bar();
+    } elseif ( function_exists( 'janecka_render_filter_bar' ) ) {
+        janecka_render_filter_bar();
+    }
+}, 5 );
 
 // 2. Loop-Header (Anzahl + Sortierung)
 add_action( 'woocommerce_before_shop_loop', 'janecka_wc_loop_header', 10 );
@@ -111,15 +122,12 @@ function janecka_product_card_open(): void {
 
 			<div class="product-card__body">
 				<?php janecka_product_card_badges(); ?>
-
+				<?php janecka_product_card_subtitle(); ?> <!-- ← vor den Titel -->
 				<h2 class="product-card__title"><?php the_title(); ?></h2>
-
-				<?php janecka_product_card_subtitle(); ?>
-
 				<div class="product-card__price">
 					<?php woocommerce_template_loop_price(); ?>
 				</div>
-			</div><!-- .product-card__body -->
+			</div>
 
 		</a><!-- .product-card__link -->
 
@@ -135,41 +143,49 @@ function janecka_product_card_close(): void {
 }
 
 function janecka_product_card_image(): void {
-	global $product;
+    global $product;
 
-	$image_id  = $product->get_image_id();
-	$image_url = $image_id
-		? wp_get_attachment_image_url( $image_id, 'janecka-product-card' )
-		: wc_placeholder_img_src( 'janecka-product-card' );
+    $image_id  = $product->get_image_id();
 
-	$image_alt = $image_id
-		? trim( strip_tags( get_post_meta( $image_id, '_wp_attachment_image_alt', true ) ) )
-		: get_the_title();
-	?>
-	<div class="product-card__image-wrap">
-		<img
-			class="product-card__image"
-			src="<?php echo esc_url( $image_url ); ?>"
-			alt="<?php echo esc_attr( $image_alt ); ?>"
-			loading="lazy"
-			decoding="async"
-		>
-		<?php
-		$gallery_ids = $product->get_gallery_image_ids();
-		if ( ! empty( $gallery_ids[0] ) ) :
-			$hover_url = wp_get_attachment_image_url( $gallery_ids[0], 'janecka-product-card' );
-		?>
-		<img
-			class="product-card__image product-card__image--hover"
-			src="<?php echo esc_url( $hover_url ); ?>"
-			alt=""
-			loading="lazy"
-			decoding="async"
-			aria-hidden="true"
-		>
-		<?php endif; ?>
-	</div>
-	<?php
+    // Immer eine URL liefern — Platzhalter wenn kein Bild
+    $image_url = $image_id
+        ? wp_get_attachment_image_url( $image_id, 'janecka-product-card' )
+        : wc_placeholder_img_src( 'janecka-product-card' );
+
+    // Sicherheitsnetz: falls wp_get_attachment_image_url false zurückgibt
+    if ( ! $image_url ) {
+        $image_url = wc_placeholder_img_src( 'janecka-product-card' );
+    }
+
+    $image_alt = $image_id
+        ? trim( strip_tags( get_post_meta( $image_id, '_wp_attachment_image_alt', true ) ) )
+        : get_the_title();
+    ?>
+    <div class="product-card__image-wrap">
+        <img
+            class="product-card__image"
+            src="<?php echo esc_url( $image_url ); ?>"
+            alt="<?php echo esc_attr( $image_alt ); ?>"
+            loading="lazy"
+            decoding="async"
+        >
+        <?php
+        $gallery_ids = $product->get_gallery_image_ids();
+        if ( ! empty( $gallery_ids[0] ) ) :
+            $hover_url = wp_get_attachment_image_url( $gallery_ids[0], 'janecka-product-card' );
+            if ( $hover_url ) :
+        ?>
+        <img
+            class="product-card__image product-card__image--hover"
+            src="<?php echo esc_url( $hover_url ); ?>"
+            alt="" loading="lazy" decoding="async" aria-hidden="true"
+        >
+        <?php
+            endif;
+        endif;
+        ?>
+    </div>
+    <?php
 }
 
 function janecka_product_card_badges(): void {
@@ -192,7 +208,7 @@ function janecka_product_card_badges(): void {
 function janecka_product_card_subtitle(): void {
 	global $product;
 	$subtitle = '';
-	foreach ( [ 'pa_marke', 'pa_kollektion' ] as $attr ) {
+	foreach ( [ 'product_brand', 'pa_brand', 'pa_marke', 'pa_kollektion' ] as $attr ) {
 		$terms = wc_get_product_terms( $product->get_id(), $attr, [ 'fields' => 'names' ] );
 		if ( ! empty( $terms ) ) {
 			$subtitle = implode( ', ', array_slice( $terms, 0, 2 ) );

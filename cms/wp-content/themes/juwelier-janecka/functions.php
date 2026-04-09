@@ -82,6 +82,8 @@ require_once get_template_directory() . '/inc/performance.php';
 require_once get_template_directory() . '/inc/shortcode-overrides.php';
 require_once get_template_directory() . '/inc/class-mega-menu-walker.php';
 require_once get_template_directory() . '/inc/shortcode-booking-button.php';
+require_once get_template_directory() . '/inc/brands/brands-setup.php';
+require_once get_template_directory() . '/inc/brands/brands-shortcodes.php';
 
 
 
@@ -182,19 +184,14 @@ if ( ! function_exists('medialab_toggle') ) {
 // WooCommerce nur laden wenn aktiv
 if ( class_exists( 'WooCommerce' ) ) {
 
-	// 1. Kategorie-Filter-Konfiguration (wird von anderen Dateien verwendet)
-	require_once get_stylesheet_directory() . '/inc/woocommerce/category-filters-config.php';
 
-	// 2. Theme-Support, Bild-Größen, Scripts
+	// Theme-Support, Bild-Größen, Scripts
 	require_once get_stylesheet_directory() . '/inc/woocommerce/setup.php';
 
-	// 3. AJAX-Filter-Handler + Sidebar-Render
-	require_once get_stylesheet_directory() . '/inc/woocommerce/ajax-filters.php';
-
-	// 4. Archiv-/Shop-Hooks (Produkt-Karte, Grid, Layout)
+	// Archiv-/Shop-Hooks (Produkt-Karte, Grid, Layout)
 	require_once get_stylesheet_directory() . '/inc/woocommerce/hooks-archive.php';
 
-	// 5. Einzelprodukt-Hooks (Galerie, Summary, Tabs, Schema)
+	// Einzelprodukt-Hooks (Galerie, Summary, Tabs, Schema)
 	require_once get_stylesheet_directory() . '/inc/woocommerce/hooks-single.php';
 }
 
@@ -305,6 +302,14 @@ function janecka_fix_category_link( $link, $term, $taxonomy ) {
 
 
 
+// Breadcrumb auf normalen WordPress-Seiten (page.php) anzeigen
+add_action( 'woocommerce_before_main_content', function() {
+    if ( is_page() && function_exists( 'woocommerce_breadcrumb' ) ) {
+        woocommerce_breadcrumb();
+    }
+}, 5 );
+
+
 
 // ── WooCommerce Login-Seite: Überschriften anpassen ──────────────────────────
 
@@ -325,3 +330,6 @@ function janecka_wc_account_strings( $translated, $original, $domain ) {
 
     return $replacements[ $original ] ?? $translated;
 }
+
+// Präfix ("Kategorie:", "Schlagwort:" etc.) aus Archiv-Titeln entfernen
+add_filter( 'get_the_archive_title_prefix', '__return_empty_string' );

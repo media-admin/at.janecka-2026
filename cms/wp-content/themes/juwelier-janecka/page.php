@@ -9,8 +9,8 @@
         while (have_posts()) : the_post();
             ?>
             <article <?php post_class(); ?>>
-                <header class="entry-header">
-                    <?php the_title('<h1>', '</h1>'); ?>
+                <header class="entry-header page-header">
+                    <?php the_title('<h1 class="page-header__title">', '</h1>'); ?>
                 </header>
                 
                 <?php if (has_post_thumbnail()) : ?>

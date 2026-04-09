@@ -104,8 +104,8 @@ $color-purple: #8b5cf6;   // Highlights, Badges
 //     NICHT in Components verwenden – nur über diese Tokens!
 // ─────────────────────────────────────────────────────────────────
 
-$color-primary-dark:        #b30000;  // darken($color-primary, 10%)
-$color-primary-darker:      #990000;  // darken($color-primary, 15%)
+$color-primary-dark:        #5a5a5a;  // darken($color-primary, 10%)
+$color-primary-darker:      #424242;  // darken($color-primary, 15%)
 
 $color-success-dark:        #075b3f;  // darken($color-success, 20%)
 $color-success-light-bg:    #b5f8e2;  // lighten($color-success, 45%)
@@ -123,7 +123,7 @@ $color-hero-gradient-dark:  #3958e3;  // darken($color-hero-gradient, 10%)
 
 
 // ─────────────────────────────────────────────────────────────────
-// 4. SEMANTIC USAGE TOKENS
+// 4. SEMANTIC USAGE TOKENS 
 //    Light Mode defaults – überschrieben durch CSS Custom Properties
 // ─────────────────────────────────────────────────────────────────
 

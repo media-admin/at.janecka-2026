@@ -65,6 +65,9 @@
     height: 50px;
     cursor: pointer;
     transition: all $transition-fast;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
       background: rgba(255, 255, 255, 0.2);

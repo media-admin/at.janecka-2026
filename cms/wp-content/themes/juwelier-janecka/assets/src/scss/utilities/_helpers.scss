@@ -157,3 +157,14 @@
 .object-top    { object-position: top; }
 .object-center { object-position: center; }
 .object-bottom { object-position: bottom; }
+
+
+// Spacing Utilities (Padding)
+.p-0  { padding: 0 !important; }
+.p-4  { padding: $spacing-4 !important; }
+.p-8  { padding: $spacing-8 !important; }
+.pt-0  { padding-top: 0 !important; }
+.pt-4  { padding-top: $spacing-4 !important; }
+.pt-8  { padding-top: $spacing-8 !important; }
+.pb-0  { padding-bottom: 0 !important; }
+.pb-4  { padding-bottom: $spacing-4 !important; }

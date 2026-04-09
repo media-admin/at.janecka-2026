@@ -1,1 +1,0 @@
-!function(){"use strict";var e={};(function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})})(e),((window.germanizedPro=window.germanizedPro||{}).static=window.germanizedPro.static||{})["checkout-multistep-styles"]=e}();

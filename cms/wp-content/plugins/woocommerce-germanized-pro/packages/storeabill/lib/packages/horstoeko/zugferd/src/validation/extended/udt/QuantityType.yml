@@ -1,7 +1,0 @@
-Vendidero\StoreaBill\Vendor\horstoeko\zugferd\entities\extended\udt\QuantityType:
-    properties:
-        unitCode:
-            -
-                NotNull:
-                    groups:
-                        - xsd_rules

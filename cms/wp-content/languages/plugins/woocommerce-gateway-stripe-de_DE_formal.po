@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce Stripe Payment Gateway - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-10-15 13:43:42+0000\n"
+"PO-Revision-Date: 2026-04-04 03:04:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -828,10 +828,6 @@ msgstr "Verwendungszweck"
 msgid "Unable to find shipping method for address."
 msgstr "Für die Adresse konnte keine Versandmethode gefunden werden."
 
-#: includes/admin/class-wc-stripe-admin-notices.php:589
-msgid "Cheatin&#8217; huh?"
-msgstr "Schummeln, was?"
-
 #. translators: 1) amount (including currency symbol) 2) transaction id 3)
 #. refund message
 #: includes/abstracts/abstract-wc-stripe-payment-gateway.php:1315
@@ -864,6 +860,10 @@ msgstr "Falls aktiviert und vom Browser unterstützt, können Kunden mit Apple P
 #: build/express-checkout.js:1
 msgid "Tax"
 msgstr "Steuer"
+
+#: includes/admin/class-wc-stripe-admin-notices.php:589
+msgid "Cheatin&#8217; huh?"
+msgstr "Sie sind nicht berechtigt, dies zu tun."
 
 #: includes/admin/class-wc-stripe-admin-notices.php:256
 msgid "WooCommerce Stripe - cURL is not installed."

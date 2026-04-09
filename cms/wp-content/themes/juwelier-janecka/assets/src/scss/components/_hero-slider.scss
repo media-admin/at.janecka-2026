@@ -121,6 +121,11 @@ $slider-height-mobile:  clamp(280px, 55vw, 480px);
         &::after { font-size: 16px; font-weight: 700; }
     }
 
+    .swiper-button-prev,
+    .swiper-button-next {
+        --swiper-navigation-sides-offset: #{$spacing-6};
+    }
+
     .swiper-pagination {
         bottom: $spacing-4;
 

@@ -41,43 +41,9 @@ get_template_part( 'template-parts/components/breadcrumbs' );
             $has_hero    = ! empty( $hero );
             ?>
             <?php if ( ! $has_hero ) : ?>
-            <h1 class="single-post__title"><?php the_title(); ?></h1>
+            <h1 class="single-post__title page-title"><?php the_title(); ?></h1>
             <?php endif; ?>
 
-            <?php /* Meta-Zeile */ ?>
-            <div class="single-post__meta">
-                <?php /* Avatar + Autor */ ?>
-                <div class="single-post__author-info">
-                    <?php echo get_avatar( get_the_author_meta( 'ID' ), 36, '', get_the_author(), [ 'class' => 'single-post__avatar' ] ); ?>
-                    <a class="single-post__author-name"
-                       href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>">
-                        <?php the_author(); ?>
-                    </a>
-                </div>
-
-                <span class="single-post__meta-sep" aria-hidden="true">·</span>
-
-                <time class="single-post__date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
-                    <?php the_date(); ?>
-                </time>
-
-                <?php if ( get_the_modified_date() !== get_the_date() ) : ?>
-                <span class="single-post__meta-sep" aria-hidden="true">·</span>
-                <span class="single-post__updated">
-                    <?php printf( esc_html__( 'Aktualisiert: %s', 'custom-theme' ), get_the_modified_date() ); ?>
-                </span>
-                <?php endif; ?>
-
-                <?php /* Lesezeit */ ?>
-                <?php
-                $word_count  = str_word_count( wp_strip_all_tags( get_the_content() ) );
-                $read_time   = max( 1, (int) round( $word_count / 200 ) );
-                ?>
-                <span class="single-post__meta-sep" aria-hidden="true">·</span>
-                <span class="single-post__read-time">
-                    <?php printf( esc_html__( '%d Min. Lesezeit', 'custom-theme' ), $read_time ); ?>
-                </span>
-            </div>
 
         </header>
 
@@ -97,6 +63,33 @@ get_template_part( 'template-parts/components/breadcrumbs' );
             <?php endif; ?>
         </div>
         <?php endif; ?>
+
+        <?php /* ── Meta-Zeile (nach Featured Image) ────────────────────── */ ?>
+        <div class="single-post__meta">
+            <span class="single-post__author-info">
+                <a class="single-post__author-name" href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>">
+                    <?php the_author(); ?>
+                </a>
+            </span>
+            <span class="single-post__meta-sep" aria-hidden="true">·</span>
+            <time class="single-post__date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
+                <?php the_date(); ?>
+            </time>
+            <?php if ( get_the_modified_date() !== get_the_date() ) : ?>
+            <span class="single-post__meta-sep" aria-hidden="true">·</span>
+            <span class="single-post__updated">
+                <?php printf( esc_html__( 'Aktualisiert: %s', 'custom-theme' ), get_the_modified_date() ); ?>
+            </span>
+            <?php endif; ?>
+            <span class="single-post__meta-sep" aria-hidden="true">·</span>
+            <span class="single-post__read-time">
+                <?php
+                $word_count = str_word_count( wp_strip_all_tags( get_the_content() ) );
+                $read_time  = max( 1, (int) round( $word_count / 200 ) );
+                printf( esc_html__( '%d Min. Lesezeit', 'custom-theme' ), $read_time );
+                ?>
+            </span>
+        </div>
 
         <?php /* ── Inhalt ───────────────────────────────────────────────── */ ?>
         <div class="single-post__content entry-content">

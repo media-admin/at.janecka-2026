@@ -87,6 +87,11 @@ if (function_exists('get_field') && get_field('top_header_enable', 'option')) :
         <!-- Logo Row: Logo zentriert, Icons rechts -->
         <div class="site-navigation__logo-row">
 
+            <!-- Mobile Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
+                <span></span>
+            </button>
+
             <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo" aria-label="<?php bloginfo('name'); ?>">
                 <?php
                 $logo_desktop       = function_exists('get_field') ? get_field('logo_desktop', 'option')       : null;
@@ -181,11 +186,6 @@ if (function_exists('get_field') && get_field('top_header_enable', 'option')) :
             ));
             ?>
         </div>
-
-        <!-- Mobile Toggle -->
-        <button class="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
-            <span></span>
-        </button>
 
     </nav>
 

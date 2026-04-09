@@ -96,20 +96,33 @@ export default class Navigation {
             const link = item.querySelector(':scope > a');
             if (!link) return;
 
+            // Klick auf das Toggle-Icon (±) → nur Submenu toggeln, nie navigieren
+            const icon = link.querySelector('.nav-toggle-icon');
+            if (icon) {
+                icon.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation(); // Link-Klick unterdrücken
+                    this._toggleSubmenu(item, this.mobileItems);
+                });
+            }
+
+            // Klick auf den Link-Text → bei geschlossenem Submenu öffnen, bei offenem navigieren
             link.addEventListener('click', (e) => {
-                // Hat dieses Item ein echtes Ziel? Nur verhindern wenn Submenu da
                 const href = link.getAttribute('href');
                 const hasRealLink = href && href !== '#' && href !== '';
 
-                if (hasRealLink && !item.classList.contains('is-open')) {
-                    // Erster Tap: Submenu öffnen statt navigieren
+                if (!hasRealLink) {
                     e.preventDefault();
                     this._toggleSubmenu(item, this.mobileItems);
-                } else if (!hasRealLink) {
+                    return;
+                }
+
+                if (!item.classList.contains('is-open')) {
+                    // Erstes Tap: Submenu öffnen
                     e.preventDefault();
                     this._toggleSubmenu(item, this.mobileItems);
                 }
-                // Zweiter Tap bei echtem Link: navigiert
+                // Zweites Tap: Link öffnet normal
             });
         });
     }

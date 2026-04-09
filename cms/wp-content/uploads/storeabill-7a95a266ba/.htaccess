@@ -1,5 +1,0 @@
-deny from all
-<FilesMatch "\.(?:ttf|woff)$">
-Order deny,allow
-Allow from all
-</FilesMatch>

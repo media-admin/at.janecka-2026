@@ -15,47 +15,34 @@
 .brand-grid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	gap: 0.75rem;
+	gap: 2rem 1.5rem;
 	margin-block: 2rem;
 
 	@include bp(sm) {
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(5, 1fr);
 	}
 
 	@include bp(md) {
 		grid-template-columns: repeat(5, 1fr);
-		gap: 1rem;
-	}
-
-	@include bp(lg) {
-		grid-template-columns: repeat(6, 1fr);
+		gap: 2.5rem 2rem;
 	}
 
 	// ----------------------------------------------------------------
-	// Kachel
+	// Kachel — rahmenlos, nur Logo
 	// ----------------------------------------------------------------
 
 	&__item {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		aspect-ratio: 1 / 1;
-		padding: 1rem;
-		background-color: var(--color-surface, #fff);
-		border: 1px solid var(--color-border, #e8e8e8);
+		padding: 0.5rem;
 		text-decoration: none;
-		transition:
-			border-color 0.2s ease,
-			box-shadow 0.2s ease;
-
-		@include bp(md) {
-			padding: 1.25rem;
-		}
+		opacity: 0.8;
+		transition: opacity 0.2s ease;
 
 		&:hover,
 		&:focus-visible {
-			border-color: var(--color-primary, #333);
-			box-shadow: 0 4px 20px rgb(0 0 0 / 0.08);
+			opacity: 1;
 			outline: none;
 		}
 	}
@@ -67,9 +54,9 @@
 	&__logo {
 		display: block;
 		width: 100%;
-		height: 100%;
+		height: auto;
+		max-height: 150px;
 		object-fit: contain;
-		// Kein Verzerrung, behält Seitenverhältnis bei
 	}
 
 	// ----------------------------------------------------------------
@@ -77,8 +64,12 @@
 	// ----------------------------------------------------------------
 
 	&__name {
-		display: block;
-		font-size: clamp(0.6875rem, 1.2vw, 0.875rem);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		min-height: 150px;
+		font-size: clamp(0.75rem, 1.5vw, 1rem);
 		font-weight: 600;
 		text-align: center;
 		color: var(--color-text, #333);
@@ -127,11 +118,28 @@
 		height: auto;
 		object-fit: cover;
 		aspect-ratio: 1400 / 470;
+		margin-block: $spacing-2;
 
-		// Mobile: etwas höheres Seitenverhältnis damit Banner nicht zu schmal wird
 		@media (max-width: 47.99em) {
 			aspect-ratio: 2 / 1;
 		}
+	}
+
+	// Fallback wenn kein Banner, aber Logo vorhanden
+	&__logo-wrap {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 2rem 0;
+	}
+
+	&__logo {
+		display: block;
+		max-width: 300px;
+		max-height: 150px;
+		width: auto;
+		height: auto;
+		object-fit: contain;
 	}
 
 	// ----------------------------------------------------------------
@@ -139,23 +147,35 @@
 	// ----------------------------------------------------------------
 
 	&__description {
-		max-width: 48rem;
-		margin-inline: auto;
-		text-align: center;
+		// Volle Breite wie das Banner – kein max-width
 		font-size: 1rem;
 		line-height: 1.75;
 		color: var(--color-text, #333);
+		text-align: left; // explizit, verhindert Vererbung von text-align: center
+		margin-block: $spacing-2;
+		margin-bottom: $spacing-2;
 
 		@include bp(md) {
 			font-size: 1.0625rem;
 		}
 
+		// Inline-Styles aus dem WYSIWYG-Feld (z.B. text-align) übernehmen
+		p,
+		h1, h2, h3, h4,
+		ul, ol, li {
+			text-align: inherit; // erbt von übergeordneten Inline-Styles
+		}
+
 		p {
-			margin-bottom: 1em;
+			margin-bottom: 1.25em;
 
 			&:last-child {
 				margin-bottom: 0;
 			}
+		}
+
+		strong {
+			font-weight: 600;
 		}
 
 		a {
@@ -190,7 +210,7 @@
 // Swiper-Container: nimmt den verbleibenden Platz ein
 .brand-slider {
 	flex: 1;
-	min-width: 0; // Flex-Kind darf schrumpfen
+	min-width: 0;
 	overflow: hidden;
 
 	// ----------------------------------------------------------------
@@ -213,16 +233,12 @@
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		min-height: 150px;  // ← neu, damit alle Slides gleich hoch sind
-		height: 4rem;  // ← neu, gleich wie __logo
+		min-height: 150px;
+		height: auto;
 		padding: 0.5rem;
 		text-decoration: none;
 		opacity: 0.65;
 		transition: opacity 0.2s ease;
-
-		@include bp(md) {
-			height: 5rem;  // ← neu
-		}
 
 		&:hover,
 		&:focus-visible {
@@ -240,12 +256,7 @@
 		width: 100%;
 		min-height: 150px;
 		height: auto;
-		height: 4rem;
 		object-fit: contain;
-
-		@include bp(md) {
-			height: 5rem;
-		}
 	}
 
 	// ----------------------------------------------------------------
@@ -257,7 +268,9 @@
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		height: 100%;  // ← füllt __item aus statt fester Höhe
+		height: 100%;
+		min-height: 150px;
+		padding-top: 1.2rem;
 		font-size: 1.5rem;
 		font-weight: 600;
 		text-align: center;
@@ -265,10 +278,6 @@
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
 		line-height: 1.2;
-
-		@include bp(md) {
-			font-size: 1.75rem;
-		}
 	}
 }
 
@@ -310,7 +319,6 @@
 		pointer-events: none;
 	}
 
-	// Pfeil-Icon via CSS
 	&::before {
 		content: '';
 		display: block;

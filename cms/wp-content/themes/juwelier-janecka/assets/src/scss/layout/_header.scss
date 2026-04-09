@@ -15,11 +15,14 @@
         object-fit: contain;
     }
 
+    // Mobile-Logo nur verstecken wenn ein separates Mobile-Logo existiert
     &__img--mobile { display: none; }
 
     @include respond-below('md') {
-        &__img--desktop { display: none; }
-        &__img--mobile  {
+        // Desktop-Logo nur verstecken wenn Mobile-Logo vorhanden
+        &__img--desktop:not(:only-of-type) { display: none; }
+
+        &__img--mobile {
             display:    block;
             max-height: 44px;
             max-width:  160px;

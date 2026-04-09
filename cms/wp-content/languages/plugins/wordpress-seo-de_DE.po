@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Yoast SEO &#8211; Advanced SEO with real-time guidance and built-in AI - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-04-02 16:03:21+0000\n"
+"PO-Revision-Date: 2026-04-08 06:56:43+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,67 @@ msgstr ""
 "X-Generator: GlotPress/4.0.3\n"
 "Language: de\n"
 "Project-Id-Version: Plugins - Yoast SEO &#8211; Advanced SEO with real-time guidance and built-in AI - Stable (latest release)\n"
+
+#. translators: %s expands to the post type name this task is about
+#: src/task-list/application/tasks/set-search-appearance-templates.php:134
+msgid "Generic titles and descriptions make your results unclear in search. Templates ensure every %s has a clear, click-worthy snippet automatically. Go to Search appearance, choose your post type, and set default title and meta description patterns."
+msgstr "Allgemeine Titel und Beschreibungen machen deine Suchergebnisse unübersichtlich. Templates sorgen dafür, dass jeder %s automatisch einen klaren, ansprechenden Ausschnitt erhält. Geh zu „Suchdarstellung“, wähle deinen Inhaltstyp aus und lege Standardvorlagen für Titel und Meta-Beschreibungen fest."
+
+#. translators: %1$s expands to an opening p tag, %2$s and %4$s expand to a
+#. closing p tag, %3$s expands to an opening p tag and opening strong tag, %5$s
+#. expands to a closing strong tag, %6$s expands to an opening strong tag, %7$s
+#. expands to a closing strong tag and closing p tag
+#: src/task-list/application/tasks/improve-content-seo.php:111
+msgid "%1$sBy aligning your content with search intent and focus keyphrases, you make it easier for people and AI systems to find your website, improving your organic visibility. Use the recommendations in the SEO analysis to strengthen your technical performance and ranking potential.%2$s%3$sPro tip%5$s: Use %6$sAI Generate%7$s to quickly generate high quality meta descriptions and keyphrase-rich headers that rank well.%4$s"
+msgstr "%1$sIndem du deine Inhalte auf die Suchabsicht und die wichtigsten Keyphrasen abstimmst, machst du es Menschen und KI-Systemen leichter, deine Website zu finden, und verbesserst so deine organische Sichtbarkeit. Nutze die Empfehlungen aus der SEO-Analyse, um deine technische Performance und dein Ranking-Potenzial zu stärken.%2$s%3$sProfi-Tipp%5$s: Nutze %6$sKI Generate%7$s, um schnell hochwertige Meta-Beschreibungen und keyphrasenreiche Überschriften zu erstellen, die gut ranken.%4$s"
+
+#. translators: %1$s expands to the post type label this task is about
+#: src/task-list/application/tasks/improve-content-seo.php:108
+msgid "Improve the SEO of your recent content: %1$s"
+msgstr "Verbessere die Suchmaschinenoptimierung deiner neuesten Inhalte: %1$s"
+
+#. translators: %1$s expands to an opening p tag, %2$s and %4$s expand to a
+#. closing p tag, %3$s expands to an opening p tag and opening strong tag, %5$s
+#. expands to a closing strong tag, %6$s expands to an opening strong tag, %7$s
+#. expands to a closing strong tag and closing p tag
+#: src/task-list/application/tasks/improve-content-readability.php:110
+msgid "%1$sChecking your recent content's readability ensures it stays clear and easy to follow, improving your user experience. Follow the feedback to refine your sentence structure and word choice and maintain a high standard of engagement and comprehension.%2$s%3$sPro tip%5$s: Use %6$sAI Optimize%7$s to automatically simplify complex sentences and improve the flow of your writing.%4$s"
+msgstr "%1$sWenn du die Lesbarkeit deiner aktuellen Inhalte überprüfst, stellst du sicher, dass sie klar und leicht verständlich bleiben, was die Benutzererfahrung verbessert. Befolge das Feedback, um deinen Satzbau und deine Wortwahl zu verfeinern und ein hohes Maß an Engagement und Verständlichkeit zu gewährleisten.%2$s%3$sProfi-Tipp%5$s: Nutze %6$sAI Optimize%7$s, um komplexe Sätze automatisch zu vereinfachen und den Lesefluss deiner Texte zu verbessern.%4$s"
+
+#. translators: %1$s expands to the post type label this task is about
+#: src/task-list/application/tasks/improve-content-readability.php:107
+msgid "Improve the readability of your recent content: %1$s"
+msgstr "Verbessere die Lesbarkeit deiner neuesten Inhalte: %1$s"
+
+#. translators: %1$s and %3$s expands to an opening p tag, %2$s and %5$s expand
+#. to a closing p tag and %4$s expands to Yoast
+#: src/task-list/application/tasks/create-new-content.php:111
+msgid "%1$sLong gaps without new content slow down your traffic growth. Publishing regularly gives search engines and visitors a reason to return.%2$s%3$sPlan a topic, write your post, and use the %4$s SEO and Readability Analyses to refine it before publishing.%5$s"
+msgstr "%1$sLange Pausen ohne neue Inhalte bremsen das Wachstum deiner Besucherzahlen. Regelmäßige Veröffentlichungen geben Suchmaschinen und Besuchern einen Grund, wiederzukommen.%2$s%3$sPlane ein Thema, schreibe deinen Beitrag und nutze die %4$s SEO- und Lesbarkeitsanalysen, um ihn vor der Veröffentlichung zu optimieren.%5$s"
+
+#: src/task-list/application/tasks/child-tasks/improve-content-seo-child.php:53
+msgid "Your content is not yet optimized for search. Follow the SEO recommendations to help search engines understand and rank your page."
+msgstr "Dein Inhalt ist noch nicht für Suchmaschinen optimiert. Befolge die SEO-Empfehlungen, damit Suchmaschinen deine Seite besser verstehen und besser ranken können."
+
+#: src/task-list/application/tasks/child-tasks/improve-content-seo-child.php:52
+msgid "Your content is partially optimized. Adding a few more SEO best practices will help you reach a wider audience."
+msgstr "Deine Inhalte sind teilweise optimiert. Wenn du noch ein paar weitere SEO-Best-Practices umsetzt, kannst du ein breiteres Publikum erreichen."
+
+#: src/task-list/application/tasks/child-tasks/improve-content-seo-child.php:51
+msgid "Your content is well optimized for search engines. This increases your chances of ranking higher in search results."
+msgstr "Deine Inhalte sind gut für Suchmaschinen optimiert. Das erhöht deine Chancen, in den Suchergebnissen dein Ranking zu verbessern."
+
+#: src/task-list/application/tasks/child-tasks/improve-content-readability-child.php:53
+msgid "Your content is currently difficult to read. Check the analysis for specific ways to simplify your writing for a better user experience."
+msgstr "Dein Text ist derzeit schwer lesbar. Schau dir die Analyse an, um konkrete Tipps zu erhalten, wie du deinen Text vereinfachen und so das Benutzererlebnis verbessern kannst."
+
+#: src/task-list/application/tasks/child-tasks/improve-content-readability-child.php:52
+msgid "Your content is readable but could be clearer. Consider simplifying a few sentences to improve the overall flow."
+msgstr "Dein Text ist gut lesbar, könnte aber noch etwas klarer sein. Versuche doch, ein paar Sätze zu vereinfachen, um den Lesefluss insgesamt zu verbessern."
+
+#: src/task-list/application/tasks/child-tasks/improve-content-readability-child.php:51
+msgid "Your content is clear and easy to read. This helps your audience stay engaged with your message."
+msgstr "Deine Inhalte sind klar und leicht verständlich. Das hilft deinem Publikum, sich auf deine Botschaft einzulassen."
 
 #: src/schema-aggregator/user-interface/site-schema-aggregator-cli-command.php:103
 msgid "An error occurred while aggregating the site schema."
@@ -54,6 +115,10 @@ msgstr "Der Beitrag \"Hello World\" konnte nicht gelöscht werden."
 msgid "Set search templates"
 msgstr "Such-Templates einstellen"
 
+#: src/task-list/application/tasks/enable-llms-txt.php:109
+msgid "Without llms.txt, AI platforms may not know how to treat your content. Enabling it helps communicate your preferences in a clearer way to AI tools."
+msgstr "Ohne die Datei „llms.txt“ wissen KI-Plattformen möglicherweise nicht, wie sie deine Inhalte behandeln sollen. Wenn du sie aktivierst, kannst du deine Präferenzen den KI-Tools klarer vermitteln."
+
 #: src/task-list/application/tasks/enable-llms-txt.php:108
 msgid "Create an llms.txt file"
 msgstr "Eine llms.txt Datei erstellen"
@@ -81,6 +146,15 @@ msgstr "Neuen Inhalt erstellen"
 #: src/task-list/application/tasks/create-new-content.php:95
 msgid "Create new post"
 msgstr "Neuen Beitrag erstellen"
+
+#. translators: %s expands to Yoast SEO
+#: src/task-list/application/tasks/complete-ftc.php:94
+msgid "Skipping setup limits how much %s can help you. Completing it makes sure the core settings are working in your favor."
+msgstr "Wenn du die Einrichtung überspringst, kannst du %s nur begrenzt nutzen. Wenn du sie abschließt, stellst du sicher, dass die Grundeinstellungen so funktionieren, wie du es möchtest."
+
+#: src/task-list/application/tasks/complete-ftc.php:91
+msgid "Complete the first time configuration"
+msgstr "Führe die Erstkonfiguration durch"
 
 #: src/presenters/admin/sidebar-presenter.php:115 js/dist/general-page.js:5
 #: js/dist/new-settings.js:5 js/dist/support.js:4

@@ -8,7 +8,8 @@
                 wp_nav_menu(array(
                     'theme_location' => 'footer',
                     'menu_class'     => 'footer-nav__list',
-                    'container'      => false,
+                    'container'      => 'nav',
+                    'container_class'=> 'footer-nav',
                     'depth'          => 2,
                     'fallback_cb'    => false,
                 ));

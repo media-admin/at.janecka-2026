@@ -51,6 +51,7 @@ function mlt_init() {
     require_once MLT_PATH . 'inc/class-seo.php';
     require_once MLT_PATH . 'inc/class-schema.php';
     require_once MLT_PATH . 'inc/class-breadcrumbs.php';
+    require_once MLT_PATH . 'inc/breadcrumbs.php';
     require_once MLT_PATH . 'inc/class-redirects.php';
     require_once MLT_PATH . 'inc/class-seo-dashboard.php';
     require_once MLT_PATH . 'inc/class-report-template.php';

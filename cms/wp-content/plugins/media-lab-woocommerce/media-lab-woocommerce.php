@@ -31,3 +31,14 @@ add_action('after_setup_theme', function() {
 
 // Load Product Configurator
 require_once MEDIA_LAB_WC_PATH . 'inc/configurator/class-configurator.php';
+
+// ── Medialab WooCommerce Filters ─────────────────────────────────────────────
+add_action( 'plugins_loaded', function() {
+    if ( ! class_exists( 'WooCommerce' ) ) return;
+    require_once MEDIA_LAB_WC_PATH . 'inc/filters/filter-config.php';
+    require_once MEDIA_LAB_WC_PATH . 'inc/filters/acf-fields.php';
+    require_once MEDIA_LAB_WC_PATH . 'inc/filters/ajax-handlers.php';
+    require_once MEDIA_LAB_WC_PATH . 'inc/filters/filter-bar.php';
+    require_once MEDIA_LAB_WC_PATH . 'inc/filters/setup.php';
+    require_once MEDIA_LAB_WC_PATH . 'inc/filters/admin-overview.php';
+} );

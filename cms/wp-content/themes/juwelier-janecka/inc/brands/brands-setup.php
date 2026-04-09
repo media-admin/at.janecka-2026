@@ -81,7 +81,21 @@ function janecka_register_brand_acf_fields(): void {
 
 // ============================================================
 // 3. Brand-Archiv-Header (Banner + Beschreibung) per Hook
+//
+// Liest in dieser Priorität:
+//   Banner:      brand-banner (migriert) → brand_banner (neues ACF-Feld)
+//   Logo:        brand-logo-main (migriert) → thumbnail_id
+//   Beschreibung: brand-description (migriert) → WC term_description()
 // ============================================================
+
+// Anchor-ID für den "#product-grid"-Link in der Marken-Beschreibung
+add_action( 'woocommerce_before_shop_loop', 'janecka_brand_product_grid_anchor', 4 );
+function janecka_brand_product_grid_anchor(): void {
+	if ( ! is_tax( 'product_brand' ) ) {
+		return;
+	}
+	echo '<div id="product-grid"></div>';
+}
 
 add_action( 'woocommerce_before_shop_loop', 'janecka_brand_archive_header', 5 );
 function janecka_brand_archive_header(): void {
@@ -94,28 +108,55 @@ function janecka_brand_archive_header(): void {
 		return;
 	}
 
-	// Banner-Bild: zuerst ACF-Feld, Fallback auf WC thumbnail_id
+	$tid = $term->term_id;
+
+	// ── Banner-Bild ───────────────────────────────────────────
 	$banner_url = '';
-	$acf_banner = get_field( 'brand_banner', 'product_brand_' . $term->term_id );
-	if ( ! empty( $acf_banner['url'] ) ) {
-		$banner_url = $acf_banner['url'];
-	} else {
-		$thumbnail_id = (int) get_term_meta( $term->term_id, 'thumbnail_id', true );
-		if ( $thumbnail_id ) {
-			$src        = wp_get_attachment_image_src( $thumbnail_id, 'full' );
-			$banner_url = $src ? $src[0] : '';
+
+	// 1. Migriertes ACF-Feld (Bindestrich-Key, speichert Attachment-ID)
+	$banner_id = (int) get_term_meta( $tid, 'brand-banner', true );
+	if ( $banner_id ) {
+		$banner_url = wp_get_attachment_image_url( $banner_id, 'full' ) ?: '';
+	}
+
+	// 2. Neues ACF-Feld (Unterstrich-Key, gibt Array zurück)
+	if ( ! $banner_url ) {
+		$acf_banner = get_field( 'brand_banner', 'product_brand_' . $tid );
+		if ( ! empty( $acf_banner['url'] ) ) {
+			$banner_url = $acf_banner['url'];
 		}
 	}
 
-	// Term-Beschreibung (aus dem WC-Brand-Feld "Beschreibung")
-	$description = term_description( $term->term_id, 'product_brand' );
+	// ── Beschreibung ──────────────────────────────────────────
+	$description = '';
 
-	if ( ! $banner_url && ! $description ) {
+	// 1. Migriertes ACF-Feld (brand-description, kann HTML enthalten)
+	$acf_desc = get_term_meta( $tid, 'brand-description', true );
+	if ( ! empty( $acf_desc ) ) {
+		$description = $acf_desc;
+	}
+
+	// 2. Natives WC term_description() als Fallback
+	if ( ! $description ) {
+		$description = term_description( $tid, 'product_brand' );
+	}
+
+	// ── Logo (optional, falls kein Banner vorhanden) ──────────
+	$logo_url = '';
+	if ( ! $banner_url ) {
+		$logo_id = (int) get_term_meta( $tid, 'brand-logo-main', true );
+		if ( $logo_id ) {
+			$logo_url = wp_get_attachment_image_url( $logo_id, 'large' ) ?: '';
+		}
+	}
+
+	if ( ! $banner_url && ! $logo_url && ! $description ) {
 		return;
 	}
 
 	?>
 	<div class="brand-archive-header">
+
 		<?php if ( $banner_url ) : ?>
 			<div class="brand-archive-header__banner">
 				<img
@@ -128,13 +169,27 @@ function janecka_brand_archive_header(): void {
 					decoding="async"
 				>
 			</div>
+		<?php elseif ( $logo_url ) : ?>
+			<div class="brand-archive-header__logo-wrap">
+				<img
+					src="<?php echo esc_url( $logo_url ); ?>"
+					alt="<?php echo esc_attr( $term->name ); ?>"
+					class="brand-archive-header__logo"
+					loading="eager"
+					decoding="async"
+				>
+			</div>
 		<?php endif; ?>
 
 		<?php if ( $description ) : ?>
 			<div class="brand-archive-header__description">
-				<?php echo wp_kses_post( $description ); ?>
+				<?php
+				// wp_kses_post erlaubt style-Attribute – Formatierung aus WYSIWYG bleibt erhalten
+				echo wp_kses( wpautop( $description ), wp_kses_allowed_html( 'post' ) );
+				?>
 			</div>
 		<?php endif; ?>
+
 	</div>
 	<?php
 }

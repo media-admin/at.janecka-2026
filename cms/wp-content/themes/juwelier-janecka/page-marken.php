@@ -40,6 +40,10 @@ $brands   = ! empty( $cat_slug ) ? janecka_get_brands_by_category( $cat_slug ) :
 <main id="main" class="site-main page-marken">
 	<div class="container">
 
+		<?php if ( function_exists( 'woocommerce_breadcrumb' ) ) : ?>
+			<?php woocommerce_breadcrumb(); ?>
+		<?php endif; ?>
+
 		<header class="page-header">
 			<h1 class="page-header__title"><?php the_title(); ?></h1>
 		</header>

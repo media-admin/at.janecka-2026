@@ -8,6 +8,12 @@ get_header(); ?>
 
 <main class="content stores-archive">
 
+    <?php get_template_part('template-parts/components/breadcrumbs'); ?>
+
+    <header class="page-header">
+        <h1 class="page-header__title"><?php the_title(); ?></h1>
+    </header>
+
 	<?php // ── Redaktioneller Inhalt (Gutenberg-Editor) ────────────────────────── ?>
 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 		<?php if ( get_the_content() ) : ?>

@@ -75,11 +75,14 @@
 
 // Pages
 @use 'pages/home';
+@use 'pages/post-archive';
 @use 'pages/stores-archive';
 @use 'pages/stores';
 
+
 // WooCommerce
 @use 'pages/woocommerce-account';
+@use 'woocommerce/brands';
 @use 'pages/page-404';
 @use 'pages/welcome-page';
 

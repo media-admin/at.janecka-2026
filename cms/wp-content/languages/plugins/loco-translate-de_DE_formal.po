@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Loco Translate - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-03-18 20:34:28+0000\n"
+"PO-Revision-Date: 2026-04-07 11:07:39+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,6 +14,14 @@ msgstr ""
 #: tpl/admin/config/settings.php:211
 msgid "Admins only"
 msgstr "Nur für Admins"
+
+#: tpl/admin/config/settings.php:207
+msgid "Viewing of referenced source code"
+msgstr "Referenzierten Quellcode anzeigen"
+
+#: tpl/admin/config/settings.php:31
+msgid "Skip source files larger than:"
+msgstr "Quelldateien überspringen, die größer sind als:"
 
 #: tpl/admin/config/apis.php:146
 msgid "Configured externally"

@@ -23,31 +23,41 @@
 /cms/wp-content/upgrade/
 /cms/wp-content/cache/
 /cms/wp-content/w3tc-config/
+/cms/wp-content/updraft/
 
 # ============================================
-# PLUGINS - Third Party (ignorieren)
+# PLUGINS – Drittanbieter (nicht versionieren)
 # ============================================
-/cms/wp-content/plugins/git sta
 /cms/wp-content/plugins/*
+
+# Agentur-Plugins (werden versioniert)
 !/cms/wp-content/plugins/media-lab-agency-core/
 !/cms/wp-content/plugins/media-lab-analytics/
 !/cms/wp-content/plugins/media-lab-seo/
 !/cms/wp-content/plugins/media-lab-woocommerce/
 
+# Janecka Custom Plugin (wird versioniert)
+!/cms/wp-content/plugins/janecka-juweliere-project/
 
 # ============================================
 # THEMES
 # ============================================
 /cms/wp-content/themes/twenty*/
 
+# Juwelier Janecka Theme (wird versioniert)
+!/cms/wp-content/themes/juwelier-janecka/
+
+# Build-Artefakte innerhalb des Themes
+/cms/wp-content/themes/*/assets/dist/
+/cms/wp-content/themes/juwelier-janecka/assets/hot
+
 # ============================================
 # BUILD & DEPENDENCIES
 # ============================================
 node_modules/
-npm-debug.log
-yarn-error.log
-/cms/wp-content/themes/*/assets/dist/
-*.map
+npm-debug.log*
+yarn-error.log*
+# package-lock.json und yarn.lock: optional – je nach Team-Entscheidung
 /vendor/
 
 # ============================================
@@ -73,32 +83,20 @@ Thumbs.db
 .cache/
 
 # ============================================
-# BACKUPS & DATABASE
+# BACKUPS & DATENBANK
 # ============================================
 *.backup
+*.bak
 *-backup/
 *.sql
 *.sql.gz
+*.zip
+*.tar.gz
 docs-backup/
-/cms/wp-content/updraft/
-
 
 # ============================================
 # ENVIRONMENT
 # ============================================
 .env
-.env.local
+.env.*
 .vscode/sftp.json
-
-# ============================================
-# PROJEKT SPEZIFISCH - Janecka Juweliere
-# ============================================
-
-# Janecka Plugin (wird committed)
-!/cms/wp-content/plugins/janecka-juweliere-project/
-
-# Juwelier Janecka Theme (wird committed)
-!/cms/wp-content/themes/juwelier-janecka/
-/cms/wp-content/themes/custom-theme/assets/hot
-cms/wp-content/updraft/
-cms/wp-content/updraft/

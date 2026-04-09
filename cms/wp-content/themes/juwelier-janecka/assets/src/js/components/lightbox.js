@@ -1,5 +1,8 @@
 /**
  * Lightbox Component
+ * Supports:
+ *  - SK-eigene Trigger: [data-lightbox="group-name"]
+ *  - WordPress Gallery Block (.wp-lightbox-container) mit Galerie-Navigation
  */
 
 export default class Lightbox {
@@ -14,21 +17,102 @@ export default class Lightbox {
   init() {
     this.createLightbox();
 
+    // capture: true → feuert vor dem WP Interactivity API
     document.addEventListener('click', (e) => {
+
+      // ── 1. SK-eigene Trigger ─────────────────────────────────────────────
       const trigger = e.target.closest('[data-lightbox]');
       if (trigger) {
         e.preventDefault();
         this.open(trigger);
+        return;
       }
-    });
+
+      // ── 2. WP Gallery Block ──────────────────────────────────────────────
+      const wpTrigger = e.target.closest(
+        '.wp-lightbox-container .lightbox-trigger, .wp-lightbox-container img'
+      );
+      if (wpTrigger) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const container = wpTrigger.closest('.wp-lightbox-container');
+        const gallery   = container.closest('.wp-block-gallery');
+        this.openWPGallery(container, gallery);
+      }
+
+    }, true); // capture: true
 
     document.addEventListener('keydown', (e) => {
       if (!this.lightbox.classList.contains('is-active')) return;
-      if (e.key === 'Escape') this.close();
-      if (e.key === 'ArrowLeft') this.prev();
+      if (e.key === 'Escape')     this.close();
+      if (e.key === 'ArrowLeft')  this.prev();
       if (e.key === 'ArrowRight') this.next();
     });
   }
+
+  // ── WP Gallery öffnen ────────────────────────────────────────────────────
+
+  openWPGallery(container, gallery) {
+    // Alle Container in dieser Galerie sammeln
+    const containers = gallery
+      ? Array.from(gallery.querySelectorAll('.wp-lightbox-container'))
+      : [container];
+
+    // Pseudo-Trigger-Objekte bauen, die showImage() versteht
+    this.images = containers.map(c => {
+      const img = c.querySelector('img');
+
+      // Größtes Bild aus srcset wählen, Fallback: src
+      let fullSrc = img.src;
+      if (img.srcset) {
+        const parts = img.srcset
+          .split(',')
+          .map(s => s.trim().split(/\s+/));
+        const largest = parts.reduce((a, b) => {
+          const aW = parseInt(a[1]) || 0;
+          const bW = parseInt(b[1]) || 0;
+          return bW > aW ? b : a;
+        });
+        if (largest[0]) fullSrc = largest[0];
+      }
+
+      return {
+        href:    fullSrc,
+        src:     fullSrc,
+        alt:     img.alt || '',
+        dataset: { caption: '' },
+      };
+    });
+
+    this.currentIndex = containers.indexOf(container);
+    if (this.currentIndex < 0) this.currentIndex = 0;
+
+    this.resetZoom();
+    this.showImage();
+    this.lightbox.classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // ── SK-eigene Trigger öffnen ─────────────────────────────────────────────
+
+  open(trigger) {
+    const gallery = trigger.dataset.lightbox;
+    if (gallery) {
+      this.images = Array.from(
+        document.querySelectorAll(`[data-lightbox="${gallery}"]`)
+      );
+      this.currentIndex = this.images.indexOf(trigger);
+    } else {
+      this.images = [trigger];
+      this.currentIndex = 0;
+    }
+    this.resetZoom();
+    this.showImage();
+    this.lightbox.classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // ── Lightbox DOM aufbauen ────────────────────────────────────────────────
 
   createLightbox() {
     this.lightbox = document.createElement('div');
@@ -76,11 +160,13 @@ export default class Lightbox {
     });
   }
 
+  // ── Zoom ─────────────────────────────────────────────────────────────────
+
   toggleZoom(e) {
-    const img = this.lightbox.querySelector('.lightbox__image');
     if (this.isZoomed) {
       this.resetZoom();
     } else {
+      const img = this.lightbox.querySelector('.lightbox__image');
       this.isZoomed = true;
       img.classList.add('is-zoomed');
       this.lightbox.classList.add('is-zoomed');
@@ -96,7 +182,7 @@ export default class Lightbox {
   }
 
   initPinchZoom(img) {
-    let startDist = 0;
+    let startDist  = 0;
     let startScale = 1;
     let currentScale = 1;
 
@@ -130,20 +216,7 @@ export default class Lightbox {
     });
   }
 
-  open(trigger) {
-    const gallery = trigger.dataset.lightbox;
-    if (gallery) {
-      this.images = Array.from(document.querySelectorAll(`[data-lightbox="${gallery}"]`));
-      this.currentIndex = this.images.indexOf(trigger);
-    } else {
-      this.images = [trigger];
-      this.currentIndex = 0;
-    }
-    this.resetZoom();
-    this.showImage();
-    this.lightbox.classList.add('is-active');
-    document.body.style.overflow = 'hidden';
-  }
+  // ── Navigation ───────────────────────────────────────────────────────────
 
   close() {
     this.resetZoom();
@@ -153,11 +226,11 @@ export default class Lightbox {
 
   showImage() {
     const current = this.images[this.currentIndex];
-    const img = this.lightbox.querySelector('.lightbox__image');
+    const img     = this.lightbox.querySelector('.lightbox__image');
     const caption = this.lightbox.querySelector('.lightbox__caption');
 
-    img.src = current.href || current.src;
-    img.alt = current.alt || '';
+    img.src     = current.href || current.src;
+    img.alt     = current.alt || '';
     caption.textContent = current.dataset.caption || '';
 
     const hasPrev = this.images.length > 1;

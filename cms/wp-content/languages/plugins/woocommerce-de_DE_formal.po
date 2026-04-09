@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-03-30 20:29:58+0000\n"
+"PO-Revision-Date: 2026-04-07 18:31:25+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -9567,17 +9567,6 @@ msgstr "<a id=\"woo-connect-notice-url\" href=\"%s\">Verbinden Sie Ihren Shop mi
 #: src/Database/Migrations/CustomOrderTable/CLIRunner.php:1000
 msgid "Failed to clean up all orders in a batch. Aborting."
 msgstr "Es konnten nicht alle Bestellungen in einem Stapel bereinigt werden. Abbruch."
-
-#. translators: no need to translate it. It's a link.
-#: src/Admin/Features/LaunchYourStore.php:198
-msgid ""
-"\n"
-"\t\t\tThis page is in \"Coming soon\" mode and is only visible to you and those who have permission. To make it public to everyone,&nbsp;<a href='%s'>change visibility settings</a>\n"
-"\t\t"
-msgstr ""
-"\n"
-"\t\t\tDiese Seite befindet sich im „Demnächst verfügbar“-Modus und wird nur Ihnen und denjenigen angezeigt, die eine entsprechende Berechtigung haben. Um sie für alle zu veröffentlichen, <a href='%s'>ändern Sie bitte die Sichtbarkeitseinstellungen</a>\n"
-"\t\t"
 
 #. translators: %s: Order history URL on My Account section
 #: includes/class-wc-frontend-scripts.php:680
@@ -30926,6 +30915,16 @@ msgstr[1] "Bewertet mit %1$s von 5, basierend auf %2$s Kundenbewertungen"
 msgid "ID %d"
 msgstr "ID %d"
 
+#. translators: %d: product ID
+#: includes/import/abstract-wc-product-importer.php:206
+msgid "Invalid product ID %d."
+msgstr "Ungültige Produkt-ID %d."
+
+#: includes/import/abstract-wc-product-importer.php:181
+#: src/Internal/RestApi/Routes/V4/Settings/Products/Controller.php:279
+msgid "Invalid product type."
+msgstr "Ungültiger Produkttyp."
+
 #. translators: %s: Available placeholders for use
 #. translators: %s: list of placeholders
 #: includes/admin/settings/class-wc-settings-emails.php:266
@@ -30943,16 +30942,6 @@ msgstr "ID %d"
 #: src/Internal/StockNotifications/Emails/CustomerStockNotificationVerifyEmail.php:271
 msgid "Available placeholders: %s"
 msgstr "Verfügbare Platzhalter: %s"
-
-#. translators: %d: product ID
-#: includes/import/abstract-wc-product-importer.php:206
-msgid "Invalid product ID %d."
-msgstr "Ungültige Produkt-ID %d."
-
-#: includes/import/abstract-wc-product-importer.php:181
-#: src/Internal/RestApi/Routes/V4/Settings/Products/Controller.php:279
-msgid "Invalid product type."
-msgstr "Ungültiger Produkttyp."
 
 #: includes/class-wc-post-types.php:357
 #: assets/client/admin/chunks/analytics-report-stock.js:1
@@ -45800,11 +45789,6 @@ msgstr "Kundenbemerkungen"
 msgid "Shipping details"
 msgstr "Versanddetails"
 
-#: src/Internal/Admin/Orders/ListTable.php:1701
-#: templates/checkout/form-billing.php:28
-msgid "Billing details"
-msgstr "Rechnungsdetails"
-
 #: includes/cli/class-wc-cli-runner.php:111
 #: src/Admin/API/Reports/Customers/Controller.php:198
 #: src/Admin/API/Reports/Orders/Controller.php:167
@@ -46166,6 +46150,11 @@ msgstr "Aktivieren Sie diese Option, wenn der Gutschein nicht für Produkte gelt
 #: includes/admin/class-wc-admin.php:367
 msgid "Version %s"
 msgstr "Version %s"
+
+#: src/Internal/Admin/Orders/ListTable.php:1701
+#: templates/checkout/form-billing.php:28
+msgid "Billing details"
+msgstr "Rechnungsdaten"
 
 #: includes/widgets/class-wc-widget-product-categories.php:39
 #: assets/client/blocks/featured-category.js:8
@@ -46974,6 +46963,11 @@ msgid_plural "%s orders updated."
 msgstr[0] "%s Bestellung aktualisiert."
 msgstr[1] "%s Bestellungen aktualisiert."
 
+#. translators: %s: product url
+#: includes/admin/class-wc-admin-post-types.php:152
+msgid "Product draft updated. <a target=\"_blank\" href=\"%s\">Preview product</a>"
+msgstr "Produktentwurf aktualisiert. <a target=\"_blank\" href=\"%s\">Produktvorschau</a>"
+
 #: includes/admin/class-wc-admin-dashboard.php:598
 #: includes/admin/list-tables/class-wc-admin-list-table-orders.php:128
 #: includes/admin/list-tables/class-wc-admin-list-table-orders.php:263
@@ -47000,11 +46994,6 @@ msgstr[1] "%s Bestellungen aktualisiert."
 #: assets/client/blocks/wc-cart-checkout-base-frontend.js:35
 msgid "Total"
 msgstr "Gesamtsumme"
-
-#. translators: %s: product url
-#: includes/admin/class-wc-admin-post-types.php:152
-msgid "Product draft updated. <a target=\"_blank\" href=\"%s\">Preview product</a>"
-msgstr "Produktentwurf aktualisiert. <a target=\"_blank\" href=\"%s\">Produktvorschau</a>"
 
 #. translators: %s: product url
 #: includes/admin/class-wc-admin-post-types.php:144
@@ -47775,10 +47764,6 @@ msgstr "Einen Fehler gefunden?"
 #: includes/admin/class-wc-admin-help.php:69
 msgid "Report a bug"
 msgstr "Fehler melden"
-
-#: includes/admin/class-wc-admin-help.php:75
-msgid "For more information:"
-msgstr "Für weitere Informationen:"
 
 #: includes/admin/class-wc-admin-help.php:76
 msgid "About WooCommerce"
@@ -48657,6 +48642,10 @@ msgstr "Archiv aktivieren?"
 #: includes/admin/class-wc-admin-attributes.php:478
 msgid "Custom ordering"
 msgstr "Individuelle Anordnung"
+
+#: includes/admin/class-wc-admin-help.php:75
+msgid "For more information:"
+msgstr "Weitere Informationen:"
 
 #: i18n/states.php:1513
 msgid "Albay"

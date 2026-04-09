@@ -14,9 +14,17 @@ body {
   min-height: 100vh;
 }
 
+
 .site-main {
   flex: 1;
+  padding-bottom: 5rem;
+
+  @include bp(md) {
+      padding-bottom: 7rem;
+  }
 }
+
+
 
 .container {
   @include container;
