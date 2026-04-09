@@ -145,3 +145,45 @@ $slider-height-mobile:  clamp(280px, 55vw, 480px);
         }
     }
 }
+
+@media (max-width: 767.98px) {
+
+  // Min-height entfernen
+  .hero-slider,
+  .hero-slider .swiper-slide,
+  .hero-slide,
+  .hero-slider-container {
+    min-height: 0 !important;
+  }
+
+  // Nav-Buttons: kleiner + näher am Rand
+  .hero-slider .swiper-button-prev,
+  .hero-slider .swiper-button-next {
+    width:  32px;
+    height: 32px;
+    top:    50%;
+    transform: translateY(-50%);
+  }
+
+  .hero-slider .swiper-button-prev {
+    left: 6px;
+  }
+
+  .hero-slider .swiper-button-next {
+    right: 6px;
+  }
+
+  // Pfeil-Icon skalieren falls per CSS gezeichnet
+  .hero-slider .swiper-button-prev::after,
+  .hero-slider .swiper-button-next::after {
+    font-size: 14px;
+  }
+}
+
+
+@media (max-width: 767.98px) {
+  .hero-slider .swiper-button-prev,
+  .hero-slider .swiper-button-next {
+    display: none !important;
+  }
+}

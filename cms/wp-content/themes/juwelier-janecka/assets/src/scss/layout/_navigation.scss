@@ -373,7 +373,7 @@
     overflow-y:  auto;
     z-index:     999;
     padding:     var(--space-xl);
-    padding-top: calc(var(--header-height, 80px) + 0.5rem);
+    padding-top: calc(var(--header-height, 80px) + 5rem);
 
     @include respond-to('lg') { display: none; }
 
@@ -402,7 +402,7 @@
         &:focus-visible { outline: 2px solid $color-primary; outline-offset: -2px; }
     }
 
-    > ul > li > a { padding: $spacing-2 $spacing-4; font-weight: 500; font-size: var(--text-sm); }
+    > ul > li > a { padding: 0.4rem $spacing-4; font-weight: 500; font-size: var(--text-sm); }
 
     .menu-item-has-children {
         > a .nav-toggle-icon {

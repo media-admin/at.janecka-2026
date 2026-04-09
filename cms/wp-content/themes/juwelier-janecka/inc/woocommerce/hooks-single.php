@@ -288,34 +288,3 @@ function janecka_single_product_schema(): void {
 		. wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
 		. '</script>' . "\n";
 }
-
-// ===========================================================================
-// 13. BRAND IN PRODUKT-LOOP (Related Products etc.)
-// ===========================================================================
-
-add_action( 'woocommerce_shop_loop_item_title', 'janecka_loop_brand', 5 );
-
-function janecka_loop_brand(): void {
-    global $product;
-    if ( ! $product ) return;
-
-    $brand = '';
-    foreach ( [ 'pa_brand', 'pa_marke' ] as $tax ) {
-        $terms = wc_get_product_terms( $product->get_id(), $tax, [ 'fields' => 'names' ] );
-        if ( ! empty( $terms ) ) {
-            $brand = $terms[0];
-            break;
-        }
-    }
-
-    if ( ! $brand ) {
-        $tags = wc_get_product_terms( $product->get_id(), 'product_tag', [ 'fields' => 'names' ] );
-        if ( ! empty( $tags ) ) {
-            $brand = $tags[0];
-        }
-    }
-
-    if ( $brand ) {
-        echo '<div class="product-card__brand">' . esc_html( strtoupper( $brand ) ) . '</div>';
-    }
-}

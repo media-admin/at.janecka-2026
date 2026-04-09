@@ -213,6 +213,12 @@
 	min-width: 0;
 	overflow: hidden;
 
+	& .swiper-wrapper {
+		display: flex;
+		align-items: center;
+	}
+	
+
 	// ----------------------------------------------------------------
 	// Slide
 	// ----------------------------------------------------------------
@@ -335,4 +341,40 @@
 
 .brand-slider__next::before {
 	transform: rotate(45deg) translate(-1px, 1px);
+}
+
+// ─── MOBILE ──────────────────────────────────────────────────────────────────
+
+@media (max-width: 767.98px) {
+
+  // Nur 1 Logo gleichzeitig sichtbar – kein halbes Einblenden
+  .brand-slider-wrapper {
+    overflow: hidden;
+  }
+
+  .brand-slider {
+    overflow: hidden;
+  }
+
+  .brand-slider .swiper-slide {
+    width: 100% !important;
+  }
+
+  // Kompaktere Höhe
+  .brand-slider__item {
+    min-height: 80px;
+  }
+
+  .brand-slider__logo {
+    min-height: 80px;
+  }
+
+  // Text-Platzhalter vertikal zentrieren
+  .brand-slider__name {
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0;
+  }
 }

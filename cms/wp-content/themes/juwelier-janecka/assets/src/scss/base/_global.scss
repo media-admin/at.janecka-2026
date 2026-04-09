@@ -30,6 +30,7 @@ body {
   @include container;
 }
 
+
 // Cards anpassen für Dark Mode
 .card {
   background: var(--color-surface);
@@ -53,5 +54,12 @@ a {
   
   [data-theme="dark"] & {
     background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+
+@media (max-width: 767.98px) {
+  .container {
+    padding-inline: 0.75rem;
   }
 }
