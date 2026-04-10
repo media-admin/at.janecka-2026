@@ -106,6 +106,7 @@ remove_action( 'woocommerce_after_shop_loop_item_title',  'woocommerce_template_
 remove_action( 'woocommerce_after_shop_loop_item_title',  'woocommerce_template_loop_price', 10 );
 
 add_action( 'woocommerce_before_shop_loop_item', 'janecka_product_card_open', 5 );
+add_action( 'woocommerce_after_shop_loop_item',  'janecka_product_card_actions_hook', 20 );
 add_action( 'woocommerce_after_shop_loop_item',  'janecka_product_card_close', 999 );
 
 function janecka_product_card_open(): void {
@@ -131,13 +132,16 @@ function janecka_product_card_open(): void {
 
 		</a><!-- .product-card__link -->
 
-		<div class="product-card__actions">
-			<?php janecka_product_card_actions(); ?>
-		</div>
-
 	<?php
 }
 
+function janecka_product_card_actions_hook(): void {
+        ?>
+        <div class="product-card__actions">
+                <?php janecka_product_card_actions(); ?>
+        </div>
+        <?php
+}
 function janecka_product_card_close(): void {
 	echo '</div><!-- .product-card -->';
 }
