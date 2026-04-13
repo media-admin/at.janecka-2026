@@ -227,13 +227,6 @@
                 "operator": "==",
                 "value": "product_brand"
             }
-        ],
-        [
-            {
-                "param": "taxonomy",
-                "operator": "==",
-                "value": "product_cat"
-            }
         ]
     ],
     "menu_order": 1,
@@ -246,5 +239,5 @@
     "description": "",
     "show_in_rest": 1,
     "display_title": "",
-    "modified": 1775742054
+    "modified": 1775829669
 }

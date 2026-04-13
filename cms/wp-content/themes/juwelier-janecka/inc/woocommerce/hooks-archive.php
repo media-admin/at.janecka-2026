@@ -136,11 +136,12 @@ function janecka_product_card_open(): void {
 }
 
 function janecka_product_card_actions_hook(): void {
-        ?>
-        <div class="product-card__actions">
-                <?php janecka_product_card_actions(); ?>
-        </div>
-        <?php
+    if ( ! apply_filters( 'janecka_product_card_show_actions', true ) ) return;
+    ?>
+    <div class="product-card__actions">
+        <?php janecka_product_card_actions(); ?>
+    </div>
+    <?php
 }
 function janecka_product_card_close(): void {
 	echo '</div><!-- .product-card -->';

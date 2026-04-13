@@ -440,3 +440,31 @@ body.single-product {
         text-align: center;
     }
 }
+// Eheringe: zweite meta-row (Lieferzeit) ausblenden — wird unten via Hook angezeigt
+.product-type-simple.product_cat-eheringe {
+    .single-product__meta-row:last-of-type {
+        display: none;
+    }
+}
+
+// Eheringe Subtitle
+.eheringe-subtitle {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+
+    + .single-product__meta-row {
+        padding-top: 0;
+    }
+}
+
+.eheringe-details {
+    margin: 0;
+
+    &__grid {
+        border-top: none;
+        padding-top: 0;
+    }
+}

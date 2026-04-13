@@ -85,7 +85,7 @@ require_once get_template_directory() . '/inc/shortcode-booking-button.php';
 require_once get_template_directory() . '/inc/brands/brands-setup.php';
 require_once get_stylesheet_directory() . '/inc/woocommerce/category-archive-header.php';
 require_once get_template_directory() . '/inc/brands/brands-shortcodes.php';
-
+require_once get_stylesheet_directory() . '/inc/woocommerce/hooks-eheringe.php';
 
 
 // Optional components (only if files exist)
