@@ -92,6 +92,10 @@
 	padding-left: $spacing-2;
 	color: var(--color-text-muted, #888);
 
+	 @include respond-below( 'lg' ) {
+            padding-left: 0;
+        }
+
 	&__list {
 		display: flex;
 		flex-wrap: wrap;

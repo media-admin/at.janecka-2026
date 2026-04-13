@@ -128,23 +128,57 @@ get_header(); ?>
 
 				</div><!-- .store-contact__left -->
 
-				<?php // ── Rechte Spalte: Google Map ─────────────────────────── ?>
-				<?php $location = get_field( 'store-map' ); ?>
-				<?php if ( $location ) : ?>
+				<?php // ── Rechte Spalte: Google Map (via gmap CPT, Cookie Consent) ── ?>
+				<?php
+				$map_post = get_field( 'store-map' );
+				if ( $map_post instanceof WP_Post ) :
+					$embed_src    = get_field( 'embed_src',    $map_post->ID );
+					$marker_title = get_field( 'marker_title', $map_post->ID ) ?: get_the_title();
+					$map_height   = get_field( 'map_height',   $map_post->ID ) ?: 450;
+				?>
+				<?php if ( $embed_src ) : ?>
 				<div class="store-contact__map">
-					<div
-						class="acf-map"
-						data-zoom="14"
-						data-lat="<?php echo esc_attr( $location['lat'] ); ?>"
-						data-lng="<?php echo esc_attr( $location['lng'] ); ?>"
-					>
-						<div
-							class="marker"
-							data-lat="<?php echo esc_attr( $location['lat'] ); ?>"
-							data-lng="<?php echo esc_attr( $location['lng'] ); ?>"
-						></div>
+					<div class="google-map" style="--map-height: <?php echo intval( $map_height ); ?>px;">
+
+						<?php // iframe: src leer lassen — JS setzt data-src erst nach Consent ?>
+						<iframe
+							class="google-map__iframe"
+							data-src="<?php echo esc_url( $embed_src ); ?>"
+							width="100%"
+							height="<?php echo intval( $map_height ); ?>"
+							title="<?php echo esc_attr( $marker_title ); ?>"
+							style="border:0;"
+							allowfullscreen
+							loading="lazy"
+							referrerpolicy="no-referrer-when-downgrade"
+							hidden
+						></iframe>
+
+						<?php // Placeholder: wird angezeigt solange kein Consent vorliegt ?>
+						<div class="google-map__placeholder">
+							<div class="google-map__placeholder-inner">
+								<div class="google-map__placeholder-icon">
+									<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+										<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+										<circle cx="12" cy="9" r="2.5"/>
+									</svg>
+								</div>
+								<p class="google-map__placeholder-title"><?php echo esc_html( $marker_title ); ?></p>
+								<p class="google-map__placeholder-text">
+									<?php _e( 'Um die Karte anzuzeigen, stimmen Sie bitte der Nutzung von Google Maps zu.', 'juwelier-janecka' ); ?>
+								</p>
+								<button class="google-map__placeholder-btn btn btn--primary" data-map-accept-comfort>
+									<?php _e( 'Karte anzeigen & Cookies akzeptieren', 'juwelier-janecka' ); ?>
+								</button>
+								<button class="google-map__placeholder-settings-link" data-map-open-settings>
+									<?php _e( 'Cookie-Einstellungen anpassen', 'juwelier-janecka' ); ?>
+								</button>
+							</div>
+						</div>
+
 					</div>
 				</div>
+				<?php endif; ?>
 				<?php endif; ?>
 
 			</div><!-- .store-contact__grid -->
