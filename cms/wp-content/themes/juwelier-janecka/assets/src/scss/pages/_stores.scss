@@ -14,40 +14,21 @@
 }
 
 
-// ── Seitentitel ───────────────────────────────────────────────────────────────
-
-.store-single__title-wrap {
-    padding-block: 2rem 1.5rem;
-    text-align: center;
-}
-
-.store-single__title {
-    font-size: clamp( 1.5rem, 3vw, 2.25rem );
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    margin: 0 auto;
-    display: inline-block;
-    border-bottom: 1px solid var( --color-text, #1a1a1a );
-    padding-bottom: 0.5rem;
-}
-
-
-// ── Hero (full-width, kein Overlay) ───────────────────────────────────────────
+// ── Hero (Container-Breite, kein Overlay) ────────────────────────────────────
 
 .store-hero {
-    // Container-Breite statt full-width
-    max-width: var( --container-width, 1200px );
-    margin-inline: auto;
-    padding-inline: var( --container-padding, 1.5rem );
-    overflow: hidden;
+	max-width: var( --container-width, 1200px );
+	margin-inline: auto;
+	padding-inline: var( --container-padding, 1.5rem );
+	overflow: hidden;
 
-    &__image {
-        display: block;
-        width: 100%;
-        height: auto;
-        max-height: 32rem;
-        object-fit: cover;
-    }
+	&__image {
+		display: block;
+		width: 100%;
+		height: auto;
+		max-height: 32rem;
+		object-fit: cover;
+	}
 }
 
 
@@ -87,13 +68,28 @@
 		}
 	}
 
+	// Theme-Standard: Links und Überschriften normalisieren
 	a {
-		color: var( --color-accent, #c8a96e );
-		text-decoration: none;
+		color: var( --color-text, #1a1a1a );
+		text-decoration: underline;
+		font-weight: inherit;
 
 		&:hover {
-			text-decoration: underline;
+			color: var( --color-accent, #c8a96e );
 		}
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-size: inherit;
+		font-weight: inherit;
+		font-style: inherit;
+		text-transform: inherit;
+		letter-spacing: inherit;
+		margin: 0 0 0.75rem;
+	}
+
+	strong {
+		font-weight: 600;
 	}
 }
 
@@ -211,14 +207,14 @@
 // ── Google Map ────────────────────────────────────────────────────────────────
 
 .acf-map {
-    width: 100%;
-    height: 26rem !important; // explizite Höhe erzwingen
-    min-height: 20rem;
-    border: 1px solid var( --color-border, #e0e0e0 );
+	width: 100%;
+	height: 26rem !important;
+	min-height: 20rem;
+	border: 1px solid var( --color-border, #e0e0e0 );
 
-    img {
-        max-width: none !important;
-    }
+	img {
+		max-width: none !important;
+	}
 }
 
 
@@ -277,13 +273,28 @@
 			margin-bottom: 0.5rem;
 		}
 
+		// Theme-Standard: Links und Überschriften normalisieren
 		a {
-			color: var( --color-accent, #c8a96e );
-			text-decoration: none;
+			color: var( --color-text, #1a1a1a );
+			text-decoration: underline;
+			font-weight: inherit;
 
 			&:hover {
-				text-decoration: underline;
+				color: var( --color-accent, #c8a96e );
 			}
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			font-size: inherit;
+			font-weight: inherit;
+			font-style: inherit;
+			text-transform: inherit;
+			letter-spacing: inherit;
+			margin: 0 0 0.75rem;
+		}
+
+		strong {
+			font-weight: 600;
 		}
 	}
 
@@ -328,6 +339,20 @@
 }
 
 
+// ── Brand-Grid Name-Fallback (wenn kein Logo vorhanden) ──────────────────────
+
+.brand-grid__name {
+	font-size: 0.8125rem;
+	font-weight: 600;
+	text-align: center;
+	color: var( --color-text, #1a1a1a );
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	padding: 0.5rem;
+	display: block;
+}
+
+
 // ── Bildergalerie ─────────────────────────────────────────────────────────────
 
 .store-gallery {
@@ -344,21 +369,28 @@
 		list-style: none;
 		padding: 0;
 		margin: 0;
-		display: grid;
-		grid-template-columns: 1fr;
+		display: grid !important;
+		grid-template-columns: repeat( 3, 1fr );
 		gap: 0.75rem;
 
-		@include bp( sm ) {
-			grid-template-columns: repeat( 2, 1fr );
+		@media ( max-width: 767px ) {
+			grid-template-columns: 1fr;
 		}
 
-		@include bp( md ) {
-			grid-template-columns: repeat( 3, 1fr );
+		@media ( max-width: 1023px ) and ( min-width: 768px ) {
+			grid-template-columns: repeat( 2, 1fr );
 		}
 	}
 
 	&__item {
 		overflow: hidden;
+	}
+
+	// Lightbox-Trigger als Block damit das Bild voll klickbar ist
+	a[data-lightbox] {
+		display: block;
+		overflow: hidden;
+		cursor: zoom-in;
 	}
 
 	&__image {

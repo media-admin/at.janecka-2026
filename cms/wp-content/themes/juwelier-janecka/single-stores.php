@@ -235,36 +235,26 @@ get_header(); ?>
 			</div>
 			<div class="brand-grid">
 				<?php foreach ( $brand_names as $brand ) :
-					setup_postdata( $brand );
 					$logo = get_field( 'brand-logo-main', $brand );
-					$link = get_term_link( $brand->slug, $brand->taxonomy );
+					$link = get_term_link( $brand );
+					if ( is_wp_error( $link ) ) continue;
 				?>
-				
-					class="brand-grid__item"
-					href="<?php echo esc_url( $link ); ?>"
-					title="<?php echo esc_attr( $brand->name ); ?>"
-				>
-					<?php if ( $logo ) : ?>
-						<img
-							class="brand-grid__logo"
-							src="<?php echo esc_url( $logo['url'] ); ?>"
-							alt="<?php echo esc_attr( $logo['alt'] ?: $brand->name ); ?>"
-							loading="lazy"
-							decoding="async"
-						>
-					<?php else : ?>
-						<span class="brand-grid__name"><?php echo esc_html( $brand->name ); ?></span>
-					<?php endif; ?>
-				</a>
-				<?php endforeach; wp_reset_postdata(); ?>
+					<a class="brand-grid__item" href="<?php echo esc_url( $link ); ?>" title="<?php echo esc_attr( $brand->name ); ?>">
+						<?php if ( $logo ) : ?>
+							<img class="brand-grid__logo" src="<?php echo esc_url( $logo['url'] ); ?>" alt="<?php echo esc_attr( $logo['alt'] ?: $brand->name ); ?>" loading="lazy" decoding="async">
+						<?php else : ?>
+							<span class="brand-grid__name"><?php echo esc_html( $brand->name ); ?></span>
+						<?php endif; ?>
+					</a>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</section>
 	<?php endif; ?>
 
 
-	<?php // ── Bildergalerie ─────────────────────────────────────────────────── ?>
-	<?php $gallery_images = get_field( 'store-bildergalerie' ); ?>
+	<?php // ── Bildergalerie ─────────────────────────────────────────────────────── ?>
+	<?php $gallery_images = get_field( 'store-bildergalerie', get_the_ID() ); ?>
 	<?php if ( $gallery_images ) : ?>
 	<section class="store-gallery">
 		<div class="container">
@@ -272,12 +262,10 @@ get_header(); ?>
 			<ul class="store-gallery__grid">
 				<?php foreach ( $gallery_images as $image ) : ?>
 				<li class="store-gallery__item">
-					<img
-						class="store-gallery__image"
-						src="<?php echo esc_url( $image['sizes']['large'] ); ?>"
-						alt="<?php echo esc_attr( $image['alt'] ); ?>"
-					>
-					<?php if ( $image['caption'] ) : ?>
+					<a data-lightbox="store-gallery" href="<?php echo esc_url( $image['url'] ); ?>" data-caption="<?php echo esc_attr( $image['caption'] ?? '' ); ?>">
+						<img class="store-gallery__image" src="<?php echo esc_url( $image['sizes']['large'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>">
+					</a>
+					<?php if ( ! empty( $image['caption'] ) ) : ?>
 					<p class="store-gallery__caption"><?php echo esc_html( $image['caption'] ); ?></p>
 					<?php endif; ?>
 				</li>
@@ -290,7 +278,9 @@ get_header(); ?>
 
 	<?php // ── Schmuck-Service ───────────────────────────────────────────────── ?>
 	<section class="store-service">
-		<?php echo do_shortcode( '[content_schmuckservice]' ); ?>
+		<div class="container">
+			<?php echo do_shortcode( '[block id="82973"]' ); ?>
+		</div>
 	</section>
 
 

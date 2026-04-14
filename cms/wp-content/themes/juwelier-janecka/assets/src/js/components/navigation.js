@@ -111,18 +111,23 @@ export default class Navigation {
                 const href = link.getAttribute('href');
                 const hasRealLink = href && href !== '#' && href !== '';
 
+                // Submenu offen → immer schließen, nie navigieren
+                if (item.classList.contains('is-open')) {
+                    e.preventDefault();
+                    this._toggleSubmenu(item, this.mobileItems);
+                    return;
+                }
+
+                // Kein echter Link → Submenu öffnen
                 if (!hasRealLink) {
                     e.preventDefault();
                     this._toggleSubmenu(item, this.mobileItems);
                     return;
                 }
 
-                if (!item.classList.contains('is-open')) {
-                    // Erstes Tap: Submenu öffnen
-                    e.preventDefault();
-                    this._toggleSubmenu(item, this.mobileItems);
-                }
-                // Zweites Tap: Link öffnet normal
+                // Submenu geschlossen + echter Link → Submenu öffnen
+                e.preventDefault();
+                this._toggleSubmenu(item, this.mobileItems);
             });
         });
     }
