@@ -1,4 +1,3 @@
-import '../scss/blocks.scss';
 /**
  * Media Lab – Native Gutenberg Blocks
  *

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 6.9.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-04-08 22:42:14+0000\n"
+"PO-Revision-Date: 2026-04-25 22:10:00+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -313,7 +313,7 @@ msgstr "<strong>Anzeigen</strong> führt Sie zu einem öffentlichen Autoren-Arch
 
 #: wp-admin/users.php:60
 msgid "<strong>Delete</strong> brings you to the Delete Users screen for confirmation, where you can permanently remove a user from your site and delete their content. You can also delete multiple users at once by using bulk actions."
-msgstr "<strong>Löschen</strong> bringt Sie zur „Benutzer löschen“-Ansicht zur Bestätigung Ihrerseits, dass Sie einen Benutzer unwiderruflich von Ihrer Website entfernen und auch dessen Inhalte löschen wollen. Sie können über die Mehrfachaktionen auch mehrere Benutzer auf einmal löschen."
+msgstr "<strong>Löschen</strong> bringt Sie zur „Benutzer löschen“-Ansicht zur Bestätigung Ihrerseits, dass Sie einen Benutzer endgültig von Ihrer Website entfernen und auch dessen Inhalte löschen wollen. Sie können über die Mehrfachaktionen auch mehrere Benutzer auf einmal löschen."
 
 #: wp-admin/users.php:58
 msgid "<strong>Remove</strong> allows you to remove a user from your site. It does not delete their content. You can also remove multiple users at once by using bulk actions."
@@ -1224,7 +1224,7 @@ msgstr "Automatische Updates für alle WordPress-Versionen wurden aktiviert. Vie
 #. translators: 1: URL to About screen, 2: WordPress version.
 #: wp-admin/update-core.php:292
 msgid "<a href=\"%1$s\">Learn more about WordPress %2$s</a>."
-msgstr "<a href=\"%1$s\">Weitere Informationen zu WordPress %2$s</a>"
+msgstr "<a href=\"%1$s\">Mehr über WordPress %2$s erfahren</a>"
 
 #: wp-admin/update-core.php:287
 msgid "While your site is being updated, it will be in maintenance mode. As soon as your updates are complete, this mode will be deactivated."
@@ -2297,8 +2297,8 @@ msgstr "Wenn Sie &#8222;headers already sent&#8220;-Hinweise, Probleme mit Feeds
 #: wp-admin/plugins.php:671
 msgid "The plugin generated %d character of <strong>unexpected output</strong> during activation."
 msgid_plural "The plugin generated %d characters of <strong>unexpected output</strong> during activation."
-msgstr[0] "Das Plugin erzeugte %d Zeichen mit <strong>unerwarteter Ausgabe</strong> während der Aktivierung."
-msgstr[1] "Das Plugin erzeugte %d Zeichen mit <strong>unerwarteter Ausgabe</strong> während der Aktivierung."
+msgstr[0] "Das Plugin erzeugte %d Zeichen mit <strong>unerwarteter Ausgabe</strong> bei der Aktivierung."
+msgstr[1] "Das Plugin erzeugte %d Zeichen mit <strong>unerwarteter Ausgabe</strong> bei der Aktivierung."
 
 #. translators: 1: Plugin file, 2: Error message.
 #: wp-admin/plugins.php:644
@@ -3253,7 +3253,7 @@ msgstr "Im Bereich „Dateien hochladen“ bestimmen Sie den Ordner und Pfad fü
 
 #: wp-admin/options-media.php:20
 msgid "You can set maximum sizes for images inserted into your written content; you can also insert an image as Full Size."
-msgstr "Sie können auf dieser Seite einstellen, welche Größe Bilder maximal haben sollen, wenn sie eingefügt werden. Ihnen bleibt aber unabhängig davon immer noch die Möglichkeit, ein Bild auch in seiner ursprünglichen Größe einzufügen."
+msgstr "Sie können maximale Größen für Bilder festlegen, die in Ihre Inhalte eingefügt werden. Sie können ein Bild auch in Originalgröße einfügen."
 
 #: wp-admin/options-media.php:17
 msgid "Media Settings"
@@ -3381,7 +3381,7 @@ msgstr "Website-Icon ändern"
 
 #: wp-admin/options-general.php:190 wp-admin/options-general.php:199
 msgid "Choose a Site Icon"
-msgstr "Ein Website-Icon auswählen"
+msgstr "Website-Icon auswählen"
 
 #. translators: %s: Site tagline example.
 #: wp-admin/options-general.php:90
@@ -4017,7 +4017,7 @@ msgstr "Die von Ihnen gewählte primäre Website existiert nicht."
 
 #: wp-admin/ms-delete-site.php:139
 msgid "Delete My Site Permanently"
-msgstr "Meine Website unwiderruflich löschen"
+msgstr "Meine Website endgültig löschen"
 
 #. translators: %s: Site address.
 #: wp-admin/ms-delete-site.php:134
@@ -4031,7 +4031,7 @@ msgstr "Bedenken Sie bitte, eine gelöschte Website kann nicht wiederhergestellt
 #. translators: %s: Network title.
 #: wp-admin/ms-delete-site.php:120
 msgid "If you do not want to use your %s site any more, you can delete it using the form below. When you click <strong>Delete My Site Permanently</strong> you will be sent an email with a link in it. Click on this link to delete your site."
-msgstr "Wenn Sie Ihre Website %s nicht mehr nutzen möchten, können Sie sie löschen, indem Sie das unten stehende Formular benutzen. Wenn Sie auf <strong>Meine Website unwiderruflich löschen</strong> klicken, wird Ihnen eine E-Mail mit einem Link gesendet. Klicken Sie auf diesen Link, um Ihre Website zu löschen."
+msgstr "Wenn Sie Ihre Website %s nicht mehr nutzen möchten, können Sie sie löschen, indem Sie das unten stehende Formular benutzen. Wenn Sie auf <strong>Meine Website endgültig löschen</strong> klicken, wird Ihnen eine E-Mail mit einem Link gesendet. Klicken Sie auf diesen Link, um Ihre Website zu löschen."
 
 #: wp-admin/ms-delete-site.php:111
 msgid "Thank you. Please check your email for a link to confirm your action. Your site will not be deleted until this link is clicked."
@@ -4462,7 +4462,7 @@ msgstr "Willkommen bei der berühmten 5-Minuten-Installation von WordPress. Fül
 #. translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES
 #: wp-admin/install.php:336
 msgid "The constant %s cannot be defined when installing WordPress."
-msgstr "Die Konstante %s kann während der Installation von WordPress nicht definiert werden."
+msgstr "Die Konstante %s kann bei der Installation von WordPress nicht definiert werden."
 
 #. translators: %s: wp-config.php
 #: wp-admin/install.php:323
@@ -4876,7 +4876,7 @@ msgstr "Allgemein"
 
 #: wp-admin/includes/upgrade.php:141
 msgid "The password you chose during installation."
-msgstr "Das Passwort, das Sie während der Installation gewählt haben."
+msgstr "Das Passwort, das Sie bei der Installation gewählt haben."
 
 #: wp-admin/includes/upgrade.php:124
 msgid "User already exists. Password inherited."
@@ -5070,7 +5070,7 @@ msgstr "Das Theme konnte nicht wiederhergestellt werden."
 #: wp-admin/theme-install.php:501
 msgctxt "theme"
 msgid "Cannot Install"
-msgstr "Installation nicht möglich"
+msgstr "Nicht installierbar"
 
 #: wp-admin/includes/theme.php:1056 wp-admin/themes.php:1247
 msgid "Tags:"
@@ -5677,7 +5677,7 @@ msgstr "Ändern Sie die Revision mit der linken und der rechten Pfeiltaste"
 
 #: wp-admin/includes/revision.php:382
 msgid "Select a revision"
-msgstr "Wählen Sie eine Revision aus"
+msgstr "Revision auswählen"
 
 #: wp-admin/includes/revision.php:377
 msgctxt "Button label for a next revision"
@@ -6432,7 +6432,7 @@ msgstr "Website: %s"
 #. translators: Hidden accessibility text.
 #: wp-admin/includes/ms.php:941
 msgid "Select a user"
-msgstr "Wählen Sie einen Benutzer"
+msgstr "Benutzer auswählen"
 
 #. translators: %s: User login.
 #: wp-admin/includes/ms.php:923
@@ -6736,7 +6736,7 @@ msgstr "reale Welt"
 #: wp-admin/includes/meta-boxes.php:1408
 msgctxt "Type of relation"
 msgid "none"
-msgstr "Ohne"
+msgstr "Keine"
 
 #. translators: xfn: https://gmpg.org/xfn
 #: wp-admin/includes/meta-boxes.php:1341
@@ -6756,7 +6756,7 @@ msgstr "Kontakt"
 #. translators: xfn: https://gmpg.org/xfn
 #: wp-admin/includes/meta-boxes.php:1329
 msgid "friendship"
-msgstr "Freundschaft"
+msgstr "Beziehung"
 
 #: wp-admin/includes/meta-boxes.php:1326
 msgid "another web address of mine"
@@ -7391,12 +7391,12 @@ msgstr "Start-Koordinaten:"
 #. translators: Hidden accessibility text.
 #: wp-admin/includes/image-edit.php:243
 msgid "selection height"
-msgstr "Höhe für die Auswahl"
+msgstr "Auswahlhöhe"
 
 #. translators: Hidden accessibility text.
 #: wp-admin/includes/image-edit.php:235
 msgid "selection width"
-msgstr "Breite für die Auswahl"
+msgstr "Auswahlbreite"
 
 #: wp-admin/includes/image-edit.php:230
 msgid "Selection:"
@@ -8013,7 +8013,7 @@ msgstr "%1$s&#8211;%2$s von %3$s anzeigen"
 
 #: wp-admin/includes/dashboard.php:2126
 msgid "Learn about block themes"
-msgstr "Erfahren Sie mehr über Block-Themes (engl.)"
+msgstr "Mehr über Block-Themes erfahren (engl.)"
 
 #: wp-admin/includes/dashboard.php:2126
 msgid "https://wordpress.org/documentation/article/block-themes/"
@@ -8263,7 +8263,7 @@ msgstr "Stadt:"
 
 #: wp-admin/includes/dashboard.php:1382
 msgid "Select location"
-msgstr "Eine Stadt auswählen"
+msgstr "Stadt auswählen"
 
 #: wp-admin/includes/dashboard.php:1358 wp-admin/js/dashboard.js:591
 msgid "An error occurred. Please try again."
@@ -9120,7 +9120,7 @@ msgstr "Der Seiten-Cache verbessert die Geschwindigkeit und Leistung Ihrer Websi
 
 #: wp-admin/includes/class-wp-site-health.php:2393
 msgid "Learn how to configure the Authorization header."
-msgstr "Erfahren Sie, wie Sie den Authorization-Header konfigurieren (engl.)"
+msgstr "Mehr über die Konfiguration des Authorization-Headers erfahren (engl.)"
 
 #: wp-admin/includes/class-wp-site-health.php:2392
 msgid "https://developer.wordpress.org/rest-api/frequently-asked-questions/#why-is-authentication-not-working"
@@ -10859,7 +10859,7 @@ msgstr "Deaktivieren"
 
 #: wp-admin/includes/class-wp-plugins-list-table.php:895
 msgid "Network Only"
-msgstr "Nur für das gesamte Netzwerk aktivierbar"
+msgstr "Netzwerkspezifisch"
 
 #: wp-admin/includes/class-wp-plugins-list-table.php:891
 msgid "Network Active"
@@ -10881,7 +10881,7 @@ msgstr "Sie können dieses Plugin nicht löschen, da andere Plugins es erfordern
 #: wp-admin/includes/class-wp-plugins-list-table.php:965
 msgctxt "plugin"
 msgid "Cannot Activate"
-msgstr "Eine Aktivierung ist nicht möglich"
+msgstr "Nicht aktivierbar"
 
 #. translators: %s: Plugin name.
 #: wp-admin/includes/class-wp-plugins-list-table.php:852
@@ -10893,7 +10893,7 @@ msgstr "%s netzwerkweit aktivieren"
 #: wp-admin/includes/class-wp-plugins-list-table.php:838
 #: wp-admin/includes/class-wp-plugins-list-table.php:944
 msgid "You cannot activate this plugin as it has unmet requirements."
-msgstr "Sie können dieses Plugin nicht aktivieren, da es Erfordernisse hat, die nicht erfüllt sind."
+msgstr "Sie können dieses Plugin nicht aktivieren, da die Voraussetzungen nicht erfüllt sind."
 
 #. translators: %s: Plugin name.
 #: wp-admin/includes/class-wp-plugins-list-table.php:827
@@ -11130,7 +11130,7 @@ msgstr "Werkzeuge"
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:499
 msgctxt "Plugin installer group title"
 msgid "Social"
-msgstr "Social"
+msgstr "Soziale Netzwerke"
 
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:498
 msgctxt "Plugin installer group title"
@@ -11390,7 +11390,7 @@ msgstr[1] "%s freigegebene Kommentare"
 #. translators: Hidden accessibility text.
 #: wp-admin/includes/class-wp-list-table.php:604
 msgid "Select bulk action"
-msgstr "Mehrfachaktion wählen"
+msgstr "Mehrfachaktion auswählen"
 
 #. translators: %1$s: The argument name. %2$s: The view name.
 #: wp-admin/includes/class-wp-list-table.php:454
@@ -13549,7 +13549,7 @@ msgstr "Als Header-Bild festlegen"
 
 #: wp-admin/includes/class-custom-image-header.php:683
 msgid "Choose a Custom Header"
-msgstr "Wählen Sie ein individuelles Header-Bild"
+msgstr "Individuelles Header-Bild auswählen"
 
 #. translators: %s: Size in pixels.
 #: wp-admin/includes/class-custom-image-header.php:650
@@ -13645,7 +13645,7 @@ msgstr "Manche Themes bringen gleich mehrere zusätzliche Header-Bilder mit. Wen
 
 #: wp-admin/includes/class-custom-image-header.php:120
 msgid "You can set a custom image header for your site. Simply upload the image and crop it, and the new header will go live immediately. Alternatively, you can use an image that has already been uploaded to your Media Library by clicking the &#8220;Choose Image&#8221; button."
-msgstr "Sie können ein individuelles Header-Bild für Ihre Website festlegen. Laden Sie einfach ein Bild hoch und schneiden Sie es zu. Das neue Header-Bild wird sofort übernommen. Alternativ können Sie ein Bild, das schon in der Mediathek abgelegt wurde, durch Klick auf den Button: &#8222;Bild wählen&#8220; auswählen."
+msgstr "Sie können ein individuelles Header-Bild für Ihre Website festlegen. Laden Sie einfach ein Bild hoch und schneiden Sie es zu. Das neue Header-Bild wird sofort übernommen. Alternativ können Sie ein Bild verwenden, das bereits in Ihre Mediathek hochgeladen wurde, indem Sie auf den Button „Bild auswählen“ klicken."
 
 #: wp-admin/includes/class-custom-image-header.php:111
 msgid "You can choose from the theme&#8217;s default header images, or use one of your own. You can also customize how your Site Title and Tagline are displayed."
@@ -13672,7 +13672,7 @@ msgstr "Anzeigeoptionen"
 #: wp-admin/includes/class-custom-background.php:363
 #: wp-admin/includes/class-custom-image-header.php:684
 msgid "Choose Image"
-msgstr "Bild wählen"
+msgstr "Bild auswählen"
 
 #: wp-admin/includes/class-custom-background.php:363
 msgid "Set as background"
@@ -13680,7 +13680,7 @@ msgstr "Als Hintergrund festlegen"
 
 #: wp-admin/includes/class-custom-background.php:362
 msgid "Choose a Background Image"
-msgstr "Wählen Sie ein Hintergrundbild"
+msgstr "Hintergrundbild auswählen"
 
 #: wp-admin/includes/class-custom-background.php:360
 #: wp-admin/includes/class-custom-image-header.php:680
@@ -13748,7 +13748,7 @@ msgstr "Sie können auch eine Hintergrundfarbe auswählen, indem Sie auf den But
 
 #: wp-admin/includes/class-custom-background.php:102
 msgid "To use a background image, simply upload it or choose an image that has already been uploaded to your Media Library by clicking the &#8220;Choose Image&#8221; button. You can display a single instance of your image, or tile it to fill the screen. You can have your background fixed in place, so your site content moves on top of it, or you can have it scroll with your site."
-msgstr "Um ein Hintergrundbild zu verwenden, laden Sie einfach eins hoch oder wählen Sie ein Bild aus der Mediathek durch Klick auf den &#8222;Bild wählen&#8220;-Button. Sie können das Bild einzeln anzeigen, es kacheln oder bildschirmfüllend einstellen. Sie können den Hintergrund auch fixieren, so dass der Inhalt der Website darüber scrollt oder das Bild mit dem Inhalt mitscrollen lassen."
+msgstr "Um ein Hintergrundbild zu verwenden, laden Sie es einfach hoch oder wählen Sie ein Bild aus, das bereits in Ihre Mediathek hochgeladen wurde, indem Sie auf den Button „Bild auswählen“ klicken. Sie können Ihr Bild als einzelne Ansicht anzeigen lassen oder es als Kacheln anordnen, sodass es den gesamten Bildschirm ausfüllt. Sie können den Hintergrund auch fixieren, sodass sich der Inhalt Ihrer Website darüber bewegt, oder ihn mit der Website mitscrollen lassen."
 
 #: wp-admin/includes/class-custom-background.php:101
 msgid "You can customize the look of your site without touching any of your theme&#8217;s code by using a custom background. Your background can be an image or a color."
@@ -13762,7 +13762,7 @@ msgstr "Die Aktualisierung konnte nicht installiert werden, da einige Dateien ni
 
 #: wp-admin/includes/class-core-upgrader.php:42
 msgid "Due to an error during updating, WordPress has been restored to your previous version."
-msgstr "Aufgrund eines Fehlers während der Aktualisierung wurde WordPress auf die bisherige Version zurückgesetzt."
+msgstr "Aufgrund eines Fehlers bei der Aktualisierung wurde WordPress auf die bisherige Version zurückgesetzt."
 
 #: wp-admin/includes/class-core-upgrader.php:41
 msgid "Attempting to restore the previous version."
@@ -15570,7 +15570,7 @@ msgstr "Schließen Sie den Customizer und gehen Sie zur vorherigen Seite zurück
 #: wp-admin/themes.php:1035 wp-admin/themes.php:1297
 msgctxt "theme"
 msgid "Cannot Activate"
-msgstr "Aktivierung nicht möglich"
+msgstr "Nicht aktivierbar"
 
 #: wp-admin/customize.php:155 wp-admin/includes/class-wp-debug-data.php:835
 #: wp-admin/includes/dashboard.php:1168
@@ -16236,7 +16236,7 @@ msgstr "<a href=\"%1$s\">Learn WordPress</a> ist eine kostenlose Ressource für 
 #. translators: %s: Version number.
 #: wp-admin/about.php:283
 msgid "Learn more about WordPress %s"
-msgstr "Weitere Informationen zu WordPress %s"
+msgstr "Mehr über WordPress %s erfahren"
 
 #: wp-admin/about.php:267
 msgid "See everything new"

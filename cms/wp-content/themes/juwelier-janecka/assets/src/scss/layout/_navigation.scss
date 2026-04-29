@@ -521,3 +521,9 @@
         }
     }
 }
+
+
+.site-notifications-banner {
+  position: relative;
+  z-index: 9999; // höher als der sticky header
+}
