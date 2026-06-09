@@ -2,8 +2,13 @@
 /**
  * WooCommerce Produktkategorie-Archiv-Header
  *
- * - Registriert ACF-Felder für product_cat-Terme (Banner-Bild + Beschreibung)
- * - Injiziert Banner + Beschreibung auf Kategorie-Archivseiten (kein Template-Override)
+ * Reihenfolge:
+ *   1. Banner-Bild        → fullwidth direkt unter dem Header (vor .wc-archive Container)
+ *   2. 90px Whitespace    → via CSS
+ *   3. Seitentitel        → woocommerce_before_shop_loop priority 4
+ *   4. Beschreibung       → woocommerce_before_shop_loop priority 4 (nur wenn vorhanden)
+ *   5. Breadcrumb         → woocommerce_before_shop_loop priority 4
+ *   6. Filter-Bar         → hooks-archive.php priority 5
  *
  * @package JuwelierJanecka
  */
@@ -17,113 +22,137 @@ defined( 'ABSPATH' ) || exit;
 
 add_action( 'acf/init', 'janecka_register_category_acf_fields' );
 function janecka_register_category_acf_fields(): void {
-	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
-		return;
-	}
+    if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+        return;
+    }
 
-	acf_add_local_field_group( [
-		'key'    => 'group_category_header_fields',
-		'title'  => 'Kategorie-Header',
-		'fields' => [
-			[
-				'key'           => 'field_cat_banner',
-				'label'         => 'Banner-Bild',
-				'name'          => 'cat_banner',
-				'type'          => 'image',
-				'return_format' => 'array',
-				'preview_size'  => 'medium',
-				'library'       => 'all',
-				'instructions'  => 'Breites Bannerbild für die Kategorie-Seite (empfohlen: 1400 × 470 px)',
-			],
-			[
-				'key'           => 'field_cat_description',
-				'label'         => 'Beschreibung',
-				'name'          => 'cat_description',
-				'type'          => 'wysiwyg',
-				'toolbar'       => 'basic',
-				'media_upload'  => 0,
-				'instructions'  => 'Optionaler Einleitungstext für die Kategorie-Seite. Wird unterhalb des Banners angezeigt.',
-			],
-		],
-		'location' => [
-			[
-				[
-					'param'    => 'taxonomy',
-					'operator' => '==',
-					'value'    => 'product_cat',
-				],
-			],
-		],
-		'menu_order' => 5,
-		'active'     => true,
-	] );
+    acf_add_local_field_group( [
+        'key'    => 'group_category_header_fields',
+        'title'  => 'Kategorie-Header',
+        'fields' => [
+            [
+                'key'           => 'field_cat_banner',
+                'label'         => 'Banner-Bild',
+                'name'          => 'cat_banner',
+                'type'          => 'image',
+                'return_format' => 'array',
+                'preview_size'  => 'medium',
+                'library'       => 'all',
+                'instructions'  => 'Breites Bannerbild für die Kategorie-Seite (empfohlen: 1400 × 470 px)',
+            ],
+            [
+                'key'           => 'field_cat_description',
+                'label'         => 'Beschreibung',
+                'name'          => 'cat_description',
+                'type'          => 'wysiwyg',
+                'toolbar'       => 'basic',
+                'media_upload'  => 0,
+                'instructions'  => 'Optionaler Einleitungstext für die Kategorie-Seite.',
+            ],
+        ],
+        'location' => [
+            [
+                [
+                    'param'    => 'taxonomy',
+                    'operator' => '==',
+                    'value'    => 'product_cat',
+                ],
+            ],
+        ],
+        'menu_order' => 5,
+        'active'     => true,
+    ] );
 }
 
 
 // ============================================================
-// 2. Kategorie-Archiv-Header (Banner + Beschreibung) per Hook
+// 2. Banner fullwidth — VOR dem .wc-archive Container
+//    Hängt an woocommerce_before_main_content priority 8
+//    (nach janecka_wc_open_wrapper priority 10 — nein, wir brauchen es DAVOR)
+//    janecka_wc_open_wrapper hat priority 10, wir nehmen priority 8
 // ============================================================
 
-add_action( 'woocommerce_before_shop_loop', 'janecka_category_archive_header', 5 );
-function janecka_category_archive_header(): void {
-	if ( ! is_product_category() ) {
-		return;
-	}
+add_action( 'woocommerce_before_main_content', 'janecka_category_banner_fullwidth', 8 );
+function janecka_category_banner_fullwidth(): void {
+    if ( ! is_product_category() ) {
+        return;
+    }
 
-	$term = get_queried_object();
-	if ( ! ( $term instanceof WP_Term ) ) {
-		return;
-	}
+    $term = get_queried_object();
+    if ( ! ( $term instanceof WP_Term ) ) {
+        return;
+    }
 
-	$tid = $term->term_id;
+    $tid        = $term->term_id;
+    $banner_url = '';
+    $acf_banner = get_field( 'cat_banner', 'product_cat_' . $tid );
 
-	// ── Banner-Bild ───────────────────────────────────────────
-	$banner_url = '';
-	$acf_banner = get_field( 'cat_banner', 'product_cat_' . $tid );
-	if ( ! empty( $acf_banner['url'] ) ) {
-		$banner_url = $acf_banner['url'];
-	}
+    if ( ! empty( $acf_banner['url'] ) ) {
+        $banner_url = $acf_banner['url'];
+    }
 
-	// ── Beschreibung ──────────────────────────────────────────
-	$description = '';
+    if ( ! $banner_url ) {
+        return;
+    }
+    ?>
+    <div class="category-archive-banner">
+        <img
+            src="<?php echo esc_url( $banner_url ); ?>"
+            alt="<?php echo esc_attr( $term->name ); ?>"
+            class="category-archive-banner__img"
+            width="1400"
+            height="470"
+            loading="eager"
+            decoding="async"
+        >
+    </div>
+    <?php
+}
 
-	// 1. ACF-Feld cat_description
-	$acf_desc = get_field( 'cat_description', 'product_cat_' . $tid );
-	if ( ! empty( $acf_desc ) ) {
-		$description = $acf_desc;
-	}
 
-	// 2. Native WC term_description() als Fallback
-	if ( ! $description ) {
-		$description = term_description( $tid, 'product_cat' );
-	}
+// ============================================================
+// 3. Seitentitel + Beschreibung + Breadcrumb
+//    Hängt an woocommerce_before_shop_loop priority 4
+//    (vor Filter-Bar bei priority 5)
+// ============================================================
 
-	if ( ! $banner_url && ! $description ) {
-		return;
-	}
-	?>
-	<div class="brand-archive-header">
+add_action( 'woocommerce_before_shop_loop', 'janecka_category_title_description_breadcrumb', 4 );
+function janecka_category_title_description_breadcrumb(): void {
+    if ( ! is_product_category() ) {
+        return;
+    }
 
-		<?php if ( $banner_url ) : ?>
-			<div class="brand-archive-header__banner">
-				<img
-					src="<?php echo esc_url( $banner_url ); ?>"
-					alt="<?php echo esc_attr( $term->name ); ?>"
-					class="brand-archive-header__banner-img"
-					width="1400"
-					height="470"
-					loading="eager"
-					decoding="async"
-				>
-			</div>
-		<?php endif; ?>
+    $term = get_queried_object();
+    if ( ! ( $term instanceof WP_Term ) ) {
+        return;
+    }
 
-		<?php if ( $description ) : ?>
-			<div class="brand-archive-header__description">
-				<?php echo wp_kses( wpautop( $description ), wp_kses_allowed_html( 'post' ) ); ?>
-			</div>
-		<?php endif; ?>
+    $tid = $term->term_id;
 
-	</div>
-	<?php
+    // ── Beschreibung ──────────────────────────────────────────
+    $description = '';
+    $acf_desc    = get_field( 'cat_description', 'product_cat_' . $tid );
+
+    if ( ! empty( $acf_desc ) ) {
+        $description = $acf_desc;
+    } elseif ( $native = term_description( $tid, 'product_cat' ) ) {
+        $description = $native;
+    }
+    ?>
+
+    <div class="category-archive-intro">
+
+        <?php if ( $description ) : ?>
+            <div class="category-archive-intro__description">
+                <?php echo wp_kses( wpautop( $description ), wp_kses_allowed_html( 'post' ) ); ?>
+            </div>
+        <?php endif; ?>
+
+        <div class="category-archive-intro__breadcrumb">
+            <?php woocommerce_breadcrumb(); ?>
+        </div>
+
+    </div>
+
+    <?php
 }

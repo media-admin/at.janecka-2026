@@ -1,0 +1,60 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// =============================================================================
+// Category Archive — Banner + Intro
+// =============================================================================
+
+// ── Banner: fullwidth direkt unter dem Header ─────────────────────────────────
+
+.category-archive-banner {
+    width:    100%;
+    overflow: hidden;
+
+    &__img {
+        display:    block;
+        width:      100%;
+        height:     auto;
+        min-height: 300px;
+        object-fit: cover;
+        aspect-ratio: 1400 / 470;
+
+        @media (max-width: 767.98px) {
+            aspect-ratio: 2 / 1;
+            min-height: 180px;
+        }
+    }
+}
+
+// ── Intro: 90px Whitespace + Titel + Beschreibung + Breadcrumb ────────────────
+
+// 90px Abstand vor dem page-title
+.wc-archive .page-title {
+    padding-top: 90px;
+}
+
+.category-archive-intro {
+    padding-top: $spacing-2;
+    margin-bottom: $spacing-6;
+
+    &__description {
+        max-width:   700px;
+        margin:      0 auto $spacing-4;
+        text-align:  center;
+        font-size:   var(--text-base);
+        line-height: $line-height-relaxed;
+        color:       var(--color-text-muted);
+
+        p {
+            margin-bottom: 0.75rem;
+            &:last-child { margin-bottom: 0; }
+        }
+    }
+
+    &__breadcrumb {
+        display:         flex;
+        justify-content: flex-start;
+        margin-top:   $spacing-4;
+        margin-bottom:   $spacing-2;
+    }
+}
