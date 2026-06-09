@@ -50,14 +50,33 @@
     align-items: center !important;
     margin-bottom: $spacing-2 !important;
     gap: $spacing-3 !important;
+    flex-wrap: nowrap !important;
+
+    .wp-block-column:first-child {
+        flex-grow: 1 !important;
+        flex-shrink: 1 !important;
+        min-width: 0 !important;
+    }
 
     // Rechte Spalte: nur so breit wie der Link, kein extra Padding
     .wp-block-column:last-child {
         flex-grow: 0 !important;
         flex-shrink: 0 !important;
+        flex-basis: auto !important;
+        width: auto !important;
         padding: 0 !important;
         margin: 0 !important;
         text-align: right !important;
+    }
+
+    // Gutenberg Mobile-Stack überschreiben
+    @media (max-width: 781px) {
+        flex-wrap: nowrap !important;
+
+        .wp-block-column {
+            flex-basis: auto !important;
+            width: auto !important;
+        }
     }
 }
 
