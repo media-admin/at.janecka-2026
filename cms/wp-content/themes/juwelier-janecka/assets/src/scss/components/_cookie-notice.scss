@@ -38,12 +38,12 @@
     border:         1px solid $color-dark;
     
     outline: 1px solid var(--color-text, #1a1a1a) !important;
-    outline-offset: -20px;
+    outline-offset: -40px;
 
     width:          100%;
     max-width:      540px;
     padding:        $spacing-5 $spacing-5 $spacing-4;
-    padding:        $spacing-5;
+    padding:        $spacing-8;
     display:        flex;
     flex-direction: column;
     gap:            $spacing-3;
