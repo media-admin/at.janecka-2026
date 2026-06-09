@@ -104,12 +104,17 @@
   }
   
   // Info
-  &--info {
-    border-left-color: $color-info;
-    background: $color-info-light-bg;
-    
+  .notification--info {
+    background:   $color-primary;
+    border-color: $color-primary;
+    color:        $color-white;
+
     .notification__icon {
-      color: $color-info;
+      color: $color-white;
+    }
+
+    a {
+      color: $color-white;
     }
   }
 }

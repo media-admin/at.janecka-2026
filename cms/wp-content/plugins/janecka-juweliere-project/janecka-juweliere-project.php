@@ -76,6 +76,8 @@ function medialab_project_activate() {
     // Flush rewrite rules
     flush_rewrite_rules();
 }
+require_once plugin_dir_path( __FILE__ ) . 'inc/notifications.php';
+
 register_activation_hook(__FILE__, 'medialab_project_activate');
 
 /**

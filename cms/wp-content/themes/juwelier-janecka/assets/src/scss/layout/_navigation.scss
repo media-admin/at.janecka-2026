@@ -525,5 +525,10 @@
 
 .site-notifications-banner {
   position: relative;
-  z-index: 9999; // höher als der sticky header
+  z-index:  9999; // höher als der sticky header
+
+  .notification {
+    margin:        0;
+    border-radius: 0;
+  }
 }

@@ -17,18 +17,16 @@
 // ── Hero (Container-Breite, kein Overlay) ────────────────────────────────────
 
 .store-hero {
-	max-width: var( --container-width, 1200px );
-	margin-inline: auto;
-	padding-inline: var( --container-padding, 1.5rem );
-	overflow: hidden;
-
-	&__image {
-		display: block;
-		width: 100%;
-		height: auto;
-		max-height: 32rem;
-		object-fit: cover;
-	}
+        width:       100vw;
+        margin-left: calc(50% - 50vw);
+        overflow:    hidden;
+        &__image {
+                display:    block;
+                width:      100%;
+                min-height: 390px;
+                max-height: 32rem;
+                object-fit: cover;
+        }
 }
 
 

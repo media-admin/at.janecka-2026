@@ -107,22 +107,20 @@
 	// ----------------------------------------------------------------
 
 	&__banner {
-		width: 100%;
-		margin-bottom: 1.5rem;
-		overflow: hidden;
+			width:       100vw;
+			margin-left: calc(50% - 50vw);
+			margin-bottom: 1.5rem;
+			overflow:    hidden;
 	}
-
 	&__banner-img {
-		display: block;
-		width: 100%;
-		height: auto;
-		object-fit: cover;
-		aspect-ratio: 1400 / 470;
-		margin-block: $spacing-2;
-
-		@media (max-width: 47.99em) {
-			aspect-ratio: 2 / 1;
-		}
+			display:    block;
+			width:      100%;
+			min-height: 390px;
+			object-fit: cover;
+			aspect-ratio: 1400 / 470;
+			@media (max-width: 47.99em) {
+					aspect-ratio: 2 / 1;
+			}
 	}
 
 	// Fallback wenn kein Banner, aber Logo vorhanden
