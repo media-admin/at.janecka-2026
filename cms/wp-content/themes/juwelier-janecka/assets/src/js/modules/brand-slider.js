@@ -29,8 +29,8 @@ export function initBrandSliders() {
 
 		new Swiper( el, {
 			modules: [ Navigation, ...(autoplayDelay > 0 ? [ Autoplay ] : []) ],
-			slidesPerView: 1,
-			spaceBetween: 0,
+			slidesPerView: 2,   // < 480px (sehr kleine Mobilgeräte)
+			spaceBetween: 16,
 			loop: true,
 			loopAdditionalSlides: 3,
 			...(autoplayDelay > 0 && {
@@ -45,10 +45,11 @@ export function initBrandSliders() {
 				nextEl: wrapper.querySelector( '.brand-slider__next' ),
 			},
 			breakpoints: {
-				480: { slidesPerView: 3, spaceBetween: 24 },
-				768: { slidesPerView: 4, spaceBetween: 32 },
-				1024: { slidesPerView: 4, spaceBetween: 40 },
-				1280: { slidesPerView: 5, spaceBetween: 48 },
+				480:  { slidesPerView: 3, spaceBetween: 24 },  // Mobil groß
+				768:  { slidesPerView: 4, spaceBetween: 32 },  // Tablet
+				1024: { slidesPerView: 5, spaceBetween: 40 },  // Desktop
+				1280: { slidesPerView: 6, spaceBetween: 48 },  // Desktop breit
+				1536: { slidesPerView: 7, spaceBetween: 56 },  // Desktop sehr breit
 			},
 		} );
 	} );

@@ -217,6 +217,12 @@ document.addEventListener( 'keydown', ( e ) => {
 } );
 
 
+// Scrolbar width CSS Variable (für präzises Layout bei 100vw-Elementen)
+document.documentElement.style.setProperty(
+    '--scrollbar-width',
+    ( window.innerWidth - document.documentElement.clientWidth ) + 'px'
+);
+
 
 // DOM Ready
 if (document.readyState === 'loading') {

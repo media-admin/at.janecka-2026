@@ -4,6 +4,7 @@
         display: flex;
         justify-content: flex-end;
         margin-bottom: 1rem;
+        padding-inline-end: var(--container-padding);
     }
 
     &__all-link {

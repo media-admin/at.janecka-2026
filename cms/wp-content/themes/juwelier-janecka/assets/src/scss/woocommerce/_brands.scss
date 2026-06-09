@@ -199,9 +199,13 @@
 	align-items: center;
 	gap: 0.75rem;
 	margin-block: 2rem;
+	margin-inline-start: 1rem;
+    margin-inline-end: calc(1rem + var(--scrollbar-width, 17px));
 
 	@include bp(md) {
 		gap: 1rem;
+		margin-inline-start: 1.5rem;
+        margin-inline-end: calc(1.5rem + var(--scrollbar-width, 17px));
 	}
 }
 
