@@ -1,9 +1,7 @@
 @use '../abstracts' as *;
 
 // =============================================================================
-// Hero Slider – v1.3.0
-// - Höhe auf .swiper-wrapper + .swiper-slide (Swiper überschreibt sonst child)
-// - overflow: hidden verhindert Scrollbalken UND hält Pfeile innen
+// Hero Slider – v2.0.0
 // =============================================================================
 
 $slider-height-desktop: clamp(420px, 65vh, 780px);
@@ -14,7 +12,7 @@ $slider-height-mobile:  clamp(280px, 55vw, 480px);
 .hero-slider {
     position: relative;
     width:    100%;
-    overflow: hidden; // Pfeile + Scrollbalken bleiben innen
+    overflow: hidden;
 
     .swiper-wrapper {
         overflow: hidden;
@@ -22,12 +20,12 @@ $slider-height-mobile:  clamp(280px, 55vw, 480px);
 
     .swiper-wrapper,
     .swiper-slide {
-        height: $slider-height-desktop;
-        aspect-ratio: 1400 / 470;   // ← Bildverhältnis deiner Slider-Bilder
-        height:       auto;          // ← statt fixer Höhe
+        aspect-ratio: 1400 / 470;
+        height:       auto;
 
         @include respond-below('md') {
-            height: $slider-height-mobile;
+            aspect-ratio: unset;
+            height: clamp(480px, 100vw, 720px); // Mobile: höheres Format
         }
     }
 }
@@ -37,7 +35,7 @@ $slider-height-mobile:  clamp(280px, 55vw, 480px);
 .hero-slide {
     position: relative;
     width:    100%;
-    height:   100%; // erbt von .swiper-slide
+    height:   100%;
 
     // ── Hintergrundbild ───────────────────────────────────────────────────────
 
@@ -64,126 +62,142 @@ $slider-height-mobile:  clamp(280px, 55vw, 480px);
         background: rgba(0, 0, 0, var(--overlay-opacity, 0));
     }
 
-    // ── Content ───────────────────────────────────────────────────────────────
+    // ── Content: zentriert ────────────────────────────────────────────────────
 
     &__content {
-        position:       absolute;
-        bottom:         0;
-        left:           50%;
-        transform:      translateX(-50%);
-        width:          100%;
-        max-width:      1400px;
-        z-index:        2;
-        display:        flex;
-        flex-direction: column;
-        padding:        0 var(--container-padding) $spacing-12;
-
-        @include respond-below('md') {
-            padding-bottom: $spacing-8;
-        }
+        position:        absolute;
+        inset:           0;
+        z-index:         2;
+        display:         flex;
+        flex-direction:  column;
+        align-items:     center;
+        justify-content: center;
+        text-align:      center;
+        padding:         $spacing-4 var(--container-padding);
     }
 
-    // ── Textfarben ────────────────────────────────────────────────────────────
+    // ── Titel (Post Title) ────────────────────────────────────────────────────
 
-    &--light &__subtitle,
-    &--light &__btn      { color: #fff; }
-    &--dark  &__subtitle { color: var(--color-text); }
+    &__title {
+        font-family:  $font-heading;
+        font-size:    clamp(3rem, 8vw, 7rem);
+        font-weight:  $font-weight-light;
+        font-style:   italic;
+        line-height:  1.1;
+        color:        #fff;
+        margin:       0 0 $spacing-2;
+        text-shadow:  0 2px 20px rgba(0, 0, 0, 0.15);
+
+        @include respond-below('md') {
+            font-size: clamp(2.5rem, 12vw, 5rem);
+            margin-bottom: $spacing-1;
+        }
+    }
 
     // ── Subtitle ──────────────────────────────────────────────────────────────
 
     &__subtitle {
-        font-size:   var(--text-lg);
-        margin:      0 0 $spacing-4;
-        line-height: 1.4;
+        font-family:     $font-nav;
+        font-size:       var(--text-xs);
+        font-weight:     $font-weight-semibold;
+        letter-spacing:  0.2em;
+        text-transform:  uppercase;
+        color:           #fff;
+        margin:          0 0 $spacing-4;
+        opacity:         0.9;
 
-        @include respond-below('md') { font-size: var(--text-base); }
+        @include respond-below('md') {
+            margin-bottom: $spacing-3;
+        }
     }
 
-    &__btn { align-self: flex-start; }
+    // ── Button ────────────────────────────────────────────────────────────────
+
+    &__btn {
+        display:          inline-block;
+        padding:          $spacing-2 $spacing-5;
+        border:           1px solid rgba(255, 255, 255, 0.85);
+        color:            #fff;
+        font-family:      $font-nav;
+        font-size:        var(--text-xs);
+        font-weight:      $font-weight-semibold;
+        letter-spacing:   0.14em;
+        text-transform:   uppercase;
+        text-decoration:  none;
+        background:       transparent;
+        transition:       background-color 0.25s ease, color 0.25s ease,
+                          border-color 0.25s ease;
+
+        @include respond-below('md') {
+            padding: $spacing-2 $spacing-4;
+            width: 80%;
+            text-align: center;
+        }
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+    }
 }
 
-// ── Swiper Navigation ─────────────────────────────────────────────────────────
+// ── Swiper Pagination — rechts oben ──────────────────────────────────────────
 
 .hero-slider {
-    .swiper-button-prev,
-    .swiper-button-next {
-        // Swiper positioniert diese per top: 50% – bleibt innerhalb durch overflow:hidden
-        color:           #fff;
-        background:      rgba(0, 0, 0, 0.35);
-        width:           44px;
-        height:          44px;
-        border-radius:   50%;
-        backdrop-filter: blur(4px);
-        transition:      background 0.2s ease;
-        border:          none;
-
-        &:hover  { background: rgba(0, 0, 0, 0.6); }
-        &::after { font-size: 16px; font-weight: 700; }
-    }
-
-    .swiper-button-prev,
-    .swiper-button-next {
-        --swiper-navigation-sides-offset: #{$spacing-6};
-    }
 
     .swiper-pagination {
-        bottom: $spacing-4;
+        top:    $spacing-3 !important;
+        bottom: auto !important;
+        right:  $spacing-4 !important;
+        left:   auto !important;
+        width:  auto !important;
+        display: flex;
+        align-items: center;
+        gap: 6px;
 
         .swiper-pagination-bullet {
-            background:     #fff;
-            opacity:        0.5;
-            width:          10px;
-            height:         10px;
-            border-radius:  50%;
-            transition:     width 0.3s ease, opacity 0.3s ease, border-radius 0.3s ease;
+            background:    #fff;
+            opacity:       0.5;
+            width:         8px;
+            height:        8px;
+            border-radius: 50%;
+            margin:        0 !important;
+            transition:    width 0.3s ease, opacity 0.3s ease, border-radius 0.3s ease;
         }
 
         .swiper-pagination-bullet-active {
-            opacity:        1;
-            width:          28px;          // ← breiter
-            border-radius:  5px;           // ← Pill-Form
+            opacity:       1;
+            width:         24px;
+            border-radius: 4px;
         }
+    }
+
+    // ── Navigation: nur für Accessibility, visuell versteckt ──────────────────
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        opacity:        0;
+        pointer-events: none;
+        position:       absolute;
+        width:          1px;
+        height:         1px;
+        overflow:       hidden;
+        clip:           rect(0, 0, 0, 0);
     }
 }
 
-@media (max-width: 767.98px) {
-
-  // Min-height entfernen
-  .hero-slider,
-  .hero-slider .swiper-slide,
-  .hero-slide,
-  .hero-slider-container {
-    min-height: 0 !important;
-  }
-
-  // Nav-Buttons: kleiner + näher am Rand
-  .hero-slider .swiper-button-prev,
-  .hero-slider .swiper-button-next {
-    width:  32px;
-    height: 32px;
-    top:    50%;
-    transform: translateY(-50%);
-  }
-
-  .hero-slider .swiper-button-prev {
-    left: 6px;
-  }
-
-  .hero-slider .swiper-button-next {
-    right: 6px;
-  }
-
-  // Pfeil-Icon skalieren falls per CSS gezeichnet
-  .hero-slider .swiper-button-prev::after,
-  .hero-slider .swiper-button-next::after {
-    font-size: 14px;
-  }
-}
-
+// ── Mobile ────────────────────────────────────────────────────────────────────
 
 @media (max-width: 767.98px) {
-  .hero-slider .swiper-button-prev,
-  .hero-slider .swiper-button-next {
-    display: none !important;
-  }
+
+    .hero-slider,
+    .hero-slider .swiper-slide,
+    .hero-slide,
+    .hero-slider-container {
+        min-height: 0 !important;
+    }
+
+    .hero-slider .swiper-pagination {
+        top:   $spacing-2 !important;
+        right: $spacing-3 !important;
+    }
 }

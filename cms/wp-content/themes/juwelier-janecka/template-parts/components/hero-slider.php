@@ -1,50 +1,79 @@
 <?php
 /**
  * Hero Slider Component
- * 
- * @package CustomTheme
+ *
+ * @package JuwelierJanecka
  */
 
-$slides = $args['slides'] ?? array();
+$slides = $args['slides'] ?? [];
 
-if (empty($slides)) {
+if ( empty( $slides ) ) {
     return;
 }
 ?>
 
-<div class="hero-slider swiper" data-autoplay="true" data-loop="true" data-delay="5000">
+<section
+    class="hero-slider swiper"
+    aria-label="Hero Slider"
+    data-autoplay="true"
+    data-loop="true"
+    data-delay="5000"
+>
     <div class="swiper-wrapper">
-        <?php foreach ($slides as $slide) : ?>
-            <div class="swiper-slide" style="background-image: url('<?php echo esc_url($slide['image']); ?>');">
-                <div class="hero-slider__content container">
-                    <?php if (!empty($slide['title'])) : ?>
-                        <h1 class="hero-slider__title">
-                            <?php echo esc_html($slide['title']); ?>
-                        </h1>
-                    <?php endif; ?>
-                    
-                    <?php if (!empty($slide['subtitle'])) : ?>
-                        <p class="hero-slider__subtitle">
-                            <?php echo esc_html($slide['subtitle']); ?>
-                        </p>
-                    <?php endif; ?>
-                    
-                    <?php if (!empty($slide['button_text']) && !empty($slide['button_link'])) : ?>
-                        <div class="hero-slider__cta">
-                            <a href="<?php echo esc_url($slide['button_link']); ?>" class="btn btn-primary">
-                                <?php echo esc_html($slide['button_text']); ?>
-                            </a>
-                        </div>
-                    <?php endif; ?>
-                </div>
+
+        <?php foreach ( $slides as $index => $slide ) :
+            $overlay = floatval( $slide['overlay_opacity'] ?? 0 );
+        ?>
+        <div
+            class="swiper-slide hero-slide hero-slide--light"
+            style="--overlay-opacity: <?php echo esc_attr( $overlay ); ?>"
+        >
+            <?php if ( ! empty( $slide['image'] ) ) : ?>
+                <picture class="hero-slide__bg">
+                    <img
+                        src="<?php echo esc_url( $slide['image'] ); ?>"
+                        alt="<?php echo esc_attr( $slide['title'] ?? '' ); ?>"
+                        <?php echo $index === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'; ?>
+                    >
+                </picture>
+            <?php endif; ?>
+
+            <div class="hero-slide__overlay" aria-hidden="true"></div>
+
+            <div class="hero-slide__content">
+
+                <?php if ( ! empty( $slide['title'] ) ) : ?>
+                    <h2 class="hero-slide__title">
+                        <?php echo esc_html( $slide['title'] ); ?>
+                    </h2>
+                <?php endif; ?>
+
+                <?php if ( ! empty( $slide['subtitle'] ) ) : ?>
+                    <p class="hero-slide__subtitle">
+                        <?php echo esc_html( $slide['subtitle'] ); ?>
+                    </p>
+                <?php endif; ?>
+
+                <?php if ( ! empty( $slide['button_text'] ) && ! empty( $slide['button_link'] ) ) : ?>
+                    <a
+                        href="<?php echo esc_url( $slide['button_link'] ); ?>"
+                        class="hero-slide__btn"
+                    >
+                        <?php echo esc_html( $slide['button_text'] ); ?>
+                    </a>
+                <?php endif; ?>
+
             </div>
+        </div>
         <?php endforeach; ?>
+
     </div>
-    
-    <!-- Navigation -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-    
-    <!-- Pagination -->
+
+    <!-- Navigation: visuell versteckt, für Accessibility behalten -->
+    <button class="swiper-button-prev" aria-label="Vorheriger Slide"></button>
+    <button class="swiper-button-next" aria-label="Nächster Slide"></button>
+
+    <!-- Pagination: rechts oben -->
     <div class="swiper-pagination"></div>
-</div>
+
+</section>

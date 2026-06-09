@@ -263,7 +263,11 @@
 .notification-popup {
   position:      relative;
   background:    $color-white;
-  border:        1px solid var(--color-text, #1a1a1a);
+  border:        1px solid var(--color-text, #1a1a1a) !important;
+
+  outline: 1px solid var(--color-text, #1a1a1a) !important;
+  outline-offset: -20px;
+
   border-radius: 0;
   padding:       $container-padding;
   max-width:     540px;
@@ -285,8 +289,8 @@
 
   &__close {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 1.5rem;
+    right: 1.5rem;
     background: none;
     border: none;
     font-size: 1.5rem;
@@ -479,4 +483,77 @@ body.popup-open { overflow: hidden; }
     max-width: 100%;
     padding: $container-padding;
   }
+}
+
+// =============================================================================
+// POPUP – Janecka Standard Layout
+// =============================================================================
+
+.notification-popup {
+    max-width: 420px !important;  // schmäler
+    padding: $spacing-5 !important;
+
+    // Titel ausblenden
+    &__title {
+        display: none !important;
+    }
+
+    // Close-Button dünner
+    &__close {
+        font-size: 1.125rem !important;
+        font-weight: $font-weight-light !important;
+        color: $color-text !important;
+        opacity: 0.5 !important;
+    }
+}
+
+.notification-popup__body--rich {
+
+    // Heading: groß, leicht, zentriert
+    h2, h3, h4 {
+        font-family:  $font-heading !important;
+        font-weight:  $font-weight-light !important;
+        font-size:    var(--text-3xl) !important;
+        text-align:   center !important;
+        color:        $color-dark !important;
+        margin-bottom: $spacing-3 !important;
+    }
+
+    // Body-Text: zentriert
+    p {
+        text-align: center !important;
+        color: $color-text !important;
+    }
+
+    // Button: volle Breite, eckig, Janecka-Stil
+    .wp-block-buttons {
+        justify-content: center !important;
+        margin-top: $spacing-4 !important;
+    }
+
+    .wp-block-button {
+        width: 100% !important;
+    }
+
+    .wp-block-button__link,
+    .wp-element-button {
+        width:           100% !important;
+        border-radius:   $radius-none !important;
+        background-color: $color-dark !important;
+        color:           #fff !important;
+        font-family:     $font-nav !important;
+        font-size:       var(--text-xs) !important;
+        font-weight:     $font-weight-semibold !important;
+        letter-spacing:  0.12em !important;
+        text-transform:  uppercase !important;
+        padding:         $spacing-2 $spacing-4 !important;
+        text-align:      center !important;
+        transition:      background-color 0.25s ease !important;
+
+        &:hover {
+            background-color: $color-grey-dark !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    }
 }
