@@ -51,6 +51,7 @@
     margin-bottom: $spacing-2 !important;
     gap: $spacing-3 !important;
     flex-wrap: nowrap !important;
+    padding-inline: var(--container-padding) !important;
 
     .wp-block-column:first-child {
         flex-grow: 1 !important;
@@ -118,6 +119,14 @@
 // =============================================================================
 
 .janecka-duo-covers {
+
+    // Section-Header soll volle Breite nutzen, nicht durch constrained eingeschränkt werden
+    &.is-layout-constrained > .janecka-section-header,
+    &.wp-block-group-is-layout-constrained > .janecka-section-header {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin-inline: 0 !important;
+    }
 
     .wp-block-cover__inner-container {
 
@@ -338,6 +347,14 @@
             color: #fff !important;
         }
     }
+}
+
+
+body .wp-block-group.janecka-duo-covers > .wp-block-columns.janecka-section-header {
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+    padding-inline: var(--container-padding) !important;
+    width: 100% !important;
 }
 
 
