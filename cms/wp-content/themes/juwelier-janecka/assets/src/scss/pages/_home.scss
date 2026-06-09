@@ -280,3 +280,88 @@
   display: block;
   margin-top: 45%;
 }
+
+// =============================================================================
+// Kategorie-Grid (Startseite)
+// Columns-Block mit CSS-Klasse "category-grid"
+// =============================================================================
+
+.category-grid {
+
+    // Spalten ohne Abstand
+    &.wp-block-columns {
+        gap: 0 !important;
+        flex-wrap: nowrap !important;
+    }
+
+    .wp-block-column {
+        padding:  0 !important;
+        margin:   0 !important;
+        overflow: hidden;
+    }
+
+    .wp-block-cover {
+        height:   100% !important;
+        overflow: hidden;
+        cursor:   pointer;
+
+        // Bild-Zoom vorbereiten
+        .wp-block-cover__image-background {
+            transition: transform 0.6s ease;
+            will-change: transform;
+        }
+
+        // Overlay-Deckkraft vorbereiten
+        .wp-block-cover__background {
+            transition: opacity 0.4s ease;
+        }
+
+        // Text
+        .wp-block-cover__inner-container {
+            position:   relative;
+            z-index:    2;
+
+            h2, h3, h4,
+            .wp-block-heading {
+                font-size:      clamp(1rem, 2vw, 1.5rem);
+                font-weight:    700;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color:          #fff;
+                margin:         0;
+                text-shadow:    0 1px 4px rgba(0, 0, 0, .4);
+            }
+        }
+
+        // Hover: Zoom + stärkeres Overlay
+        &:hover {
+            .wp-block-cover__image-background {
+                transform: scale(1.05);
+            }
+
+            .wp-block-cover__background {
+                opacity: 0.55 !important;
+            }
+        }
+    }
+
+    // Mobile: 2×2 Grid statt 4 Spalten
+    @media (max-width: 767.98px) {
+        &.wp-block-columns {
+            flex-wrap: wrap !important;
+        }
+
+        .wp-block-column {
+            flex-basis: 50% !important;
+            min-width:  50% !important;
+        }
+    }
+
+    // Sehr klein: einspaltig
+    @media (max-width: 479.98px) {
+        .wp-block-column {
+            flex-basis: 100% !important;
+            min-width:  100% !important;
+        }
+    }
+}
