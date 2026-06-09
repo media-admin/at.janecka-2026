@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "janecka/featured-products",
+    "title": "Hervorgehobene Produkte",
+    "category": "janecka",
+    "icon": "star-filled",
+    "description": "Zeigt bis zu 4 hervorgehobene WooCommerce-Produkte im Produkt-Grid an.",
+    "supports": {
+        "anchor": true,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "count": {
+            "type": "number",
+            "default": 4
+        }
+    },
+    "editorScript": "file:./editor.js",
+    "textdomain": "juwelier-janecka"
+}

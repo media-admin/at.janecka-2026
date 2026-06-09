@@ -1,0 +1,17 @@
+.featured-products-block {
+
+    &__header {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 1rem;
+    }
+
+    &__all-link {
+        font-size: 0.875rem;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

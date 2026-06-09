@@ -320,3 +320,16 @@ ul.products.wc-products-grid {
     opacity: 1 !important;
     visibility: visible !important;
 }
+
+// Featured Products Block
+.featured-products-block {
+    margin-block: var(--space-2xl, 4rem);
+
+    &__title {
+        text-align: center;
+        font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        margin-bottom: var(--space-xl, 2.5rem);
+    }
+}
