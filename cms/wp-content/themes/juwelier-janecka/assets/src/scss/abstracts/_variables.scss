@@ -33,7 +33,7 @@ $color-accent:    #00d9ff;
 
 $color-text:        rgb(112, 112, 112);
 $color-bg:          #ffffff;
-$color-bg-light:    #f2f2f2;
+$color-bg-light:    #f5f5f5;
 $color-bg-dark:     #dedede;
 
 
@@ -77,16 +77,16 @@ $color-warning-light: #fef3c7;
 $color-error:         #ef4444;
 $color-error-light:   #fee2e2;
 
-$color-info:          #3b82f6;
-$color-info-light:    #dbeafe;
+$color-info:          $color-black;
+$color-info-light:    $color-black;
 
 $color-danger: $color-error; // Alias
 
 $color-woo-danger: #cc0000;  // WooCommerce Sale/Error Badge
 
 // Extended Status – hellere Dark-Mode-Varianten
-$color-info-dark:    #1e40af;   // Info Text (Light Mode)
-$color-info-dim:     #93c5fd;   // Info Text (Dark Mode)
+$color-info-dark:    $color-white;   // Info Text (Light Mode)
+$color-info-dim:     $color-white;   // Info Text (Dark Mode)
 $color-success-dim:  #86efac;   // Success Text (Dark Mode)
 $color-warning-dark: #92400e;   // Warning Text (Light Mode)
 $color-warning-dim:  #fcd34d;   // Warning Text (Dark Mode)
@@ -253,18 +253,34 @@ $color-border:         var(--color-border);
 //    In Components: CSS Custom Properties (--text-*) bevorzugen.
 // ─────────────────────────────────────────────────────────────────
 
-$font-primary:   'Source Sans Pro Regular', sans-serif;
-$font-secondary: 'Roboto Slab Light', serif;
+// $font-primary:   'Source Sans Pro Regular', sans-serif;
+// $font-secondary: 'Roboto Slab Light', serif;
 
-$font-body:         'Source Sans Pro Regular', sans-serif;
-$font-body-bold:    'Source Sans Pro Bold', sans-serif;
-$font-heading:      'Roboto Slab Light', serif;
-$font-heading-bold: 'Roboto Slab Bold', serif;
-$font-subheading:   'Aalto Sans Pro Light It', sans-serif;
-$font-nav:          'Aalto Sans Pro Light', sans-serif;
-$font-nav-bold:     'Aalto Sans Pro Bold', sans-serif;
-$font-nav-semi:     'Aalto Sans Pro Semibold', sans-serif;
-$font-nav-regular:  'Aalto Sans Pro Regular', sans-serif;
+// $font-body:         'Source Sans Pro Regular', sans-serif;
+// $font-body-bold:    'Source Sans Pro Bold', sans-serif;
+// $font-heading:      'Roboto Slab Light', serif;
+// $font-heading-bold: 'Roboto Slab Bold', serif;
+// $font-subheading:   'Aalto Sans Pro Light It', sans-serif;
+// $font-nav:          'Aalto Sans Pro Light', sans-serif;
+// $font-nav-bold:     'Aalto Sans Pro Bold', sans-serif;
+// $font-nav-semi:     'Aalto Sans Pro Semibold', sans-serif;
+// $font-nav-regular:  'Aalto Sans Pro Regular', sans-serif;
+
+
+
+$font-primary:   'Inter', sans-serif;
+$font-secondary: 'DM Sans', sans-serif;
+
+$font-body:         'Inter', sans-serif;
+$font-body-bold:    'Inter', sans-serif;
+$font-heading:      'DM Sans', sans-serif;
+$font-heading-bold: 'DM Sans', sans-serif;
+$font-subheading:   'DM Sans', sans-serif;
+$font-nav:          'DM Sans', sans-serif;
+$font-nav-bold:     'DM Sans', sans-serif;
+$font-nav-semi:     'DM Sans', sans-serif;
+$font-nav-regular:  'DM Sans', sans-serif;
+
 
 
 // Statische Skala (für Kontexte wo clamp() nicht passt, z.B. Icons, Badges)

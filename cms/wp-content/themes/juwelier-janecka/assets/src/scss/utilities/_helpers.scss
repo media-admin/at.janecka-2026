@@ -26,7 +26,8 @@
     max-width: 100vw;
 }
 
-.fullwidth {
+.fullwidth,
+.alignfull {
     @include fullwidth;
 
     // Mit Hintergrundfarbe (Klasse ergänzen und CSS Custom Property setzen)
@@ -98,11 +99,17 @@
 
 // ── Spacing (Margin) ─────────────────────────────────────────────────────────
 .mt-0  { margin-top: 0 !important; }
+.mr-0  { margin-right: 0 !important; }
 .mb-0  { margin-bottom: 0 !important; }
+.ml-0  { margin-left: 0 !important; }
 .mt-4  { margin-top: $spacing-4 !important; }
+.mr-4  { margin-right: $spacing-4 !important; }
 .mb-4  { margin-bottom: $spacing-4 !important; }
+.ml-4  { margin-left: $spacing-4 !important; }
 .mt-8  { margin-top: $spacing-8 !important; }
+.mr-8  { margin-right: $spacing-8 !important; }
 .mb-8  { margin-bottom: $spacing-8 !important; }
+.ml-8  { margin-left: $spacing-8 !important; }
 
 // ── Aspect Ratio (CLS-Prävention) ────────────────────────────────────────────
 // Verhindert Layout Shift bei Bildern/Videos/Embeds bevor sie geladen sind.
@@ -163,6 +170,8 @@
 .p-0  { padding: 0 !important; }
 .p-4  { padding: $spacing-4 !important; }
 .p-8  { padding: $spacing-8 !important; }
+.p-12  { padding: $spacing-12 !important; }
+.p-16  { padding: $spacing-16 !important; }
 .pt-0  { padding-top: 0 !important; }
 .pt-4  { padding-top: $spacing-4 !important; }
 .pt-8  { padding-top: $spacing-8 !important; }

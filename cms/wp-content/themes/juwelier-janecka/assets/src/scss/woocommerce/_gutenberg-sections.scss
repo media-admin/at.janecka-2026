@@ -1,0 +1,390 @@
+// =============================================================================
+// _gutenberg-sections.scss
+// Custom Gutenberg Block Styles – Juwelier Janecka
+//
+// Enthält Styles für:
+//   1. .janecka-page-inset     – Fullwidth mit 12px Seitenabstand
+//   2. .janecka-duo-covers     – Zwei Bild-Kacheln nebeneinander
+//   3. .janecka-split-section  – Text/Bild zweispaltig (+ --reverse Variante)
+//   4. .janecka-section-header – Überschrift + Link nebeneinander
+//
+// Verwendung im Editor: "Zusätzliche CSS-Klasse" am jeweiligen Block vergeben.
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// =============================================================================
+// 1. PAGE INSET — Fullwidth mit kontrolliertem Seitenabstand
+//    Klasse: janecka-page-inset  →  am äußeren Group- oder Columns-Block
+//    Verhindert dass Inhalte bis zum Bildschirmrand reichen
+// =============================================================================
+
+.janecka-page-inset {
+    padding-inline-start: 12px !important;
+    padding-inline-end: calc(12px + var(--scrollbar-width, 17px)) !important;
+
+    @include bp(md) {
+        padding-inline-start: 24px !important;
+        padding-inline-end: calc(24px + var(--scrollbar-width, 17px)) !important;
+    }
+
+    @include bp(xl) {
+        padding-inline-start: 0 !important;
+        padding-inline-end: 0 !important;
+    }
+
+    &.wp-block-columns,
+    .wp-block-columns {
+        gap: 12px !important;
+    }
+}
+
+
+// =============================================================================
+// 2. SECTION HEADER — Überschrift links, Textlink rechts
+//    Klasse: janecka-section-header  →  am Columns-Block oberhalb der Cover
+// =============================================================================
+
+.janecka-section-header {
+    align-items: center !important;
+    margin-bottom: $spacing-2 !important;
+    gap: $spacing-3 !important;
+
+    // Rechte Spalte: nur so breit wie der Link, kein extra Padding
+    .wp-block-column:last-child {
+        flex-grow: 0 !important;
+        flex-shrink: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        text-align: right !important;
+    }
+}
+
+// Textlink rechts
+// Klasse: janecka-section-link  →  am Paragraph-Block in der rechten Spalte
+.janecka-section-link {
+    margin: 0 !important;
+
+    // Link-Element innerhalb des Paragraphs
+    a {
+        display: inline !important;
+        font-family: $font-nav !important;
+        font-size: var(--text-sm) !important;
+        font-weight: $font-weight-normal !important;
+        letter-spacing: 0.04em !important;
+        color: var(--color-text) !important;
+        text-decoration: none !important;
+        border-bottom: 1px solid currentColor !important;
+        padding-bottom: 2px !important;
+        white-space: nowrap !important;
+        transition: opacity 0.2s ease !important;
+
+        &:hover,
+        &:focus,
+        &:visited {
+            text-decoration: none !important;
+        }
+
+        &:hover {
+            opacity: 0.6 !important;
+        }
+    }
+}
+
+
+// =============================================================================
+// 3. DUO COVERS — Zwei Bild-Kacheln
+//    Klasse: janecka-duo-covers  →  am äußeren Group-Block
+// =============================================================================
+
+.janecka-duo-covers {
+
+    .wp-block-cover__inner-container {
+
+        // Gutenberg constrained layout überschreiben
+        &.is-layout-constrained > *,
+        > * {
+            max-width: 100% !important;
+            margin-inline: auto !important;
+            text-align: center !important;
+        }
+    }
+
+    // Columns-Block: kein Gap, kein Padding
+    .wp-block-columns {
+        gap: 0 !important;
+        margin: 0 !important;
+    }
+
+    .wp-block-column {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    // Cover-Block
+    .wp-block-cover {
+        min-height: 560px !important;
+        padding: 0 !important;
+
+        @include bp(md) {
+            min-height: 640px !important;
+        }
+
+        @include bp(xl) {
+            min-height: 720px !important;
+        }
+
+        // Overlay abdunkeln
+        .wp-block-cover__gradient-background,
+        .wp-block-cover__background {
+            opacity: 0.35 !important;
+            background-color: #000 !important;
+        }
+
+        // Inner Container: Label unten zentriert
+        .wp-block-cover__inner-container {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            text-align: center !important;
+            width: 100% !important;
+            height: 100% !important;
+            padding: $spacing-4 $spacing-3 !important;
+
+            @include bp(md) {
+                padding: $spacing-5 $spacing-4 !important;
+            }
+
+            > * {
+                text-align: center !important;
+            }
+        }
+    }
+}
+
+// Label-Button im Cover
+// Klasse: janecka-cover-label  →  am Paragraph-Block im Cover
+.janecka-cover-label {
+    display: inline-block !important;
+    padding: $spacing-2 $spacing-4 !important;
+    border: 1px solid rgba(255, 255, 255, 0.85) !important;
+    color: #fff !important;
+    font-family: $font-nav !important;
+    font-size: var(--text-xs) !important;
+    font-weight: $font-weight-semibold !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    left: 50% !important;
+    position: relative !important;
+    transform: translateX(-50%) !important;
+    width: fit-content !important;
+    transition: background-color 0.25s ease, color 0.25s ease,
+                border-color 0.25s ease !important;
+
+    &:hover {
+        background-color: #fff !important;
+        color: $color-dark !important;
+        border-color: #fff !important;
+    }
+}
+
+
+// =============================================================================
+// 4. SPLIT SECTION — Text / Bild zweispaltig
+//    Klasse: janecka-split-section  →  am äußeren Group-Block
+//    Variante: janecka-split-section--reverse  →  Bild links, Text rechts
+// =============================================================================
+
+.janecka-split-section {
+    padding-block: var(--space-2xl);
+
+    .wp-block-columns {
+        align-items: center !important;
+        gap: var(--space-xl) !important;
+
+        @include bp(md) {
+            gap: var(--space-2xl) !important;
+        }
+    }
+
+    .janecka-split__text {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        gap: $spacing-2 !important;
+
+        h1, h2, h3 {
+            font-family: $font-heading !important;
+            font-size: var(--text-4xl) !important;
+            font-weight: $font-weight-normal !important;
+            line-height: $line-height-tight !important;
+            color: $color-dark !important;
+            margin-top: 0 !important;
+            margin-bottom: $spacing-2 !important;
+        }
+
+        p {
+            font-size: var(--text-base) !important;
+            line-height: $line-height-relaxed !important;
+            color: var(--color-text) !important;
+            margin-bottom: $spacing-2 !important;
+
+            &:last-child { margin-bottom: 0 !important; }
+        }
+
+        .wp-block-buttons {
+            margin-top: $spacing-2 !important;
+        }
+    }
+
+    .janecka-split__image {
+
+        .wp-block-image {
+            margin: 0 !important;
+
+            img {
+                display: block !important;
+                width: 100% !important;
+                height: auto !important;
+                object-fit: cover !important;
+            }
+        }
+    }
+
+    &--reverse {
+        .wp-block-columns {
+            flex-direction: row-reverse !important;
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        padding-block: var(--space-xl);
+
+        &--reverse .wp-block-columns {
+            flex-direction: column !important;
+        }
+
+        .janecka-split__image {
+            order: -1 !important;
+        }
+    }
+}
+
+
+// =============================================================================
+// 5. BUTTONS — einheitlicher Stil für Gutenberg-Buttons
+//    Überschreibt Gutenberg-Defaults (runde Ecken, variable Farben)
+// =============================================================================
+
+.janecka-split-section,
+.janecka-split__text,
+.wp-block-columns {
+
+    .wp-block-button__link {
+        border-radius: $radius-none !important;
+        font-family: $font-nav !important;
+        font-size: var(--text-xs) !important;
+        font-weight: $font-weight-semibold !important;
+        letter-spacing: 0.12em !important;
+        text-transform: uppercase !important;
+        padding: $spacing-2 $spacing-4 !important;
+        transition: background-color 0.25s ease, color 0.25s ease,
+                    border-color 0.25s ease !important;
+    }
+
+    // Filled (Standard)
+    .wp-block-button:not(.is-style-outline) .wp-block-button__link {
+        background-color: $color-dark !important;
+        color: #fff !important;
+        border: 1px solid $color-dark !important;
+
+        &:hover {
+            background-color: transparent !important;
+            color: $color-dark !important;
+        }
+    }
+
+    // Outline
+    .wp-block-button.is-style-outline .wp-block-button__link {
+        background-color: transparent !important;
+        color: $color-dark !important;
+        border: 1px solid $color-dark !important;
+
+        &:hover {
+            background-color: $color-dark !important;
+            color: #fff !important;
+        }
+    }
+}
+
+
+// =============================================================================
+// Eyebrow
+// Klasse: janecka-eyebrow  →  am Paragraph-Block
+// =============================================================================
+
+.janecka-eyebrow {
+    display: block !important;
+    font-family: $font-nav !important;
+    font-size: var(--text-xs) !important;
+    font-weight: $font-weight-semibold !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    color: var(--color-text-muted) !important;
+    margin-bottom: $spacing-1 !important;
+    margin-top: 0 !important;
+}
+
+
+
+// =============================================================================
+// Category Grid Covers — 4-spaltiges Cover-Grid (Ketten, Armbänder, etc.)
+// Klasse: category-grid  →  an jeder Column
+// =============================================================================
+
+.category-grid {
+
+    .wp-block-cover__inner-container {
+        display: flex !important;
+        align-items: center !important;        // vertikal zentrieren
+        justify-content: center !important;
+        text-align: center !important;
+
+        // Gutenberg constrained layout überschreiben
+        > * {
+            max-width: 100% !important;
+            margin-inline: auto !important;
+        }
+    }
+
+    .wp-block-heading {
+        font-family: $font-heading !important;
+        font-size: clamp(1.25rem, 2.5vw, 1.75rem) !important;
+        font-weight: $font-weight-light !important;   // 300 — elegant
+        letter-spacing: 0.08em !important;
+        text-transform: none !important;              // kein uppercase
+        color: #fff !important;
+        line-height: $line-height-tight !important;
+        margin: 0 !important;
+    }
+}
+
+
+
+
+// =============================================================================
+// Credit-Zeile
+// Klasse: janecka-split__credit  →  am Paragraph-Block
+// =============================================================================
+
+.janecka-split__credit {
+    font-size: var(--text-sm) !important;
+    line-height: $line-height-base !important;
+    color: var(--color-text-muted) !important;
+    margin-top: $spacing-1 !important;
+    margin-bottom: 0 !important;
+}

@@ -39,8 +39,10 @@ h1 {
 
 h2 {
   font-family: $font-subheading !important;
-  font-size: $font-size-h2;// war clamp(1.4rem, 3vw, 1.8rem);
+  font-size: $font-size-h2;
   color: $color-text;
+  font-weight: $font-weight-normal !important;
+  letter-spacing: 5%;
   padding: 0.4em 0;
 }
 

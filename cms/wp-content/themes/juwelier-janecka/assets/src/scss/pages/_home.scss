@@ -324,10 +324,8 @@
             h2, h3, h4,
             .wp-block-heading {
                 font-size:      clamp(1rem, 2vw, 1.5rem);
-                font-weight:    700;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                color:          #fff;
+                color:          $color-white;
+                font-weight:     $font-weight-normal !important;
                 margin:         0;
                 text-shadow:    0 1px 4px rgba(0, 0, 0, .4);
             }

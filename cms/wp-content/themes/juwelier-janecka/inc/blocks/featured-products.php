@@ -50,8 +50,7 @@ function janecka_render_featured_products_block( array $attributes ): string {
 		return '';
 	}
 
-	$count    = isset( $attributes['count'] ) ? (int) $attributes['count'] : 4;
-	$shop_url = wc_get_page_permalink( 'shop' );
+	$count = isset( $attributes['count'] ) ? (int) $attributes['count'] : 4;
 
 	$products = wc_get_products( [
 		'featured' => true,
@@ -72,12 +71,6 @@ function janecka_render_featured_products_block( array $attributes ): string {
 
 	?>
 	<section class="featured-products-block">
-
-		<div class="featured-products-block__header">
-			<a href="<?php echo esc_url( $shop_url ); ?>" class="featured-products-block__all-link">
-				<?php esc_html_e( 'Alle Produkte zeigen', 'juwelier-janecka' ); ?> &rarr;
-			</a>
-		</div>
 
 		<?php
 		woocommerce_product_loop_start();
