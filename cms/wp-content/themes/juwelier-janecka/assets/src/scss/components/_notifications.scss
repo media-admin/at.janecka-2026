@@ -256,16 +256,17 @@
 }
 
 .notification-popup {
-  position: relative;
-  background: $color-white;
-  border-radius: $radius-xl;
-  padding: $container-padding;
-  max-width: $container-width;
-  width: 100%;
-  box-shadow: $shadow-xl;
-  transform: translateY(1rem);
-  transition: transform 0.3s ease;
-  text-align: center; // Nur für Standard-Popup (kein Gutenberg-Content)
+  position:      relative;
+  background:    $color-white;
+  border:        1px solid var(--color-text, #1a1a1a);
+  border-radius: 0;
+  padding:       $container-padding;
+  max-width:     540px;
+  width:         100%;
+  box-shadow:    none;
+  transform:     translateY(1rem);
+  transition:    transform 0.3s ease;
+  text-align:    center;
 
   // Bei Rich Content (Gutenberg): kein globales text-align,
   // Gutenberg-Blöcke steuern die Ausrichtung selbst via .has-text-align-*

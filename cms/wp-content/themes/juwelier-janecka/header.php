@@ -32,21 +32,26 @@ if (function_exists('get_field') && get_field('top_header_enable', 'option')) :
 <div class="top-header <?php echo $bg_class . ' ' . $mobile_class; ?>" role="complementary" aria-label="Kontaktinformationen">
     <div class="top-header__inner container">
         <div class="top-header__contact">
-            <?php if (!empty($th_address['enable']) && (!empty($th_address['street']) || !empty($th_address['city']))) : ?>
-                <span class="top-header__item top-header__address">
-                    <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    <?php if (!empty($th_address['maps_link'])) : ?><a href="<?php echo esc_url($th_address['maps_link']); ?>" target="_blank" rel="noopener"><?php endif; ?>
-                    <?php echo esc_html(trim(($th_address['street'] ?? '') . ', ' . ($th_address['city'] ?? ''), ', ')); ?>
-                    <?php if (!empty($th_address['country'])) : ?><?php echo ', ' . esc_html($th_address['country']); ?><?php endif; ?>
-                    <?php if (!empty($th_address['maps_link'])) : ?></a><?php endif; ?>
-                </span>
-            <?php endif; ?>
+            
             <?php if (!empty($th_hours['enable']) && !empty($th_hours['text'])) : ?>
                 <span class="top-header__item top-header__hours">
                     <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                     <?php echo esc_html($th_hours['text']); ?>
                 </span>
             <?php endif; ?>
+            <?php if (!empty($th_address['enable'])) : ?>
+                <?php
+                    $filialen_page = get_page_by_path('filialen');
+                    $filialen_url  = $filialen_page
+                        ? get_permalink($filialen_page)
+                        : home_url('/filialen/');
+                    ?>
+                    <span class="top-header__item top-header__address">
+                        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <a href="<?php echo esc_url($filialen_url); ?>">Unsere Filialen</a>
+                    </span>
+                <?php endif; ?>
+
             <?php if (!empty($th_phone['enable']) && !empty($th_phone['number'])) : ?>
                 <span class="top-header__item top-header__phone">
                     <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.53 2 2 0 0 1 3.6 1.37h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>

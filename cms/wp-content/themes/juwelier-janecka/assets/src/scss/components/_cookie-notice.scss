@@ -11,31 +11,48 @@
 // ── Banner ────────────────────────────────────────────────────────────────────
 
 .cookie-banner {
-    position:   fixed;
-    bottom:     0;
-    left:       0;
-    right:      0;
-    z-index:    9997;
-    background: var(--color-card-bg, #fff);
-    border-top: 1px solid var(--color-border, #e0e0e0);
-    box-shadow: 0 -4px 24px rgba(0, 0, 0, .08);
-    transform:  translateY(100%);
-    transition: transform .35s ease;
+    position:        fixed;
+    inset:           0;
+    z-index:         9997;
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    padding:         1rem;
+    pointer-events:  none;
 
-    &.is-visible { transform: translateY(0); }
+    &::before {
+        content:    '';
+        position:   absolute;
+        inset:      0;
+        background: rgba(0, 0, 0, .5);
+        opacity:    0;
+        transition: opacity .35s ease;
+    }
+
+    &.is-visible {
+        pointer-events: auto;
+        &::before { opacity: 1; }
+    }
 }
 
 .cookie-banner__inner {
+    position:       relative;
+    z-index:        1;
+    background:     var(--color-card-bg, #fff);
+    border:         1px solid var(--color-text, #1a1a1a);
+    width:          100%;
+    max-width:      540px;
+    padding:        2rem;
     display:        flex;
-    gap:            2rem;
-    padding:        1.5rem 2rem;
-    max-width:      1400px;
-    margin:         0 auto;
     flex-direction: column;
+    gap:            1.5rem;
+    opacity:        0;
+    transform:      translateY(1rem);
+    transition:     opacity .3s ease, transform .3s ease;
 
-    @include respond-to('lg') {
-        flex-direction: row;
-        align-items:    flex-start;
+    .cookie-banner.is-visible & {
+        opacity:   1;
+        transform: translateY(0);
     }
 }
 
@@ -69,16 +86,19 @@
 // ── Rechte Spalte: 4 Buttons ──────────────────────────────────────────────────
 
 .cookie-banner__actions {
-    display:         flex;
-    flex-direction:  column;
-    gap:             .5rem;
-    flex-shrink:     0;
-    width:           100%;
+    display:   flex;
+    flex-wrap: wrap;
+    gap:       .75rem;
+    width:     100%;
 
-    @include respond-to('lg') { width: 280px; }
+    // Hauptbuttons nebeneinander
+    .btn--primary,
+    .btn--outline:not(.cookie-banner__link-btn) {
+        flex:      1;
+        min-width: 120px;
+    }
 
     .btn {
-        width:           100%;
         text-align:      center;
         justify-content: center;
         white-space:     nowrap;
