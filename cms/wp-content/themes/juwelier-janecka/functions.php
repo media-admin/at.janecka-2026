@@ -358,25 +358,8 @@ add_action( 'woocommerce_after_shop_loop_item', function() {
     }
 }, 1 );
 
-file_put_contents( __DIR__ . '/hook-debug.txt', '', 0 );
-add_action( 'woocommerce_after_shop_loop_item', function() {
-    global $wp_filter;
-    foreach ( $wp_filter as $hook_name => $hook ) {
-        if ( strpos( $hook_name, 'gzd' ) !== false ) {
-            foreach ( $hook->callbacks as $priority => $callbacks ) {
-                foreach ( $callbacks as $key => $callback ) {
-                    $fn = $callback['function'];
-                    if ( $fn instanceof Closure ) {
-                        $ref  = new ReflectionFunction( $fn );
-                        $name = 'Closure:' . $ref->getStartLine();
-                    } elseif ( is_array( $fn ) ) {
-                        $name = ( is_object( $fn[0] ) ? get_class( $fn[0] ) : $fn[0] ) . '::' . $fn[1];
-                    } else {
-                        $name = (string) $fn;
-                    }
-                    file_put_contents( __DIR__ . '/hook-debug.txt', $hook_name . ' | ' . $priority . ' | ' . $name . PHP_EOL, FILE_APPEND );
-                }
-            }
-        }
-    }
-}, 999 );
+
+// Dark Mode deaktivieren — Theme unterstützt nur Light Mode
+add_action( 'wp_head', function() {
+    echo '<meta name="color-scheme" content="light">' . "\n";
+}, 1 );

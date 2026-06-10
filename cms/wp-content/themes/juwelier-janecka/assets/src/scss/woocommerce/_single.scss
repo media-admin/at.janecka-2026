@@ -202,7 +202,7 @@ body.single-product {
 .summary.entry-summary {
 	display: flex;
 	flex-direction: column;
-	gap: var(--space-sm);
+	// gap: var(--space-sm);
 
 	// 4a. Marke
 	.single-product__brand {
@@ -616,4 +616,67 @@ tr.wishlist_item td.product-name a {
 // Wunschliste: Datum kein Zeilenumbruch
 tr.wishlist_item td.product-date {
     white-space: nowrap;
+}
+
+
+.legal-price-info {
+    display: none !important;
+}
+
+
+// =============================================================================
+// Single Product — Button, Lupe, Wishlist
+// =============================================================================
+
+// ATC-Button: Janecka-Stil (wie btn--primary im Archiv)
+.single_add_to_cart_button.button {
+    background-color: $color-dark !important;
+    border:           1px solid $color-dark !important;
+    color:            #fff !important;
+    border-radius:    $radius-none !important;
+    font-family:      $font-nav !important;
+    font-size:        var(--text-xs) !important;
+    font-weight:      $font-weight-semibold !important;
+    letter-spacing:   0.12em !important;
+    text-transform:   uppercase !important;
+    padding:          $spacing-2 $spacing-4 !important;
+    transition:       background-color 0.25s ease !important;
+
+    &:hover {
+        background-color: $color-grey-dark !important;
+        border-color:     $color-grey-dark !important;
+    }
+}
+
+// Lupe-Icon entfernen
+.woocommerce-product-gallery__trigger {
+    display: none !important;
+}
+
+// Wishlist-Button: oben rechts im Bild (wie im Archiv)
+.woocommerce-product-gallery {
+    .tinv-wraper {
+        position: absolute !important;
+        top:      0.625rem !important;
+        right:    0.625rem !important;
+        left:     auto !important;
+        z-index:  2;
+    }
+
+    a.tinvwl_add_to_wishlist_button {
+        opacity:    1 !important;
+        visibility: visible !important;
+    }
+}
+
+.summary.entry-summary .cart .single_add_to_cart_button {
+    top: -2px !important;
+}
+
+
+
+.woocommerce div.product,
+.single-product-layout {
+    --borderRadius: 0px;
+    --buttonExpressCheckoutBorderRadius: 0px;
 }

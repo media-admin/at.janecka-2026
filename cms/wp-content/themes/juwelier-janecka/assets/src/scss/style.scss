@@ -86,6 +86,7 @@
 @use 'woocommerce/brands';
 @use 'woocommerce/eheringe';
 @use 'woocommerce/featured-products-block';
+@use 'woocommerce/single-product-additions';
 @use 'woocommerce/gutenberg-sections';
 @use 'woocommerce/category-archive';
 @use 'pages/page-404';
@@ -93,3 +94,11 @@
 
 // Swiper Overrides – muss zuletzt stehen
 @use 'components/swiper-overrides';
+
+
+// Dark Mode deaktivieren — Theme unterstützt nur Light Mode
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: light;
+    }
+}

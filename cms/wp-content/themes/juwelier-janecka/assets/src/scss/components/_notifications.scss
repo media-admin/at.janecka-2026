@@ -557,3 +557,8 @@ body.popup-open { overflow: hidden; }
         }
     }
 }
+
+.site-notifications-banner .notification__dismiss {
+    color: var(--color-text, #1a1a1a) !important;
+    opacity: 1 !important;
+}
