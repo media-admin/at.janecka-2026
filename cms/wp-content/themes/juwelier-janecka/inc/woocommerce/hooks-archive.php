@@ -18,9 +18,14 @@ remove_action( 'woocommerce_sidebar',             'woocommerce_get_sidebar', 10 
 add_action( 'woocommerce_before_main_content', 'janecka_wc_open_wrapper', 10 );
 add_action( 'woocommerce_after_main_content',  'janecka_wc_close_wrapper', 10 );
 
-// GZD Marken-Info im Loop entfernen
-add_action( 'woocommerce_init', function() {
+// GZD Loop-Ausgabe deaktivieren — wird manuell in product-card__gzd gerendert
+// Priorities laut Shopmarks.php: tax=6, shipping=7, delivery=8, units=9
+add_action( 'wp', function() {
+    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_tax_info', 6 );
+    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_shipping_costs_info', 7 );
+    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_delivery_time_info', 8 );
     remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_product_units', 9 );
+    remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_gzd_template_loop_product_units', 9 );
 } );
 
 function janecka_wc_open_wrapper(): void {
@@ -38,23 +43,17 @@ function janecka_wc_close_wrapper(): void {
 }
 
 // ===========================================================================
-// 2. SEITENTITEL + BREADCRUMB auf Kategorie-Seiten:
-//    WC-Standard entfernen — wird von category-archive-header.php übernommen
+// 2. SEITENTITEL + BREADCRUMB auf Kategorie-Seiten
 // ===========================================================================
 
-// Standard WC-Breadcrumb auf Kategorie-Seiten entfernen
-// (wird in category-archive-intro ausgegeben)
 add_action( 'woocommerce_before_main_content', function() {
     if ( is_product_category() ) {
         remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
     }
 }, 1 );
 
-// WC gibt den Seitentitel via woocommerce_archive_description aus —
-// auf Kategorie-Seiten entfernen wir ihn (category-archive-header.php übernimmt)
 add_action( 'woocommerce_before_shop_loop', function() {
     if ( is_product_category() ) {
-        // woocommerce_taxonomy_archive_description gibt Titel + Beschreibung aus
         remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
         remove_action( 'woocommerce_archive_description', 'woocommerce_product_archive_description', 10 );
     }
@@ -67,7 +66,7 @@ add_action( 'woocommerce_before_shop_loop', function() {
 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count',     20 );
 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
 
-// 1. Filter-Bar (priority 5 — nach category-archive-header bei priority 4)
+// 1. Filter-Bar
 add_action( 'woocommerce_before_shop_loop', function() {
     if ( function_exists( 'mlwf_render_filter_bar' ) ) {
         mlwf_render_filter_bar();
@@ -76,7 +75,7 @@ add_action( 'woocommerce_before_shop_loop', function() {
     }
 }, 5 );
 
-// 2. Loop-Header (Anzahl + Sortierung)
+// 2. Loop-Header
 add_action( 'woocommerce_before_shop_loop', 'janecka_wc_loop_header', 10 );
 
 function janecka_wc_loop_header(): void {
@@ -125,8 +124,11 @@ function janecka_product_card_open(): void {
     if ( $product->is_on_sale() )    $classes[] = 'product-card--on-sale';
     if ( $product->is_featured() )   $classes[] = 'product-card--featured';
     if ( ! $product->is_in_stock() ) $classes[] = 'product-card--out-of-stock';
+
+    $gzd_product = function_exists( 'wc_gzd_get_product' ) ? wc_gzd_get_product( $product ) : null;
     ?>
     <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+
         <a class="product-card__link" href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>">
 
             <?php janecka_product_card_image(); ?>
@@ -138,9 +140,29 @@ function janecka_product_card_open(): void {
                 <div class="product-card__price">
                     <?php woocommerce_template_loop_price(); ?>
                 </div>
+                <?php if ( $gzd_product ) : ?>
+                <div class="product-card__gzd">
+                    <?php if ( $gzd_product->get_tax_info() ) : ?>
+                        <p class="wc-gzd-additional-info wc-gzd-additional-info-loop tax-info">
+                            <?php echo wp_kses_post( $gzd_product->get_tax_info() ); ?>
+                        </p>
+                    <?php elseif ( function_exists( 'wc_gzd_is_small_business' ) && wc_gzd_is_small_business() ) : ?>
+                        <p class="wc-gzd-additional-info wc-gzd-additional-info-loop small-business-info">
+                            <?php echo wp_kses_post( wc_gzd_get_small_business_product_notice() ); ?>
+                        </p>
+                    <?php endif; ?>
+                    <?php if ( $gzd_product->get_shipping_costs_html() ) : ?>
+                        <p class="wc-gzd-additional-info wc-gzd-additional-info-loop shipping-costs-info">
+                            <?php echo wp_kses_post( $gzd_product->get_shipping_costs_html() ); ?>
+                        </p>
+                    <?php endif; ?>
+                </div>
+                <?php endif; ?>
+
             </div>
 
         </a><!-- .product-card__link -->
+
     <?php
 }
 

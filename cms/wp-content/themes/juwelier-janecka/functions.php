@@ -336,3 +336,47 @@ function janecka_wc_account_strings( $translated, $original, $domain ) {
 
 // Präfix ("Kategorie:", "Schlagwort:" etc.) aus Archiv-Titeln entfernen
 add_filter( 'get_the_archive_title_prefix', '__return_empty_string' );
+
+add_action( 'wp_head', function() {
+    echo '<style>.tinvwl_add_to_wishlist_button{opacity:1!important;visibility:visible!important}</style>';
+}, 999 );
+
+
+add_action( 'woocommerce_after_shop_loop_item', function() {
+    global $wp_filter;
+    if ( isset( $wp_filter['woocommerce_after_shop_loop_item'] ) ) {
+        foreach ( $wp_filter['woocommerce_after_shop_loop_item']->callbacks as $priority => $callbacks ) {
+            foreach ( $callbacks as $key => $callback ) {
+                $name = is_array( $callback['function'] )
+                    ? ( is_object( $callback['function'][0] )
+                        ? get_class( $callback['function'][0] )
+                        : $callback['function'][0] ) . '::' . $callback['function'][1]
+                    : ( is_string( $callback['function'] ) ? $callback['function'] : 'closure' );
+                error_log( 'after_shop_loop_item | priority: ' . $priority . ' | ' . $name );
+            }
+        }
+    }
+}, 1 );
+
+file_put_contents( __DIR__ . '/hook-debug.txt', '', 0 );
+add_action( 'woocommerce_after_shop_loop_item', function() {
+    global $wp_filter;
+    foreach ( $wp_filter as $hook_name => $hook ) {
+        if ( strpos( $hook_name, 'gzd' ) !== false ) {
+            foreach ( $hook->callbacks as $priority => $callbacks ) {
+                foreach ( $callbacks as $key => $callback ) {
+                    $fn = $callback['function'];
+                    if ( $fn instanceof Closure ) {
+                        $ref  = new ReflectionFunction( $fn );
+                        $name = 'Closure:' . $ref->getStartLine();
+                    } elseif ( is_array( $fn ) ) {
+                        $name = ( is_object( $fn[0] ) ? get_class( $fn[0] ) : $fn[0] ) . '::' . $fn[1];
+                    } else {
+                        $name = (string) $fn;
+                    }
+                    file_put_contents( __DIR__ . '/hook-debug.txt', $hook_name . ' | ' . $priority . ' | ' . $name . PHP_EOL, FILE_APPEND );
+                }
+            }
+        }
+    }
+}, 999 );
