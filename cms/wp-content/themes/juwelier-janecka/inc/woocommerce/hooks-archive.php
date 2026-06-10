@@ -305,6 +305,7 @@ function janecka_wc_breadcrumb_args( array $args ): array {
 
 remove_action( 'woocommerce_no_products_found', 'wc_no_products_found' );
 add_action( 'woocommerce_no_products_found', 'janecka_wc_no_products_found' );
+add_filter( 'janecka_product_card_show_actions', '__return_false' );
 
 function janecka_wc_no_products_found(): void {
     ?>

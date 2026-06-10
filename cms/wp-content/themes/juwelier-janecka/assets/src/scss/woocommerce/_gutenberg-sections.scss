@@ -195,28 +195,24 @@
 // Label-Button im Cover
 // Klasse: janecka-cover-label  →  am Paragraph-Block im Cover
 .janecka-cover-label {
-    display: inline-block !important;
-    padding: $spacing-2 $spacing-4 !important;
-    border: 1px solid rgba(255, 255, 255, 0.85) !important;
-    color: #fff !important;
-    font-family: $font-nav !important;
-    font-size: var(--text-xs) !important;
-    font-weight: $font-weight-semibold !important;
+    display:        block !important;
+    width:          fit-content !important;
+    max-width:      80% !important;
+    padding:        $spacing-2 $spacing-4 !important;
+    border:         1px solid rgba(255, 255, 255, 0.85) !important;
+    color:          #fff !important;
+    font-family:    $font-nav !important;
+    font-size:      var(--text-xs) !important;
+    font-weight:    $font-weight-semibold !important;
     letter-spacing: 0.14em !important;
     text-transform: uppercase !important;
-    text-align: center !important;
-    margin: 0 auto !important;
-    left: 50% !important;
-    position: relative !important;
-    transform: translateX(-50%) !important;
-    width: fit-content !important;
-    transition: background-color 0.25s ease, color 0.25s ease,
-                border-color 0.25s ease !important;
+    text-align:     center !important;
+    margin:         0 auto !important;
+    transition:     background-color 0.25s ease, color 0.25s ease,
+                    border-color 0.25s ease !important;
 
     &:hover {
-        background-color: #fff !important;
-        color: $color-dark !important;
-        border-color: #fff !important;
+        background-color: $color-black !important;
     }
 }
 
@@ -411,8 +407,6 @@ body .wp-block-group.janecka-duo-covers > .wp-block-columns.janecka-section-head
 }
 
 
-
-
 // =============================================================================
 // Credit-Zeile
 // Klasse: janecka-split__credit  →  am Paragraph-Block
@@ -424,4 +418,14 @@ body .wp-block-group.janecka-duo-covers > .wp-block-columns.janecka-section-head
     color: var(--color-text-muted) !important;
     margin-top: $spacing-1 !important;
     margin-bottom: 0 !important;
+}
+
+
+
+.category-grid .wp-block-cover.has-custom-content-position .wp-block-cover__inner-container {
+    width:          100% !important;
+    margin:         0 !important;
+    display:        flex !important;
+    flex-direction: column !important;
+    align-items:    center !important;
 }
