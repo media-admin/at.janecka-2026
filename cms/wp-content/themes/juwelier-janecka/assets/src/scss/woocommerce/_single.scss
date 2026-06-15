@@ -680,3 +680,8 @@ tr.wishlist_item td.product-date {
     --borderRadius: 0px;
     --buttonExpressCheckoutBorderRadius: 0px;
 }
+
+
+.summary.entry-summary .product_title {
+    font-weight: $font-weight-normal !important;
+}

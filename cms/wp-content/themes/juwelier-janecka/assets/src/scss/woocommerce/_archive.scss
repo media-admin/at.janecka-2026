@@ -403,3 +403,12 @@ a.tinvwl_add_to_wishlist_button.tinvwl-loop,
         margin-bottom:  var(--space-xl, 2.5rem);
     }
 }
+
+
+.product-card__price .woocommerce-Price-amount.amount {
+    font-weight: $font-weight-normal !important;
+}
+
+.product-card__subtitle {
+    font-weight: $font-weight-normal !important;
+}
