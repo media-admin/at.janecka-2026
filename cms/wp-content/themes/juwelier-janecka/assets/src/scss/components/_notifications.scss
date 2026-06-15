@@ -108,6 +108,7 @@
     background:   $color-primary;
     border-color: $color-primary;
     color:        $color-white;
+    border-left-width: 0px !important;
 
     .notification__icon {
       color: $color-white;
@@ -559,6 +560,7 @@ body.popup-open { overflow: hidden; }
 }
 
 .site-notifications-banner .notification__dismiss {
-    color: var(--color-text, #1a1a1a) !important;
+    color: var(--color-white) !important;
     opacity: 1 !important;
+    margin-right: var(--spacing-2) !important;
 }

@@ -73,6 +73,7 @@
     cursor: pointer;
     font-size: 24px;
     line-height: 1;
+    margin-right: var(--spacing-4) !important;
     padding: 0;
     opacity: 0.6;
     transition: opacity $transition-base;
@@ -102,6 +103,7 @@
 .notification--info {
   background: var(--notification-info-bg);
   border-color: var(--notification-info-border);
+  border-left-width: 0px !important;
   color: var(--notification-info-text);
   padding: $spacing-2 !important;
   
@@ -187,6 +189,7 @@
   .notification--info {
     background: $color-info;
     color: var(--notification-info-dim);
+    border-left-width: 0px !important;
     
     a {
       color: var(--notification-info-dim);

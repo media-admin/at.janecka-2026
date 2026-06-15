@@ -33,21 +33,52 @@
 
 // Logo-Zeile: Logo zentriert, Icons rechts
 .site-navigation__logo-row {
-    display:         grid;
-    grid-template-columns: 1fr auto 1fr;  // Links leer | Logo mitte | Icons rechts
-    align-items:     center;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+
+    .site-navigation__contact {
+        grid-column: 1;
+        display: flex;
+        align-items: center;
+        gap: $spacing-3;
+
+        @include respond-below('lg') {
+            display: none;
+        }
+    }
+
+    .site-navigation__contact-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: var(--text-sm);
+        color: $color-grey-dark;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: $transition-fast;
+
+        svg { flex-shrink: 0; }
+
+        &:hover {
+            color: var(--color-primary);
+        }
+    }
 
     .site-logo {
         grid-column: 2;
         justify-self: center;
+        align-self: center;
 
         @include respond-below('lg') {
             grid-column: 1 / -1;
-            grid-row: 2;
-            justify-self: center;
-            padding: 0.25rem 0 0.5rem;
-            margin: $spacing-2 auto;
         }
+    }
+
+    .site-navigation__contact,
+    .header-icons {
+        align-items: center; // Inhalte innerhalb der Blöcke bleiben mittig
+        padding-top: 0.5rem; // optional: feines Alignment zur Logo-Oberkante
     }
 
     .header-icons {
@@ -524,11 +555,28 @@
 
 
 .site-notifications-banner {
-  position: relative;
-  z-index:  9999; // höher als der sticky header
+    position: relative;
+    z-index:  9999;
 
-  .notification {
-    margin:        0;
-    border-radius: 0;
-  }
+    background-color: $color-dark !important;
+    color: #fff !important;
+
+    border-left: 0px !important;
+
+    .notification {
+        margin:        0;
+        border-radius: 0;
+    }
+
+    .notification__message,
+    .notification__message--gutenberg,
+    .notification__message--gutenberg p,
+    .notification__message--gutenberg strong {
+        color: #fff !important;
+    }
+
+    .notification__icon,
+    .dashicons {
+        color: #fff !important;
+    }
 }
