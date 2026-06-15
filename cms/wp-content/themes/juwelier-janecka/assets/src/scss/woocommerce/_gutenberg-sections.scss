@@ -49,6 +49,7 @@
 .janecka-section-header {
     align-items: center !important;
     margin-bottom: $spacing-2 !important;
+    margin-left: $spacing-2 !important;
     gap: $spacing-3 !important;
     flex-wrap: nowrap !important;
     padding-inline: var(--container-padding) !important;
@@ -126,6 +127,7 @@
         max-width: 100% !important;
         width: 100% !important;
         margin-inline: 0 !important;
+        margin-left: $spacing-2 !important;
     }
 
     .wp-block-cover__inner-container {
@@ -349,6 +351,7 @@
 body .wp-block-group.janecka-duo-covers > .wp-block-columns.janecka-section-header {
     max-width: 100% !important;
     margin-inline: 0 !important;
+    margin-left: $spacing-2 !important;
     padding-inline: var(--container-padding) !important;
     padding-inline: calc(var(--container-padding) - 20px) var(--container-padding) !important;
     width: 100% !important;
@@ -366,7 +369,6 @@ body .wp-block-group.janecka-duo-covers > .wp-block-columns.janecka-section-head
     font-size: var(--text-xs) !important;
     font-weight: $font-weight-semibold !important;
     letter-spacing: 0.12em !important;
-    text-transform: uppercase !important;
     color: var(--color-text-muted) !important;
     margin-bottom: $spacing-1 !important;
     margin-top: 0 !important;

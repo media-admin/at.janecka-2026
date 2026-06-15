@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 7.0.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-06-04 02:23:53+0000\n"
+"PO-Revision-Date: 2026-06-12 21:30:05+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4646,7 +4646,7 @@ msgstr "Wenn du die Konstante %1$s benutzt, stelle sicher, dass du diese globale
 
 #: wp-includes/html-api/class-wp-html-tag-processor.php:4729
 msgid "The query argument must be an array or a tag name."
-msgstr "Das Abfrageargument muss ein Array oder ein Schlagwort-Name sein."
+msgstr "Das Abfrageargument muss ein Array oder ein Schlagwortname sein."
 
 #: wp-includes/html-api/class-wp-html-tag-processor.php:4346
 msgid "Invalid attribute name."
