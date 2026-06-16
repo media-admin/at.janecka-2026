@@ -2,13 +2,12 @@
 /**
  * WooCommerce Produktkategorie-Archiv-Header
  *
- * Reihenfolge:
- *   1. Banner-Bild        → fullwidth direkt unter dem Header (vor .wc-archive Container)
- *   2. 90px Whitespace    → via CSS
- *   3. Seitentitel        → woocommerce_before_shop_loop priority 4
- *   4. Beschreibung       → woocommerce_before_shop_loop priority 4 (nur wenn vorhanden)
- *   5. Breadcrumb         → woocommerce_before_shop_loop priority 4
- *   6. Filter-Bar         → hooks-archive.php priority 5
+ * Reihenfolge (wie Marken-Seiten):
+ *   1. Banner fullwidth   → woocommerce_before_main_content priority 8 (vor Container)
+ *   2. Titel zentriert    → woocommerce_before_shop_loop priority 4
+ *   3. Beschreibung       → woocommerce_before_shop_loop priority 4
+ *   4. Breadcrumb         → woocommerce_before_shop_loop priority 4
+ *   5. Filter-Bar         → hooks-archive.php priority 5
  *
  * @package JuwelierJanecka
  */
@@ -67,9 +66,7 @@ function janecka_register_category_acf_fields(): void {
 
 // ============================================================
 // 2. Banner fullwidth — VOR dem .wc-archive Container
-//    Hängt an woocommerce_before_main_content priority 8
-//    (nach janecka_wc_open_wrapper priority 10 — nein, wir brauchen es DAVOR)
-//    janecka_wc_open_wrapper hat priority 10, wir nehmen priority 8
+//    Priority 8 = vor janecka_wc_open_wrapper (priority 10)
 // ============================================================
 
 add_action( 'woocommerce_before_main_content', 'janecka_category_banner_fullwidth', 8 );
@@ -83,10 +80,8 @@ function janecka_category_banner_fullwidth(): void {
         return;
     }
 
-    $tid        = $term->term_id;
     $banner_url = '';
-    $acf_banner = get_field( 'cat_banner', 'product_cat_' . $tid );
-
+    $acf_banner = get_field( 'cat_banner', 'product_cat_' . $term->term_id );
     if ( ! empty( $acf_banner['url'] ) ) {
         $banner_url = $acf_banner['url'];
     }
@@ -111,9 +106,8 @@ function janecka_category_banner_fullwidth(): void {
 
 
 // ============================================================
-// 3. Seitentitel + Beschreibung + Breadcrumb
-//    Hängt an woocommerce_before_shop_loop priority 4
-//    (vor Filter-Bar bei priority 5)
+// 3. Titel + Beschreibung + Breadcrumb
+//    Priority 4 = vor Filter-Bar (priority 5)
 // ============================================================
 
 add_action( 'woocommerce_before_shop_loop', 'janecka_category_title_description_breadcrumb', 4 );
@@ -132,7 +126,6 @@ function janecka_category_title_description_breadcrumb(): void {
     // ── Beschreibung ──────────────────────────────────────────
     $description = '';
     $acf_desc    = get_field( 'cat_description', 'product_cat_' . $tid );
-
     if ( ! empty( $acf_desc ) ) {
         $description = $acf_desc;
     } elseif ( $native = term_description( $tid, 'product_cat' ) ) {
@@ -142,10 +135,14 @@ function janecka_category_title_description_breadcrumb(): void {
 
     <div class="category-archive-intro">
 
+        <h1 class="category-archive-intro__title">
+            <?php echo esc_html( $term->name ); ?>
+        </h1>
+
         <?php if ( $description ) : ?>
-            <div class="category-archive-intro__description">
-                <?php echo wp_kses( wpautop( $description ), wp_kses_allowed_html( 'post' ) ); ?>
-            </div>
+        <div class="category-archive-intro__description">
+            <?php echo wp_kses( wpautop( $description ), wp_kses_allowed_html( 'post' ) ); ?>
+        </div>
         <?php endif; ?>
 
         <div class="category-archive-intro__breadcrumb">

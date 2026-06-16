@@ -1,53 +1,19 @@
-// =============================================================================
-// Parallax-Clip-Effekt für Cover-Blöcke
-// Klasse "parallax-clip" im Editor unter "Zusätzliche CSS-Klasse(n)" eintragen
-//
-// Effekt: Das Hintergrundbild bleibt beim Scrollen "stehen" (sticky),
-// während der nachfolgende Inhalt darüber hinweg scrollt — wie auf
-// nanis.it bei der "Store Finder" Sektion.
-//
-// Funktioniert nur auf Desktop/Tablet (>= 768px). Auf Mobile wird
-// der Effekt deaktiviert (normales Verhalten), da position: sticky
-// in Kombination mit Viewport-Höhen auf iOS unzuverlässig ist.
-// =============================================================================
-
 @use '../abstracts' as *;
 
-@media (min-width: 768px) {
+// Parallax-Effekt via JS (parallax.js)
+// Klasse "parallax-clip" im Block-Editor unter "Zusätzliche CSS-Klasse(n)"
 
-    .parallax-clip {
-        // Wrapper ist höher als das Cover selbst —
-        // dadurch entsteht der "Durchscroll"-Effekt
-        position:   relative;
-        min-height: 130% !important; // Cover-Höhe bleibt erhalten, Wrapper ist höher
-        overflow:   visible !important;
+.parallax-clip {
+    will-change: transform;
 
-        // Das eigentliche Cover (Bild + Overlay + Inhalt) bleibt sticky
-        // an der Oberkante des Viewports, solange der Wrapper noch
-        // "Restplatz" zum Scrollen hat.
-        > .wp-block-cover__image-background,
-        > .wp-block-cover__background,
-        > .wp-block-cover__inner-container {
-            position: sticky;
-            top:      0;
-        }
+    // Verhindert dass der Versatz gegen angrenzende Elemente drückt
+    // indem der Parent-Container etwas Puffer hat
+    isolation: isolate;
 
-        // Bild und Overlay sollen genau die ursprüngliche
-        // min-height des Covers behalten (nicht die 130%)
-        > .wp-block-cover__image-background {
-            height:    100%;
-            max-height: 100vh;
-        }
-
-        > .wp-block-cover__background {
-            height: 100%;
-        }
-
-        > .wp-block-cover__inner-container {
-            height:          100%;
-            display:         flex;
-            align-items:     center;
-            justify-content: center;
-        }
+    // Mobile: JS deaktiviert den Effekt, aber sicherheitshalber
+    // auch per CSS zurücksetzen
+    @media (max-width: 767.98px) {
+        transform: none !important;
+        will-change: auto;
     }
 }

@@ -1,60 +1,59 @@
-@use '../abstracts/variables' as *;
-@use '../abstracts/mixins' as *;
-
 // =============================================================================
-// Category Archive — Banner + Intro
+// Kategorie-Archiv Header
+// Aufbau wie Marken-Seiten:
+//   Banner (fullwidth, vor Container) → Titel → Beschreibung → Breadcrumb
 // =============================================================================
 
-// ── Banner: fullwidth direkt unter dem Header ─────────────────────────────────
+@use '../abstracts' as *;
 
+// ── Banner fullwidth ───────────────────────────────────────────────────────────
 .category-archive-banner {
     width:    100%;
     overflow: hidden;
 
     &__img {
-        display:    block;
-        width:      100%;
-        height:     auto;
-        min-height: 300px;
-        object-fit: cover;
+        display:      block;
+        width:        100%;
+        height:       auto;
         aspect-ratio: 1400 / 470;
+        object-fit:   cover;
 
         @media (max-width: 767.98px) {
             aspect-ratio: 2 / 1;
-            min-height: 180px;
+            min-height:   180px;
         }
     }
 }
 
-// ── Intro: 90px Whitespace + Titel + Beschreibung + Breadcrumb ────────────────
-
-// 90px Abstand vor dem page-title
-.wc-archive .page-title {
-    padding-top: 90px;
-}
-
+// ── Titel + Beschreibung + Breadcrumb ─────────────────────────────────────────
 .category-archive-intro {
-    padding-top: $spacing-2;
-    margin-bottom: $spacing-6;
+    padding-top:    $spacing-6;
+    margin-bottom:  $spacing-2;
+    text-align:     center;
 
+    &__title {
+        font-size:      clamp(1.5rem, 3vw, 2.25rem);
+        font-weight:    $font-weight-normal;
+        letter-spacing: 0.04em;
+        margin:         0 0 $spacing-2;
+    }
+
+    // Dekorativer Strich unter dem Titel (wie auf Staging)
     &__description {
         max-width:   700px;
-        margin:      0 auto $spacing-4;
-        text-align:  center;
-        font-size:   var(--text-base);
-        line-height: $line-height-relaxed;
+        margin:      $spacing-0 auto 0;
         color:       var(--color-text-muted);
+        font-size:   var(--text-sm);
+        line-height: $line-height-relaxed;
+        text-align:  center;
 
-        p {
-            margin-bottom: 0.75rem;
-            &:last-child { margin-bottom: 0; }
-        }
+        p { margin-bottom: 0.75rem; &:last-child { margin-bottom: 0; } }
     }
 
     &__breadcrumb {
         display:         flex;
         justify-content: flex-start;
-        margin-top:   $spacing-4;
-        margin-bottom:   $spacing-2;
+        margin-top:      $spacing-5;
+        text-align:      left;
     }
 }

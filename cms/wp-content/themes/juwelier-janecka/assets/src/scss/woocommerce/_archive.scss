@@ -97,13 +97,13 @@ ul.products.wc-products-grid {
     &__image-wrap {
         position: relative;
         overflow: hidden;
-        background: var(--color-bg-alt, #f5f5f5);
+        // background: var(--color-bg-alt, #f5f5f5);
     }
 
     &__image {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain; // vorher: cover
         aspect-ratio: 1 / 1;
         display: block;
         transition: transform 0.4s ease, opacity 0.3s ease;
@@ -208,13 +208,14 @@ ul.products.wc-products-grid {
     }
 	
 
-    // ── Badges (oben links über dem Bild) ────────────────────────────────
+    // ── Badges (oben mittig über dem Bild) ────────────────────────────────
     &__badges {
         position:           absolute;
         inset-block-start:  0.625rem;
-        inset-inline-start: 0.625rem;
+        inset-inline-start: 50%;
+        transform:          translateX(-50%);
         display:            flex;
-        flex-direction:     column;
+        flex-direction:     row;
         gap:                0.25rem;
         z-index:            1;
     }
@@ -411,4 +412,32 @@ a.tinvwl_add_to_wishlist_button.tinvwl-loop,
 
 .product-card__subtitle {
     font-weight: $font-weight-normal !important;
+}
+
+
+.product-card__diameter {
+    position:        absolute;
+    top:             0.5rem;
+    left:            0.625rem;
+    z-index:         2;
+    display:         inline-flex;
+    align-items:     center;
+    gap:             0.25rem;
+    font-family:     $font-nav;
+    font-size:       var(--text-xxs);
+    font-weight:     $font-weight-normal;
+    letter-spacing:  0.08em;
+    text-transform:  uppercase;
+    color:           var(--color-text-muted);
+
+    // Kreis-Icon
+    &::before {
+        content:       '';
+        display:       inline-block;
+        width:         0.75rem;
+        height:        0.75rem;
+        border-radius: 50%;
+        border:        1px solid currentColor;
+        flex-shrink:   0;
+    }
 }

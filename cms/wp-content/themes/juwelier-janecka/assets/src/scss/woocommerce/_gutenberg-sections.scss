@@ -245,7 +245,7 @@
 
         h1, h2, h3 {
             font-family: $font-heading !important;
-            font-size: var(--text-4xl) !important;
+            font-size: var(--text-5xl) !important;
             font-weight: $font-weight-normal !important;
             line-height: $line-height-tight !important;
             color: $color-dark !important;
@@ -365,10 +365,10 @@ body .wp-block-group.janecka-duo-covers > .wp-block-columns.janecka-section-head
 
 .janecka-eyebrow {
     display: block !important;
-    font-family: $font-nav !important;
-    font-size: var(--text-xs) !important;
-    font-weight: $font-weight-semibold !important;
-    letter-spacing: 0.12em !important;
+    // font-family: $font-nav !important;
+    // font-size: var(--text-xs) !important;
+    // font-weight: $font-weight-semibold !important;
+    // letter-spacing: 0.12em !important;
     color: var(--color-text-muted) !important;
     margin-bottom: $spacing-1 !important;
     margin-top: 0 !important;

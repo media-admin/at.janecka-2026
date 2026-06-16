@@ -206,6 +206,7 @@ $color-input-bg:   $color-white;
   // Kein zusätzlicher @media-Query für Font-Sizes nötig.
   // ═══════════════════════════════════════════════════════════════
 
+  --text-xxs:  clamp(0.6875rem, 0.8vw,  0.75rem);   // 11–12px
   --text-xs:   clamp(0.75rem,   1vw,    0.8125rem);  // 12–13px
   --text-sm:   clamp(0.8125rem, 1.2vw,  0.875rem);   // 13–14px
   --text-base: clamp(0.9375rem, 1.5vw,  1rem);       // 15–16px
@@ -354,7 +355,7 @@ $spacing-2xl: $spacing-8;   // 64px
 //    _mixins.scss respond-to() referenziert diese Werte.
 // ─────────────────────────────────────────────────────────────────
 
-$container-width:     1200px;
+$container-width:     1400px;
 $container-max-width: $container-width;  // Alias
 $container-padding:   $spacing-md;       // Statischer Fallback – Layout nutzt var(--container-padding)
 

@@ -7,6 +7,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// Kategorie-Seitentitel unterdrücken — wird von category-archive-header.php gerendert
+add_filter( 'woocommerce_show_page_title', function( $show ) {
+    return ( is_product_category() || is_tax( 'product_brand' ) ) ? false : $show;
+} );
+
 // ===========================================================================
 // 1. LAYOUT: Wrapper anpassen
 // ===========================================================================
@@ -30,15 +35,15 @@ add_action( 'wp', function() {
 
 function janecka_wc_open_wrapper(): void {
     echo '<div class="wc-archive">';
-    echo '<div class="container">';
+    // echo '<div class="container">';
     echo '<div class="wc-layout">';
     echo '<div class="wc-main">';
-    echo '<div class="container">';
 }
 
 function janecka_wc_close_wrapper(): void {
+    echo '</div><!-- .wc-main -->';
     echo '</div><!-- .wc-layout -->';
-    echo '</div><!-- .container -->';
+    // echo '</div><!-- .container -->';
     echo '</div><!-- .wc-archive -->';
 }
 
@@ -47,7 +52,7 @@ function janecka_wc_close_wrapper(): void {
 // ===========================================================================
 
 add_action( 'woocommerce_before_main_content', function() {
-    if ( is_product_category() ) {
+    if ( is_product_category() || is_tax( 'product_brand' ) ) {
         remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
     }
 }, 1 );
@@ -56,6 +61,7 @@ add_action( 'woocommerce_before_shop_loop', function() {
     if ( is_product_category() ) {
         remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
         remove_action( 'woocommerce_archive_description', 'woocommerce_product_archive_description', 10 );
+        remove_action( 'woocommerce_shop_loop_header', 'woocommerce_product_taxonomy_archive_header', 10 );
     }
 }, 1 );
 
@@ -65,6 +71,7 @@ add_action( 'woocommerce_before_shop_loop', function() {
 
 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count',     20 );
 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+
 
 // 1. Filter-Bar
 add_action( 'woocommerce_before_shop_loop', function() {
@@ -196,6 +203,17 @@ function janecka_product_card_image(): void {
         : get_the_title();
     ?>
     <div class="product-card__image-wrap">
+
+        <?php
+        // Durchmesser-Badge oben links
+        $durchmesser = wc_get_product_terms( $product->get_id(), 'pa_durchmesser', [ 'fields' => 'names' ] );
+        if ( ! empty( $durchmesser ) ) :
+        ?>
+        <span class="product-card__diameter" aria-label="Durchmesser">
+            <?php echo esc_html( $durchmesser[0] ); ?>
+        </span>
+        <?php endif; ?>
+
         <img
             class="product-card__image"
             src="<?php echo esc_url( $image_url ); ?>"

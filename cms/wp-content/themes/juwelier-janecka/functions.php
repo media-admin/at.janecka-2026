@@ -359,7 +359,16 @@ add_action( 'woocommerce_after_shop_loop_item', function() {
 }, 1 );
 
 
+// In der Uhren-Kategorie die zweite MwSt.-Klasse und GZD entfernen
+add_action( 'wp', function() {
+    if ( ! is_product_category( 'uhren' ) ) return;
+    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_tax_info', 6 );
+    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_shipping_costs_info', 7 );
+} );
+
+
 // Dark Mode deaktivieren — Theme unterstützt nur Light Mode
 add_action( 'wp_head', function() {
     echo '<meta name="color-scheme" content="light">' . "\n";
 }, 1 );
+

@@ -21,6 +21,7 @@ import ScrollProgress from './components/scroll-progress';
 import Notifications from './components/notifications';
 import initTopHeader from './components/top-header';
 import { initFooterAccordion } from './modules/footer-accordion.js';
+import { initParallax } from './modules/parallax.js';
 
 // ─── Helfer ──────────────────────────────────────────────────────────────────
 // Fehler immer sichtbar – nie still schlucken
@@ -63,6 +64,11 @@ const initApp = async () => {
   // ── Footer Accordion ────────────────────────────
   if (document.querySelector('.footer-nav')) {
     initFooterAccordion();
+  }
+
+  // ── Parallax ─────────────────────────────────────
+  if (has('.parallax-clip')) {
+      safeInit('Parallax', () => initParallax());
   }
 
   // Hero Slider: Klasse aus PHP → .hero-slider.swiper
