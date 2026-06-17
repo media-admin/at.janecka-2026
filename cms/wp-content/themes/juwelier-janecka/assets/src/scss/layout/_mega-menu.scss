@@ -21,9 +21,9 @@
     width:         80%;
     top:           100%;
     background:    var(--color-card-bg);
-    border:        none; // war 1px solid var(--color-border);
-    border-radius: $radius-md;
-    box-shadow:    0 8px 40px rgba(0, 0, 0, 0.12); // war $shadow-xl;
+    border:        none; // vorher: 1px solid var(--color-border);
+    border-radius: 0; // vorher: $radius-md;
+    box-shadow:    0 8px 40px rgba(0, 0, 0, 0.12); // vorher: $shadow-xl;
     z-index:       $z-dropdown;
     opacity:       0;
     visibility:    hidden;
@@ -91,7 +91,7 @@
         min-height:    200px;
         max-height:    320px;
         object-fit:    cover;
-        border-radius: $radius-md;
+        border-radius: 0; // vorher: $radius-md;
         display:       block;
     }
 }

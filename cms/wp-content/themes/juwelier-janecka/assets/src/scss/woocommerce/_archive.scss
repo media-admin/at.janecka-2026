@@ -126,6 +126,7 @@ ul.products.wc-products-grid {
         padding: 0.75rem 0.75rem $spacing-3;
         flex: 1;
         text-align: left;
+        justify-content: space-between;
     }
 
     // ── Marke (Subtitle) ─────────────────────────────────────────────────
@@ -142,6 +143,7 @@ ul.products.wc-products-grid {
 
     // ── Titel ─────────────────────────────────────────────────────────────
     &__title {
+        min-height: 4.5em; // für 3 Zeilen, damit alle Karten gleich hoch sind
         font-family:    $font-nav;
         font-size:      var(--text-sm);
         font-weight:    $font-weight-normal;
@@ -149,7 +151,7 @@ ul.products.wc-products-grid {
         letter-spacing: 0.06em;
         text-transform: none;
         color:          var(--color-text-muted);
-        margin:         0 0 $spacing-2;
+        margin:         0; // vorher: 0 0 $spacing-2;
         display:        -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
