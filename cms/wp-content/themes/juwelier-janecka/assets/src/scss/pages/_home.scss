@@ -4,8 +4,17 @@
 @use '../abstracts' as *;
 
 // ── Main Offset für fixed Header ─────────────────────────────────────────────
+.home .site-main {
+  padding-bottom: 0rem !important;
+
+  @include bp(md) {
+      padding-bottom: 0rem !important;
+  }
+}
+
 @include bp(tablet) {
-  .home main {
+  .home main,
+  .startseite main {
     position: relative;
     margin-top: 2.0rem;
     margin-bottom: 0 !important;
@@ -18,6 +27,7 @@
       flex-wrap: wrap;
       align-items: center;
     }
+  
 
     .card {
       position: relative;

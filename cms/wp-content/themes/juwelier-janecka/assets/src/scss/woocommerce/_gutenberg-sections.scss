@@ -86,6 +86,7 @@
 // Klasse: janecka-section-link  →  am Paragraph-Block in der rechten Spalte
 .janecka-section-link {
     margin: 0 !important;
+    margin-right: $spacing-2 !important;
 
     // Link-Element innerhalb des Paragraphs
     a {

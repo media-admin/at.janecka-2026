@@ -69,6 +69,7 @@
         grid-column: 2;
         justify-self: center;
         align-self: center;
+        padding-top: 0.25rem; 
 
         @include respond-below('lg') {
             grid-column: 1 / -1;
@@ -78,12 +79,13 @@
     .site-navigation__contact,
     .header-icons {
         align-items: center; // Inhalte innerhalb der Blöcke bleiben mittig
-        padding-top: 0.5rem; // optional: feines Alignment zur Logo-Oberkante
+        // padding-top: 0.5rem; 
     }
 
     .header-icons {
         grid-column: 3;
         justify-self: end;
+        margin-top: -5px; // Leichtes Anheben der Icons für bessere optische Ausrichtung mit dem Logo
     }
 
     @include respond-below('lg') {

@@ -71,9 +71,9 @@ $slider-height-mobile:  clamp(280px, 55vw, 480px);
         display:         flex;
         flex-direction:  column;
         align-items:     center;
-        justify-content: center;
+        justify-content: flex-end; // vorher: center
         text-align:      center;
-        padding:         $spacing-4 var(--container-padding);
+        padding:         $spacing-4 var(--container-padding) $spacing-8;
     }
 
     // ── Titel (Post Title) ────────────────────────────────────────────────────
@@ -117,7 +117,7 @@ $slider-height-mobile:  clamp(280px, 55vw, 480px);
         display:          inline-block;
         padding:          $spacing-2 $spacing-5;
         border:           1px solid rgba(255, 255, 255, 0.85);
-        color:            #fff;
+        color:            $color-white;
         font-family:      $font-nav;
         font-size:        var(--text-xs);
         font-weight:      $font-weight-semibold;
@@ -135,7 +135,9 @@ $slider-height-mobile:  clamp(280px, 55vw, 480px);
         }
 
         &:hover {
-            background-color: rgba(255, 255, 255, 0.15);
+            color: $color-white;
+            background-color: $color-black;
+            border: 1px solid rgba(255, 255, 255, 0.85);
         }
     }
 }
