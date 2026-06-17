@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-add_action( 'acf/init', 'mlwf_register_acf_field_groups' );
+add_action( 'init', 'mlwf_register_acf_field_groups', 20 );
 
 function mlwf_register_acf_field_groups(): void {
 	if ( ! function_exists( 'acf_add_local_field_group' ) ) return;
@@ -157,3 +157,35 @@ function mlwf_get_acf_attribute_choices(): array {
 
 	return $choices;
 }
+
+// ── Globale Filter-Konfiguration (Options-Seite) ──────────────────────────────
+
+add_action( 'init', function(): void {
+    if ( ! function_exists( 'acf_add_options_sub_page' ) ) return;
+
+    acf_add_options_sub_page( [
+        'page_title'  => 'Filter-Konfiguration (Global)',
+        'menu_title'  => 'Filter-Konfiguration',
+        'parent_slug' => 'woocommerce',
+        'capability'  => 'manage_woocommerce',
+        'slug'        => 'mlwf-global-filter-config',
+    ] );
+}, 20 );
+
+add_action( 'init', function() use ( &$attribute_choices ): void {
+    if ( ! function_exists( 'acf_add_local_field_group' ) ) return;
+
+    $attribute_choices = mlwf_get_acf_attribute_choices();
+
+    acf_add_local_field_group( [
+        'key'    => 'group_mlwf_global_filters',
+        'title'  => 'Globale Filter-Konfiguration',
+        'fields' => mlwf_get_filter_fields( $attribute_choices, 'product_cat' ),
+        'location' => [ [ [
+            'param'    => 'options_page',
+            'operator' => '==',
+            'value'    => 'mlwf-global-filter-config',
+        ] ] ],
+        'active' => true,
+    ] );
+}, 25 );

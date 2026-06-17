@@ -28,52 +28,8 @@ add_filter( 'woocommerce_taxonomy_args_product_brand', function ( array $args ):
 
 
 // ============================================================
-// 2. ACF-Felder für product_brand-Terme
+// 2. ACF-Felder für product_brand-Terme werden via JSON (group_brand_tag_details.json) geladen.
 // ============================================================
-
-add_action( 'acf/init', 'janecka_register_brand_acf_fields' );
-function janecka_register_brand_acf_fields(): void {
-    if ( ! function_exists( 'acf_add_local_field_group' ) ) {
-        return;
-    }
-
-    acf_add_local_field_group( [
-        'key'    => 'group_brand_fields',
-        'title'  => 'Marken-Felder',
-        'fields' => [
-            [
-                'key'           => 'field_brand_banner',
-                'label'         => 'Banner-Bild',
-                'name'          => 'brand_banner',
-                'type'          => 'image',
-                'return_format' => 'array',
-                'preview_size'  => 'medium',
-                'library'       => 'all',
-                'instructions'  => 'Breites Bannerbild für die Marken-Detailseite (empfohlen: 1400 × 470 px)',
-            ],
-            [
-                'key'           => 'field_brand_logo',
-                'label'         => 'Logo (quadratisch)',
-                'name'          => 'brand_logo',
-                'type'          => 'image',
-                'return_format' => 'array',
-                'preview_size'  => 'thumbnail',
-                'library'       => 'all',
-                'instructions'  => 'Quadratisches Logo für die Marken-Übersichtsseiten (empfohlen: 400 × 400 px, weißer Hintergrund)',
-            ],
-        ],
-        'location' => [
-            [
-                [
-                    'param'    => 'taxonomy',
-                    'operator' => '==',
-                    'value'    => 'product_brand',
-                ],
-            ],
-        ],
-        'active' => true,
-    ] );
-}
 
 
 // ============================================================
@@ -147,7 +103,7 @@ function janecka_brand_product_grid_anchor(): void {
     echo '<div id="product-grid"></div>';
 }
 
-add_action( 'woocommerce_before_shop_loop', 'janecka_brand_archive_header', 5 );
+add_action( 'woocommerce_before_shop_loop', 'janecka_brand_archive_header', 4 );
 function janecka_brand_archive_header(): void {
     if ( ! is_tax( 'product_brand' ) ) {
         return;
@@ -192,9 +148,7 @@ function janecka_brand_archive_header(): void {
         }
     }
 
-    if ( ! $description && ! $logo_url ) {
-        return;
-    }
+    // Titel immer anzeigen, auch ohne Beschreibung/Logo
     ?>
 
     <?php if ( $logo_url ) : ?>
