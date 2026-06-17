@@ -493,3 +493,13 @@ add_filter( 'woocommerce_single_product_image_thumbnail_html', function( string 
     );
     return $html;
 }, 10, 2 );
+
+// Photoswipe + WC Single Product JS deregistrieren
+add_action( 'wp_enqueue_scripts', function(): void {
+    if ( ! is_product() ) return;
+    wp_dequeue_script( 'photoswipe' );
+    wp_dequeue_script( 'photoswipe-ui-default' );
+    wp_dequeue_script( 'wc-single-product' );
+    wp_dequeue_style( 'photoswipe' );
+    wp_dequeue_style( 'photoswipe-default-skin' );
+}, 99 );

@@ -24,6 +24,7 @@ export default class Lightbox {
       const trigger = e.target.closest('[data-lightbox]');
       if (trigger) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         this.open(trigger);
         return;
       }
