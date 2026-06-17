@@ -200,7 +200,7 @@
 .janecka-cover-label {
     display:        block !important;
     width:          fit-content !important;
-    max-width:      80% !important;
+    max-width:      100% !important;
     padding:        $spacing-2 $spacing-4 !important;
     border:         1px solid rgba(255, 255, 255, 0.85) !important;
     color:          #fff !important;
@@ -219,6 +219,19 @@
     }
 }
 
+
+.janecka-cover-label a {
+    width:          fit-content !important;
+    max-width:      100% !important;
+    color:          #fff !important;
+    font-family:    $font-nav !important;
+    font-size:      var(--text-xs) !important;
+    font-weight:    $font-weight-semibold !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    text-align:     center !important;
+    text-decoration: none !important;
+}
 
 // =============================================================================
 // 4. SPLIT SECTION — Text / Bild zweispaltig

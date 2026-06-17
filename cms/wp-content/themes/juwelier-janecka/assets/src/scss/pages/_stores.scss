@@ -451,7 +451,7 @@ body.modal-open {
 		position: relative;
 		z-index: 1;
 		background: #fff;
-		border-radius: 0.5rem;
+		border-radius: 0; // vorher: 0.5rem
 		width: min( 90vw, 40rem );
 		max-height: 90dvh;
 		overflow-y: auto;

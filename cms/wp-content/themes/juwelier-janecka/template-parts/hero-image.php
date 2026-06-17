@@ -65,11 +65,7 @@ $classes = [
     <div class="hero-image__content container">
         <div class="hero-image__inner">
 
-            <?php if (!empty($hero['title'])) : ?>
-            <h1 class="hero-image__title">
-                <?php echo esc_html($hero['title']); ?>
-            </h1>
-            <?php endif; ?>
+            <?php /* Titel wird im Page-Template ausgegeben, nicht im Hero */ ?>
 
             <?php if (!empty($hero['subtitle'])) : ?>
             <p class="hero-image__subtitle">

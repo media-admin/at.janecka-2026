@@ -1,0 +1,87 @@
+@use '../abstracts/variables' as *;
+@use 'sass:color';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Media Lab Bookings – Theme-Overrides
+// ─────────────────────────────────────────────────────────────────────────────
+
+.mlb-booking-form {
+    --mlb-color-primary:      #{$color-dark};
+    --mlb-color-primary-dk:   #{color.adjust($color-dark, $lightness: -10%)};
+    --mlb-color-border:       var(--color-border, #e0e0e0);
+    --mlb-color-border-focus: #{$color-dark};
+    --mlb-color-label:        var(--color-text-muted, #888);
+    --mlb-shadow-focus:       0 0 0 3px rgba(26, 26, 26, .15);
+    --mlb-radius:             0px;
+    --mlb-font:               #{$font-body};
+
+    // ── Border-radius überall auf 0 ──────────────────────────────────────────
+
+    .mlb-form__input,
+    .mlb-form__select,
+    .mlb-form__textarea,
+    .mlb-form__field-error,
+    .mlb-form__success,
+    .mlb-form__error-global,
+    .mlb-form__ical-link {
+        border-radius: 0 !important;
+    }
+
+    // ── Labels ───────────────────────────────────────────────────────────────
+
+    .mlb-form__label {
+        font-weight: #{$font-weight-normal};
+        color: var(--color-text, #1a1a1a);
+    }
+
+    // ── Datenschutz-Link ─────────────────────────────────────────────────────
+
+    .mlb-form__checkbox-text {
+        font-size: inherit;
+
+        a {
+            color: inherit;
+            font-size: inherit;
+        }
+    }
+
+    // ── Required-Mark: Farbe angleichen ──────────────────────────────────────
+
+    .mlb-form__label--required::after,
+    .mlb-form__required-mark {
+        color: var(--color-text-muted, #888);
+    }
+
+    // ── Submit-Button ─────────────────────────────────────────────────────────
+
+    .mlb-form__button {
+        background:     #{$color-dark};
+        border-radius:  0 !important;
+        font-family:    #{$font-body};
+        font-size:      0.875rem;
+        font-weight:    #{$font-weight-normal};
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding:        0.75rem 2rem;
+
+        &:hover:not(:disabled) {
+            color:        #{$color-dark} !important;
+            background:   #{$color-white};
+            border-color: #{$color-dark};
+            transform:    translateY(-1px);
+            box-shadow:   #{$shadow-md};           
+        }
+    }
+}
+
+// ── Flatpickr ─────────────────────────────────────────────────────────────────
+
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover {
+    background:   #{$color-dark};
+    border-color: #{$color-dark};
+}
+
+.flatpickr-day.today {
+    border-color: #{$color-dark};
+}

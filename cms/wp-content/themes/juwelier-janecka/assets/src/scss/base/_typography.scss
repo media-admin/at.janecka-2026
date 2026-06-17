@@ -21,6 +21,7 @@ h1 {
   font-size: clamp(1.4rem, 4vw, 1.8rem); // fluid zwischen 1.4 und 1.8rem
   line-height: 1.2;
   color: $color-text;
+  font-weight: $font-weight-normal !important;
   hyphens: auto;
   text-align: center;
   margin: 0 auto;

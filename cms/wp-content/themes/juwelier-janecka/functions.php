@@ -371,4 +371,3 @@ add_action( 'wp', function() {
 add_action( 'wp_head', function() {
     echo '<meta name="color-scheme" content="light">' . "\n";
 }, 1 );
-
