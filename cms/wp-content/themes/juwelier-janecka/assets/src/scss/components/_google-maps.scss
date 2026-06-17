@@ -11,7 +11,7 @@
     width: 100%;
     height: var(--map-height, 450px);
     overflow: hidden;
-    border-radius: $radius-lg;
+    border-radius: 0; // vorher: $radius-lg
     background-color: $color-gray-100;
 
     // ── Fullwidth Variante ────────────────────────────────────────────────────

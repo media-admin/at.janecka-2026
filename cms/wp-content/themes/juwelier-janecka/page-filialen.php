@@ -42,10 +42,36 @@ get_header(); ?>
 		<div class="container">
 			<ul class="stores-grid">
 
-				<?php while ( $stores_query->have_posts() ) : $stores_query->the_post(); ?>
-				<li class="store-card">
-					<a class="store-card__link" href="<?php the_permalink(); ?>">
+				<?php
+			// MLB-Location Posts einmalig laden für Mapping
+			$mlb_locations = get_posts( [
+				'post_type'      => 'mlb_location',
+				'posts_per_page' => -1,
+				'post_status'    => 'publish',
+			] );
 
+			while ( $stores_query->have_posts() ) : $stores_query->the_post();
+
+				// Zugehörige mlb_location per Titel-Match finden
+				$store_title  = get_the_title();
+				$mlb_location = null;
+				foreach ( $mlb_locations as $loc ) {
+					if ( preg_match( '/\d{4}/', $store_title, $m ) && stripos( $loc->post_title, $m[0] ) !== false ) {
+						$mlb_location = $loc;
+						break;
+					}
+				}
+				$mlb_id  = $mlb_location ? $mlb_location->ID : null;
+				$address = $mlb_id ? get_post_meta( $mlb_id, 'mlb_location_address', true ) : '';
+				$phone   = $mlb_id ? get_post_meta( $mlb_id, 'mlb_location_phone',   true ) : '';
+				$email   = $mlb_id ? get_post_meta( $mlb_id, 'mlb_location_email',   true ) : '';
+				$angebot = get_field( 'store-angebot' );
+			?>
+				<li class="store-card">
+
+					<h2 class="store-card__title"><?php the_title(); ?></h2>
+
+					<a class="store-card__link" href="<?php the_permalink(); ?>">
 						<div class="store-card__image-wrap">
 							<?php if ( has_post_thumbnail() ) : ?>
 								<?php the_post_thumbnail( 'large', [
@@ -56,18 +82,38 @@ get_header(); ?>
 								<div class="store-card__image-placeholder"></div>
 							<?php endif; ?>
 						</div>
-
-						<div class="store-card__body">
-							<h2 class="store-card__title"><?php the_title(); ?></h2>
-							<?php $ort = get_field( 'store-ort' ); ?>
-							<?php if ( $ort ) : ?>
-							<p class="store-card__location"><?php echo esc_html( $ort ); ?></p>
-							<?php endif; ?>
-						</div>
-
 					</a>
+
+					<div class="store-card__body">
+
+						<?php if ( $address ) : ?>
+						<p class="store-card__address"><?php echo nl2br( esc_html( $address ) ); ?></p>
+						<?php endif; ?>
+
+						<?php if ( $phone ) : ?>
+						<p class="store-card__phone">
+							<a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $phone ) ); ?>">
+								<?php echo esc_html( $phone ); ?>
+							</a>
+						</p>
+						<?php endif; ?>
+
+						<?php if ( $email ) : ?>
+						<p class="store-card__email">
+							<a href="mailto:<?php echo esc_attr( $email ); ?>">
+								<?php echo esc_html( $email ); ?>
+							</a>
+						</p>
+						<?php endif; ?>
+
+						<?php if ( $angebot ) : ?>
+						<p class="store-card__offer"><?php echo esc_html( $angebot ); ?></p>
+						<?php endif; ?>
+
+					</div>
+
 				</li>
-				<?php endwhile; wp_reset_postdata(); ?>
+			<?php endwhile; wp_reset_postdata(); ?>
 
 			</ul>
 		</div>

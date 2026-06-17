@@ -11,11 +11,6 @@ get_header(); ?>
 
 	<?php while ( have_posts() ) : the_post(); ?>
 
-	<?php // ── Seitentitel (zentriert, über Hero) ───────────────────────────── ?>
-	<header class="page-header">
-		<h1 class="page-header__title"><?php the_title(); ?></h1>
-	</header>
-
 	<?php // ── Hero-Bild (full-width, kein Overlay) ────────────────────────── ?>
 	<?php if ( has_post_thumbnail() ) : ?>
 	<div class="store-hero">
@@ -25,6 +20,11 @@ get_header(); ?>
 		] ); ?>
 	</div>
 	<?php endif; ?>
+
+	<?php // ── Seitentitel (zentriert, unter Hero) ────────────────────────── ?>
+	<header class="page-header">
+		<h1 class="page-header__title"><?php the_title(); ?></h1>
+	</header>
 
 
 	<?php // ── Aktuelle Meldung ──────────────────────────────────────────────── ?>
@@ -191,8 +191,7 @@ get_header(); ?>
 	<?php if ( ! empty( $payment_terms ) && ! is_wp_error( $payment_terms ) ) : ?>
 	<section class="store-payment">
 		<div class="container">
-			<hr class="store-divider">
-			<h3 class="store-payment__heading"><?php _e( 'Zahlungsmöglichkeiten in dieser Filiale', 'juwelier-janecka' ); ?></h3>
+			<h2 class="store-payment__heading"><?php _e( 'Zahlungsmöglichkeiten in dieser Filiale', 'juwelier-janecka' ); ?></h2>
 			<ul class="store-payment__list">
 				<?php foreach ( $payment_terms as $term ) :
 					$image_id  = get_field( 'zahlungsweisen-logo', $term, false );
@@ -220,7 +219,6 @@ get_header(); ?>
 	<?php if ( $brand_names ) : ?>
 	<section class="store-brands">
 		<div class="container">
-			<hr class="store-divider">
 			<div class="store-brands__intro">
 				<h2 class="store-brands__heading">
 					<?php _e( 'An diesem Standort umfasst unser Sortiment folgende Marken', 'juwelier-janecka' ); ?>
@@ -258,7 +256,7 @@ get_header(); ?>
 	<?php if ( $gallery_images ) : ?>
 	<section class="store-gallery">
 		<div class="container">
-			<h3 class="store-gallery__heading"><?php _e( 'Unsere Verkaufsräume', 'juwelier-janecka' ); ?></h3>
+			<h2 class="store-gallery__heading"><?php _e( 'Unsere Verkaufsräume', 'juwelier-janecka' ); ?></h2>
 			<ul class="store-gallery__grid">
 				<?php foreach ( $gallery_images as $image ) : ?>
 				<li class="store-gallery__item">
