@@ -190,7 +190,7 @@ function janecka_single_specs_accordion(): void {
         </button>
         <div class="single-product__accordion-content" hidden>
             <div class="single-product__accordion-body">
-                <?php echo wp_kses_post( $description ); ?>
+                <?php echo wp_kses_post( wpautop( $description ) ); ?>
             </div>
         </div>
     </div>
@@ -475,3 +475,21 @@ function janecka_single_accordion_script(): void {
     </script>
     <?php
 }
+// ===========================================================================
+// 14. PRODUKTGALERIE: WC-Zoom deaktivieren, eigene Lightbox aktivieren
+// ===========================================================================
+
+add_filter( 'woocommerce_single_product_zoom_enabled', '__return_false' );
+add_filter( 'wc_zoom_enabled', '__return_false' );
+
+add_filter( 'woocommerce_single_product_image_thumbnail_html', function( string $html, int $attachment_id ): string {
+    $full_url = wp_get_attachment_image_url( $attachment_id, 'full' );
+    $alt      = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
+    if ( ! $full_url ) return $html;
+    $html = preg_replace(
+        '/<a([^>]*)href=["\'][^"\']*["\']([^>]*)>/i',
+        '<a$1href="' . esc_url( $full_url ) . '" data-lightbox="product-gallery" data-caption="' . esc_attr( $alt ) . '"$2>',
+        $html
+    );
+    return $html;
+}, 10, 2 );

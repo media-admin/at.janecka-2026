@@ -386,7 +386,7 @@ body.single-product {
 }
 
 // ---------------------------------------------------------------------------
-// 5. Related Products – dezenter
+// 5. Related Products
 // ---------------------------------------------------------------------------
 
 .related.products {
@@ -394,11 +394,11 @@ body.single-product {
 	margin-bottom: var(--space-xl);
 
 	> h2 {
-		font-size: 1.5rem;
-		font-weight: 400;
-		font-style: italic;
-		color: var(--color-text-muted, #888);
-		letter-spacing: 0.06em;
+		// font-size: 1.5rem;
+		// font-weight: 400;
+		// font-style: italic;
+		// color: var(--color-text-muted, #888);
+		// letter-spacing: 0.06em;
 		margin: 0;
 		margin-bottom: var(--space-md);
 	}
@@ -684,4 +684,15 @@ tr.wishlist_item td.product-date {
 
 .summary.entry-summary .product_title {
     font-weight: $font-weight-normal !important;
+}
+// ── Related Products ──────────────────────────────────────────────────────────
+
+.related.products {
+    > h2 {
+        font-family: $font-subheading !important;
+        font-size: $font-size-h2;
+        font-weight: normal;
+        text-transform: none;
+        letter-spacing: normal;
+    }
 }
