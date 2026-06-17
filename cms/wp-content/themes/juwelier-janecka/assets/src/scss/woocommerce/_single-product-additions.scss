@@ -30,6 +30,7 @@
 
 .single-product__accordion {
     border-top:    1px solid var(--color-border);
+    border-bottom:    1px solid var(--color-border);
     margin-top:    $spacing-4;
 
     &-trigger {
@@ -37,14 +38,13 @@
         align-items:     center;
         justify-content: space-between;
         width:           100%;
-        padding:         $spacing-3 0;
+        padding:         $spacing-3 $spacing-2 0 $spacing-2;
         background:      none;
         border:          none;
-        border-bottom:   1px solid var(--color-border);
         cursor:          pointer;
         font-family:     $font-nav;
-        font-size:       var(--text-xs);
-        font-weight:     $font-weight-semibold;
+        font-size:       var(--text-md);
+        font-weight:     $font-weight-normal;
         letter-spacing:  0.1em;
         text-transform:  uppercase;
         color:           $color-dark;
@@ -72,7 +72,7 @@
     }
 
     &-body {
-        padding:     $spacing-1 0 $spacing-2;
+        padding:     0 $spacing-2 $spacing-2;
         font-size:   var(--text-sm);
         line-height: $line-height-relaxed;
         color:       var(--color-text-muted);
