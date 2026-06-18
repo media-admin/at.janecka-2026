@@ -55,5 +55,32 @@
         justify-content: flex-start;
         margin-top:      $spacing-5;
         text-align:      left;
+
+        .woocommerce-breadcrumb {
+            padding-inline: 0;
+            max-width:      none;
+            margin-inline:  0;
+
+            a {
+                font-size:   var( --text-sm );
+                color:       var( --color-text-muted );
+                font-weight: inherit;
+            }
+        }
+    }
+}
+
+.janecka-category-archive {
+    .category-archive-intro__breadcrumb {
+        .woocommerce-breadcrumb a {
+            font-size:   0.8125rem !important;
+            font-weight: 400 !important;
+        }
+
+        // Override _base.scss nth-last-child(3) Regel
+        .woocommerce-breadcrumb .breadcrumb__item:nth-last-child(3) a {
+            font-weight: 400 !important;
+            color:       var( --color-text-muted ) !important;
+        }
     }
 }

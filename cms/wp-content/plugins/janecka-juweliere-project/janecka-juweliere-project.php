@@ -56,6 +56,7 @@ function medialab_project_init() {
     require_once MEDIALAB_PROJECT_PATH . 'inc/custom-post-types.php';
     require_once MEDIALAB_PROJECT_PATH . 'inc/taxonomies.php';
     require_once MEDIALAB_PROJECT_PATH . 'inc/acf-config.php';
+    require_once MEDIALAB_PROJECT_PATH . 'inc/shortcodes.php';
 }
 add_action('plugins_loaded', 'medialab_project_init', 10);
 

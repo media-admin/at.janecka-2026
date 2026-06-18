@@ -18,8 +18,17 @@ add_action( 'wp_ajax_nopriv_mlwf_filter_products', 'mlwf_ajax_filter_products' )
 add_action( 'wp_ajax_janecka_filter_products',        'mlwf_ajax_filter_products' );
 add_action( 'wp_ajax_nopriv_janecka_filter_products', 'mlwf_ajax_filter_products' );
 
+// Theme-Alias (ajax_filter_posts)
+add_action( 'wp_ajax_ajax_filter_posts',        'mlwf_ajax_filter_products' );
+add_action( 'wp_ajax_nopriv_ajax_filter_posts', 'mlwf_ajax_filter_products' );
+
 function mlwf_ajax_filter_products(): void {
-	check_ajax_referer( 'mlwf_filter_nonce', 'nonce' );
+	// Beide Nonce-Actions akzeptieren (Plugin + Theme)
+	$nonce_action = isset( $_POST['nonce'] ) ? 'mlwf_filter_nonce' : '';
+	if ( ! check_ajax_referer( 'mlwf_filter_nonce', 'nonce', false ) &&
+	     ! check_ajax_referer( 'ajax_filters_nonce', 'nonce', false ) ) {
+		wp_send_json_error( 'Invalid nonce', 403 );
+	}
 
 	$category_slug = sanitize_text_field( $_POST['category']      ?? '' );
 	$brand_slug    = sanitize_text_field( $_POST['brand']         ?? '' );
@@ -194,7 +203,12 @@ add_action( 'wp_ajax_janecka_get_price_range',        'mlwf_ajax_get_price_range
 add_action( 'wp_ajax_nopriv_janecka_get_price_range', 'mlwf_ajax_get_price_range' );
 
 function mlwf_ajax_get_price_range(): void {
-	check_ajax_referer( 'mlwf_filter_nonce', 'nonce' );
+	// Beide Nonce-Actions akzeptieren (Plugin + Theme)
+	$nonce_action = isset( $_POST['nonce'] ) ? 'mlwf_filter_nonce' : '';
+	if ( ! check_ajax_referer( 'mlwf_filter_nonce', 'nonce', false ) &&
+	     ! check_ajax_referer( 'ajax_filters_nonce', 'nonce', false ) ) {
+		wp_send_json_error( 'Invalid nonce', 403 );
+	}
 
 	$category_slug = sanitize_text_field( $_POST['category'] ?? '' );
 	$brand_slug    = sanitize_text_field( $_POST['brand']    ?? '' );

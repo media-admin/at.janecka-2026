@@ -229,3 +229,29 @@ function mlwf_get_context_product_ids( int $term_id, string $taxonomy ): array {
 function janecka_render_filter_bar(): void {
 	mlwf_render_filter_bar();
 }
+
+/**
+ * Rendert die Filter-Bar für eine bestimmte Kategorie (Shortcode-Kontext).
+ *
+ * @param string $category_slug WooCommerce product_cat Slug
+ */
+function mlwf_render_filter_bar_for_category( string $category_slug ): void {
+    $term = get_term_by( 'slug', $category_slug, 'product_cat' );
+    if ( ! $term ) return;
+
+    global $wp_query;
+    $original_query = clone $wp_query;
+
+    // WooCommerce prüft is_product_category() via is_tax( 'product_cat' )
+    $wp_query->is_tax                        = true;
+    $wp_query->is_archive                    = true;
+    $wp_query->queried_object                = $term;
+    $wp_query->queried_object_id             = $term->term_id;
+    $wp_query->query_vars['product_cat']     = $category_slug;
+    $wp_query->query_vars['taxonomy']        = 'product_cat';
+    $wp_query->query_vars['term']            = $category_slug;
+
+    mlwf_render_filter_bar();
+
+    $wp_query = $original_query;
+}

@@ -53,7 +53,8 @@ function janecka_woocommerce_assets(): void {
 		return;
 	}
 
-	if ( ! ( is_woocommerce() || is_cart() || is_checkout() || is_account_page() ) ) {
+	$is_shortcode_page = is_singular() && has_shortcode( get_post()->post_content ?? '', 'janecka_category_archive' );
+	if ( ! ( is_woocommerce() || is_cart() || is_checkout() || is_account_page() || $is_shortcode_page ) ) {
 		return;
 	}
 

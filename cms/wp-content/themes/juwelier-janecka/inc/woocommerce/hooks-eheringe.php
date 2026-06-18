@@ -77,9 +77,12 @@ add_action( 'woocommerce_before_single_product', function(): void {
 
 	// Damen/Herrenring-Block
 	add_action( 'woocommerce_single_product_summary', 'janecka_eheringe_acf_fields',    25 );
+	// GZD-Info nach eheringe-details__grid (Priority 26 via janecka_eheringe_acf_fields)
+	add_action( 'woocommerce_single_product_summary', 'janecka_single_gzd_info', 26 );
+	remove_action( 'woocommerce_single_product_summary', 'janecka_single_gzd_info', 25 );
 
 	// Buchungsbutton + Lieferzeit
-	add_action( 'woocommerce_single_product_summary', 'janecka_eheringe_booking_button', 40 );
+	add_action( 'woocommerce_single_product_summary', 'janecka_eheringe_booking_button', 38 );
 } );
 
 
@@ -227,9 +230,6 @@ function janecka_eheringe_acf_fields(): void {
 			<?php endif; ?>
 
 		</div><!-- .eheringe-details__grid -->
-
-		<p class="eheringe-details__tax-note">
-			<?php esc_html_e( 'Die Preise verstehen sich inklusive 20% MwSt.', 'juwelier-janecka' ); ?>
 		</p>
 	</div><!-- .eheringe-details -->
 	<?php

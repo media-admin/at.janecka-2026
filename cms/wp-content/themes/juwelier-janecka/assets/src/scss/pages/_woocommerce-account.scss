@@ -1,5 +1,6 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
+@use '../components/buttons' as btn; // separater Namespace wegen Konflikt
 
 // ── Mein Konto — Login/Registrierung ─────────────────────────────────────────
 
@@ -35,6 +36,11 @@
             @media ( max-width: 767px ) {
                 padding-left: 0;
             }
+        }
+
+        // GZD Datenschutz-Checkbox Text
+        .woocommerce-gzd-reg_data_privacy-checkbox-text a {
+            font-size: $font-size-base !important;
         }
     }
 
@@ -99,23 +105,26 @@
         margin-bottom: 0.75rem;
     }
 
+    
+
     // ── Checkbox-Zeile ────────────────────────────────────────────────────────
 
     .woocommerce-form-login__rememberme {
         display: block;
-        margin-bottom: 1rem; // Weniger Abstand nach oben
+        // margin-bottom: 1rem;
         margin-top: 0;
     }
 
     // ── Buttons — kein min-width, kein full-width ─────────────────────────────
 
     .woocommerce-button,
-    button[type="submit"],
-    input[type="submit"] {
-        width: auto !important;
-        min-width: unset !important;
-        display: inline-block;
-    }
+        button[type="submit"],
+        input[type="submit"] {
+            @include btn.btn-primary;
+            width: auto !important;
+            min-width: unset !important;
+            margin-left: 0 !important;
+        }
 
     // ── Passwort vergessen ────────────────────────────────────────────────────
 
