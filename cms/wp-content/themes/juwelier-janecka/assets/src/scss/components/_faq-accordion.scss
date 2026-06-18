@@ -5,13 +5,14 @@
 // ============================================
 
 .faq-accordion {
-  max-width: 800px;
+  // max-width: 800px;
+  width: 100%;
   margin: 2rem auto;
   
   .faq-item {
     margin-bottom: 1rem;
-    border: 1px solid $color-border;
-    border-radius: $radius-lg;
+    border: 1px solid $color-grey-light; // vorher: border: 1px solid $color-border;
+    border-radius: 0; // vorher: $radius-lg;
     overflow: hidden;
     background: $color-white;
     transition: $transition-base;
@@ -45,8 +46,8 @@
     background: transparent;
     border: none;
     text-align: left;
-    font-size: $font-size-lg;
-    font-weight: $font-weight-semibold;
+    font-size: $font-size-base; // vorher: $font-size-lg;
+    font-weight: $font-weight-normal; // vohher: $font-weight-semibold;
     color: $color-text;
     cursor: pointer;
     transition: $transition-base;
@@ -84,9 +85,10 @@
     animation: fadeIn 0.3s ease;
     
     &__content {
+      font-size: $font-size-base;
       line-height: 1.8;
       color: $color-text-muted;
-      padding-top: 1.5rem;
+      padding-top: 0.5rem; // vorher: 1.5rem;
       
       p {
         margin-bottom: 1rem;
