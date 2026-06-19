@@ -174,3 +174,201 @@
         }
     }
 }
+
+
+// ── Mein Konto — eingeloggt ───────────────────────────────────────────────────
+
+.woocommerce-account.logged-in {
+
+    .woocommerce {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: var(--space-xl);
+        align-items: start;
+
+        @media (max-width: 767px) {
+            grid-template-columns: 1fr;
+            gap: var(--space-lg);
+        }
+    }
+
+    // ── Navigation ────────────────────────────────────────────────────────────
+
+    .woocommerce-MyAccount-navigation {
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            border-bottom: 1px solid var(--color-border);
+
+            &:first-child {
+                border-top: 1px solid var(--color-border);
+            }
+
+            a {
+                display: block;
+                padding: 0.75rem 0;
+                font-size: $font-size-base;
+                font-weight: $font-weight-normal;
+                color: var(--color-text-muted);
+                text-decoration: none;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                font-size: $font-size-sm;
+                transition: color 0.2s ease;
+
+                &:hover {
+                    color: var(--color-text);
+                }
+            }
+
+            &.is-active a {
+                color: var(--color-text);
+                font-weight: $font-weight-medium;
+            }
+        }
+    }
+
+    // ── Content ───────────────────────────────────────────────────────────────
+
+    .woocommerce-MyAccount-content {
+        p {
+            font-size: $font-size-base;
+            color: var(--color-text);
+            line-height: 1.7;
+
+            a {
+                color: var(--color-text);
+                text-decoration: underline;
+            }
+
+            strong {
+                font-weight: $font-weight-medium;
+            }
+        }
+
+        // Bestelltabelle
+        table.woocommerce-orders-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: $font-size-sm;
+
+            th, td {
+                padding: 0.75rem 0.5rem;
+                border-bottom: 1px solid var(--color-border);
+                text-align: left;
+            }
+
+            th {
+                font-size: $font-size-xs;
+                font-weight: $font-weight-medium;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: var(--color-text-muted);
+            }
+
+            .button {
+                @include btn.btn-primary;
+                padding: 0.375rem 0.75rem;
+                font-size: $font-size-xs;
+            }
+        }
+
+        // Adressen
+        .woocommerce-Addresses {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+
+            @media (max-width: 767px) {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .woocommerce-Address {
+            h3 {
+                font-size: $font-size-sm;
+                font-weight: $font-weight-medium;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                margin-bottom: 1rem;
+                padding-bottom: 0.5rem;
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            address {
+                font-style: normal;
+                font-size: $font-size-base;
+                line-height: 1.7;
+                color: var(--color-text-muted);
+            }
+
+            .edit {
+                display: inline-block;
+                margin-top: 0.75rem;
+                font-size: $font-size-sm;
+                color: var(--color-text-muted);
+                text-decoration: underline;
+
+                &:hover { color: var(--color-text); }
+            }
+        }
+
+        // Formulare
+        .woocommerce-EditAccountForm,
+        .edit-account {
+            label {
+                display: block;
+                font-size: $font-size-xs;
+                font-weight: $font-weight-medium;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                margin-bottom: 0.4rem;
+                color: var(--color-text-muted);
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="password"] {
+                width: 100%;
+                border: 1px solid var(--color-border);
+                border-radius: 0;
+                padding: 0.75rem 1rem;
+                font-size: $font-size-base;
+                margin-bottom: 1rem;
+                box-sizing: border-box;
+
+                &:focus {
+                    outline: none;
+                    border-color: var(--color-text);
+                }
+            }
+
+            fieldset {
+                border: none;
+                padding: 0;
+                margin: var(--space-md) 0 0;
+
+                legend {
+                    font-size: $font-size-sm;
+                    font-weight: $font-weight-medium;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                    margin-bottom: 1rem;
+                    padding-bottom: 0.5rem;
+                    border-bottom: 1px solid var(--color-border);
+                    width: 100%;
+                }
+            }
+
+            .woocommerce-Button,
+            button[type="submit"] {
+                @include btn.btn-primary;
+                margin-top: var(--space-sm);
+            }
+        }
+    }
+}
