@@ -135,7 +135,7 @@ $slider-height-mobile:  clamp(280px, 55vw, 480px);
         }
 
         &:hover {
-            color: $color-white;
+            color: $color-white !important;
             background-color: $color-black;
             border: 1px solid rgba(255, 255, 255, 0.85);
         }
