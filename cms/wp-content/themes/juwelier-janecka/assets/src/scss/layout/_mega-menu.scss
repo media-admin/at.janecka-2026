@@ -1,7 +1,7 @@
 @use '../abstracts' as *;
 
 // =============================================================================
-// Mega Menu – v1.2.0 – Links 2-spaltig
+// Mega Menu – v1.2.2 – Links 2-spaltig, kein Slide-Effekt
 // =============================================================================
 
 .primary-menu > ul > li.mega-menu {
@@ -10,20 +10,20 @@
     &:hover > .mega-menu__panel {
         opacity:    1;
         visibility: visible;
-        transform: translateX(-50%) translateY(0);
+        transform:  translateX(-50%) translateY(0);
     }
 }
 
 .mega-menu__panel {
-    position:      absolute;
-    left:          50%;
-    transform:     translateX(-50%) translateY(-6px);
-    width:         80%;
-    top:           100%;
-    background:    var(--color-card-bg);
-    border:        none; // vorher: 1px solid var(--color-border);
-    border-radius: 0; // vorher: $radius-md;
-    box-shadow:    0 8px 40px rgba(0, 0, 0, 0.12); // vorher: $shadow-xl;
+    position:   absolute;
+    left:       50%;
+    transform:  translateX(-50%) translateY(-6px);
+    width:      80%;
+    top:        100%;
+    background: var(--color-card-bg);
+    border:        none;
+    border-radius: 0;
+    box-shadow:    0 8px 40px rgba(0, 0, 0, 0.12);
     z-index:       $z-dropdown;
     opacity:       0;
     visibility:    hidden;
@@ -40,16 +40,16 @@
 // ── Links: fix 2 Spalten ──────────────────────────────────────────────────────
 
 .mega-menu__links {
-    flex:        0 0 38%;     // ← fixe 38 %
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    list-style:  none;
-    margin:      0;
-    padding:     0 $spacing-8 0 0;
-    display:     grid;
+    flex:                  0 0 38%;
+    list-style:            none;
+    margin:                0;
+    padding:               0 $spacing-8 0 0;
+    display:               grid;
     grid-template-columns: repeat(2, 1fr);
-    gap:         $spacing-4 $spacing-6;
-    align-content: start;
+    gap:                   $spacing-4 $spacing-6;
+    align-content:         start;
+    flex-wrap:             wrap;
+    justify-content:       flex-start;
 
     li {
         margin:        0;
@@ -59,28 +59,33 @@
 
     a {
         display:         block;
-        padding:         $spacing-3 0;
+        padding:         $spacing-3 0 $spacing-1;
+        margin-bottom:   $spacing-2;
         color:           var(--color-text);
         text-decoration: none;
         font-size:       var(--text-sm);
         letter-spacing:  0.03em;
         white-space:     nowrap;
-        transition:      color 0.15s ease, padding-left 0.15s ease;
+        border-bottom:   1px solid transparent;
+        transition:      color 0.15s ease, border-color 0.15s ease;
         background:      none !important;
 
         &:hover {
-            color:        $color-primary;
-            padding-left: $spacing-2;
+            color:         $color-primary;
+            border-bottom: 1px solid $color-primary;
         }
     }
 
-    .current-menu-item > a { color: $color-primary; font-weight: 600; }
+    .current-menu-item > a {
+        color:       $color-primary;
+        font-weight: 600;
+    }
 }
 
 // ── Bild-Spalte ───────────────────────────────────────────────────────────────
 
 .mega-menu__image {
-    flex:        1;           // ← nimmt verbleibende ~62 %
+    flex:        1;
     flex-shrink: 0;
     align-self:  stretch;
 
@@ -91,7 +96,7 @@
         min-height:    200px;
         max-height:    320px;
         object-fit:    cover;
-        border-radius: 0; // vorher: $radius-md;
+        border-radius: 0;
         display:       block;
     }
 }

@@ -371,3 +371,36 @@ add_action( 'wp', function() {
 add_action( 'wp_head', function() {
     echo '<meta name="color-scheme" content="light">' . "\n";
 }, 1 );
+
+
+// ── WooCommerce Pagination – Scroll to Grid ───────────────────────────────────
+add_action( 'wp_footer', function() {
+    $page = 1;
+    if ( preg_match( '#/page/(\d+)/#', $_SERVER['REQUEST_URI'] ?? '', $m ) ) {
+        $page = (int) $m[1];
+    }
+    if ( $page <= 1 ) return;
+    ?>
+    <script>
+    ( function() {
+        function scrollToGrid() {
+            var grid = document.querySelector( '.wc-products-container' );
+            if ( ! grid ) return;
+            var header = document.querySelector( '.site-header' );
+            var offset = ( header ? header.offsetHeight : 100 ) + 16;
+            window.scrollTo( {
+                top:      grid.getBoundingClientRect().top + window.scrollY - offset,
+                behavior: 'smooth'
+            } );
+        }
+        if ( document.readyState === 'complete' ) {
+            setTimeout( scrollToGrid, 300 );
+        } else {
+            window.addEventListener( 'load', function() {
+                setTimeout( scrollToGrid, 300 );
+            } );
+        }
+    } )();
+    </script>
+    <?php
+}, 99 );

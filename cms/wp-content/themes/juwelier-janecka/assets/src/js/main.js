@@ -228,12 +228,3 @@ document.documentElement.style.setProperty(
     '--scrollbar-width',
     ( window.innerWidth - document.documentElement.clientWidth ) + 'px'
 );
-
-
-// DOM Ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initApp);
-} else {
-  initApp();
-}
-

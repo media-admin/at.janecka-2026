@@ -233,13 +233,17 @@
                 color:           var(--color-text);
                 text-decoration: none;
                 font-size:       var(--text-sm);
-                transition:      background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
+                font-weight:   400; // neu
+                border-bottom: 1px solid transparent; // neu
+                transition:      background 0.15s ease, color 0.15s ease, border-color 0.15s ease; // vorher: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
                 white-space:     nowrap;
 
                 &:hover {
-                    background:   var(--color-hover-bg);
-                    color:        $color-primary;
-                    padding-left: $spacing-5;
+                    background:    var(--color-hover-bg);
+                    color:         $color-primary;
+                    text-shadow:   0 0 0.6px currentColor;
+                    border-bottom: 1px solid $color-primary;
+                    padding-left:  $spacing-4; // ← neu: neutralisiert .mega-menu__links a:hover
                 }
 
                 &:focus-visible {
@@ -272,9 +276,19 @@
         top: 0; left: 100%; margin-left: $spacing-1; transform: translateX(-8px);
         min-width: 200px; border-left: 3px solid $color-primary;
 
+        // li a {
+        //     font-size: var(--text-xs); color: var(--color-text-muted); padding: $spacing-2 $spacing-3;
+        //     &:hover { color: $color-primary; padding-left: $spacing-4; }
+            
+        // }
+
         li a {
-            font-size: var(--text-xs); color: var(--color-text-muted); padding: $spacing-2 $spacing-3;
-            &:hover { color: $color-primary; padding-left: $spacing-4; }
+            font-size:     var(--text-xs);
+            color:         var(--color-text-muted);
+            padding:       $spacing-2 $spacing-3;
+            font-weight:   400;
+            border-bottom: 1px solid transparent;
+            &:hover { color: $color-primary; text-shadow: 0 0 0.6px currentColor; border-bottom: 1px solid $color-primary; }
         }
     }
 
