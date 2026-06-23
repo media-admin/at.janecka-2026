@@ -277,10 +277,18 @@ function janecka_register_category_rewrites() {
         }
         $path .= $term->slug;
 
+        // Basis-URL
         add_rewrite_rule(
             '^' . $path . '/?$',
             'index.php?product_cat=' . $term->slug,
-            'top' // Kategorie gewinnt vor gleichnamigen WordPress-Seiten
+            'top'
+        );
+
+        // Pagination
+        add_rewrite_rule(
+            '^' . $path . '/page/([0-9]+)/?$',
+            'index.php?product_cat=' . $term->slug . '&paged=$matches[1]',
+            'top'
         );
     }
 }
@@ -383,23 +391,20 @@ add_action( 'wp_footer', function() {
     ?>
     <script>
     ( function() {
+        if ( 'scrollRestoration' in history ) history.scrollRestoration = 'manual';
+
         function scrollToGrid() {
             var grid = document.querySelector( '.wc-products-container' );
             if ( ! grid ) return;
-            var header = document.querySelector( '.site-header' );
-            var offset = ( header ? header.offsetHeight : 100 ) + 16;
-            window.scrollTo( {
-                top:      grid.getBoundingClientRect().top + window.scrollY - offset,
-                behavior: 'smooth'
-            } );
+            var header  = document.querySelector( '.site-header' );
+            var offset  = ( header ? header.offsetHeight : 100 ) + 16;
+            var top     = grid.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo( { top: top, behavior: 'smooth' } );
         }
-        if ( document.readyState === 'complete' ) {
-            setTimeout( scrollToGrid, 300 );
-        } else {
-            window.addEventListener( 'load', function() {
-                setTimeout( scrollToGrid, 300 );
-            } );
-        }
+
+        [ 100, 400, 800 ].forEach( function( delay ) {
+            setTimeout( scrollToGrid, delay );
+        } );
     } )();
     </script>
     <?php
