@@ -59,12 +59,12 @@ function janecka_woocommerce_assets(): void {
 	}
 
 	// noUISlider CSS — aus node_modules kopiert (via Vite)
-	wp_enqueue_style(
-		'nouislider',
-		get_template_directory_uri() . '/assets/dist/css/nouislider.css',
-		[],
-		'15.7.1'
-	);
+	// wp_enqueue_style(
+	// 	'nouislider',
+	// 	get_template_directory_uri() . '/assets/dist/css/nouislider.css',
+	// 	[],
+	// 	'15.7.1'
+	// );
 	wp_enqueue_script(
 		'janecka-wc-filters',
 		// ... Pfad via Manifest ...

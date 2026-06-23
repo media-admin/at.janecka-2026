@@ -107,7 +107,7 @@ get_header(); ?>
 						<?php endif; ?>
 
 						<?php if ( $angebot ) : ?>
-						<p class="store-card__offer"><?php echo esc_html( $angebot ); ?></p>
+						<div class="store-card__offer"><?php echo wp_kses_post( wpautop( $angebot ) ); ?></div>
 						<?php endif; ?>
 
 					</div>
