@@ -188,7 +188,7 @@ function janecka_single_specs_accordion(): void {
                 </svg>
             </span>
         </button>
-        <div class="single-product__accordion-content" hidden>
+        <div class="single-product__accordion-content is-collapsed">
             <div class="single-product__accordion-body">
                 <?php echo wp_kses_post( wpautop( $description ) ); ?>
             </div>
@@ -468,7 +468,7 @@ function janecka_single_accordion_script(): void {
             const icon     = this.querySelector('.accordion-icon__vertical');
 
             this.setAttribute('aria-expanded', String(!expanded));
-            content.hidden = expanded;
+            content.classList.toggle('is-collapsed', expanded);
             if (icon) icon.style.display = expanded ? '' : 'none';
         });
     });
@@ -482,9 +482,10 @@ function janecka_single_accordion_script(): void {
 add_filter( 'woocommerce_single_product_zoom_enabled', '__return_false' );
 add_filter( 'wc_zoom_enabled', '__return_false' );
 
-add_filter( 'woocommerce_single_product_image_thumbnail_html', function( string $html, int $attachment_id ): string {
-    $full_url = wp_get_attachment_image_url( $attachment_id, 'full' );
-    $alt      = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
+add_filter( 'woocommerce_single_product_image_thumbnail_html', function( string $html, $attachment_id ): string {
+    if ( ! $attachment_id || ! is_numeric( $attachment_id ) ) return $html;
+    $full_url = wp_get_attachment_image_url( (int) $attachment_id, 'full' );
+    $alt      = get_post_meta( (int) $attachment_id, '_wp_attachment_image_alt', true );
     if ( ! $full_url ) return $html;
     $html = preg_replace(
         '/<a([^>]*)href=["\'][^"\']*["\']([^>]*)>/i',
