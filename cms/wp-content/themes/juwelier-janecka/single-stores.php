@@ -66,7 +66,7 @@ get_header(); ?>
 								__( 'Montag',     'juwelier-janecka' ) => [ get_sub_field( 'monday_opened' ),    get_sub_field( 'monday_closed' ) ],
 								__( 'Dienstag',   'juwelier-janecka' ) => [ get_sub_field( 'thuesday_opened' ),  get_sub_field( 'thuesday_closed' ) ],
 								__( 'Mittwoch',   'juwelier-janecka' ) => [ get_sub_field( 'wednesday_opened' ), get_sub_field( 'wednesday_closed' ) ],
-								__( 'Donnerstag', 'juwelier-janecka' ) => [ get_sub_field( 'thursday_opened' ),  get_sub_field( 'thursday_closed' ) ],
+								__( 'Donnerstag', 'juwelier-janecka' ) => [ get_sub_field( 'thursday_opened' ),  get_sub_field( 'thuesday_closed' ) ],
 								__( 'Freitag',    'juwelier-janecka' ) => [ get_sub_field( 'friday_opened' ),    get_sub_field( 'friday_closed' ) ],
 								__( 'Samstag',    'juwelier-janecka' ) => [ get_sub_field( 'saturday_opened' ),  get_sub_field( 'saturday_closed' ) ],
 							];
