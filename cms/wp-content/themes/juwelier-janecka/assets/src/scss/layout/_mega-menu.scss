@@ -23,7 +23,7 @@
     background: var(--color-card-bg);
     border:        none;
     border-radius: 0;
-    box-shadow:    0 8px 40px rgba(0, 0, 0, 0.12);
+    box-shadow:    0; // vorher: 0 8px 40px rgba(0, 0, 0, 0.12);
     z-index:       $z-dropdown;
     opacity:       0;
     visibility:    hidden;

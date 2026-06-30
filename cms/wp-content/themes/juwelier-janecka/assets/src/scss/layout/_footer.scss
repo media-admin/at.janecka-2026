@@ -35,7 +35,7 @@ $footer-border:      $color-primary;
     display:    grid;
     grid-template-columns: repeat(4, 1fr);
     gap:        $spacing-8;
-    justify-content: space-evenly;
+    justify-content: space-around; // vorher: space-evenly;
 
     // Spalten-Köpfe
     > li > a {

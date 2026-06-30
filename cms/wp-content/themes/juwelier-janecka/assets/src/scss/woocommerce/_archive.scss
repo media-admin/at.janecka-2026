@@ -143,7 +143,8 @@ ul.products.wc-products-grid {
 
     // ── Titel ─────────────────────────────────────────────────────────────
     &__title {
-        min-height: 4.5em; // für 3 Zeilen, damit alle Karten gleich hoch sind
+        min-height: 3.0em; // für 2 Zeilen, damit alle Karten gleich hoch sind
+        // vorher: min-height: 4.5em; // für 3 Zeilen, damit alle Karten gleich hoch sind
         font-family:    $font-nav;
         font-size:      var(--text-sm);
         font-weight:    $font-weight-normal;
