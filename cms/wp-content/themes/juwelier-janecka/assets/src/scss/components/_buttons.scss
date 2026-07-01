@@ -49,7 +49,7 @@
         &:hover {
             color: $color-dark !important;
             background:   $color-white;
-            border-color: $color-dark;
+            border-color: $color-black;
             transform:    translateY(-1px);
             box-shadow:   $shadow-md;
         }
@@ -68,6 +68,7 @@
         &:hover {
             background: $color-primary;
             color:      $color-white;
+            border-color: $color-black;
             transform:  translateY(-1px);
         }
 

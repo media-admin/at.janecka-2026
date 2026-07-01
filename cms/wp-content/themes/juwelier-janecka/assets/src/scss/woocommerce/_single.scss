@@ -667,8 +667,7 @@ tr.wishlist_item td.product-date {
     transition:       background-color 0.25s ease !important;
 
     &:hover {
-        background-color: $color-grey-dark !important;
-        border-color:     $color-grey-dark !important;
+        background-color: $color-black !important; 
     }
 }
 
