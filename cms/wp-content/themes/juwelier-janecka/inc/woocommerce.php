@@ -148,7 +148,7 @@ add_action( 'woocommerce_after_shop_loop', function () {
 
     echo paginate_links( [
         'base'      => esc_url_raw( str_replace( 999999999, '%#%', get_pagenum_link( 999999999, false ) ) ),
-        'format'    => '?paged=%#%',
+        'format'    => '/page/%#%/',
         'add_args'  => false,
         'current'   => max( 1, get_query_var( 'paged' ) ),
         'total'     => $wp_query->max_num_pages,
