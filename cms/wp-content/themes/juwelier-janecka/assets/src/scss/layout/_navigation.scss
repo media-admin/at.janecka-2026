@@ -584,6 +584,10 @@
         border-radius: 0;
     }
 
+    .notification--info{
+        padding: 0 !important;
+    }
+
     .notification__message,
     .notification__message--gutenberg,
     .notification__message--gutenberg p,
@@ -595,4 +599,10 @@
     .dashicons {
         color: #fff !important;
     }
+
+    .notification__title {
+        display: none;
+    }
+
+    
 }

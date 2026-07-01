@@ -360,9 +360,11 @@ a.tinvwl_add_to_wishlist_button.tinvwl-loop,
 
 .product-card__gzd {
     display:    flex;
+    justify-content: space-between !important;
     flex-wrap:  wrap;
     gap:        0 $spacing-2;
     margin-top: 0.25rem;
+    justify-content: space-between;
 
     .wc-gzd-additional-info {
         font-size:   0.6875rem !important;

@@ -112,7 +112,7 @@
 
 	&__phone a,
 	&__email a {
-		font-size: $font-size-base;
+		font-size: 0.8125rem !important; // vorher: $font-size-base;
 		color: inherit;
 		text-decoration: none;
 

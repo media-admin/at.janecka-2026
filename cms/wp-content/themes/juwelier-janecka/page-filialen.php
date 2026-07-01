@@ -11,7 +11,7 @@ get_header(); ?>
     <?php get_template_part('template-parts/components/breadcrumbs'); ?>
 
     <header class="page-header">
-        <h1 class="page-header__title"><?php the_title(); ?></h1>
+        <h1 class="page-header__title"><?php esc_html_e( 'Unsere Standorte im Überblick', 'juwelier-janecka' ); ?></h1>
     </header>
 
 	<?php // ── Redaktioneller Inhalt (Gutenberg-Editor) ────────────────────────── ?>
