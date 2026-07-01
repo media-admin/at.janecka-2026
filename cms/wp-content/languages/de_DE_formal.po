@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 7.0.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-06-12 21:29:22+0000\n"
+"PO-Revision-Date: 2026-06-29 22:04:34+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4399,7 +4399,7 @@ msgstr "Suchergebnisse"
 #: wp-includes/block-template-utils.php:204
 #: wp-includes/js/dist/block-library.js:25559
 msgid "Attachment Pages"
-msgstr "Anhang-Seiten"
+msgstr "Anhangseiten"
 
 #: wp-includes/block-template-utils.php:200
 msgctxt "Template name"
@@ -14453,7 +14453,7 @@ msgstr "Sortieren Sie die Sammlung nach einem Attribut des Objekts."
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:1162
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1597
 msgid "Order sort attribute ascending or descending."
-msgstr "Attribut für aufsteigende oder absteigende Sortierung."
+msgstr "Das Sortierattribut aufsteigend oder absteigend sortieren."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1713
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:3036
@@ -17410,7 +17410,7 @@ msgstr "Weitere Details bearbeiten"
 
 #: wp-includes/media-template.php:562
 msgid "View attachment page"
-msgstr "Anhang-Seite anzeigen"
+msgstr "Anhangseite anzeigen"
 
 #: wp-includes/media-template.php:456 wp-admin/includes/media.php:3370
 #: wp-admin/includes/media.php:3372
@@ -18599,7 +18599,7 @@ msgstr "Medien-Player einbetten"
 
 #: wp-includes/media-template.php:886
 msgid "Link to Attachment Page"
-msgstr "Anhang-Seite verlinken"
+msgstr "Anhangseite verlinken"
 
 #: wp-includes/media-template.php:879
 msgid "Link to Media File"
@@ -19070,7 +19070,7 @@ msgstr "Mediendatei"
 #: wp-includes/media-template.php:888 wp-includes/media-template.php:953
 #: wp-includes/media-template.php:1232 wp-admin/includes/media.php:2656
 msgid "Attachment Page"
-msgstr "Anhang-Seite"
+msgstr "Anhangseite"
 
 #: wp-includes/media-template.php:858 wp-includes/media-template.php:943
 #: wp-includes/media-template.php:1110 wp-includes/media-template.php:1225
@@ -19166,7 +19166,7 @@ msgstr "Neue Galerie erstellen"
 
 #: wp-includes/post.php:101
 msgid "View Attachment Page"
-msgstr "Anhang-Seite anzeigen"
+msgstr "Anhangseite anzeigen"
 
 #: wp-includes/media-template.php:266 wp-admin/includes/media.php:2276
 msgid "Select Files"
@@ -22212,7 +22212,7 @@ msgstr "Möchten Sie sich wirklich <a href=\"%s\">abmelden</a>?"
 #. translators: %s: Site title.
 #: wp-includes/functions.php:3698
 msgid "You are attempting to log out of %s"
-msgstr "Sie haben vor, sich von der Website %s abzumelden"
+msgstr "Sie möchten sich gerade von der Website %s abmelden"
 
 #. translators: %s: File name.
 #: wp-includes/functions.php:2966

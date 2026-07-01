@@ -181,6 +181,9 @@ const initApp = async () => {
 };
 
 
+// App starten
+document.addEventListener('DOMContentLoaded', () => initApp());
+
 // Carousel Grid: data-columns -> CSS Variable
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.carousel-grid').forEach(grid => {
