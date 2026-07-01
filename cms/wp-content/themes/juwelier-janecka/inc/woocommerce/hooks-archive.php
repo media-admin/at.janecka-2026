@@ -399,3 +399,4 @@ add_filter( 'woocommerce_add_to_cart_fragments', function( $fragments ) {
     $fragments['.cart-count'] = ob_get_clean();
     return $fragments;
 } );
+add_filter('loop_shop_per_page', function() { return 36; }, 20);
