@@ -1318,7 +1318,7 @@ function faq_accordion_shortcode($atts) {
     while ($faqs->have_posts()) {
         $faqs->the_post();
         $question = get_the_title();
-        $answer = get_the_content();
+        $answer = get_the_content(); // vorher: $answer = get_field('answer');
         
         $output .= '<div class="faq-item">';
         $output .= '<button class="faq-question" aria-expanded="false">';

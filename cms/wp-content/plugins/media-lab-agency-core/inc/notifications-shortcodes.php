@@ -245,11 +245,10 @@ add_action( 'wp_body_open', function () {
 
     echo '<div class="site-notifications-banner">';
     foreach ( $banners as $n ) {
-        $banner_title = apply_filters( 'media_lab_notification_banner_title', $n['title'], $n );
         echo media_lab_build_notification(  // phpcs:ignore WordPress.Security.EscapeOutput
             $n['type'],
             $n['message'],
-            $banner_title,
+            $n['title'],
             $n['icon'],
             $n['dismissible'],
             ' notification--banner',
