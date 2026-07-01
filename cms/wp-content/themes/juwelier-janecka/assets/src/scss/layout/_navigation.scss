@@ -606,3 +606,24 @@
 
     
 }
+// ── Leerer Notifications-Balken (immer sichtbar) ─────────────────────────────
+.site-notifications-banner--empty {
+    display: block;
+    width: 100%;
+    min-height: 2.5rem;
+    background-color: var( --color-dark, #1a1a1a );
+}
+
+// ── Notifications Banner ──────────────────────────────────────────────────────
+.site-notifications-banner {
+    min-height: 40px;
+    display:    flex;
+    align-items: center;
+
+    .notification--info {
+        width:       100%;
+        align-items: center;
+        margin:      0;
+        padding:     0;
+    }
+}

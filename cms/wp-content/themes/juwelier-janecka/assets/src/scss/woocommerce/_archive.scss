@@ -347,6 +347,7 @@ a.tinvwl_add_to_wishlist_button.tinvwl-loop,
 
     .product-card__subtitle {
         font-size: var(--text-xs);
+        font-weight: $font-weight-medium;
     }
 
     .product-card__title {
@@ -355,6 +356,7 @@ a.tinvwl_add_to_wishlist_button.tinvwl-loop,
 
     .product-card__price .price {
         font-size: 0.875rem;
+        font-weight: $font-weight-medium;
     }
 }
 
@@ -413,11 +415,11 @@ a.tinvwl_add_to_wishlist_button.tinvwl-loop,
 
 
 .product-card__price .woocommerce-Price-amount.amount {
-    font-weight: $font-weight-normal !important;
+    font-weight: $font-weight-medium !important;
 }
 
 .product-card__subtitle {
-    font-weight: $font-weight-normal !important;
+    font-weight: $font-weight-medium !important;
 }
 
 
