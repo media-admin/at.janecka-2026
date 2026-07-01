@@ -35,7 +35,7 @@ add_action('woocommerce_after_main_content', function() {
  * Customize products per page
  */
 add_filter('loop_shop_per_page', function($cols) {
-    return 12; // 12 products per page
+    return 36; // 36 products per page
 }, 20);
 
 /**
