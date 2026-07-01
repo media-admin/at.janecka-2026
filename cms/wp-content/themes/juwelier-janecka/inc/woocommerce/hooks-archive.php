@@ -122,6 +122,9 @@ remove_action( 'woocommerce_after_shop_loop_item_title',  'woocommerce_template_
 remove_action( 'woocommerce_after_shop_loop_item_title',  'woocommerce_template_loop_price', 10 );
 
 add_action( 'woocommerce_before_shop_loop_item', 'janecka_product_card_open', 5 );
+add_action( 'woocommerce_before_shop_loop_item', function(): void {
+    remove_action( 'woocommerce_before_shop_loop_item', 'tinvwl_view_addto_htmlloop', 9 );
+}, 1 );
 add_action( 'woocommerce_after_shop_loop_item',  'janecka_product_card_actions_hook', 20 );
 add_action( 'woocommerce_after_shop_loop_item',  'janecka_product_card_close', 999 );
 
@@ -269,7 +272,17 @@ function janecka_product_card_subtitle(): void {
     }
     if ( $subtitle ) :
     ?>
-    <p class="product-card__subtitle"><?php echo esc_html( $subtitle ); ?></p>
+    <div class="product-card__subtitle-row">
+        <p class="product-card__subtitle"><?php echo esc_html( $subtitle ); ?></p>
+        <div class="product-card__wishlist-btn">
+            <?php
+            global $product;
+            if ( $product && function_exists( 'tinvwl_view_addto_htmlloop' ) ) {
+                tinvwl_view_addto_htmlloop();
+            }
+            ?>
+        </div>
+    </div>
     <?php
     endif;
 }

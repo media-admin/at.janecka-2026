@@ -157,6 +157,8 @@ ul.products.wc-products-grid {
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow:       hidden;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
     }
 
     // ── Preis ─────────────────────────────────────────────────────────────
@@ -245,23 +247,67 @@ ul.products.wc-products-grid {
 // Wishlist-Button: absolut oben rechts im Bild, IMMER sichtbar
 // ---------------------------------------------------------------------------
 
-.tinv-wraper.tinvwl-loop-button-wrapper,
-.tinv-wraper.tinvwl-above_thumb-add-to-cart {
-    position:   absolute !important;
-    top:        0.625rem !important;
-    right:      0.625rem !important;
-    left:       auto !important;
-    z-index:    2;
-    opacity:    1 !important;
-    visibility: visible !important;
-    display:    block !important;
+// ---------------------------------------------------------------------------
+// Wishlist-Button: in Subtitle-Zeile, NICHT im Bild
+// ---------------------------------------------------------------------------
+
+// Im Bild verstecken – nur außerhalb der Subtitle-Zeile
+.product-card__body > .tinv-wraper,
+.product-card__image-wrap .tinv-wraper,
+.product-card > .tinv-wraper {
+    display:    none !important;
+    visibility: hidden !important;
 }
 
-a.tinvwl_add_to_wishlist_button.tinvwl-loop,
-.woocommerce ul.products li.product .tinv-wraper a.tinvwl_add_to_wishlist_button {
-    opacity:    1 !important;
-    visibility: visible !important;
-    display:    block !important;
+// Alle Wishlist-Buttons im Loop verstecken, außer in subtitle-row
+.woocommerce ul.products li.product .tinv-wraper:not(.product-card__wishlist-btn .tinv-wraper) {
+    display:    none !important;
+    visibility: hidden !important;
+}
+
+// In Subtitle-Zeile anzeigen
+.product-card__subtitle-row {
+    display:         flex;
+    align-items:     center;
+    justify-content: space-between;
+    gap:             0.5rem;
+
+    .product-card__subtitle {
+        margin: 0;
+        flex:   1;
+    }
+
+    .product-card__wishlist-btn {
+        flex-shrink: 0;
+
+        .tinv-wraper.tinvwl-loop-button-wrapper,
+        .tinv-wraper.tinvwl-above_thumb-add-to-cart {
+            display:    block !important;
+            visibility: visible !important;
+            position:   static !important;
+            opacity:    1 !important;
+            width:      auto !important;
+            height:     auto !important;
+            top:        auto !important;
+            left:       auto !important;
+            z-index:    auto !important;
+            margin:     0 !important;
+        }
+
+        a.tinvwl_add_to_wishlist_button {
+            display:         flex !important;
+            visibility:      visible !important;
+            opacity:         1 !important;
+            width:           1.5rem !important;
+            height:          1.5rem !important;
+            align-items:     center !important;
+            justify-content: center !important;
+            color:           var( --color-text-muted, #888 );
+            font-size:       1rem;
+
+            &:hover { color: var( --color-text, #1a1a1a ); }
+        }
+    }
 }
 
 // ---------------------------------------------------------------------------
@@ -447,5 +493,35 @@ a.tinvwl_add_to_wishlist_button.tinvwl-loop,
         border-radius: 50%;
         border:        1px solid currentColor;
         flex-shrink:   0;
+    }
+}
+// ── Wishlist Button: aus Bild entfernen, in Subtitle-Zeile anzeigen ───────────
+
+// Original-Position (above_thumb) verstecken
+.tinvwl-position-above_thumb {
+    display: none !important;
+}
+
+// Subtitle-Zeile mit Wishlist-Button
+.product-card__subtitle-row {
+    display:         flex;
+    align-items:     center;
+    justify-content: space-between;
+
+    .product-card__subtitle {
+        margin: 0;
+    }
+
+    .product-card__wishlist-btn {
+        .tinvwl_add_to_wishlist_button {
+            display:     flex;
+            align-items: center;
+            color:       var( --color-text-muted, #888 );
+            font-size:   1rem;
+
+            &:hover {
+                color: var( --color-text, #1a1a1a );
+            }
+        }
     }
 }

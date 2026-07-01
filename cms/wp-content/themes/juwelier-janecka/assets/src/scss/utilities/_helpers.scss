@@ -95,6 +95,7 @@
 .text-right     { text-align: right; }
 .text-muted     { color: var(--color-text-muted); }
 .text-primary   { color: $color-primary; }
+.text-white     { color: $color-white !important; }
 .truncate       { @include truncate; }
 
 // ── Spacing (Margin) ─────────────────────────────────────────────────────────
