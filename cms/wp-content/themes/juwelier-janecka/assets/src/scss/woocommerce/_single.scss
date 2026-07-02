@@ -69,8 +69,8 @@ body.single-product {
 
 .woocommerce-product-gallery {
 	position: relative;
-	background: #f5f5f5;
-	border-radius: var(--radius-md, 8px);
+	background: none; // vorher: #f5f5f5;
+	border-radius: 0; // vorher: var(--radius-md, 8px);
 	overflow: hidden;
 	opacity: 1 !important;
 
