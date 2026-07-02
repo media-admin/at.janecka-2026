@@ -263,17 +263,28 @@ function janecka_product_card_badges(): void {
 function janecka_product_card_subtitle(): void {
     global $product;
     $subtitle = '';
+    global $wpdb;
     foreach ( [ 'product_brand', 'pa_brand', 'pa_marke', 'pa_kollektion' ] as $attr ) {
-        $terms = wc_get_product_terms( $product->get_id(), $attr, [ 'fields' => 'names' ] );
-        if ( ! empty( $terms ) ) {
-            $subtitle = implode( ', ', array_slice( $terms, 0, 2 ) );
+        $term_names = $wpdb->get_col( $wpdb->prepare(
+            "SELECT t.name
+             FROM {$wpdb->terms} t
+             JOIN {$wpdb->term_taxonomy} tt ON t.term_id = tt.term_id
+             JOIN {$wpdb->term_relationships} tr ON tt.term_taxonomy_id = tr.term_taxonomy_id
+             WHERE tr.object_id = %d AND tt.taxonomy = %s
+             LIMIT 2",
+            $product->get_id(),
+            $attr
+        ) );
+        if ( ! empty( $term_names ) ) {
+            $subtitle = implode( ', ', $term_names );
             break;
         }
     }
-    if ( $subtitle ) :
     ?>
     <div class="product-card__subtitle-row">
+        <?php if ( $subtitle ) : ?>
         <p class="product-card__subtitle"><?php echo esc_html( $subtitle ); ?></p>
+        <?php endif; ?>
         <div class="product-card__wishlist-btn">
             <?php
             global $product;
@@ -284,7 +295,6 @@ function janecka_product_card_subtitle(): void {
         </div>
     </div>
     <?php
-    endif;
 }
 
 function janecka_product_card_actions(): void {
