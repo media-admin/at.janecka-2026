@@ -127,6 +127,11 @@ function janecka_single_sku_delivery(): void {
     }
     echo '</div>';
 
+    global $product;
+    $excerpt = $product->get_short_description();
+    if ( $excerpt ) {
+        echo '<div class="product-short-description">' . wp_kses_post( $excerpt ) . '</div>';
+    }
     echo '<div class="single-product__meta-row">';
     if ( $delivery ) {
         echo '<span class="single-product__delivery">';

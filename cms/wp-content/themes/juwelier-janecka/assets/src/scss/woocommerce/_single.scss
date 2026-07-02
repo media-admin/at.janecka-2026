@@ -259,6 +259,15 @@ body.single-product {
 		color: var(--color-text);
 	}
 
+	.product-short-description {
+                font-size: 0.875rem;
+                font-weight: $font-weight-normal;
+                padding: 0.625rem 0;
+                line-height: 1.6;
+                color: var(--color-text);
+                border-bottom: 1px solid var(--color-border, #e0e0e0);
+        }
+
 	// 4d. Preis
 	.price {
 		font-size: 1.625rem;
