@@ -350,29 +350,8 @@ add_action( 'wp_head', function() {
 }, 999 );
 
 
-add_action( 'woocommerce_after_shop_loop_item', function() {
-    global $wp_filter;
-    if ( isset( $wp_filter['woocommerce_after_shop_loop_item'] ) ) {
-        foreach ( $wp_filter['woocommerce_after_shop_loop_item']->callbacks as $priority => $callbacks ) {
-            foreach ( $callbacks as $key => $callback ) {
-                $name = is_array( $callback['function'] )
-                    ? ( is_object( $callback['function'][0] )
-                        ? get_class( $callback['function'][0] )
-                        : $callback['function'][0] ) . '::' . $callback['function'][1]
-                    : ( is_string( $callback['function'] ) ? $callback['function'] : 'closure' );
-                error_log( 'after_shop_loop_item | priority: ' . $priority . ' | ' . $name );
-            }
-        }
-    }
-}, 1 );
 
 
-// In der Uhren-Kategorie die zweite MwSt.-Klasse und GZD entfernen
-add_action( 'wp', function() {
-    if ( ! is_product_category( 'uhren' ) ) return;
-    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_tax_info', 6 );
-    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_shipping_costs_info', 7 );
-} );
 
 
 // Dark Mode deaktivieren — Theme unterstützt nur Light Mode
