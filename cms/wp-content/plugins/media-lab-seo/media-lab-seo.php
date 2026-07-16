@@ -3,7 +3,7 @@
  * Plugin Name: Media Lab SEO Toolkit
  * Plugin URI:  https://github.com/media-admin/media-lab-starter-kit
  * Description: SEO-Toolkit für Media Lab Kundenprojekte. GSC-Integration, GA4 OAuth, Schema.org, Breadcrumbs, Redirect-Manager, Consent-aware Analytics und wöchentlicher Report-Mailer.
- * Version:     1.2.0
+ * Version:     1.3.0
  * Author:      Media Lab
  * Author URI:  https://medialab.at
  * Text Domain: media-lab-seo
@@ -14,7 +14,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'MLT_VERSION',  '1.2.0' );
+define( 'MLT_VERSION',  '1.3.0' );
 define( 'MLT_FILE',     __FILE__ );
 define( 'MLT_PATH',     plugin_dir_path( __FILE__ ) );
 define( 'MLT_URL',      plugin_dir_url( __FILE__ ) );
@@ -53,9 +53,12 @@ function mlt_init() {
     require_once MLT_PATH . 'inc/class-schema.php';
     require_once MLT_PATH . 'inc/class-breadcrumbs.php';
     require_once MLT_PATH . 'inc/class-redirects.php';
+    require_once MLT_PATH . 'inc/class-consent-stats.php';
     require_once MLT_PATH . 'inc/class-seo-dashboard.php';
     require_once MLT_PATH . 'inc/class-report-template.php';
     require_once MLT_PATH . 'inc/class-report-mailer.php';
+    require_once MLT_PATH . 'inc/report-recipients.php';
+    require_once MLT_PATH . 'inc/report-schedule.php';
 
     new MLT_Settings();
     new MLT_SEO();
