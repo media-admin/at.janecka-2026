@@ -30,6 +30,12 @@ function mlwf_ajax_filter_products(): void {
 		wp_send_json_error( 'Invalid nonce', 403 );
 	}
 
+	// GZD-Duplikat-Fix — 'wp'-Hook feuert bei admin-ajax.php nicht,
+	// daher hier zusätzlich manuell entfernen (Funktion aus Theme: hooks-archive.php)
+	if ( function_exists( 'janecka_remove_gzd_loop_hooks' ) ) {
+		janecka_remove_gzd_loop_hooks();
+	}
+
 	$category_slug = sanitize_text_field( $_POST['category']      ?? '' );
 	$brand_slug    = sanitize_text_field( $_POST['brand']         ?? '' );
 	$subcat_slug   = sanitize_text_field( $_POST['subcat']        ?? '' );

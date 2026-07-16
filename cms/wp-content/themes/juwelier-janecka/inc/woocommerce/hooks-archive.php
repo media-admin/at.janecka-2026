@@ -25,13 +25,15 @@ add_action( 'woocommerce_after_main_content',  'janecka_wc_close_wrapper', 10 );
 
 // GZD Loop-Ausgabe deaktivieren — wird manuell in product-card__gzd gerendert
 // Priorities laut Shopmarks.php: tax=6, shipping=7, delivery=8, units=9
-add_action( 'wp', function() {
+add_action( 'wp', 'janecka_remove_gzd_loop_hooks' );
+
+function janecka_remove_gzd_loop_hooks(): void {
     remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_tax_info', 6 );
     remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_shipping_costs_info', 7 );
     remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_delivery_time_info', 8 );
     remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_product_units', 9 );
     remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_gzd_template_loop_product_units', 9 );
-} );
+}
 
 function janecka_wc_open_wrapper(): void {
     echo '<div class="wc-archive">';
