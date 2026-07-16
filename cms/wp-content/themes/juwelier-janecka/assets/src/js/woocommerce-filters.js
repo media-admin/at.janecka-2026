@@ -418,33 +418,34 @@ import noUiSlider from 'nouislider';
 
 
 	// ── Pagination-Klicks abfangen ────────────────────────────────────────────
-
 	function bindPaginationEvents() {
-		document.addEventListener( 'click', e => {
+		document.addEventListener( 'click', async e => {
 			const link = e.target.closest( '.woocommerce-pagination a' );
 			if ( ! link ) return;
-
 			e.preventDefault();
-
 			// Seitennummer aus URL extrahieren
 			const url   = new URL( link.href );
 			const match = url.pathname.match( /\/page\/(\d+)\// );
 			const paged = match ? parseInt( match[1] ) : 1;
-
 			// Aktuelle Filter-Parameter in URL beibehalten
 			const currentParams = new URLSearchParams( window.location.search );
 			const newParams     = new URLSearchParams( url.search );
-
 			// Query-Parameter aus aktueller URL übernehmen
 			currentParams.forEach( ( val, key ) => {
 				if ( ! newParams.has( key ) ) newParams.set( key, val );
 			} );
-
 			const newUrl = url.pathname + ( newParams.toString() ? '?' + newParams.toString() : '' );
 			window.history.replaceState( {}, '', newUrl );
 
-			fetchProducts( paged );
-			window.scrollTo( { top: 0, behavior: 'smooth' } );
+			await fetchProducts( paged );
+
+			// Zum Grid scrollen statt zur Seitenoberkante
+			const container = document.querySelector( PRODUCTS_CONTAINER );
+			if ( container ) {
+				const headerHeight = document.querySelector( '.site-header' )?.offsetHeight || 100;
+				const targetTop    = container.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
+				window.scrollTo( { top: targetTop, behavior: 'smooth' } );
+			}
 		} );
 	}
 
