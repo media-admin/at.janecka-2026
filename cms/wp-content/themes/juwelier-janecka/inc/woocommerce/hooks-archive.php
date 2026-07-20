@@ -7,6 +7,33 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// ===========================================================================
+// 0. HPOS-Fix: Produkttyp-Term-Cache für alle Produkte im Loop primen —
+//    über 'the_posts' statt 'woocommerce_before_shop_loop'. Letzteres feuert
+//    zu spät: Code wie MLT_Redirects (oder andere früh laufende Hooks) kann
+//    bereits vorher wc_get_product() aufrufen und den falschen Typ dauerhaft
+//    in WooCommerce's eigenem 'products'-Cache festschreiben (siehe
+//    hooks-single.php für den identischen, dort bereits verifizierten Bug).
+//    'the_posts' feuert direkt nach der Haupt-Query, bevor irgendwer sonst
+//    Zugriff auf die Post-Objekte hat.
+// ===========================================================================
+
+add_filter( 'the_posts', 'janecka_prime_loop_product_type_cache', 1, 2 );
+
+function janecka_prime_loop_product_type_cache( array $posts, WP_Query $query ): array {
+    if ( ! $query->is_main_query() || empty( $posts ) ) {
+        return $posts;
+    }
+
+    foreach ( $posts as $post ) {
+        if ( isset( $post->post_type ) && 'product' === $post->post_type ) {
+            get_the_terms( $post->ID, 'product_type' );
+        }
+    }
+
+    return $posts;
+}
+
 // Kategorie-Seitentitel unterdrücken — wird von category-archive-header.php gerendert
 add_filter( 'woocommerce_show_page_title', function( $show ) {
     return ( is_product_category() || is_tax( 'product_brand' ) ) ? false : $show;

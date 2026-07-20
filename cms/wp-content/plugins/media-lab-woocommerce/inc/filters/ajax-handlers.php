@@ -127,6 +127,14 @@ function mlwf_ajax_filter_products(): void {
 
 	$query = new WP_Query( $args );
 
+	// HPOS-Fix: Produkttyp-Term-Cache primen, bevor die Karten gerendert werden.
+	// Ohne das liefert $product->get_type() bei variablen Produkten fälschlich
+	// "simple" zurück (siehe hooks-archive.php / hooks-single.php für Details).
+	foreach ( $query->posts as $post ) {
+		$post_id = is_object( $post ) ? $post->ID : $post;
+		get_the_terms( $post_id, 'product_type' );
+	}
+
 	ob_start();
 
 	if ( $query->have_posts() ) {

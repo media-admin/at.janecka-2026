@@ -8,6 +8,37 @@
 defined( 'ABSPATH' ) || exit;
 
 // ===========================================================================
+// 0. HPOS-Fix: Term-Cache für Produkt-Taxonomien primen — über 'the_posts'
+//    statt 'wp'. 'wp' feuert zu spät: irgendein Code (vermutlich MLT_Redirects
+//    oder ein SEO/Analytics-Hook) ruft wc_get_product() für dieses Produkt
+//    bereits VOR dem 'wp'-Hook auf und schreibt den falschen Typ dauerhaft in
+//    WooCommerce's eigenen 'products'-Cache (verifiziert per Debug-Log, Juli
+//    2026). 'the_posts' feuert direkt nach der Haupt-Query, bevor irgendwer
+//    sonst Zugriff auf das Post-Objekt hat.
+// ===========================================================================
+
+add_filter( 'the_posts', 'janecka_prime_single_product_term_cache', 1, 2 );
+
+function janecka_prime_single_product_term_cache( array $posts, WP_Query $query ): array {
+    if ( ! $query->is_main_query() || empty( $posts ) ) {
+        return $posts;
+    }
+
+    $taxonomies = get_object_taxonomies( 'product' );
+
+    foreach ( $posts as $post ) {
+        if ( isset( $post->post_type ) && 'product' === $post->post_type ) {
+            foreach ( $taxonomies as $taxonomy ) {
+                get_the_terms( $post->ID, $taxonomy );
+            }
+        }
+    }
+
+    return $posts;
+}
+
+
+// ===========================================================================
 // 1. WRAPPER: Container + eigenes Layout
 // ===========================================================================
 
@@ -108,14 +139,21 @@ function janecka_single_sku_delivery(): void {
     $sku      = $product->get_sku();
     $delivery = '';
 
-    if ( function_exists( 'wc_gzd_get_product' ) ) {
-        $gzd_product = wc_gzd_get_product( $product );
-        if ( $gzd_product && method_exists( $gzd_product, 'get_delivery_time' ) ) {
-            $delivery_obj = $gzd_product->get_delivery_time();
-            if ( $delivery_obj ) {
-                $delivery = $delivery_obj->name;
-            }
-        }
+    // HPOS pre-populates the term cache with empty arrays before this hook runs,
+    // so get_the_terms()/wc_gzd_get_product()->get_delivery_time() unreliably
+    // return empty. Direct $wpdb query bypasses the poisoned cache.
+    global $wpdb;
+    $delivery_term = $wpdb->get_row( $wpdb->prepare( "
+        SELECT t.name
+        FROM {$wpdb->term_relationships} tr
+        INNER JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+        INNER JOIN {$wpdb->terms} t ON tt.term_id = t.term_id
+        WHERE tr.object_id = %d AND tt.taxonomy = %s
+        LIMIT 1
+    ", $product->get_id(), 'product_delivery_time' ) );
+
+    if ( $delivery_term ) {
+        $delivery = $delivery_term->name;
     }
 
     echo '<div class="single-product__meta-row">';
@@ -127,7 +165,6 @@ function janecka_single_sku_delivery(): void {
     }
     echo '</div>';
 
-    global $product;
     $excerpt = $product->get_short_description();
     if ( $excerpt ) {
         echo '<div class="product-short-description">' . wp_kses_post( $excerpt ) . '</div>';
