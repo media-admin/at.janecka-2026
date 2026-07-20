@@ -125,15 +125,26 @@ function mlwf_ajax_filter_products(): void {
 		'meta_query'     => $meta_query,
 	], $order_args );
 
-	$query = new WP_Query( $args );
-
-	// HPOS-Fix: Produkttyp-Term-Cache primen, bevor die Karten gerendert werden.
-	// Ohne das liefert $product->get_type() bei variablen Produkten fälschlich
-	// "simple" zurück (siehe hooks-archive.php / hooks-single.php für Details).
-	foreach ( $query->posts as $post ) {
-		$post_id = is_object( $post ) ? $post->ID : $post;
+	// HPOS-Fix: Produkttyp-Term-Cache primen, BEVOR WooCommerce während der
+	// eigentlichen Query volle Produktobjekte lädt. Ein Priming NACH der
+	// vollständigen WP_Query kommt zu spät — WooCommerce lädt bereits
+	// während der Query-Ausführung selbst Produktobjekte (vermutlich für
+	// Lagerbestand-/Sichtbarkeitsfilter bei variablen Produkten über einen
+	// eigenen 'pre_get_posts'-Hook), was WC_Product_Data_Store_CPT's
+	// eigenen 'products'-Cache mit dem falschen Typ ("simple" statt z.B.
+	// "variable") vorbefüllt (verifiziert per WP-CLI, Juli 2026 — siehe
+	// hooks-single.php für den identischen Bug im Single-Product-Kontext).
+	//
+	// Lösung: Zuerst eine reine ID-Query (fields=ids) ausführen — dabei
+	// werden KEINE vollständigen Produktobjekte instanziiert — und den
+	// Term-Cache für diese IDs primen. Erst danach die eigentliche
+	// Produkt-Query mit denselben Args ausführen.
+	$id_query = new WP_Query( array_merge( $args, [ 'fields' => 'ids' ] ) );
+	foreach ( $id_query->posts as $post_id ) {
 		get_the_terms( $post_id, 'product_type' );
 	}
+
+	$query = new WP_Query( $args );
 
 	ob_start();
 

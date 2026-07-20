@@ -9,29 +9,39 @@ defined( 'ABSPATH' ) || exit;
 
 // ===========================================================================
 // 0. HPOS-Fix: Produkttyp-Term-Cache für alle Produkte im Loop primen —
-//    über 'the_posts' statt 'woocommerce_before_shop_loop'. Letzteres feuert
-//    zu spät: Code wie MLT_Redirects (oder andere früh laufende Hooks) kann
-//    bereits vorher wc_get_product() aufrufen und den falschen Typ dauerhaft
-//    in WooCommerce's eigenem 'products'-Cache festschreiben (siehe
-//    hooks-single.php für den identischen, dort bereits verifizierten Bug).
-//    'the_posts' feuert direkt nach der Haupt-Query, bevor irgendwer sonst
-//    Zugriff auf die Post-Objekte hat.
+//    über 'pre_get_posts', NICHT 'the_posts'. 'the_posts' feuert zu spät:
+//    WooCommerce lädt bereits WÄHREND der Query-Ausführung selbst volle
+//    Produktobjekte (vermutlich für Lagerbestand-/Sichtbarkeitsfilter bei
+//    variablen Produkten), was den falschen Typ dauerhaft in WC's eigenem
+//    'products'-Cache festschreibt, bevor 'the_posts' überhaupt läuft
+//    (verifiziert per Debug-Log an echter Kategorieseite, Juli 2026).
+//    Lösung: Auf 'pre_get_posts' (VOR der eigentlichen Query-Ausführung)
+//    eine separate, schlanke ID-only-Query mit denselben Query-Vars bauen
+//    und darüber primen — analog zum AJAX-Handler-Fix in ajax-handlers.php.
 // ===========================================================================
 
-add_filter( 'the_posts', 'janecka_prime_loop_product_type_cache', 1, 2 );
+add_action( 'pre_get_posts', 'janecka_prime_archive_product_type_cache', 20 );
 
-function janecka_prime_loop_product_type_cache( array $posts, WP_Query $query ): array {
-    if ( ! $query->is_main_query() || empty( $posts ) ) {
-        return $posts;
+function janecka_prime_archive_product_type_cache( WP_Query $query ): void {
+    if ( is_admin() || ! $query->is_main_query() ) {
+        return;
     }
 
-    foreach ( $posts as $post ) {
-        if ( isset( $post->post_type ) && 'product' === $post->post_type ) {
-            get_the_terms( $post->ID, 'product_type' );
-        }
+    if ( ! $query->is_post_type_archive( 'product' ) && ! $query->is_tax( get_object_taxonomies( 'product' ) ) && ! $query->is_search() ) {
+        return;
     }
 
-    return $posts;
+    $id_query_vars = $query->query_vars;
+    $id_query_vars['fields']         = 'ids';
+    $id_query_vars['posts_per_page'] = $query->get( 'posts_per_page' ) ?: get_option( 'posts_per_page' );
+
+    remove_action( 'pre_get_posts', 'janecka_prime_archive_product_type_cache', 20 );
+    $id_query = new WP_Query( $id_query_vars );
+    add_action( 'pre_get_posts', 'janecka_prime_archive_product_type_cache', 20 );
+
+    foreach ( $id_query->posts as $post_id ) {
+        get_the_terms( $post_id, 'product_type' );
+    }
 }
 
 // Kategorie-Seitentitel unterdrücken — wird von category-archive-header.php gerendert
