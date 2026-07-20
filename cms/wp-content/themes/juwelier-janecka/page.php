@@ -10,7 +10,11 @@
             ?>
             <article <?php post_class(); ?>>
                 <header class="entry-header page-header">
-                    <?php the_title('<h1 class="page-header__title">', '</h1>'); ?>
+                    <?php if ( is_page( 'Über uns' ) ) : ?>
+                        <h1 class="page-header__title">Gelebte Familientradition seit 1924</h1>
+                    <?php else : ?>
+                        <?php the_title( '<h1 class="page-header__title">', '</h1>' ); ?>
+                    <?php endif; ?>
                 </header>
                 
                 <?php if (has_post_thumbnail()) : ?>
