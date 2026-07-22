@@ -217,18 +217,22 @@ function janecka_get_brands_by_category( string $category_slug ): array {
     // phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
     $query = $wpdb->prepare(
         "SELECT DISTINCT tt2.term_id
-         FROM {$wpdb->term_relationships} tr1
-         INNER JOIN {$wpdb->term_taxonomy} tt1
-             ON tr1.term_taxonomy_id = tt1.term_taxonomy_id
+        FROM {$wpdb->term_relationships} tr1
+        INNER JOIN {$wpdb->term_taxonomy} tt1
+            ON tr1.term_taxonomy_id = tt1.term_taxonomy_id
             AND tt1.taxonomy = 'product_cat'
             AND tt1.term_id IN ({$placeholders})
-         INNER JOIN {$wpdb->term_relationships} tr2
-             ON tr1.object_id = tr2.object_id
-         INNER JOIN {$wpdb->term_taxonomy} tt2
-             ON tr2.term_taxonomy_id = tt2.term_taxonomy_id
+        INNER JOIN {$wpdb->term_relationships} tr2
+            ON tr1.object_id = tr2.object_id
+        INNER JOIN {$wpdb->term_taxonomy} tt2
+            ON tr2.term_taxonomy_id = tt2.term_taxonomy_id
             AND tt2.taxonomy = 'product_brand'
-         INNER JOIN {$wpdb->posts} p
-             ON tr1.object_id = p.ID
+        INNER JOIN {$wpdb->termmeta} tm
+            ON tm.term_id = tt2.term_id
+            AND tm.meta_key = 'brand-is-active'
+            AND tm.meta_value = '1'
+        INNER JOIN {$wpdb->posts} p
+            ON tr1.object_id = p.ID
             AND p.post_type  = 'product'
             AND p.post_status = 'publish'",
         ...$cat_ids

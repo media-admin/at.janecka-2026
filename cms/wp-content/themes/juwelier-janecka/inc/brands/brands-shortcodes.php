@@ -40,6 +40,13 @@ function janecka_shortcode_alle_marken( array|string $atts ): string {
 		'hide_empty' => true,
 		'orderby'    => 'name',
 		'order'      => 'ASC',
+		'meta_query' => [
+			[
+				'key'     => 'brand-is-active',
+				'value'   => '1',
+				'compare' => '=',
+			],
+		],
 	] );
 
 	if ( is_wp_error( $brands ) || empty( $brands ) ) {

@@ -129,6 +129,20 @@ function mlwf_render_filter_bar(): void {
 					$taxonomy = get_taxonomy( $attr_slug );
 					if ( ! $taxonomy ) continue;
 
+					// Bei product_brand nur aktive Marken (ACF "brand-is-active") anzeigen.
+					// Terms ohne gesetzten Wert gelten als inaktiv und werden ausgeblendet.
+					// Für alle anderen Attribute bleibt $brand_meta_query leer und hat
+					// keinen Effekt auf get_terms().
+					$brand_meta_query = ( 'product_brand' === $attr_slug )
+						? [
+							[
+								'key'     => 'brand-is-active',
+								'value'   => '1',
+								'compare' => '=',
+							],
+						]
+						: [];
+
 					// Terms laden — gefiltert auf aktuellen Kontext
 					if ( $queried_term_id ) {
 						$context_term = get_term( $queried_term_id );
@@ -136,6 +150,7 @@ function mlwf_render_filter_bar(): void {
 							'taxonomy'   => $attr_slug,
 							'hide_empty' => true,
 							'orderby'    => 'name',
+							'meta_query' => $brand_meta_query,
 							'object_ids' => get_objects_in_term(
 								$context_term->term_id,
 								$is_brand ? 'product_brand' : 'product_cat'
@@ -146,6 +161,7 @@ function mlwf_render_filter_bar(): void {
 							'taxonomy'   => $attr_slug,
 							'hide_empty' => true,
 							'orderby'    => 'name',
+							'meta_query' => $brand_meta_query,
 						] );
 					}
 
