@@ -119,7 +119,7 @@ function mlwf_ajax_filter_products(): void {
 	$args = array_merge( [
 		'post_type'      => 'product',
 		'post_status'    => 'publish',
-		'posts_per_page' => (int) get_option( 'posts_per_page_shop', 12 ),
+		'posts_per_page' => (int) get_option( 'posts_per_page_shop', 36 ),
 		'paged'          => $paged,
 		'tax_query'      => $tax_query,
 		'meta_query'     => $meta_query,
