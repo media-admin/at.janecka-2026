@@ -424,6 +424,49 @@ body .wp-block-group.janecka-duo-covers > .wp-block-columns.janecka-section-head
 }
 
 
+// ---------------------------------------------------------------------------
+// Vollflächiger, unsichtbarer Link-Button innerhalb eines Cover-Blocks
+// Anwendung: Button-Block in den Cover legen, Link setzen, diese CSS-Klasse
+// im Feld "Zusätzliche CSS-Klasse(n)" des Button-Blocks eintragen.
+// ---------------------------------------------------------------------------
+
+.wp-block-cover {
+    position: relative;
+
+    // Wenn ein Full-Link-Button im Cover liegt: den inneren Container auf
+    // die volle Höhe der Kachel strecken, damit position:absolute; inset:0
+    // sich auf die GESAMTE Kachel bezieht statt nur auf den (sonst nur
+    // content-hohen) Inner-Container.
+    .wp-block-cover__inner-container:has(.cover-full-link) {
+        align-self: stretch !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .wp-block-button.cover-full-link {
+        position: absolute;
+        inset: 0;
+        margin: 0;
+        z-index: 5;
+
+        .wp-block-button__link,
+        .wp-block-button__link:hover,
+        .wp-block-button__link:focus {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: transparent !important;
+            border: none !important;
+            color: transparent !important;
+            font-size: 0;
+            padding: 0;
+        }
+    }
+}
+
+
 // =============================================================================
 // Credit-Zeile
 // Klasse: janecka-split__credit  →  am Paragraph-Block
