@@ -52,6 +52,8 @@ function mlwf_render_filter_bar(): void {
 
 			<div class="wc-filter-bar__groups">
 
+				<div class="wc-filter-bar__groups-filters">
+
 				<?php
 				// ── Preis-Slider ──────────────────────────────────────────
 				if ( $show_price ) :
@@ -209,12 +211,16 @@ function mlwf_render_filter_bar(): void {
 				</div>
 				<?php endforeach; ?>
 
+				</div><!-- .wc-filter-bar__groups-filters -->
+
 				<?php
-				// ── Sortierung (als Pill, in derselben Zeile wie die Filter) ──
+				// ── Sortierung (eigene Gruppe, rechtsbündig neben den Filtern) ──
 				if ( function_exists( 'woocommerce_catalog_ordering' ) ) :
 				?>
-				<div class="wc-filter-group wc-filter-group--sort" data-filter-type="sort">
-					<?php woocommerce_catalog_ordering(); ?>
+				<div class="wc-filter-bar__groups-sort">
+					<div class="wc-filter-group wc-filter-group--sort" data-filter-type="sort">
+						<?php woocommerce_catalog_ordering(); ?>
+					</div>
 				</div>
 				<?php endif; ?>
 
