@@ -130,9 +130,6 @@ function janecka_wc_loop_header(): void {
         <div class="wc-loop-header__count js-product-count">
             <?php woocommerce_result_count(); ?>
         </div>
-        <div class="wc-loop-header__ordering">
-            <?php woocommerce_catalog_ordering(); ?>
-        </div>
     </div>
     <?php
 }

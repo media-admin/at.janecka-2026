@@ -209,6 +209,15 @@ function mlwf_render_filter_bar(): void {
 				</div>
 				<?php endforeach; ?>
 
+				<?php
+				// ── Sortierung (als Pill, in derselben Zeile wie die Filter) ──
+				if ( function_exists( 'woocommerce_catalog_ordering' ) ) :
+				?>
+				<div class="wc-filter-group wc-filter-group--sort" data-filter-type="sort">
+					<?php woocommerce_catalog_ordering(); ?>
+				</div>
+				<?php endif; ?>
+
 			</div><!-- .wc-filter-bar__groups -->
 
 			<button class="wc-filter-bar__reset js-filter-reset" type="button" hidden>

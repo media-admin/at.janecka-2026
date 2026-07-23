@@ -312,6 +312,36 @@
 }
 
 // ---------------------------------------------------------------------------
+// Sortierung als Pill (in der Filter-Gruppen-Reihe)
+// ---------------------------------------------------------------------------
+
+.wc-filter-group--sort {
+	margin-left: auto;
+
+    .woocommerce-ordering select {
+        display: inline-flex !important;
+        align-items: center;
+        padding: 0.5rem 2rem 0.5rem 1rem !important;
+        border: 1px solid #d0d0d0 !important;
+        border-radius: 999px !important;
+        background-color: #fff !important;
+        color: var(--color-text);
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        appearance: none !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem center !important;
+        transition: background 0.2s, border-color 0.2s, color 0.2s;
+
+        &:hover {
+            border-color: #b0b0b0;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
 // Mobile
 // ---------------------------------------------------------------------------
 
