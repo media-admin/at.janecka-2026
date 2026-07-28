@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 7.0.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-07-18 01:51:48+0000\n"
+"PO-Revision-Date: 2026-07-26 17:19:01+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -152,7 +152,7 @@ msgstr "Für die Konnektoren-Seite sind Build-Dateien erforderlich. Bitte führe
 
 #: wp-admin/options-connectors.php:23
 msgid "Connectors are not available."
-msgstr "Es sind keine Konnektoren vorhanden."
+msgstr "Es sind keine Konnektoren verfügbar."
 
 #: wp-admin/nav-menus.php:1237
 msgid "an unknown menu"
@@ -337,7 +337,7 @@ msgstr "Der Status der aktuellen PHP-Version (%s) konnte nicht ermittelt werden"
 #. translators: %s: The server PHP version.
 #: wp-admin/includes/class-wp-site-health.php:732
 msgid "Your site is running PHP %s"
-msgstr "Deine Website verwendet PHP %s."
+msgstr "Deine Website verwendet PHP %s"
 
 #: wp-admin/includes/class-wp-debug-data.php:776
 msgid "Image format transforms"
@@ -1011,7 +1011,7 @@ msgstr "Mit der Mehrfachbearbeitung kannst du Metadaten (Kategorien, Autor usw.)
 #. translators: %s: WordPress version number.
 #: wp-admin/about.php:279
 msgid "Read the WordPress %s Release Notes for information on installation, enhancements, fixed issues, release contributors, learning resources, and the list of file changes."
-msgstr "Lies die WordPress-%s-Versionshinweise für Informationen zu Installation, Verbesserungen, behobenen Problemen, Mitwirkenden dieser Version, Lernressourcen und die Liste der Dateiänderungen."
+msgstr "Lies die WordPress-%s-Versionshinweise für Informationen zu Installation, Verbesserungen, behobenen Problemen, Mitwirkenden dieser Version, Lernressourcen sowie zur Liste der Dateiänderungen."
 
 #. translators: %s: WordPress version number.
 #: wp-admin/about.php:306
@@ -1438,7 +1438,7 @@ msgstr "<strong>Lass</strong> deiner kreativen Fantasie bei der Gestaltung der W
 
 #: wp-admin/contribute.php:77
 msgid "<strong>Organize</strong> or participate in local Meetups and WordCamps."
-msgstr "Nimm an lokalen WordPress-Meetups und WordCamps teil oder <strong>organisiere</strong> sie."
+msgstr "<strong>Organisiere</strong> lokale Meetups und WordCamps oder nimm an ihnen teil."
 
 #: wp-admin/contribute.php:76
 msgid "<strong>Curate</strong> submissions or take photos for the Photo Directory."
@@ -2350,7 +2350,7 @@ msgstr "Template-Bearbeitung"
 #. translators: %s: https://wordpress.org/about/license
 #: wp-admin/freedoms.php:61
 msgid "WordPress comes with some awesome, worldview-changing rights courtesy of its <a href=\"%s\">license</a>, the GPL."
-msgstr "WordPress gewährt einige großartige und die Weltansicht verändernde Rechte durch seine <a href=\"%s\">Lizenz</a>, der GPL."
+msgstr "WordPress gewährt einige großartige und die Weltansicht verändernde Rechte durch seine <a href=\"%s\">Lizenz</a>, die GPL."
 
 #: wp-admin/credits.php:72
 msgid "Want to see your name in lights on this page?"
@@ -2889,7 +2889,7 @@ msgstr "Zu den Aktualisierungen"
 
 #: wp-admin/user-edit.php:225
 msgid "&larr; Go to Users"
-msgstr "&larr; Zu Benutzer"
+msgstr "&larr; Zu den Benutzern"
 
 #: wp-admin/revision.php:111
 msgid "&larr; Go to editor"
@@ -3226,11 +3226,11 @@ msgstr "Aktualisierung ist inkompatibel"
 
 #: wp-admin/update-core.php:733
 msgid "This update does not work with your version of WordPress."
-msgstr "Diese Aktualisierung funktioniert nicht mit deiner WordPress-Version."
+msgstr "Diese Aktualisierung ist mit deiner WordPress-Version nicht kompatibel."
 
 #: wp-admin/update-core.php:699
 msgid "This update does not work with your versions of WordPress and PHP."
-msgstr "Diese Aktualisierung funktioniert nicht mit deiner WordPress- und deiner PHP-Version."
+msgstr "Diese Aktualisierung ist mit deinen Versionen von WordPress und PHP nicht kompatibel."
 
 #: wp-admin/options-discussion.php:201
 msgid "Disallowed Comment Keys"
@@ -3258,7 +3258,7 @@ msgstr "Automatische Aktualisierungen für Plugins und Themes sind anscheinend d
 
 #: wp-admin/includes/class-wp-site-health.php:3236
 msgid "Auto-updates for plugins and/or themes appear to be disabled, but settings are still set to be displayed. This could cause auto-updates to not work as expected."
-msgstr "Automatische Aktualisierungen für Plugins und/oder Themes sind anscheinend deaktiviert, aber die Einstellung wird dennoch angezeigt. Das kann dazu führen, dass automatische Aktualisierungen nicht wie erwartet funktionieren."
+msgstr "Automatische Aktualisierungen für Plugins und/oder Themes scheinen deaktiviert zu sein, aber die Einstellungen werden dennoch angezeigt. Das kann dazu führen, dass automatische Aktualisierungen nicht wie erwartet funktionieren."
 
 #: wp-admin/includes/class-wp-site-health.php:1826
 msgid "Your site may have problems auto-updating plugins and themes"
@@ -3653,7 +3653,7 @@ msgstr "PHP-Sitzungen"
 #. translators: 1: session_start(), 2: session_write_close()
 #: wp-admin/includes/class-wp-site-health.php:1212
 msgid "A PHP session was created by a %1$s function call. This interferes with REST API and loopback requests. The session should be closed by %2$s before making any HTTP requests."
-msgstr "Eine PHP-Sitzung wurde durch einen %1$s-Funktionsaufruf erzeugt. Dies beeinträchtigt die REST-API- und Loopback-Anfragen. Die Sitzung sollte von %2$s geschlossen werden, bevor irgendwelche HTTP-Anfragen erfolgen."
+msgstr "Eine PHP-Sitzung wurde durch einen %1$s-Funktionsaufruf erzeugt. Dies beeinträchtigt die REST-API- und Loopback-Anfragen. Die Sitzung sollte mittels %2$s geschlossen werden, bevor irgendwelche HTTP-Anfragen erfolgen."
 
 #: wp-admin/includes/class-wp-site-health.php:1206
 msgid "An active PHP session was detected"
@@ -4355,7 +4355,7 @@ msgstr "Passwortgeschützt"
 #. translators: %s: The name of the late cron event.
 #: wp-admin/includes/class-wp-site-health.php:1710
 msgid "The scheduled event, %s, is late to run. Your site still works, but this may indicate that scheduling posts or automated updates may not work as intended."
-msgstr "Das geplante Ereignis, %s, wird zu spät ausgeführt. Deine Website funktioniert noch, aber das kann darauf hindeuten, dass die Planung von Beiträgen oder automatisierten Updates nicht wie beabsichtigt funktioniert."
+msgstr "Das geplante Ereignis %s ist verspätet. Deine Website funktioniert zwar weiterhin, dies könnte jedoch darauf hindeuten, dass die Planung von Beiträgen oder automatischen Aktualisierungen möglicherweise nicht wie vorgesehen funktioniert."
 
 #: wp-admin/includes/class-wp-site-health.php:1704
 msgid "A scheduled event is late"
@@ -4714,7 +4714,7 @@ msgstr "Bericht zum Website-Zustand"
 
 #: wp-admin/update-core.php:549 wp-admin/update-core.php:742
 msgid "This update does not work with your version of PHP."
-msgstr "Diese Aktualisierung funktioniert nicht mit deiner PHP-Version."
+msgstr "Diese Aktualisierung ist mit deiner PHP-Version nicht kompatibel."
 
 #: wp-admin/includes/class-wp-posts-list-table.php:543
 msgid "All formats"
@@ -4808,8 +4808,8 @@ msgstr "Leistung"
 #: wp-admin/includes/class-wp-site-health.php:689
 msgid "Your site has %1$d inactive theme, other than %2$s, the default WordPress theme, and %3$s, your active theme."
 msgid_plural "Your site has %1$d inactive themes, other than %2$s, the default WordPress theme, and %3$s, your active theme."
-msgstr[0] "Deine Website hat %1$d inaktives Theme, neben %2$s, dem Standard-WordPress-Theme, und %3$s, deinem aktiven Theme."
-msgstr[1] "Deine Website hat %1$d inaktive Themes, neben %2$s, dem Standard-WordPress-Theme, und %3$s, deinem aktiven Theme."
+msgstr[0] "Deine Website hat %1$d inaktives Theme, abgesehen von %2$s, dem Standard-WordPress-Theme, und %3$s, deinem aktiven Theme."
+msgstr[1] "Deine Website hat %1$d inaktive Themes, abgesehen von %2$s, dem Standard-WordPress-Theme, und %3$s, deinem aktiven Theme."
 
 #: wp-admin/includes/class-wp-site-health.php:682
 #: wp-admin/includes/class-wp-site-health.php:698
@@ -4821,8 +4821,8 @@ msgstr "Es wird empfohlen, alle nicht verwendeten Themes zu löschen, um die Sic
 #: wp-admin/includes/class-wp-site-health.php:674
 msgid "Your site has %1$d inactive theme, other than %2$s, your active theme."
 msgid_plural "Your site has %1$d inactive themes, other than %2$s, your active theme."
-msgstr[0] "Deine Website hat %1$d inaktives Theme, neben %2$s, deinem aktiven Theme."
-msgstr[1] "Deine Website hat %1$d inaktive Themes, neben %2$s, deinem aktiven Theme."
+msgstr[0] "Deine Website hat %1$d inaktives Theme, abgesehen von %2$s, deinem aktiven Theme."
+msgstr[1] "Deine Website hat %1$d inaktive Themes, abgesehen von %2$s, deinem aktiven Theme."
 
 #. translators: %d: The number of inactive themes.
 #: wp-admin/includes/class-wp-site-health.php:628
@@ -4889,7 +4889,7 @@ msgstr "Liste für „Personenbezogene Daten exportieren“ filtern"
 #. 4: Version number 5: URL to Update PHP page.
 #: wp-admin/includes/update.php:572
 msgid "There is a new version of %1$s available, but it does not work with your version of PHP. <a href=\"%2$s\" %3$s>View version %4$s details</a> or <a href=\"%5$s\">learn more about updating PHP</a>."
-msgstr "Es gibt eine neue Version von %1$s, aber sie funktioniert nicht mit deiner PHP-Version. <a href=\"%2$s\" %3$s>Siehe Details der Version %4$s (engl.)</a> oder <a href=\"%5$s\">erfahre mehr über die Aktualisierung von PHP (engl.)</a>."
+msgstr "Es ist eine neue Version von %1$s verfügbar, die jedoch mit deiner PHP-Version nicht kompatibel ist. <a href=\"%2$s\" %3$s>Siehe Details der Version %4$s (engl.)</a> oder <a href=\"%5$s\">erfahre mehr über die Aktualisierung von PHP (engl.)</a>."
 
 #: wp-admin/includes/class-wp-plugins-list-table.php:1301
 msgid "This plugin failed to load properly and is paused during recovery mode."
@@ -5099,7 +5099,7 @@ msgstr "Hintergrundaktualisierungen funktionieren"
 #. translators: %s: The name of the failed cron event.
 #: wp-admin/includes/class-wp-site-health.php:1697
 msgid "The scheduled event, %s, failed to run. Your site still works, but this may indicate that scheduling posts or automated updates may not work as intended."
-msgstr "Das geplante Ereignis, %s, konnte nicht ausgeführt werden. Deine Website funktioniert noch, aber das kann darauf hindeuten, dass die Planung von Beiträgen oder automatisierten Updates nicht wie vorgesehen funktioniert."
+msgstr "Das geplante Ereignis %s konnte nicht ausgeführt werden. Deine Website funktioniert zwar weiterhin, dies könnte jedoch darauf hindeuten, dass die Planung von Beiträgen oder automatischen Aktualisierungen möglicherweise nicht wie vorgesehen funktioniert."
 
 #: wp-admin/includes/class-wp-site-health.php:1691
 msgid "A scheduled event has failed"
@@ -6018,17 +6018,17 @@ msgstr "Mein Netzwerk"
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:640
 #: wp-admin/includes/class-wp-plugins-list-table.php:1470
 msgid "This plugin does not work with your version of PHP."
-msgstr "Dieses Plugin funktioniert nicht mit deiner PHP-Version."
+msgstr "Dieses Plugin ist mit deiner PHP-Version nicht kompatibel."
 
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:631
 #: wp-admin/includes/class-wp-plugins-list-table.php:1461
 msgid "This plugin does not work with your version of WordPress."
-msgstr "Dieses Plugin funktioniert nicht mit deiner WordPress-Version."
+msgstr "Dieses Plugin ist mit deiner WordPress-Version nicht kompatibel."
 
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:607
 #: wp-admin/includes/class-wp-plugins-list-table.php:1437
 msgid "This plugin does not work with your versions of WordPress and PHP."
-msgstr "Dieses Plugin funktioniert nicht mit deinen Versionen von WordPress und PHP."
+msgstr "Dieses Plugin ist mit deinen Versionen von WordPress und PHP nicht kompatibel."
 
 #. translators: %s: WordPress version number.
 #. translators: %s: WordPress version.
@@ -6142,7 +6142,7 @@ msgstr "Willkommen bei WordPress. Dies ist dein erster Beitrag. Bearbeite oder l
 #. translators: First page content. %s: Site admin URL.
 #: wp-admin/includes/upgrade.php:336
 msgid "As a new WordPress user, you should go to <a href=\"%s\">your dashboard</a> to delete this page and create new pages for your content. Have fun!"
-msgstr "Als neuer WordPress-Benutzer solltest du <a href=\"%s\">dein Dashboard</a> aufrufen, um diese Seite zu löschen und neue Seiten und Beiträge für deine Website erstellen. Viel Spaß!"
+msgstr "Als neuer WordPress-Benutzer solltest du <a href=\"%s\">dein Dashboard</a> aufrufen, um diese Seite zu löschen und neue Seiten für deine Website zu erstellen. Viel Spaß!"
 
 #. translators: First page content.
 #: wp-admin/includes/upgrade.php:330
@@ -6187,7 +6187,7 @@ msgstr "<strong>Fehler:</strong> „Tabellenpräfix“ darf nicht leer sein."
 #. translators: %s: The name of the plugin that generated this meta box.
 #: wp-admin/includes/template.php:1194 wp-admin/includes/template.php:1446
 msgid "This meta box, from the %s plugin, is not compatible with the block editor."
-msgstr "Diese Metabox von dem Plugin %s ist mit dem Block-Editor inkompatibel."
+msgstr "Diese Metabox des Plugins %s ist mit dem Block-Editor inkompatibel."
 
 #. translators: Header for the About section in a personal data export.
 #: wp-admin/includes/privacy-tools.php:368
@@ -6205,7 +6205,7 @@ msgstr "Über"
 #. Policy page.
 #: wp-admin/options-privacy.php:228
 msgid "<a href=\"%1$s\">Edit</a> or <a href=\"%2$s\">preview</a> your Privacy Policy page content."
-msgstr "<a href=\"%1$s\">Bearbeite</a> den Inhalt der Seite deiner Datenschutzerklärung oder sieh dir eine <a href=\"%2$s\">Voransicht</a> an."
+msgstr "<a href=\"%1$s\">Bearbeite</a> den Inhalt der Seite deiner Datenschutzerklärung oder sieh dir eine <a href=\"%2$s\">Vorschau</a> an."
 
 #: wp-admin/includes/file.php:40
 msgid "Privacy Policy Page"
@@ -6482,7 +6482,7 @@ msgstr "Wenn du dich anmeldest, werden wir einige Cookies setzen, um deine Anmel
 #. translators: Default privacy policy text.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:535
 msgid "If you visit our login page, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser."
-msgstr "Wenn du unsere Anmeldeseite besuchst, werden wir ein temporäres Cookie setzen, um festzustellen, ob dein Browser Cookies akzeptiert. Dieses Cookie enthält keine personenbezogenen Daten und wird verworfen, wenn du dein Browser schließt."
+msgstr "Wenn du unsere Anmeldeseite besuchst, werden wir ein temporäres Cookie setzen, um festzustellen, ob dein Browser Cookies akzeptiert. Dieses Cookie enthält keine personenbezogenen Daten und wird verworfen, wenn du deinen Browser schließt."
 
 #. translators: Default privacy policy text.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:533
@@ -6750,7 +6750,7 @@ msgstr "datenschutzerklaerung"
 #. translators: %s: URL to Customizer -> Menus.
 #: wp-admin/options-privacy.php:74
 msgid "Privacy Policy page setting updated successfully. Remember to <a href=\"%s\">update your menus</a>!"
-msgstr "Die Einstellungen der Seite für Datenschutzerklärung wurden erfolgreich aktualisiert. Denk daran, <a href=\"%s\">deine Menüs zu aktualisieren</a>!"
+msgstr "Die Einstellungen für die Seite „Datenschutzerklärung“ wurden erfolgreich aktualisiert. Denk daran, <a href=\"%s\">deine Menüs zu aktualisieren</a>!"
 
 #. translators: Hidden accessibility text. %s: Plugin name.
 #: wp-admin/includes/class-wp-privacy-policy-content.php:435

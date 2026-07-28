@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 7.0.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-07-19 03:30:54+0000\n"
+"PO-Revision-Date: 2026-07-27 21:30:39+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -556,10 +556,6 @@ msgstr "Text- und Bildgenerierung mit GPT und Dall-E."
 msgid "Text generation with Claude."
 msgstr "Textgenerierung mit Claude."
 
-#: wp-includes/connectors.php:196
-msgid "Provider logo path must be located within the plugins or must-use plugins directory."
-msgstr "Der Pfad zum Anbieter-Logo muss sich im Verzeichnis „plugins“ oder „must-use plugins“ befinden."
-
 #. translators: %s: Connector name.
 #: wp-includes/connectors.php:603
 msgid "%s API Key"
@@ -646,6 +642,10 @@ msgstr "Dieser XML-RPC-Methode wurden ungültige Argumente übergeben. Es sind z
 #: wp-includes/rest-api/endpoints/class-wp-rest-global-styles-controller.php:743
 msgid "The CSS must not contain \"%s\"."
 msgstr "Das CSS darf „%s“ nicht enthalten."
+
+#: wp-includes/connectors.php:196
+msgid "Provider logo path must be located within the plugins or must-use plugins directory."
+msgstr "Der Pfad zum Anbieter-Logo muss sich im Verzeichnis „plugins“ oder „mu-plugins“ befinden."
 
 #. translators: %s is the post type name.
 #: wp-includes/blocks/query-title.php:69
@@ -2154,10 +2154,6 @@ msgstr "Der Titel der Website."
 msgid "Returns core details about the site's runtime context for diagnostics and compatibility (environment, PHP runtime, database server info, WordPress version)."
 msgstr "Gibt wichtige Details zum Laufzeitkontext der Website für Diagnose- und Kompatibilitätszwecke zurück (Umgebung, PHP-Runtime, Datenbank-Serverinformationen, WordPress-Version)."
 
-#: wp-includes/abilities.php:211
-msgid "The site's runtime environment classification (can be one of these: production, staging, development, local)."
-msgstr "Die Klassifizierung der Website-Laufzeitumgebung (kann eine der folgenden sein: Produktion, Staging, Entwicklung, lokal)."
-
 #: wp-includes/abilities.php:202
 msgid "Get Environment Info"
 msgstr "Umgebungsinformationen abrufen"
@@ -2225,6 +2221,10 @@ msgstr[1] "%1$s Kommentare<span class=\"screen-reader-text\"> zu %2$s</span>"
 #: wp-includes/blocks/post-comments-link.php:43
 msgid "No comments<span class=\"screen-reader-text\"> on %s</span>"
 msgstr "Keine Kommentare<span class=\"screen-reader-text\"> zu %s</span>"
+
+#: wp-includes/abilities.php:211
+msgid "The site's runtime environment classification (can be one of these: production, staging, development, local)."
+msgstr "Die Klassifizierung der Website-Laufzeitumgebung (kann eine der folgenden sein: production, staging, development, local)."
 
 #. translators: %s: Ability name.
 #: wp-includes/abilities-api/class-wp-abilities-registry.php:96
@@ -2742,7 +2742,7 @@ msgstr "Deine PHP-Version ist von einem Fehler betroffen, der zu korrupten Nachr
 #. translators: %s: forbidden eagerness value
 #: wp-includes/class-wp-speculation-rules.php:198
 msgid "The eagerness value \"%s\" is forbidden for document-level speculation rules."
-msgstr "Der eagerness-Wert „%s“ ist für Spekulationsregeln auf Dokumentenebene unzulässig."
+msgstr "Der Eagerness-Wert „%s“ ist für Spekulationsregeln auf Dokumentenebene unzulässig."
 
 #. translators: 1: Start index of posts, 2: Total number of posts
 #: wp-includes/blocks/query-total.php:47
@@ -3546,10 +3546,6 @@ msgstr "Schriftarten"
 msgid "Entries in dependencies array must be either strings or arrays with an id key."
 msgstr "Einträge im Abhängigkeitsarray müssen Zeichenfolgen oder Arrays mit einem ID-Schlüssel sein."
 
-#: wp-includes/class-wp-script-modules.php:144
-msgid "Missing required id key in entry among dependencies array."
-msgstr "Fehlender erforderlicher ID-Schlüssel in Eintrag unter Abhängigkeitsarray."
-
 #. translators: %s: Font collection URL.
 #: wp-includes/fonts/class-wp-font-collection.php:188
 msgid "Error fetching the font collection data from \"%s\"."
@@ -3750,6 +3746,10 @@ msgstr "Einige der Werte für %1$s %2$s sind ungültig"
 #: wp-admin/options-general.php:215
 msgid "The Site Icon is what you see in browser tabs, bookmark bars, and within the WordPress mobile apps. It should be square and at least <code>%1$s by %2$s</code> pixels."
 msgstr "Das Website-Icon ist in Browser-Tabs, Lesezeichenleisten und in den WordPress Mobile Apps zu sehen. Es sollte quadratisch und mindestens <code>%1$s × %2$s</code> Pixel groß sein."
+
+#: wp-includes/class-wp-script-modules.php:144
+msgid "Missing required id key in entry among dependencies array."
+msgstr "Erforderlicher ID-Schlüssel fehlt in einem Eintrag des Abhängigkeits-Arrays."
 
 #: wp-includes/block-patterns.php:211
 msgctxt "Block pattern category"
@@ -8552,7 +8552,7 @@ msgstr "Anwendungspasswort konnte nicht gespeichert werden."
 #: wp-includes/media-template.php:552 wp-includes/media-template.php:804
 #: wp-admin/async-upload.php:76 wp-admin/includes/media.php:3384
 msgid "Copy URL to clipboard"
-msgstr "URL in Zwischenablage kopieren"
+msgstr "URL in die Zwischenablage kopieren"
 
 #. translators: 1: Parameter, 2: Multiplier.
 #: wp-includes/rest-api.php:2575
@@ -8718,46 +8718,25 @@ msgid "The %s constant is no longer supported."
 msgstr "Die Konstante %s wird nicht mehr unterstützt."
 
 #. translators: %s: Theme name.
-#: wp-includes/customize/class-wp-customize-theme-control.php:161
-#: wp-admin/includes/theme.php:949 wp-admin/includes/update.php:807
-#: wp-admin/themes.php:505 wp-admin/themes.php:902 wp-admin/themes.php:1213
-msgid "There is a new version of %s available, but it does not work with your version of PHP."
-msgstr "Es gibt eine neue Version von %s, aber sie funktioniert nicht mit deiner PHP-Version."
-
-#. translators: %s: Theme name.
 #: wp-includes/customize/class-wp-customize-theme-control.php:116
 #: wp-admin/includes/theme.php:904 wp-admin/includes/update.php:766
 #: wp-admin/themes.php:464 wp-admin/themes.php:857 wp-admin/themes.php:1168
 msgid "There is a new version of %s available, but it does not work with your versions of WordPress and PHP."
-msgstr "Es gibt eine neue Version von %s, aber sie funktioniert nicht mit deiner PHP- und WordPress-Version."
+msgstr "Es ist eine neue Version von %s verfügbar, die jedoch mit deinen Versionen von WordPress und PHP nicht kompatibel ist."
 
 #. translators: %s: Theme name.
 #: wp-includes/customize/class-wp-customize-theme-control.php:146
 #: wp-admin/includes/theme.php:934 wp-admin/includes/update.php:794
 #: wp-admin/themes.php:492 wp-admin/themes.php:887 wp-admin/themes.php:1198
 msgid "There is a new version of %s available, but it does not work with your version of WordPress."
-msgstr "Es gibt eine neue Version von %s, aber sie funktioniert nicht mit deiner WordPress-Version."
+msgstr "Es ist eine neue Version von %s verfügbar, die jedoch mit deiner WordPress-Version nicht kompatibel ist."
 
-#: wp-includes/customize/class-wp-customize-theme-control.php:183
-#: wp-admin/includes/theme.php:983 wp-admin/theme-install.php:340
-#: wp-admin/theme-install.php:545 wp-admin/themes.php:530
-#: wp-admin/themes.php:923 wp-admin/themes.php:1103
-msgid "This theme does not work with your versions of WordPress and PHP."
-msgstr "Dieses Theme funktioniert nicht mit deinen Versionen von WordPress und PHP."
-
-#: wp-includes/customize/class-wp-customize-theme-control.php:209
-#: wp-admin/includes/theme.php:1009 wp-admin/theme-install.php:366
-#: wp-admin/theme-install.php:571 wp-admin/themes.php:554
-#: wp-admin/themes.php:949 wp-admin/themes.php:1129
-msgid "This theme does not work with your version of WordPress."
-msgstr "Dieses Theme funktioniert nicht mit deiner WordPress-Version."
-
-#: wp-includes/customize/class-wp-customize-theme-control.php:220
-#: wp-admin/includes/theme.php:1020 wp-admin/theme-install.php:377
-#: wp-admin/theme-install.php:582 wp-admin/themes.php:563
-#: wp-admin/themes.php:960 wp-admin/themes.php:1140
-msgid "This theme does not work with your version of PHP."
-msgstr "Dieses Theme funktioniert nicht mit deiner PHP-Version."
+#. translators: %s: Theme name.
+#: wp-includes/customize/class-wp-customize-theme-control.php:161
+#: wp-admin/includes/theme.php:949 wp-admin/includes/update.php:807
+#: wp-admin/themes.php:505 wp-admin/themes.php:902 wp-admin/themes.php:1213
+msgid "There is a new version of %s available, but it does not work with your version of PHP."
+msgstr "Es ist eine neue Version von %s verfügbar, die jedoch mit deiner PHP-Version nicht kompatibel ist."
 
 #. translators: %s: URL to WordPress Updates screen.
 #: wp-includes/customize/class-wp-customize-theme-control.php:130
@@ -8819,7 +8798,28 @@ msgstr "<a href=\"%s\">Mehr über die PHP-Aktualisierung erfahren (engl.)</a>."
 #: wp-admin/themes.php:1107 wp-admin/themes.php:1174
 #: wp-admin/update-core.php:703
 msgid "<a href=\"%1$s\">Please update WordPress</a>, and then <a href=\"%2$s\">learn more about updating PHP</a>."
-msgstr "<a href=\"%1$s\">Bitte aktualisiere WordPress</a> und informiere dich bitte danach über <a href=\"%2$s\">die Aktualisierung von PHP (engl.)</a>."
+msgstr "<a href=\"%1$s\">Bitte aktualisiere WordPress</a> und informiere dich anschließend über <a href=\"%2$s\">die Aktualisierung von PHP (engl.)</a>."
+
+#: wp-includes/customize/class-wp-customize-theme-control.php:220
+#: wp-admin/includes/theme.php:1020 wp-admin/theme-install.php:377
+#: wp-admin/theme-install.php:582 wp-admin/themes.php:563
+#: wp-admin/themes.php:960 wp-admin/themes.php:1140
+msgid "This theme does not work with your version of PHP."
+msgstr "Dieses Theme ist mit deiner PHP-Version nicht kompatibel."
+
+#: wp-includes/customize/class-wp-customize-theme-control.php:209
+#: wp-admin/includes/theme.php:1009 wp-admin/theme-install.php:366
+#: wp-admin/theme-install.php:571 wp-admin/themes.php:554
+#: wp-admin/themes.php:949 wp-admin/themes.php:1129
+msgid "This theme does not work with your version of WordPress."
+msgstr "Dieses Theme ist mit deiner WordPress-Version nicht kompatibel."
+
+#: wp-includes/customize/class-wp-customize-theme-control.php:183
+#: wp-admin/includes/theme.php:983 wp-admin/theme-install.php:340
+#: wp-admin/theme-install.php:545 wp-admin/themes.php:530
+#: wp-admin/themes.php:923 wp-admin/themes.php:1103
+msgid "This theme does not work with your versions of WordPress and PHP."
+msgstr "Dieses Theme ist mit deinen Versionen von WordPress und PHP nicht kompatibel."
 
 #. translators: %s: register_rest_field
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2831
@@ -10649,11 +10649,6 @@ msgstr "Für diese E-Mail-Adresse existiert bereits eine offene Anfrage zu perso
 msgid "Error Details"
 msgstr "Fehlerdetails"
 
-#: wp-login.php:1248 wp-admin/includes/ajax-actions.php:4940
-#: wp-admin/includes/ajax-actions.php:5130
-msgid "Missing request ID."
-msgstr "Fehlende Anforderungs-ID."
-
 #: wp-login.php:1252
 msgid "Missing confirm key."
 msgstr "Fehlender Bestätigungsschlüssel."
@@ -10734,6 +10729,11 @@ msgid "%s Comment in moderation"
 msgid_plural "%s Comments in moderation"
 msgstr[0] "%s Kommentar in der Moderation"
 msgstr[1] "%s Kommentare in der Moderation"
+
+#: wp-login.php:1248 wp-admin/includes/ajax-actions.php:4940
+#: wp-admin/includes/ajax-actions.php:5130
+msgid "Missing request ID."
+msgstr "Die Anfrage-ID fehlt."
 
 #: wp-includes/functions.php:8672
 msgid "Update PHP"
@@ -12429,12 +12429,6 @@ msgstr "Themes filtern (%s)"
 msgid "Search WordPress.org themes"
 msgstr "Themes auf WordPress.org suchen"
 
-#: wp-includes/customize/class-wp-customize-theme-control.php:312
-#: wp-includes/customize/class-wp-customize-theme-control.php:314
-#: wp-admin/includes/theme.php:1086 wp-admin/includes/theme.php:1089
-msgid "Install &amp; Preview"
-msgstr "Installation und Vorschau"
-
 #: wp-includes/functions.php:8042
 msgid "Only UUID V4 is supported at this time."
 msgstr "Zurzeit wird nur UUID V4 unterstützt."
@@ -12447,6 +12441,12 @@ msgstr "Das Plugin Press This ist erforderlich."
 #: wp-includes/customize/class-wp-customize-themes-section.php:124
 msgid "Go to theme sources"
 msgstr "Zu den Theme-Quellen"
+
+#: wp-includes/customize/class-wp-customize-theme-control.php:312
+#: wp-includes/customize/class-wp-customize-theme-control.php:314
+#: wp-admin/includes/theme.php:1086 wp-admin/includes/theme.php:1089
+msgid "Install &amp; Preview"
+msgstr "Installieren und Vorschau anzeigen"
 
 #. translators: %s: "Add Items" button text.
 #: wp-includes/customize/class-wp-customize-nav-menu-control.php:46
@@ -21015,42 +21015,6 @@ msgstr[1] "Papierkorb <span class=\"count\">(%s)</span>"
 msgid "Paragraph"
 msgstr "Absatz"
 
-#: wp-includes/class-wp-editor.php:1144
-#: wp-includes/js/dist/block-library.js:66958
-#: wp-includes/js/dist/editor.js:35650
-msgid "Heading 1"
-msgstr "Überschrift 1"
-
-#: wp-includes/class-wp-editor.php:1145
-#: wp-includes/js/dist/block-library.js:66959
-#: wp-includes/js/dist/editor.js:35659
-msgid "Heading 2"
-msgstr "Überschrift 2"
-
-#: wp-includes/class-wp-editor.php:1146
-#: wp-includes/js/dist/block-library.js:66960
-#: wp-includes/js/dist/editor.js:35668
-msgid "Heading 3"
-msgstr "Überschrift 3"
-
-#: wp-includes/class-wp-editor.php:1147
-#: wp-includes/js/dist/block-library.js:66961
-#: wp-includes/js/dist/editor.js:35677
-msgid "Heading 4"
-msgstr "Überschrift 4"
-
-#: wp-includes/class-wp-editor.php:1148
-#: wp-includes/js/dist/block-library.js:66962
-#: wp-includes/js/dist/editor.js:35686
-msgid "Heading 5"
-msgstr "Überschrift 5"
-
-#: wp-includes/class-wp-editor.php:1149
-#: wp-includes/js/dist/block-library.js:66963
-#: wp-includes/js/dist/editor.js:35695
-msgid "Heading 6"
-msgstr "Überschrift 6"
-
 #: wp-includes/class-wp-editor.php:1168 wp-includes/script-loader.php:826
 #: wp-includes/js/dist/block-library.js:11286
 #: wp-includes/js/dist/block-library.js:11495
@@ -22462,6 +22426,42 @@ msgstr "Freigeben: %s"
 msgid "You are attempting to log out of %s"
 msgstr "Du möchtest dich gerade von der Website %s abmelden"
 
+#: wp-includes/class-wp-editor.php:1146
+#: wp-includes/js/dist/block-library.js:66960
+#: wp-includes/js/dist/editor.js:35668
+msgid "Heading 3"
+msgstr "Überschrift 3"
+
+#: wp-includes/class-wp-editor.php:1145
+#: wp-includes/js/dist/block-library.js:66959
+#: wp-includes/js/dist/editor.js:35659
+msgid "Heading 2"
+msgstr "Überschrift 2"
+
+#: wp-includes/class-wp-editor.php:1144
+#: wp-includes/js/dist/block-library.js:66958
+#: wp-includes/js/dist/editor.js:35650
+msgid "Heading 1"
+msgstr "Überschrift 1"
+
+#: wp-includes/class-wp-editor.php:1147
+#: wp-includes/js/dist/block-library.js:66961
+#: wp-includes/js/dist/editor.js:35677
+msgid "Heading 4"
+msgstr "Überschrift 4"
+
+#: wp-includes/class-wp-editor.php:1148
+#: wp-includes/js/dist/block-library.js:66962
+#: wp-includes/js/dist/editor.js:35686
+msgid "Heading 5"
+msgstr "Überschrift 5"
+
+#: wp-includes/class-wp-editor.php:1149
+#: wp-includes/js/dist/block-library.js:66963
+#: wp-includes/js/dist/editor.js:35695
+msgid "Heading 6"
+msgstr "Überschrift 6"
+
 #: wp-includes/link-template.php:2675 wp-includes/link-template.php:2734
 msgid "&laquo; Previous Page"
 msgstr "&laquo; Vorherige Seite"
@@ -22702,6 +22702,23 @@ msgstr "Deaktivieren"
 msgid "HTML"
 msgstr "HTML"
 
+#: wp-login.php:1047
+msgid "Strength indicator"
+msgstr "Passwortstärke"
+
+#: wp-includes/admin-bar.php:1163
+#: wp-includes/class-wp-customize-widgets.php:419
+#: wp-includes/class-wp-customize-widgets.php:927
+#: wp-includes/functions.php:5473 wp-includes/js/dist/blocks.js:5734
+#: wp-includes/js/dist/core-data.js:14557
+#: wp-includes/js/dist/customize-widgets.js:1848
+#: wp-includes/js/dist/edit-widgets.js:3489
+#: wp-includes/js/dist/edit-widgets.js:3495
+#: wp-includes/js/dist/edit-widgets.js:3796 wp-includes/js/dist/editor.js:39959
+#: wp-includes/js/dist/editor.js:39977 wp-admin/widgets.php:28
+msgid "Widgets"
+msgstr "Widgets"
+
 #: wp-includes/class-wp-editor.php:1335 wp-includes/media-template.php:1212
 #: wp-includes/widgets/class-wp-widget-media-image.php:78
 #: wp-includes/js/dist/block-editor.js:48717
@@ -22754,23 +22771,6 @@ msgstr "Breite"
 #: wp-admin/js/color-picker.js:149
 msgid "Default"
 msgstr "Standard"
-
-#: wp-login.php:1047
-msgid "Strength indicator"
-msgstr "Passwortstärke"
-
-#: wp-includes/admin-bar.php:1163
-#: wp-includes/class-wp-customize-widgets.php:419
-#: wp-includes/class-wp-customize-widgets.php:927
-#: wp-includes/functions.php:5473 wp-includes/js/dist/blocks.js:5734
-#: wp-includes/js/dist/core-data.js:14557
-#: wp-includes/js/dist/customize-widgets.js:1848
-#: wp-includes/js/dist/edit-widgets.js:3489
-#: wp-includes/js/dist/edit-widgets.js:3495
-#: wp-includes/js/dist/edit-widgets.js:3796 wp-includes/js/dist/editor.js:39959
-#: wp-includes/js/dist/editor.js:39977 wp-admin/widgets.php:28
-msgid "Widgets"
-msgstr "Widgets"
 
 #: wp-includes/widgets/class-wp-nav-menu-widget.php:185
 #: wp-includes/widgets/class-wp-widget-archives.php:235
@@ -23314,6 +23314,10 @@ msgstr "Links"
 msgid "Users"
 msgstr "Benutzer"
 
+#: wp-includes/post.php:3543 wp-includes/js/dist/editor.js:13365
+msgid "Images"
+msgstr "Bilder"
+
 #. translators: Hidden accessibility text.
 #: wp-includes/admin-bar.php:1259 wp-includes/admin-bar.php:1261
 #: wp-includes/blocks/search.php:25 wp-includes/blocks/search.php:26
@@ -23372,10 +23376,6 @@ msgstr "Suchen"
 #: wp-admin/includes/class-wp-ms-themes-list-table.php:755
 msgid "By %s"
 msgstr "Von %s"
-
-#: wp-includes/post.php:3543 wp-includes/js/dist/editor.js:13365
-msgid "Images"
-msgstr "Bilder"
 
 #: wp-login.php:1169 wp-admin/includes/class-wp-users-list-table.php:373
 #: wp-admin/includes/class-wp-users-list-table.php:396
@@ -23543,6 +23543,26 @@ msgstr "Kommentar"
 msgid "Update Category"
 msgstr "Kategorie aktualisieren"
 
+#: wp-includes/class-wp-editor.php:1187
+#: wp-includes/js/dist/block-library.js:55934
+#: wp-includes/js/dist/components.js:38965 wp-admin/includes/meta-boxes.php:165
+#: wp-admin/includes/meta-boxes.php:223 wp-admin/includes/template.php:894
+#: wp-admin/js/post.js:1031
+msgid "OK"
+msgstr "OK"
+
+#: wp-includes/post.php:1326 wp-includes/post.php:1346
+#: wp-includes/js/dist/block-library.js:41298
+#: wp-includes/js/dist/edit-site.js:46207 wp-includes/js/dist/editor.js:10424
+#: wp-includes/js/dist/editor.js:46229 wp-includes/js/dist/editor.js:48202
+#: wp-includes/js/dist/editor.js:48218
+#: wp-admin/includes/class-wp-posts-list-table.php:1793
+#: wp-admin/includes/class-wp-posts-list-table.php:1998
+#: wp-admin/includes/meta-boxes.php:180 wp-admin/includes/meta-boxes.php:220
+#: wp-admin/js/post.js:910
+msgid "Private"
+msgstr "Privat"
+
 #: wp-includes/class-wp-customize-nav-menus.php:1277
 #: wp-includes/class-wp-editor.php:1271 wp-includes/class-wp-editor.php:1893
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:111
@@ -23646,26 +23666,6 @@ msgstr "Kommentare"
 msgid "Save"
 msgstr "Speichern"
 
-#: wp-includes/class-wp-editor.php:1187
-#: wp-includes/js/dist/block-library.js:55934
-#: wp-includes/js/dist/components.js:38965 wp-admin/includes/meta-boxes.php:165
-#: wp-admin/includes/meta-boxes.php:223 wp-admin/includes/template.php:894
-#: wp-admin/js/post.js:1031
-msgid "OK"
-msgstr "OK"
-
-#: wp-includes/post.php:1326 wp-includes/post.php:1346
-#: wp-includes/js/dist/block-library.js:41298
-#: wp-includes/js/dist/edit-site.js:46207 wp-includes/js/dist/editor.js:10424
-#: wp-includes/js/dist/editor.js:46229 wp-includes/js/dist/editor.js:48202
-#: wp-includes/js/dist/editor.js:48218
-#: wp-admin/includes/class-wp-posts-list-table.php:1793
-#: wp-admin/includes/class-wp-posts-list-table.php:1998
-#: wp-admin/includes/meta-boxes.php:180 wp-admin/includes/meta-boxes.php:220
-#: wp-admin/js/post.js:910
-msgid "Private"
-msgstr "Privat"
-
 #: wp-includes/js/dist/editor.js:46224 wp-admin/includes/meta-boxes.php:189
 #: wp-admin/includes/meta-boxes.php:211 wp-admin/js/post.js:907
 msgid "Public"
@@ -23674,6 +23674,20 @@ msgstr "Öffentlich"
 #: wp-includes/class-wp-taxonomy.php:617
 msgid "All Categories"
 msgstr "Alle Kategorien"
+
+#. translators: %s: human-readable time difference.
+#. translators: %s: Human-readable time difference.
+#. translators: %s: Duration.
+#: wp-includes/blocks/comment-date.php:33 wp-includes/blocks/post-date.php:68
+#: wp-includes/rest-api/endpoints/class-wp-rest-block-directory-controller.php:143
+#: wp-includes/script-loader.php:444
+#: wp-admin/includes/class-wp-media-list-table.php:583
+#: wp-admin/includes/class-wp-plugin-install-list-table.php:704
+#: wp-admin/includes/class-wp-privacy-requests-table.php:487
+#: wp-admin/includes/plugin-install.php:663 wp-admin/includes/revision.php:254
+#: wp-admin/includes/revision.php:297
+msgid "%s ago"
+msgstr "vor %s"
 
 #: wp-includes/class-wp-editor.php:1188 wp-includes/class-wp-editor.php:1939
 #: wp-includes/media.php:5023 wp-includes/script-loader.php:1319
@@ -23730,20 +23744,6 @@ msgstr "Alle Kategorien"
 #: wp-admin/network/settings.php:184
 msgid "Cancel"
 msgstr "Abbrechen"
-
-#. translators: %s: human-readable time difference.
-#. translators: %s: Human-readable time difference.
-#. translators: %s: Duration.
-#: wp-includes/blocks/comment-date.php:33 wp-includes/blocks/post-date.php:68
-#: wp-includes/rest-api/endpoints/class-wp-rest-block-directory-controller.php:143
-#: wp-includes/script-loader.php:444
-#: wp-admin/includes/class-wp-media-list-table.php:583
-#: wp-admin/includes/class-wp-plugin-install-list-table.php:704
-#: wp-admin/includes/class-wp-privacy-requests-table.php:487
-#: wp-admin/includes/plugin-install.php:663 wp-admin/includes/revision.php:254
-#: wp-admin/includes/revision.php:297
-msgid "%s ago"
-msgstr "vor %s"
 
 #: wp-includes/post.php:132 wp-includes/js/dist/editor.js:37708
 #: wp-includes/js/dist/editor.js:45447 wp-includes/js/dist/editor.js:66616
@@ -24044,23 +24044,6 @@ msgstr "Originalgröße"
 msgid "Activate"
 msgstr "Aktivieren"
 
-#: wp-includes/post.php:1327 wp-includes/post.php:1347
-#: wp-includes/script-loader.php:1308
-#: wp-includes/js/dist/block-library.js:41294
-#: wp-includes/js/dist/edit-site.js:46143 wp-includes/js/dist/editor.js:10430
-#: wp-includes/js/dist/editor.js:48204 wp-includes/js/dist/editor.js:48228
-#: wp-admin/includes/ajax-actions.php:2280
-#: wp-admin/includes/class-wp-posts-list-table.php:1211
-#: wp-admin/includes/class-wp-posts-list-table.php:1994
-#: wp-admin/includes/meta-boxes.php:112 wp-admin/includes/meta-boxes.php:152
-#: wp-admin/js/post.js:840
-msgid "Published"
-msgstr "Veröffentlicht"
-
-#: wp-includes/admin-bar.php:349
-msgid "Log Out"
-msgstr "Abmelden"
-
 #: wp-includes/class-wp-editor.php:1215 wp-includes/media-template.php:523
 #: wp-includes/media-template.php:775 wp-includes/option.php:2750
 #: wp-includes/revision.php:32 wp-includes/js/dist/block-library.js:40874
@@ -24079,6 +24062,23 @@ msgstr "Abmelden"
 #: wp-admin/includes/media.php:2669 wp-admin/includes/media.php:2992
 msgid "Title"
 msgstr "Titel"
+
+#: wp-includes/post.php:1327 wp-includes/post.php:1347
+#: wp-includes/script-loader.php:1308
+#: wp-includes/js/dist/block-library.js:41294
+#: wp-includes/js/dist/edit-site.js:46143 wp-includes/js/dist/editor.js:10430
+#: wp-includes/js/dist/editor.js:48204 wp-includes/js/dist/editor.js:48228
+#: wp-admin/includes/ajax-actions.php:2280
+#: wp-admin/includes/class-wp-posts-list-table.php:1211
+#: wp-admin/includes/class-wp-posts-list-table.php:1994
+#: wp-admin/includes/meta-boxes.php:112 wp-admin/includes/meta-boxes.php:152
+#: wp-admin/js/post.js:840
+msgid "Published"
+msgstr "Veröffentlicht"
+
+#: wp-includes/admin-bar.php:349
+msgid "Log Out"
+msgstr "Abmelden"
 
 #. translators: Indicating that the navigation link is a Draft.
 #: wp-includes/post.php:1324 wp-includes/post.php:1345

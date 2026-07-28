@@ -155,3 +155,24 @@
 	color: var(--color-text-muted);
 	font-size: 1rem;
 }
+
+
+
+.payment-methods {
+	align-items: center;
+    justify-content: space-between;
+}
+
+
+.payment-methods img {
+	display: grid;
+	min-height: 3rem;
+	max-height: 4rem;
+	width: fit-content;
+	object-fit: contain;
+	margin-right: 0.5rem;
+	margin-left: auto;
+	align-items: right;
+    justify-content: space-between;
+	padding: 0.5rem 0;
+}
