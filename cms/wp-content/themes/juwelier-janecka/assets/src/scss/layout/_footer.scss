@@ -206,7 +206,7 @@ $footer-border:      $color-primary;
 .site-footer__credit {
     font-size:      var(--text-xs);
     letter-spacing: 0.05em;
-    text-transform: uppercase;
+    text-transform: none; //vorher: uppercase;
     color:          $footer-text;
     margin:         0;
 

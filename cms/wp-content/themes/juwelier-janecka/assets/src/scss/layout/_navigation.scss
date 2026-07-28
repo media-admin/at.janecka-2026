@@ -574,7 +574,7 @@
     position: relative;
     z-index:  9999;
 
-    background-color: $color-dark !important;
+    background-color: var( --color-dark, #1a1a1a ) !important;
     color: #fff !important;
 
     border-left: 0px !important;
@@ -611,7 +611,7 @@
     display: block;
     width: 100%;
     min-height: 2.5rem;
-    background-color: var( --color-dark, #1a1a1a );
+    background-color: var( --color-dark, #1a1a1a ) !important;
 }
 
 // ── Notifications Banner ──────────────────────────────────────────────────────
@@ -619,6 +619,7 @@
     min-height: 40px;
     display:    flex;
     align-items: center;
+    background-color: var( --color-dark, #1a1a1a ) !important;
 
     .notification--info {
         width:       100%;
