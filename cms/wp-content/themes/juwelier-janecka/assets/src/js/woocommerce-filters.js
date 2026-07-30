@@ -269,10 +269,14 @@ import noUiSlider from 'nouislider';
 
 			// Ergebnis-Anzahl aktualisieren
 			if ( countEl ) {
-				const n    = res.data.found_posts;
-				const text = n === 1
+				const n       = res.data.found_posts;
+				const current = res.data.current  || 1;
+				const perPage = res.data.per_page || 36;
+				const start   = n === 0 ? 0 : ( current - 1 ) * perPage + 1;
+				const end     = Math.min( current * perPage, n );
+				const text    = n === 1
 					? '1 Ergebnis wird angezeigt'
-					: `1–${ Math.min( n, 12 ) } von ${ n } Ergebnissen werden angezeigt`;
+					: `${ start }–${ end } von ${ n } Ergebnissen werden angezeigt`;
 				countEl.innerHTML = `<p class="woocommerce-result-count">${ text }</p>`;
 			}
 
@@ -290,6 +294,15 @@ import noUiSlider from 'nouislider';
 		const attributes = {};
 
 		for ( const [ key, value ] of formData.entries() ) {
+			// WooCommerce's woocommerce_catalog_ordering() rendert ein eigenes,
+			// verschachteltes <form> mit einem hidden "paged"-Feld (Wert immer "1").
+			// Da HTML kein Nesting von <form>-Elementen erlaubt, "flacht" der Browser
+			// dieses verschachtelte Formular in unser äußeres .js-filter-form ab,
+			// wodurch new FormData(form) dieses Fremd-Feld mit einliest und unseren
+			// korrekten paged-Parameter überschreiben würde. Daher hier ignorieren —
+			// der übergebene paged-Parameter hat immer Vorrang.
+			if ( key === 'paged' ) continue;
+
 			const attrMatch = key.match( /^attributes\[(.+?)\]\[\]$/ );
 			if ( attrMatch ) {
 				const attr = attrMatch[1];
