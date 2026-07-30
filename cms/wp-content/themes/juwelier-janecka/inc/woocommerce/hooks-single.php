@@ -165,18 +165,21 @@ function janecka_single_sku_delivery(): void {
     }
     echo '</div>';
 
+    
+    if ( $delivery ) {
+        echo '<div class="single-product__meta-row">';
+            echo '<span class="single-product__delivery">';
+            echo '<span class="single-product__meta-label">' . esc_html__( 'Lieferzeit', 'juwelier-janecka' ) . '</span>';
+            echo esc_html( $delivery );
+            echo '</span>';
+        echo '</div>';
+    }
+   
+
     $excerpt = $product->get_short_description();
     if ( $excerpt ) {
         echo '<div class="product-short-description">' . wp_kses_post( $excerpt ) . '</div>';
     }
-    echo '<div class="single-product__meta-row">';
-    if ( $delivery ) {
-        echo '<span class="single-product__delivery">';
-        echo '<span class="single-product__meta-label">' . esc_html__( 'Lieferzeit', 'juwelier-janecka' ) . '</span>';
-        echo esc_html( $delivery );
-        echo '</span>';
-    }
-    echo '</div>';
 }
 
 // ===========================================================================
