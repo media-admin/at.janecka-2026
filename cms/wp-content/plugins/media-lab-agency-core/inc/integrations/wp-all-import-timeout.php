@@ -1,6 +1,6 @@
 <?php
 /**
- * WP All Import - Image Download Timeout Fix (Janecka Interim)
+ * WP All Import - Image Download Timeout Fix
  *
  * Erhöht den Timeout für den Bilder-Download von WP All Import über den
  * dedizierten Filter 'pmxi_image_download_timeout' (30s statt Default 5s).
@@ -11,12 +11,7 @@
  * Effekt auf andere HTTP-Requests der Website.
  *
  * Siehe auch: inc/integrations/wp-all-import-custom-download.php für den
- * zusätzlichen Fix bei User-Agent-basiertem Blocking durch CDNs/WAFs
- * (z. B. bei union-glashuette.com beobachtet).
- *
- * INTERIMSLÖSUNG: Bei Starter-Kit-Backport nach media-lab-agency-core
- * diese Datei wieder entfernen (function_exists() verhindert zwar
- * Kollisionen, aber zwei Kopien sollen nicht dauerhaft im Umlauf bleiben).
+ * zusätzlichen Fix bei User-Agent-basiertem Blocking durch CDNs/WAFs.
  *
  * Override falls 30s nicht reichen:
  *   add_filter( 'mlac_wpai_image_timeout_seconds', fn() => 60 );
