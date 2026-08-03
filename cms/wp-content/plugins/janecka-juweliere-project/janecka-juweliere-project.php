@@ -57,6 +57,9 @@ function medialab_project_init() {
     require_once MEDIALAB_PROJECT_PATH . 'inc/taxonomies.php';
     require_once MEDIALAB_PROJECT_PATH . 'inc/acf-config.php';
     require_once MEDIALAB_PROJECT_PATH . 'inc/shortcodes.php';
+    require_once MEDIALAB_PROJECT_PATH . 'inc/integrations/wp-all-import-timeout.php';
+    require_once MEDIALAB_PROJECT_PATH . 'inc/integrations/wp-all-import-custom-download.php';
+    
 }
 add_action('plugins_loaded', 'medialab_project_init', 10);
 
