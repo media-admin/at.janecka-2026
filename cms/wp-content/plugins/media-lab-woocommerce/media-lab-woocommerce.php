@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Media Lab WooCommerce
- * Plugin URI:  https://media-lab.de
+ * Plugin URI:  https://www.media-lab.at
  * Description: WooCommerce integration for Media Lab Agency sites
  * Version:     1.0.0
  * Author:      Media Lab
@@ -20,6 +20,7 @@ require_once MEDIA_LAB_WC_PATH . 'inc/ajax-search-wc.php';
 require_once MEDIA_LAB_WC_PATH . 'inc/ajax-load-more-wc.php';
 require_once MEDIA_LAB_WC_PATH . 'inc/enqueue.php';
 require_once MEDIA_LAB_WC_PATH . 'inc/catalog-mode.php';
+require_once MEDIA_LAB_WC_PATH . 'inc/shop-products-per-page.php';
 
 // WooCommerce Theme Support
 add_action('after_setup_theme', function() {
@@ -35,6 +36,7 @@ require_once MEDIA_LAB_WC_PATH . 'inc/configurator/class-configurator.php';
 // ── Medialab WooCommerce Filters ─────────────────────────────────────────────
 add_action( 'plugins_loaded', function() {
     if ( ! class_exists( 'WooCommerce' ) ) return;
+    require_once MEDIA_LAB_WC_PATH . 'inc/hpos-product-type-cache-fix.php';
     require_once MEDIA_LAB_WC_PATH . 'inc/filters/filter-config.php';
     require_once MEDIA_LAB_WC_PATH . 'inc/filters/acf-fields.php';
     require_once MEDIA_LAB_WC_PATH . 'inc/filters/ajax-handlers.php';

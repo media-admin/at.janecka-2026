@@ -18,22 +18,33 @@ add_action( 'wp_ajax_nopriv_mlwf_filter_products', 'mlwf_ajax_filter_products' )
 add_action( 'wp_ajax_janecka_filter_products',        'mlwf_ajax_filter_products' );
 add_action( 'wp_ajax_nopriv_janecka_filter_products', 'mlwf_ajax_filter_products' );
 
-// Theme-Alias (ajax_filter_posts)
+// Theme-Alias (ajax_filter_posts) — WEITERHIN NÖTIG, siehe
+// assets/src/js/components/ajax-filters.js im Theme (sendet action=ajax_filter_posts)
 add_action( 'wp_ajax_ajax_filter_posts',        'mlwf_ajax_filter_products' );
 add_action( 'wp_ajax_nopriv_ajax_filter_posts', 'mlwf_ajax_filter_products' );
 
 function mlwf_ajax_filter_products(): void {
-	// Beide Nonce-Actions akzeptieren (Plugin + Theme)
-	$nonce_action = isset( $_POST['nonce'] ) ? 'mlwf_filter_nonce' : '';
+	// Beide Nonce-Actions akzeptieren (Plugin + Theme) — Theme erzeugt Nonce
+	// via wp_create_nonce('ajax_filters_nonce') in inc/enqueue.php, daher
+	// NICHT auf check_ajax_referer('mlwf_filter_nonce') allein reduzieren.
 	if ( ! check_ajax_referer( 'mlwf_filter_nonce', 'nonce', false ) &&
 	     ! check_ajax_referer( 'ajax_filters_nonce', 'nonce', false ) ) {
 		wp_send_json_error( 'Invalid nonce', 403 );
 	}
 
-	// GZD-Duplikat-Fix — 'wp'-Hook feuert bei admin-ajax.php nicht,
-	// daher hier zusätzlich manuell entfernen (Funktion aus Theme: hooks-archive.php)
-	if ( function_exists( 'janecka_remove_gzd_loop_hooks' ) ) {
-		janecka_remove_gzd_loop_hooks();
+	// ── GZD Loop-Hooks bei AJAX-Pagination entfernen ────────────────────────
+	//
+	// Der 'wp'-Hook (über den janecka_remove_gzd_loop_hooks() im Theme
+	// normalerweise läuft) feuert NICHT bei admin-ajax.php-Requests, wodurch
+	// GZD-Standard-Hooks bei AJAX-paginierten Seiten (paged >= 2) doppelt
+	// ausgegeben würden. Generischer Plugin-Fix ersetzt die bisherige
+	// Theme-Funktions-Abhängigkeit (janecka_remove_gzd_loop_hooks()).
+	if ( function_exists( 'WC_germanized' ) && apply_filters( 'mlwf_remove_gzd_loop_hooks_on_ajax', true ) ) {
+		remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_tax_info', 6 );
+		remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_shipping_costs_info', 7 );
+		remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_delivery_time_info', 8 );
+		remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_product_units', 9 );
+		remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_gzd_template_loop_product_units', 9 );
 	}
 
 	$category_slug = sanitize_text_field( $_POST['category']      ?? '' );
@@ -119,32 +130,24 @@ function mlwf_ajax_filter_products(): void {
 	$args = array_merge( [
 		'post_type'      => 'product',
 		'post_status'    => 'publish',
-		'posts_per_page' => (int) get_option( 'posts_per_page_shop', 36 ),
+		// Vereinheitlicht mit shop-products-per-page.php: eine Option statt
+		// zweier getrennter (vormals posts_per_page_shop), damit "Produkte
+		// pro Seite" auf normaler Shopseite UND bei AJAX-Filterung konsistent
+		// bleibt, statt bei zwei unabhängigen Optionen auseinanderzulaufen.
+		'posts_per_page' => (int) get_option( 'mlw_products_per_page', 12 ),
 		'paged'          => $paged,
 		'tax_query'      => $tax_query,
 		'meta_query'     => $meta_query,
 	], $order_args );
 
 	// HPOS-Fix: Produkttyp-Term-Cache primen, BEVOR WooCommerce während der
-	// eigentlichen Query volle Produktobjekte lädt. Ein Priming NACH der
-	// vollständigen WP_Query kommt zu spät — WooCommerce lädt bereits
-	// während der Query-Ausführung selbst Produktobjekte (vermutlich für
-	// Lagerbestand-/Sichtbarkeitsfilter bei variablen Produkten über einen
-	// eigenen 'pre_get_posts'-Hook), was WC_Product_Data_Store_CPT's
-	// eigenen 'products'-Cache mit dem falschen Typ ("simple" statt z.B.
-	// "variable") vorbefüllt (verifiziert per WP-CLI, Juli 2026 — siehe
-	// hooks-single.php für den identischen Bug im Single-Product-Kontext).
-	//
-	// Lösung: Zuerst eine reine ID-Query (fields=ids) ausführen — dabei
-	// werden KEINE vollständigen Produktobjekte instanziiert — und den
-	// Term-Cache für diese IDs primen. Erst danach die eigentliche
-	// Produkt-Query mit denselben Args ausführen.
-	$id_query = new WP_Query( array_merge( $args, [ 'fields' => 'ids' ] ) );
-	foreach ( $id_query->posts as $post_id ) {
-		get_the_terms( $post_id, 'product_type' );
-	}
-
-	$query = new WP_Query( $args );
+	// eigentlichen Query volle Produktobjekte lädt. Nutzt jetzt den zentralen
+	// Helper aus inc/hpos-product-type-cache-fix.php statt manuellem Priming
+	// hier vor Ort. NICHT weglassbar — medialab_prime_archive_product_type_cache()
+	// (pre_get_posts) deckt AJAX-Handler-Queries NICHT ab (is_main_query()-
+	// Guard schließt sie explizit aus), daher bleibt eigenes Priming hier
+	// weiterhin nötig (siehe Doku-Kommentar in hpos-product-type-cache-fix.php).
+	$query = medialab_prime_and_query_products( $args );
 
 	ob_start();
 
@@ -213,7 +216,7 @@ function mlwf_ajax_filter_products(): void {
 		'found_posts' => $query->found_posts,
 		'max_pages'   => $query->max_num_pages,
 		'current'     => $paged,
-		'per_page'    => (int) get_option( 'posts_per_page_shop', 36 ),
+		'per_page'    => (int) get_option( 'mlw_products_per_page', 12 ),
 	] );
 }
 
@@ -229,8 +232,7 @@ add_action( 'wp_ajax_janecka_get_price_range',        'mlwf_ajax_get_price_range
 add_action( 'wp_ajax_nopriv_janecka_get_price_range', 'mlwf_ajax_get_price_range' );
 
 function mlwf_ajax_get_price_range(): void {
-	// Beide Nonce-Actions akzeptieren (Plugin + Theme)
-	$nonce_action = isset( $_POST['nonce'] ) ? 'mlwf_filter_nonce' : '';
+	// Beide Nonce-Actions akzeptieren (Plugin + Theme) — siehe Begründung oben
 	if ( ! check_ajax_referer( 'mlwf_filter_nonce', 'nonce', false ) &&
 	     ! check_ajax_referer( 'ajax_filters_nonce', 'nonce', false ) ) {
 		wp_send_json_error( 'Invalid nonce', 403 );
