@@ -76,48 +76,104 @@ function productConfigurator(initialData) {
             } else {
                 this.currentStep++;
             }
+            this.scrollToConfiguratorTop();
         },
         
         prevStep() {
             if (this.currentStep > 1) {
                 this.currentStep--;
                 this.errors = [];
+                this.scrollToConfiguratorTop();
             }
         },
         
         goToStep(stepNumber) {
             this.currentStep = stepNumber;
             this.errors = [];
+            this.scrollToConfiguratorTop();
+        },
+
+        // Scrollt beim Schrittwechsel gezielt an den Anfang des Konfigurators,
+        // statt es dem Browser zu überlassen: Steps mit stark unterschiedlicher
+        // Höhe (z.B. der Mengen-Step mit Staffelpreis-Tabelle) verschieben beim
+        // Reflow sonst die Seite unvorhersehbar, was wie ein Sprung ans
+        // Seitenende wirkt.
+        scrollToConfiguratorTop() {
+            this.$nextTick(() => {
+                const el = this.$root.closest('.product-configurator') || this.$root;
+                if (el && el.scrollIntoView) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
         },
         
         canProceed() {
             const currentStepData = this.steps[this.currentStep - 1];
-            
-            if (!currentStepData.required) {
+
+            // Zusammenfassungs-Schritt (currentStep === totalSteps + 1) hat KEINEN
+            // Eintrag im steps-Array - hier ist "Weiter" ohnehin ausgeblendet
+            // (x-show), aber Alpine wertet :disabled trotzdem bei jeder
+            // Reaktivitäts-Änderung aus. Ohne diese Absicherung crasht das bei
+            // jedem Tastendruck im letzten Formularfeld vor der Zusammenfassung.
+            if (!currentStepData) {
                 return true;
             }
-            
-            // Contact Form ZUERST prüfen
-            if (currentStepData.step_type === 'contact_form') {
-                return this.config['customer_name'] && 
-                       this.config['customer_name'].trim() !== '' &&
-                       this.config['customer_email'] && 
-                       this.config['customer_email'].trim() !== '';
+
+            return this.isStepValid(currentStepData);
+        },
+
+        // Prüft einen einzelnen Step auf Vollständigkeit (unabhängig davon, ob
+        // es der AKTUELLE Step ist) - wiederverwendet von canProceed() (nur
+        // aktueller Step) und isConfigurationComplete() (ALLE Pflicht-Steps,
+        // für die "ab"-Preis-Anzeige, siehe wizard.php Live-Preisvorschau).
+        isStepValid(stepData) {
+            if (!stepData.required) {
+                return true;
             }
-            
-            const value = this.config[currentStepData.step_id];
-            
-            if (currentStepData.step_type === 'checkbox') {
+
+            // Contact Form ZUERST prüfen
+            if (stepData.step_type === 'contact_form') {
+                if (!this.config['customer_name'] || this.config['customer_name'].trim() === '') return false;
+                if (!this.config['customer_email'] || this.config['customer_email'].trim() === '') return false;
+
+                // Konfigurierte Pflicht-Zusatzfelder (z.B. "Firma") prüfen -
+                // vorher wurde hier nur Name/E-Mail geprüft, wodurch man mit
+                // "Zur Zusammenfassung" weiterkommen konnte, obwohl Pflicht-
+                // Zusatzfelder oder die Datenschutz-Checkbox noch fehlten.
+                const requiredKeys = (typeof configuratorData !== 'undefined' && configuratorData.requiredExtraFieldKeys) || [];
+                for (const key of requiredKeys) {
+                    const val = this.config[key];
+                    if (val === undefined || val === null || val === '' || val === false) return false;
+                }
+
+                if (typeof configuratorData !== 'undefined' && configuratorData.privacyRequired && !this.config['privacy_consent']) {
+                    return false;
+                }
+
+                return true;
+            }
+
+            const value = this.config[stepData.step_id];
+
+            if (stepData.step_type === 'checkbox') {
                 return value && value.length > 0;
-            } else if (currentStepData.step_type === 'size_matrix') {
-                return this.getSizeMatrixTotal(currentStepData.step_id) > 0;
-            } else if (currentStepData.step_type === 'number') {
+            } else if (stepData.step_type === 'size_matrix') {
+                return this.getSizeMatrixTotal(stepData.step_id) > 0;
+            } else if (stepData.step_type === 'number') {
                 const numValue = parseInt(value);
-                const minValue = parseInt(currentStepData.min_value) || 0;
+                const minValue = parseInt(stepData.min_value) || 0;
                 return !isNaN(numValue) && numValue >= minValue;
             } else {
                 return value !== '' && value !== null && value !== undefined;
             }
+        },
+
+        // Sind ALLE Pflicht-Steps ausgefüllt (nicht nur der aktuelle)?
+        // Steuert die "ab"-Vorsilbe der Live-Preisvorschau (siehe wizard.php):
+        // solange noch Pflichtangaben fehlen, ist der angezeigte Preis nur ein
+        // Ausgangswert ("ab X €"), kein finaler Preis.
+        isConfigurationComplete() {
+            return this.steps.every((step) => this.isStepValid(step));
         },
         
         // Field Changes
@@ -286,8 +342,17 @@ function productConfigurator(initialData) {
         },
         
         calculateTierPrice(discountPercent) {
+            // Muss exakt derselben Logik folgen wie class-price-calculator.php:
+            // MwSt. nur aufschlagen, wenn der Shop laut WooCommerce-Einstellung
+            // (woocommerce_tax_display_shop) Bruttopreise anzeigt - sonst bleibt
+            // es netto, damit die Tabelle zur restlichen Shop-Darstellung passt.
             const price = this.priceBreakdown ? this.priceBreakdown.subtotal : this.basePrice;
-            const discounted = price * (1 - discountPercent / 100);
+            const taxRate = this.priceBreakdown ? this.priceBreakdown.tax_rate : 0;
+            const showGross = this.priceBreakdown && this.priceBreakdown.tax_display_mode === 'incl';
+            let discounted = price * (1 - discountPercent / 100);
+            if (showGross) {
+                discounted = discounted * (1 + taxRate / 100);
+            }
             return this.formatPrice(discounted);
         },
         
@@ -340,6 +405,70 @@ function productConfigurator(initialData) {
             
             return items;
         },
+
+        // Zur Wunschliste hinzufügen (statt Anfrage/Warenkorb)
+        async addToWishlist() {
+            this.isProcessing = true;
+            this.errors = [];
+
+            // Optionale "Nachricht"-Felder ermitteln: ALLE textarea/text-Steps
+            // AUSSERHALB des Kontaktformulars (z.B. "Besondere Wünsche"), damit
+            // sie beim Übernehmen in die Wunschliste als EINE kombinierte
+            // Nachricht mitgeschickt werden - falls ein Produkt mehrere solcher
+            // Felder hat, statt nur das erste zu übernehmen. Die Step-Keys sind
+            // projektspezifisch (z.B. "anmerkungen"), daher generisch über den
+            // Step-Typ statt hartcodiert ermittelt.
+            const messageSteps = this.steps.filter(
+                (s) => (s.step_type === 'textarea' || s.step_type === 'text') && s.step_type !== 'contact_form'
+            );
+            const messageValue = messageSteps
+                .map((s) => {
+                    const val = (this.config[s.step_id] || '').toString().trim();
+                    if (!val) return '';
+                    // Label voranstellen, sobald mehr als ein Feld befüllt ist -
+                    // bei nur einem Feld reicht der reine Wert (kein "Label: " nötig).
+                    return messageSteps.length > 1 ? `${s.step_label}: ${val}` : val;
+                })
+                .filter((v) => v !== '')
+                .join('\n\n');
+
+            try {
+                const response = await fetch(configuratorData.ajax_url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        action: 'mlw_wishlist_add',
+                        nonce: configuratorData.wishlistNonce,
+                        product_id: this.productId,
+                        quantity: this.config.quantity || 1,
+                        config: JSON.stringify(this.config),
+                        message: messageValue
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('✅ Zur Wunschliste hinzugefügt!');
+                    if (typeof mlwWishlist !== 'undefined' && data.data && typeof data.data.count !== 'undefined') {
+                        mlwWishlist.count = data.data.count;
+                        document.querySelectorAll('.mlw-wishlist-count').forEach(function (el) {
+                            el.textContent = data.data.count;
+                        });
+                    }
+                    window.location.href = '/';
+                } else {
+                    this.errors = [(data.data && data.data.message) || 'Fehler beim Hinzufügen zur Wunschliste'];
+                }
+            } catch (error) {
+                console.error('Wishlist error:', error);
+                this.errors = ['Fehler beim Hinzufügen zur Wunschliste. Bitte versuchen Sie es erneut.'];
+            } finally {
+                this.isProcessing = false;
+            }
+        },
         
         // Send Inquiry (statt Add to Cart)
         async sendInquiry() {
@@ -352,8 +481,15 @@ function productConfigurator(initialData) {
                     name: this.config.customer_name || '',
                     email: this.config.customer_email || '',
                     phone: this.config.customer_phone || '',
-                    message: this.config.notes || ''
+                    message: this.config.notes || '',
+                    privacy_consent: !!this.config.privacy_consent
                 };
+
+                // Dynamisch konfigurierte Zusatzfelder generisch mitsenden
+                // (Feld-Keys kommen aus den Inquiry-Einstellungen, siehe class-configurator.php enqueue_scripts()).
+                (configuratorData.extraFieldKeys || []).forEach((key) => {
+                    contactData[key] = this.config[key] || '';
+                });
                 
                 const response = await fetch(configuratorData.ajax_url, {
                     method: 'POST',

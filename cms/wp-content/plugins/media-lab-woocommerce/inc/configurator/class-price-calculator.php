@@ -27,9 +27,20 @@ class MediaLab_Price_Calculator {
     }
     
     /**
-     * Get detailed price breakdown
+     * Get detailed price breakdown.
+     *
+     * WICHTIG: Nutzt konsequent WooCommerce's eigene Steuer-Funktionen
+     * (wc_get_price_excluding_tax()/wc_get_price_including_tax()) statt
+     * eines hartcodierten Steuersatzes. Dadurch werden automatisch korrekt
+     * berücksichtigt: die Steuerklasse des jeweiligen Produkts, ob Preise im
+     * Shop netto oder brutto eingegeben werden (wc_prices_include_tax()),
+     * die in WooCommerce hinterlegten Steuersätze (Land/Zone), und WP
+     * Germanized (hakt sich über dieselben Standard-WooCommerce-Filter/
+     * -Funktionen ein wie jede andere Preisausgabe im Shop).
      */
     public function get_breakdown($config) {
+        $product = wc_get_product($this->product_id);
+
         $breakdown = array(
             'base_price' => $this->base_price,
             'additions' => array(),
@@ -38,9 +49,12 @@ class MediaLab_Price_Calculator {
             'tier_discount' => 0,
             'tier_discount_percent' => 0,
             'total_before_tax' => 0,
-            'tax_rate' => 20,
+            'tax_rate' => 0,
             'tax_amount' => 0,
             'total' => 0,
+            'unit_price' => 0,
+            'tax_display_mode' => get_option('woocommerce_tax_display_shop', 'excl'), // 'incl' oder 'excl' - Shop-Einstellung
+            'price_suffix' => '',
         );
         
         // Calculate additions from each step
@@ -51,6 +65,42 @@ class MediaLab_Price_Calculator {
             
             $selected_value = $config[$step_id];
             $options = $step['options'];
+
+            // Manche Step-Typen (contact_form, file_upload, textarea) haben
+            // bewusst KEINE Optionen (options === false) - ohne diese Prüfung
+            // crasht foreach() darauf mit einer PHP-Warnung.
+            if ( ! is_array( $options ) ) continue;
+
+            // size_matrix braucht eine eigene Berechnung: pro Größe eine
+            // EIGENE Menge, daher ein nach Menge GEWICHTETER Durchschnitts-
+            // Aufpreis pro Stück statt eines einzelnen Auswahl-Aufpreises wie
+            // bei select/radio/checkbox. Die generische matches_selection()-
+            // Logik darunter kann das nicht abbilden (sie vergleicht einzelne
+            // Werte, hier ist $selected_value aber eine Größe→Menge-Zuordnung).
+            if ( $step['step_type'] === 'size_matrix' && is_array( $selected_value ) ) {
+                $total_qty = 0;
+                $weighted_sum = 0;
+                foreach ( $options as $option ) {
+                    $size_key = $option['value'];
+                    $qty = isset( $selected_value[ $size_key ] ) ? intval( $selected_value[ $size_key ] ) : 0;
+                    if ( $qty <= 0 ) continue;
+
+                    $total_qty += $qty;
+                    $price_modifier = floatval( $option['price_modifier'] );
+                    $weighted_sum  += $price_modifier * $qty;
+
+                    if ( $price_modifier != 0 ) {
+                        $breakdown['additions'][] = array(
+                            'label' => $option['label'] . ' (' . $qty . 'x)',
+                            'price' => $price_modifier,
+                        );
+                    }
+                }
+                if ( $total_qty > 0 ) {
+                    $breakdown['subtotal'] += $weighted_sum / $total_qty;
+                }
+                continue; // Für diesen Step ist die generische Logik unten nicht zutreffend.
+            }
             
             // Find selected option and add price
             foreach ($options as $option) {
@@ -73,14 +123,60 @@ class MediaLab_Price_Calculator {
         $tier_data = $this->get_tier_discount($quantity);
         $breakdown['tier_discount_percent'] = $tier_data['discount_percent'];
         $breakdown['tier_discount'] = $breakdown['subtotal'] * $tier_data['discount_percent'];
-        
-        // Calculate total
-        $breakdown['total_before_tax'] = ($breakdown['subtotal'] - $breakdown['tier_discount']) * $quantity;
-        $breakdown['tax_amount'] = $breakdown['total_before_tax'] * ($breakdown['tax_rate'] / 100);
+
+        // Preis pro Stück nach Rabatt, in derselben Basis wie der Produktpreis
+        // im Shop eingegeben wird (netto oder brutto, je nach wc_prices_include_tax()).
+        $unit_price_after_discount = $breakdown['subtotal'] - $breakdown['tier_discount'];
+
+        if ( $product && wc_tax_enabled() && $product->is_taxable() ) {
+            // WooCommerce übernimmt die komplette Steuer-Logik (Steuerklasse,
+            // Land/Zone, Rundungsregeln) - wir geben nur den Preis pro Stück
+            // und die Menge mit, WooCommerce macht daraus netto/brutto korrekt.
+            $breakdown['total_before_tax'] = wc_get_price_excluding_tax( $product, array( 'qty' => $quantity, 'price' => $unit_price_after_discount ) );
+            $total_incl_tax                = wc_get_price_including_tax( $product, array( 'qty' => $quantity, 'price' => $unit_price_after_discount ) );
+            $breakdown['tax_amount']       = $total_incl_tax - $breakdown['total_before_tax'];
+
+            $unit_net   = wc_get_price_excluding_tax( $product, array( 'qty' => 1, 'price' => $unit_price_after_discount ) );
+            $unit_gross = wc_get_price_including_tax( $product, array( 'qty' => 1, 'price' => $unit_price_after_discount ) );
+
+            // Tatsächlichen Steuersatz aus WooCommerce ermitteln (für die Anzeige "MwSt. (X%)")
+            $tax_rates = WC_Tax::get_rates( $product->get_tax_class() );
+            $first_rate = ! empty( $tax_rates ) ? reset( $tax_rates ) : null;
+            $breakdown['tax_rate'] = $first_rate ? round( (float) $first_rate['rate'], 2 ) : 0;
+        } else {
+            // Steuern in WooCommerce deaktiviert oder Produkt nicht steuerpflichtig
+            $breakdown['total_before_tax'] = $unit_price_after_discount * $quantity;
+            $breakdown['tax_amount']       = 0;
+            $unit_net   = $unit_price_after_discount;
+            $unit_gross = $unit_price_after_discount;
+            $breakdown['tax_rate'] = 0;
+        }
+
         $breakdown['total'] = $breakdown['total_before_tax'] + $breakdown['tax_amount'];
-        
-        // Price per unit after discount
-        $breakdown['unit_price'] = $breakdown['subtotal'] - ($breakdown['subtotal'] * $tier_data['discount_percent']);
+
+        // Anzeige-Preis pro Stück entsprechend der Shop-Einstellung wählen
+        // (woocommerce_tax_display_shop: 'incl' oder 'excl'), damit die
+        // Live-Vorschau/Staffeltabelle exakt dasselbe zeigt wie der Rest des Shops.
+        $breakdown['unit_price'] = $breakdown['tax_display_mode'] === 'incl' ? $unit_gross : $unit_net;
+
+        // Standard-WooCommerce-Hinweismechanismus (wc_get_price_suffix()) - läuft
+        // bewusst UNABHÄNGIG von wc_tax_enabled(), da der Hinweistext auch bei
+        // deaktivierten Steuern erscheinen soll (siehe inc/price-suffix.php).
+        // WICHTIG: wc_get_price_suffix() gehört zu WooCommerce's Frontend-
+        // Funktionen, die bei reinen Ajax-Requests (admin-ajax.php) nicht
+        // zuverlässig geladen sind - das führte zu einem fatalen "Call to
+        // undefined function"-Fehler bei JEDER Ajax-Preisberechnung und jedem
+        // Absenden (Anfrage & Wunschliste). Datei bei Bedarf gezielt nachladen,
+        // statt den Hinweistext in der Live-Vorschau einfach wegzulassen.
+        if ( ! function_exists( 'wc_get_price_suffix' ) && defined( 'WC_ABSPATH' ) ) {
+            $wc_price_functions = WC_ABSPATH . 'includes/wc-price-functions.php';
+            if ( file_exists( $wc_price_functions ) ) {
+                require_once $wc_price_functions;
+            }
+        }
+        if ( $product && function_exists( 'wc_get_price_suffix' ) ) {
+            $breakdown['price_suffix'] = wc_get_price_suffix( $product, $breakdown['unit_price'], 1 );
+        }
         
         return $breakdown;
     }
