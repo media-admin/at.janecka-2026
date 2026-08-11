@@ -109,6 +109,7 @@ class MediaLab_Configurator_ACF_Fields {
                                 'file_upload' => 'Datei-Upload',
                                 'size_matrix' => 'Größen-Matrix (für Textilien)',
                                 'color_picker' => 'Farbauswahl',
+                                'contact_form' => 'Kontaktformular',
                             ),
                             'default_value' => 'select',
                             'required' => 1,
