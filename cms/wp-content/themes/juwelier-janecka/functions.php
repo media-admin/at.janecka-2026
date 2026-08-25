@@ -351,7 +351,7 @@ add_action( 'wp_head', function() {
 
 
 
-
+add_filter( 'mlw_wishlist_auto_loop_button', '__return_false' );
 
 
 // Dark Mode deaktivieren — Theme unterstützt nur Light Mode
@@ -388,3 +388,19 @@ add_action( 'wp_footer', function() {
     </script>
     <?php
 }, 99 );
+
+
+// Automatischen Single-Product-Button abschalten - wir platzieren ihn
+// manuell über dem Produktbild statt unter dem "In den Warenkorb"-Button.
+add_filter( 'mlw_wishlist_auto_single_button', '__return_false' );
+
+add_action( 'woocommerce_product_thumbnails', 'janecka_wishlist_button_over_gallery', 5 );
+function janecka_wishlist_button_over_gallery(): void {
+    global $product;
+    if ( ! $product instanceof WC_Product ) return;
+    if ( ! class_exists( 'MediaLab_Wishlist_Frontend' ) ) return;
+
+    echo '<div class="product-gallery__wishlist-btn">'
+        . MediaLab_Wishlist_Frontend::render_button_html( $product->get_id(), true ) // phpcs:ignore WordPress.Security.EscapeOutput -- bereits in render_button_html() escaped
+        . '</div>';
+}

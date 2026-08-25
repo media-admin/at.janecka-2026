@@ -274,42 +274,40 @@ ul.products.wc-products-grid {
     display:         flex;
     align-items:     center;
     justify-content: space-between;
-    gap:             0.5rem;
 
     .product-card__subtitle {
         margin: 0;
-        flex:   1;
     }
 
     .product-card__wishlist-btn {
-        flex-shrink: 0;
+        .mlw-add-to-wishlist {
+            // Kreis-Rahmen + feste Breite/Höhe aus dem generischen Plugin-CSS
+            // (.mlw-add-to-wishlist--icon) überschreiben - hier soll nur ein
+            // kleines, randloses Icon inline in der Subtitle-Zeile sitzen.
+            display:     inline-flex;
+            align-items: center;
+            width:       auto;
+            height:      auto;
+            margin-top:  0;
+            padding:     0;
+            border:      none;
+            background:  none;
+            color:       var( --color-text-muted, #888 );
 
-        .tinv-wraper.tinvwl-loop-button-wrapper,
-        .tinv-wraper.tinvwl-above_thumb-add-to-cart {
-            display:    block !important;
-            visibility: visible !important;
-            position:   static !important;
-            opacity:    1 !important;
-            width:      auto !important;
-            height:     auto !important;
-            top:        auto !important;
-            left:       auto !important;
-            z-index:    auto !important;
-            margin:     0 !important;
-        }
+            &:hover {
+                color:   var( --color-text, #1a1a1a );
+                opacity: 1;
+            }
 
-        a.tinvwl_add_to_wishlist_button {
-            display:         flex !important;
-            visibility:      visible !important;
-            opacity:         1 !important;
-            width:           1.5rem !important;
-            height:          1.5rem !important;
-            align-items:     center !important;
-            justify-content: center !important;
-            color:           var( --color-text-muted, #888 );
-            font-size:       1rem;
+            .mlw-add-to-wishlist__icon {
+                width:  16px;
+                height: 16px;
+            }
 
-            &:hover { color: var( --color-text, #1a1a1a ); }
+            &.is-active .mlw-add-to-wishlist__icon {
+                fill:   #e11d48;
+                stroke: #e11d48;
+            }
         }
     }
 }

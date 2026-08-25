@@ -113,15 +113,20 @@ if ( function_exists('get_field') && get_field('scroll_progress_enabled', 'optio
                 <?php endif; ?>
 
                 <?php
-                $wishlist_url = function_exists( 'YITH_WCWL' )
-                    ? YITH_WCWL()->get_wishlist_url()
+                $wishlist_url = class_exists( 'MediaLab_Inquiry_Settings' )
+                    ? MediaLab_Inquiry_Settings::nav_wishlist_page_url()
                     : home_url( '/meine-wunschliste/' );
+                $wishlist_count = class_exists( 'MediaLab_Wishlist_Storage' ) ? MediaLab_Wishlist_Storage::count() : 0;
                 ?>
-                <a href="<?php echo esc_url( $wishlist_url ); ?>" class="header-icons__btn" aria-label="Wunschliste">
+                <?php if ( $wishlist_url ) : ?>
+                <a href="<?php echo esc_url( $wishlist_url ); ?>" class="header-icons__btn header-icons__btn--wishlist" aria-label="Wunschliste">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                     </svg>
+                    <span class="header-icons__badge mlw-wishlist-count" style="<?php echo $wishlist_count > 0 ? '' : 'display:none;'; ?>"><?php echo esc_html( $wishlist_count ); ?></span>
+
                 </a>
+                <?php endif; ?>
 
                 <?php if ( class_exists('WooCommerce') ) : ?>
                 <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="header-icons__btn header-icons__cart" aria-label="Warenkorb">

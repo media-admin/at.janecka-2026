@@ -110,6 +110,7 @@ add_action( 'woocommerce_before_shop_loop', function() {
 
 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count',     20 );
 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+remove_action( 'woocommerce_before_shop_loop', 'mlwf_render_filter_bar',       15 );
 
 
 // 1. Filter-Bar
@@ -324,8 +325,8 @@ function janecka_product_card_subtitle(): void {
         <div class="product-card__wishlist-btn">
             <?php
             global $product;
-            if ( $product && function_exists( 'tinvwl_view_addto_htmlloop' ) ) {
-                tinvwl_view_addto_htmlloop();
+            if ( $product && class_exists( 'MediaLab_Wishlist_Frontend' ) ) {
+                echo MediaLab_Wishlist_Frontend::render_button_html( $product->get_id() ); // phpcs:ignore WordPress.Security.EscapeOutput -- bereits escaped
             }
             ?>
         </div>
