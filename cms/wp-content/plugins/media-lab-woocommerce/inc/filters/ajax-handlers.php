@@ -8,6 +8,31 @@
 defined( 'ABSPATH' ) || exit;
 
 // ---------------------------------------------------------------------------
+// Nonce-Prüfung mit Fallback auf abweichenden Nonce-Action-Namen
+// ---------------------------------------------------------------------------
+
+/**
+ * Prüft den Filter-Nonce gegen die eigenen ('mlwf_filter_nonce') UND eine
+ * bei manchen Theme-Konventionen abweichende ('ajax_filters_nonce')
+ * Nonce-Action - z.B. Janeckas Theme erzeugt den Nonce unter letzterem
+ * Namen. Ohne diesen Fallback schlägt jeder Filter-Request bei solchen
+ * Projekten mit 403 fehl, obwohl die Anfrage selbst legitim ist.
+ *
+ * Bricht die Anfrage mit einer JSON-Fehlerantwort ab, falls keiner der
+ * beiden Nonces gültig ist (Verhalten bewusst analog zu check_ajax_referer()
+ * mit $die = true, nur eben mit zwei akzeptierten Action-Namen statt einem).
+ */
+function mlwf_verify_filter_nonce(): void {
+	$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
+
+	if ( wp_verify_nonce( $nonce, 'mlwf_filter_nonce' ) || wp_verify_nonce( $nonce, 'ajax_filters_nonce' ) ) {
+		return;
+	}
+
+	wp_send_json_error( __( 'Sicherheitsprüfung fehlgeschlagen. Bitte lade die Seite neu und versuche es erneut.', 'medialab-woo-filters' ), 403 );
+}
+
+// ---------------------------------------------------------------------------
 // Produkte filtern
 // ---------------------------------------------------------------------------
 
@@ -18,27 +43,30 @@ add_action( 'wp_ajax_nopriv_mlwf_filter_products', 'mlwf_ajax_filter_products' )
 add_action( 'wp_ajax_janecka_filter_products',        'mlwf_ajax_filter_products' );
 add_action( 'wp_ajax_nopriv_janecka_filter_products', 'mlwf_ajax_filter_products' );
 
-// Theme-Alias (ajax_filter_posts) — WEITERHIN NÖTIG, siehe
-// assets/src/js/components/ajax-filters.js im Theme (sendet action=ajax_filter_posts)
+// Theme-Alias: manche Theme-Konventionen (z.B. Janeckas Theme) senden den
+// AJAX-Filter-Request unter der Action 'ajax_filter_posts' statt
+// 'janecka_filter_products'/'mlwf_filter_products'. Zusätzlicher, rein
+// additiver Alias - wirkungslos für Projekte, die den Namen nicht nutzen,
+// schützt aber vor einem stillen Totalausfall der Filterfunktion bei
+// Projekten mit ähnlicher Theme-Konvention wie Janecka.
 add_action( 'wp_ajax_ajax_filter_posts',        'mlwf_ajax_filter_products' );
 add_action( 'wp_ajax_nopriv_ajax_filter_posts', 'mlwf_ajax_filter_products' );
 
 function mlwf_ajax_filter_products(): void {
-	// Beide Nonce-Actions akzeptieren (Plugin + Theme) — Theme erzeugt Nonce
-	// via wp_create_nonce('ajax_filters_nonce') in inc/enqueue.php, daher
-	// NICHT auf check_ajax_referer('mlwf_filter_nonce') allein reduzieren.
-	if ( ! check_ajax_referer( 'mlwf_filter_nonce', 'nonce', false ) &&
-	     ! check_ajax_referer( 'ajax_filters_nonce', 'nonce', false ) ) {
-		wp_send_json_error( 'Invalid nonce', 403 );
-	}
+	mlwf_verify_filter_nonce();
 
 	// ── GZD Loop-Hooks bei AJAX-Pagination entfernen ────────────────────────
 	//
-	// Der 'wp'-Hook (über den janecka_remove_gzd_loop_hooks() im Theme
-	// normalerweise läuft) feuert NICHT bei admin-ajax.php-Requests, wodurch
-	// GZD-Standard-Hooks bei AJAX-paginierten Seiten (paged >= 2) doppelt
-	// ausgegeben würden. Generischer Plugin-Fix ersetzt die bisherige
-	// Theme-Funktions-Abhängigkeit (janecka_remove_gzd_loop_hooks()).
+	// Projekte, die die GZD-Tax-/Shipping-/Delivery-Info manuell im
+	// Product-Card-Template rendern, deaktivieren die GZD-Standard-Loop-Hooks
+	// üblicherweise über den 'wp'-Action-Hook im Theme (da 'woocommerce_init'
+	// zu früh ist). Der 'wp'-Hook feuert aber NICHT bei admin-ajax.php-
+	// Requests, wodurch die GZD-Hooks hier weiterhin aktiv wären und die
+	// Info bei AJAX-paginierten Seiten (paged >= 2) doppelt ausgegeben würde.
+	// Projekte, die die GZD-Standard-Loop-Ausgabe ausdrücklich behalten
+	// wollen, können dies per
+	// add_filter( 'mlwf_remove_gzd_loop_hooks_on_ajax', '__return_false' )
+	// deaktivieren.
 	if ( function_exists( 'WC_germanized' ) && apply_filters( 'mlwf_remove_gzd_loop_hooks_on_ajax', true ) ) {
 		remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_tax_info', 6 );
 		remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_gzd_template_loop_shipping_costs_info', 7 );
@@ -131,22 +159,20 @@ function mlwf_ajax_filter_products(): void {
 		'post_type'      => 'product',
 		'post_status'    => 'publish',
 		// Vereinheitlicht mit shop-products-per-page.php: eine Option statt
-		// zweier getrennter (vormals posts_per_page_shop), damit "Produkte
-		// pro Seite" auf normaler Shopseite UND bei AJAX-Filterung konsistent
-		// bleibt, statt bei zwei unabhängigen Optionen auseinanderzulaufen.
-		'posts_per_page' => (int) get_option( 'mlw_products_per_page', 12 ),
+        // zweier getrennter, damit "Produkte pro Seite" auf normaler
+        // Shopseite UND bei AJAX-Filterung konsistent bleibt.
+        'posts_per_page' => (int) get_option( 'mlw_products_per_page', 12 ),
 		'paged'          => $paged,
 		'tax_query'      => $tax_query,
 		'meta_query'     => $meta_query,
 	], $order_args );
 
 	// HPOS-Fix: Produkttyp-Term-Cache primen, BEVOR WooCommerce während der
-	// eigentlichen Query volle Produktobjekte lädt. Nutzt jetzt den zentralen
-	// Helper aus inc/hpos-product-type-cache-fix.php statt manuellem Priming
-	// hier vor Ort. NICHT weglassbar — medialab_prime_archive_product_type_cache()
-	// (pre_get_posts) deckt AJAX-Handler-Queries NICHT ab (is_main_query()-
-	// Guard schließt sie explizit aus), daher bleibt eigenes Priming hier
-	// weiterhin nötig (siehe Doku-Kommentar in hpos-product-type-cache-fix.php).
+	// eigentlichen Query volle Produktobjekte lädt. NICHT weglassbar —
+	// medialab_prime_archive_product_type_cache() (pre_get_posts) deckt
+	// AJAX-Handler-Queries NICHT ab (is_main_query()-Guard schließt sie
+	// explizit aus), daher bleibt eigenes Priming hier weiterhin nötig
+	// (siehe Doku-Kommentar in hpos-product-type-cache-fix.php).
 	$query = medialab_prime_and_query_products( $args );
 
 	ob_start();
@@ -232,11 +258,10 @@ add_action( 'wp_ajax_janecka_get_price_range',        'mlwf_ajax_get_price_range
 add_action( 'wp_ajax_nopriv_janecka_get_price_range', 'mlwf_ajax_get_price_range' );
 
 function mlwf_ajax_get_price_range(): void {
-	// Beide Nonce-Actions akzeptieren (Plugin + Theme) — siehe Begründung oben
-	if ( ! check_ajax_referer( 'mlwf_filter_nonce', 'nonce', false ) &&
-	     ! check_ajax_referer( 'ajax_filters_nonce', 'nonce', false ) ) {
-		wp_send_json_error( 'Invalid nonce', 403 );
-	}
+	// Selber Nonce-Fallback wie mlwf_ajax_filter_products() - wird vom
+	// selben Filter-Bar-JS beim Öffnen des Preis-Sliders angefragt und
+	// wäre ohne den Fallback der gleichen 403-Falle ausgesetzt.
+	mlwf_verify_filter_nonce();
 
 	$category_slug = sanitize_text_field( $_POST['category'] ?? '' );
 	$brand_slug    = sanitize_text_field( $_POST['brand']    ?? '' );
