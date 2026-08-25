@@ -3,9 +3,9 @@
  * Plugin Name: Media Lab Agency Core
  * Plugin URI: https://github.com/media-admin/media-lab-starter-kit
  * Description: Core functionality for Media Lab agency websites. Provides shortcodes, security features, and admin customizations.
- * Version:           1.20.0
+ * Version:           1.25.0
  * Author: Media Lab
- * Author URI: https://medialab.at
+ * Author URI: https://media-lab.at
  * Text Domain: media-lab-core
  * Domain Path: /languages
  * Requires at least: 6.0
@@ -14,7 +14,7 @@
 
 if (!defined('ABSPATH')) { exit; }
 
-define('MEDIALAB_CORE_VERSION', '1.20.0');
+define('MEDIALAB_CORE_VERSION', '1.25.0');
 define('MEDIALAB_CORE_FILE', __FILE__);
 define('MEDIALAB_CORE_PATH', plugin_dir_path(__FILE__));
 define('MEDIALAB_CORE_URL', plugin_dir_url(__FILE__));
@@ -29,6 +29,7 @@ function medialab_core_init() {
     require_once MEDIALAB_CORE_PATH . 'inc/admin.php';
     require_once MEDIALAB_CORE_PATH . 'inc/helpers.php';
     require_once MEDIALAB_CORE_PATH . 'inc/ajax-search.php';
+    require_once MEDIALAB_CORE_PATH . 'inc/nav-search-icon.php';
     require_once MEDIALAB_CORE_PATH . 'inc/ajax-load-more.php';
     require_once MEDIALAB_CORE_PATH . 'inc/ajax-filters.php';
     require_once MEDIALAB_CORE_PATH . 'inc/svg-support.php';
@@ -40,6 +41,9 @@ function medialab_core_init() {
     require_once MEDIALAB_CORE_PATH . 'inc/notifications-cpt.php';
     require_once MEDIALAB_CORE_PATH . 'inc/notifications-shortcodes.php';
     require_once MEDIALAB_CORE_PATH . 'inc/acf-fields-gmap.php';
+    require_once MEDIALAB_CORE_PATH . '/inc/facebook-video-fields.php';
+    require_once MEDIALAB_CORE_PATH . '/inc/social-embed-fields.php';
+    require_once MEDIALAB_CORE_PATH . '/inc/youtube-embed-consent.php';
     require_once MEDIALAB_CORE_PATH . 'inc/top-header-order.php';
     require_once MEDIALAB_CORE_PATH . 'inc/login-style.php';
 
