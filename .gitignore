@@ -26,20 +26,23 @@
 /cms/wp-content/updraft/
 
 # ============================================
-# PLUGINS – Drittanbieter (nicht versionieren)
+# PLUGINS – alles ignorieren, nur Projekt-Plugin versionieren
+# (media-lab-* werden zentral im Starter Kit verwaltet)
 # ============================================
 /cms/wp-content/plugins/*
-/cms/wp-content/languages/plugins/
-/cms/wp-content/languages/themes/
-
-# Agentur-Plugins (werden versioniert)
-!/cms/wp-content/plugins/media-lab-agency-core/
-!/cms/wp-content/plugins/media-lab-analytics/
-!/cms/wp-content/plugins/media-lab-seo/
-!/cms/wp-content/plugins/media-lab-woocommerce/
-
-# Janecka Custom Plugin (wird versioniert)
 !/cms/wp-content/plugins/janecka-juweliere-project/
+
+# ============================================
+# LANGUAGES – Auto-Updates von Core/Plugins nicht versionieren
+# (Loco-Eigenübersetzungen bleiben versioniert, falls vorhanden)
+# ============================================
+/cms/wp-content/languages/*
+!/cms/wp-content/languages/loco/
+
+# ============================================
+# BACKUP-PLUGIN (ML Backup)
+# ============================================
+/cms/wp-content/mlbkp-*/
 
 # ============================================
 # THEMES
