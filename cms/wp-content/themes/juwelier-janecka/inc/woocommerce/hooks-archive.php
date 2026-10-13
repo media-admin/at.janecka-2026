@@ -445,20 +445,3 @@ add_action( 'pre_get_posts', function ( WP_Query $query ): void {
 		update_object_term_cache( $ids, 'product' );
 	}
 }, 25 );
-
-
-// ===========================================================================
-// 8d. SUCHE: Kategorien als Treffer (AUS)
-// ===========================================================================
-// Standard (Woo-Plugin ab 2.17.1): Treffer aus Produkten, Seiten und Beiträgen, dazu Produkte, deren
-// MARKE zum Suchbegriff passt. Kategorien zählen NICHT als Treffer.
-//
-// Wird der Block unten einkommentiert, findet die Suche zusätzlich alle Produkte der Kategorien, deren
-// Name den Suchbegriff enthält (wie "Suche in Kategorie" bei Advanced Woo Search):
-//   - "Eheringe" findet auch Produkte, in deren Titel das Wort nicht vorkommt (Fundstelle "Kategorie: Eheringe")
-//   - "ring" findet dafür auch alle Produkte der Kategorien Ringe, Eheringe, Ohrringe ... (439 statt 139 Treffer)
-// Wirkt auf Live-Suche, Ergebnisseite und Produktfilter (Treffer-IDs werden bis zu 5 Minuten zwischengespeichert).
-//
-// add_filter( 'mlw_search_taxonomies', function ( array $taxonomies ): array {
-//     return array_merge( $taxonomies, [ 'product_cat' ] );
-// } );
