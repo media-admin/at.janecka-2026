@@ -585,3 +585,14 @@
     margin:     0;
     box-sizing: border-box;
 }
+
+
+// ── Suche: Overlay-Preis linksbündig (Suche: Overlay-Preis) ─────────────────────
+// Der Preis stand mittig unter dem Titel; jetzt wie Typ-Label und Titel linksbündig.
+
+.search-overlay .ajax-search__results [class*='price'] {
+    align-self:    flex-start;
+    justify-self:  start;
+    margin-inline: 0;
+    text-align:    left;
+}
