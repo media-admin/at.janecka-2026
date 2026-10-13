@@ -409,41 +409,39 @@ function janecka_wc_pagination(): void {
     woocommerce_pagination();
 }
 
-// ===========================================================================
-// 9. SALE BADGE mit Prozentanzeige
-// ===========================================================================
 
-add_filter( 'woocommerce_sale_flash', function( $html, $post, $product ) {
-    $percentage = '';
-    if ( $product->is_type( 'variable' ) ) {
-        $percentages = [];
-        $prices      = $product->get_variation_prices();
-        foreach ( $prices['price'] as $key => $price ) {
-            if ( $prices['regular_price'][ $key ] !== $price ) {
-                $percentages[] = round( ( ( $prices['regular_price'][ $key ] - $price ) / $prices['regular_price'][ $key ] ) * 100 );
-            }
-        }
-        if ( ! empty( $percentages ) ) {
-            $percentage = max( $percentages ) . '%';
-        }
-    } elseif ( $product->is_on_sale() ) {
-        $regular = $product->get_regular_price();
-        $sale    = $product->get_sale_price();
-        if ( $regular && $sale ) {
-            $percentage = round( ( ( $regular - $sale ) / $regular ) * 100 ) . '%';
-        }
-    }
-    return $percentage ? '<span class="onsale">-' . $percentage . '</span>' : $html;
-}, 10, 3 );
 
 // ===========================================================================
-// 10. CART FRAGMENTS
+// 8b. PAGINATION der Suchergebnisseite: gleiche Pfeile und Seitenzahlen wie im Shop
 // ===========================================================================
 
-add_filter( 'woocommerce_add_to_cart_fragments', function( $fragments ) {
-    ob_start();
-    ?><span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span><?php
-    $fragments['.cart-count'] = ob_get_clean();
-    return $fragments;
+add_filter( 'ml_search_pagination_args', function ( array $args ): array {
+	return array_merge( $args, [
+		'prev_text' => '<span aria-hidden="true">&larr;</span><span class="screen-reader-text">' . __( 'Vorherige Seite', 'custom-theme' ) . '</span>',
+		'next_text' => '<span aria-hidden="true">&rarr;</span><span class="screen-reader-text">' . __( 'Nächste Seite', 'custom-theme' ) . '</span>',
+		'end_size'  => 3,
+		'mid_size'  => 3,
+	] );
 } );
-add_filter('loop_shop_per_page', function() { return 36; }, 20);
+
+
+// ===========================================================================
+// 8c. SUCHE: Produkttyp-Cache auch für Treffer der erweiterten Suche primen
+// ===========================================================================
+// Treffer, die nur die erweiterte Suche findet (SKU, Attribute, Kategorien ...), stehen nicht in der
+// ID-Query von janecka_prime_archive_product_type_cache(). Priorität 25: nach dem Core (prepare(), 20),
+// sonst wäre MediaLab_Serp_Search::extra_ids() noch leer.
+
+add_action( 'pre_get_posts', function ( WP_Query $query ): void {
+	if ( is_admin() || ! $query->is_main_query() || ! $query->is_search() ) {
+		return;
+	}
+	if ( ! class_exists( 'MediaLab_Serp_Search' ) || ! method_exists( 'MediaLab_Serp_Search', 'extra_ids' ) ) {
+		return;
+	}
+
+	$ids = MediaLab_Serp_Search::extra_ids();
+	if ( $ids ) {
+		update_object_term_cache( $ids, 'product' );
+	}
+}, 25 );

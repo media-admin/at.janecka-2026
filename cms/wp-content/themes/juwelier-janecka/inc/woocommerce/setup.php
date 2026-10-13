@@ -49,12 +49,8 @@ add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 add_action( 'wp_enqueue_scripts', 'janecka_woocommerce_assets' );
 
 function janecka_woocommerce_assets(): void {
-	if ( ! function_exists( 'is_woocommerce' ) ) {
-		return;
-	}
-
 	$is_shortcode_page = is_singular() && has_shortcode( get_post()->post_content ?? '', 'janecka_category_archive' );
-	if ( ! ( is_woocommerce() || is_cart() || is_checkout() || is_account_page() || $is_shortcode_page ) ) {
+	if ( ! ( is_woocommerce() || is_cart() || is_checkout() || is_account_page() || $is_shortcode_page || is_search() ) ) {
 		return;
 	}
 
@@ -99,17 +95,6 @@ function janecka_woocommerce_assets(): void {
 		);
 	}
 
-	// AJAX-URL & Nonce für JS
-	wp_localize_script( 'janecka-wc-filters', 'janeckaWC', [
-		'ajaxUrl'  => admin_url( 'admin-ajax.php' ),
-		'nonce'    => wp_create_nonce( 'mlwf_filter_nonce' ),
-		'currency' => get_woocommerce_currency_symbol(),
-		'i18n'     => [
-			'loading'     => __( 'Produkte werden geladen …', 'juwelier-janecka' ),
-			'noProducts'  => __( 'Keine Produkte gefunden.', 'juwelier-janecka' ),
-			'filterReset' => __( 'Filter zurücksetzen', 'juwelier-janecka' ),
-		],
-	] );
 }
 
 // ---------------------------------------------------------------------------

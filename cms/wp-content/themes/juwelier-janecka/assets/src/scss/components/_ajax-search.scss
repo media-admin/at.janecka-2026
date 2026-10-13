@@ -2,14 +2,55 @@
 
 // =============================================================================
 // AJAX Search
-// Version: 1.2.0 – Fluid Responsive System
+// Version: 1.4.0 – Dark Mode (Theme-Tokens), Meldungen im Container, Fokus-Styles
 //
-// Änderungen:
+// Änderungen v1.4.0:
+//   - Farben laufen über lokale Custom Properties (--ajax-search-*), die auf die
+//     Theme-Tokens (--color-*) zeigen und auf die Sass-Variablen zurückfallen.
+//     Vorher waren $color-white/-border/-gray-* statisch -> Dropdown blieb im
+//     Dark Mode hell. Die Zuordnung steht gebündelt am Anfang von .ajax-search.
+//   - &__no-results / &__error nicht mehr absolut positioniert: JS rendert sie in
+//     .ajax-search__results (eigener Rahmen, overflow-y: auto) - ein absolut
+//     positioniertes Kind mit top: calc(100% + …) wird dort vom Container
+//     abgeschnitten. Jetzt wie &__intro/&__hint im Fluss.
+//   - Eingabefeld: background/color/placeholder über Tokens (Dark Mode)
+//   - &__item: :focus-visible (Tastaturbedienung) wie :hover
+//   - &__results: max-height zusätzlich an Viewport gekoppelt (Nav-Overlay, Mobile)
+//
+// Version 1.3.1 – <mark> ohne seitliches Padding (zerriss Wörter beim Highlighten)
+//
+// Änderungen v1.3.1:
+//   - mark-Padding 0.2em / 0.15em → 0 ("Arbeits[jack]e" wurde optisch auseinandergerissen)
+//
+// Version 1.3.0 – Startertext, Mindestzeichen-Hinweis, "Alle Ergebnisse"-Link
+//
+// Änderungen v1.3.0:
+//   - &__intro / &__hint: Startertext bzw. Hinweis "zu wenige Zeichen"
+//     (Agency Core → Logo / Globale Einstellungen → Suche → Texte)
+//   - &__all: Link "Alle Ergebnisse anzeigen" unter der Trefferliste
+//
+// Änderungen v1.2.1:
+//   - mark-Styling auch für __excerpt/__result-excerpt (bisher nur __title) -
+//     Backend (ajax-search.php) markiert den Suchbegriff jetzt serverseitig
+//     per <mark> in Titel UND Excerpt, dezenter als beim Titel
+//
+// Änderungen v1.2.0 (Fluid Responsive System):
 //   - @media (max-width: 768px) → @include respond-below('md')
 //   - font-size → var(--text-*)
 // =============================================================================
 
 .ajax-search {
+  // ── Theme-Tokens (Dark Mode) ────────────────────────────────────────────────
+  // Links der lokale Name, rechts das Theme-Token mit Sass-Fallback. Heißen die
+  // Tokens im Projekt anders, nur diese Zeilen anpassen.
+  --ajax-search-bg:       var(--color-card-bg,    #{$color-white});
+  --ajax-search-input-bg: var(--color-input-bg,   #{$color-white});
+  --ajax-search-border:   var(--color-border,     #{$color-border});
+  --ajax-search-hover:    var(--color-hover-bg,   #{$color-gray-50});
+  --ajax-search-chip:     var(--color-hover-bg,   #{$color-gray-100});
+  --ajax-search-text:     var(--color-text,       #{$color-text});
+  --ajax-search-muted:    var(--color-text-muted, #{$color-text-muted});
+
   position:  relative;
   max-width: 600px;
   margin:    0 auto;
@@ -25,10 +66,14 @@
   &__input {
     width:         100%;
     padding:       1rem 3.5rem 1rem 3rem;
-    border:        2px solid $color-border;
+    border:        2px solid var(--ajax-search-border);
     border-radius: $radius-full;
+    background:    var(--ajax-search-input-bg);
+    color:         var(--ajax-search-text);
     font-size:     var(--text-base);
     transition:    $transition-base;
+
+    &::placeholder { color: var(--ajax-search-muted); opacity: 0.8; }
 
     &:focus {
       outline:      none;
@@ -42,7 +87,7 @@
   &__icon {
     position:       absolute;
     left:           1rem;
-    color:          $color-text-muted;
+    color:          var(--ajax-search-muted);
     pointer-events: none;
     display:        flex;
     align-items:    center;
@@ -90,28 +135,31 @@
     right:      1rem;
     background: transparent;
     border:     none;
-    color:      $color-text-muted;
+    color:      var(--ajax-search-muted);
     cursor:     pointer;
     padding:    0.5rem;
     display:    flex;
     align-items: center;
     transition: $transition-base;
 
-    &:hover { color: $color-text; }
+    &:hover { color: var(--ajax-search-text); }
   }
 
+  // Container für Treffer UND Meldungen (Startertext, Hinweis, "Keine Ergebnisse",
+  // Fehler): bringt Rahmen, Schatten, Hintergrund und Scrollen mit.
   &__results {
-    position:    absolute;
-    top:         calc(100% + 0.5rem);
-    left:        0;
-    right:       0;
-    background:  $color-white;
-    border:      1px solid $color-border;
+    position:      absolute;
+    top:           calc(100% + 0.5rem);
+    left:          0;
+    right:         0;
+    background:    var(--ajax-search-bg);
+    border:        1px solid var(--ajax-search-border);
     border-radius: $radius-lg;
-    box-shadow:  $shadow-xl;
-    max-height:  400px;
-    overflow-y:  auto;
-    z-index:     100;
+    box-shadow:    $shadow-xl;
+    max-height:    400px;
+    max-height:    min(400px, 60vh); // kleine Viewports (Nav-Overlay, Mobile)
+    overflow-y:    auto;
+    z-index:       100;
 
     &-list { padding: 0.5rem 0; }
   }
@@ -123,13 +171,17 @@
     gap:             1rem;
     padding:         1rem;
     text-decoration: none;
-    color:           $color-text;
+    color:           var(--ajax-search-text);
     transition:      $transition-base;
-    border-bottom:   1px solid $color-border;
+    border-bottom:   1px solid var(--ajax-search-border);
     border-left:     3px solid transparent;
 
     &:last-child { border-bottom: none; }
-    &:hover, &.is-active { background: $color-gray-50; }
+    &:hover,
+    &:focus-visible,
+    &.is-active { background: var(--ajax-search-hover); }
+
+    &:focus-visible { outline: 2px solid $color-primary; outline-offset: -2px; }
 
     &--post    { border-left-color: $color-primary; }
     &--page    { border-left-color: $color-gray-400; }
@@ -145,7 +197,7 @@
     height:        60px;
     border-radius: $radius-base;
     overflow:      hidden;
-    background:    $color-gray-100;
+    background:    var(--ajax-search-chip);
 
     img { width: 100%; height: 100%; object-fit: cover; }
   }
@@ -155,12 +207,12 @@
     font-size:     var(--text-base);
     font-weight:   $font-weight-semibold;
     margin-bottom: 0.25rem;
-    color:         $color-text;
+    color:         var(--ajax-search-text);
 
     mark {
       background:    rgba($color-primary, 0.2);
       color:         $color-primary;
-      padding:       0 0.2em;
+      padding:       0;
       border-radius: 2px;
     }
   }
@@ -168,9 +220,18 @@
   &__excerpt,
   &__result-excerpt {
     font-size:   var(--text-sm);
-    color:       $color-text-muted;
+    color:       var(--ajax-search-muted);
     line-height: 1.5;
     margin-bottom: 0.5rem;
+
+    // Dezenter als beim Titel - Excerpt-Text soll nicht mit der Primärfarbe
+    // um Aufmerksamkeit konkurrieren, nur die Fundstelle leicht absetzen.
+    mark {
+      background:    rgba($color-primary, 0.15);
+      color:         inherit;
+      padding:       0;
+      border-radius: 2px;
+    }
   }
 
   &__meta,
@@ -180,13 +241,13 @@
     gap:         0.75rem;
     flex-wrap:   wrap;
     font-size:   var(--text-xs);
-    color:       $color-text-muted;
+    color:       var(--ajax-search-muted);
   }
 
   &__type,
   &__result-type {
     padding:        0.25rem 0.5rem;
-    background:     $color-gray-100;
+    background:     var(--ajax-search-chip);
     border-radius:  $radius-sm;
     font-weight:    $font-weight-medium;
     text-transform: uppercase;
@@ -201,7 +262,7 @@
     white-space: nowrap;
 
     del {
-      color:       $color-text-muted;
+      color:       var(--ajax-search-muted);
       font-size:   var(--text-sm);
       font-weight: $font-weight-normal;
       margin-right: 0.5rem;
@@ -211,24 +272,50 @@
     ins { text-decoration: none; color: $color-error; }
   }
 
+  // ── Meldungen im Ergebnis-Container ─────────────────────────────────────────
+  // Startertext, Mindestzeichen-Hinweis, "Keine Ergebnisse", Fehler. Werden vom JS
+  // in .ajax-search__results gerendert, der Rahmen, Schatten und Hintergrund
+  // bereits mitbringt - hier nur Innenabstand und Textstil. Bewusst NICHT absolut
+  // positioniert (ein absolutes Kind würde vom overflow-y des Containers
+  // abgeschnitten).
+  &__intro,
+  &__hint,
   &__no-results,
   &__error {
-    position:      absolute;
-    top:           calc(100% + 0.5rem);
-    left:          0;
-    right:         0;
-    background:    $color-white;
-    border:        1px solid $color-border;
-    border-radius: $radius-lg;
-    box-shadow:    $shadow-xl;
-    padding:       var(--space-lg);
-    text-align:    center;
-    z-index:       100;
+    padding:     var(--space-md, 1rem) var(--space-lg, 1.25rem);
+    font-size:   var(--text-sm);
+    line-height: 1.5;
+    color:       var(--ajax-search-muted);
 
-    p { color: $color-text-muted; margin: 0; }
+    p { margin: 0; color: inherit; }
   }
 
-  &__error { border-color: $color-error; p { color: $color-error; } }
+  &__no-results,
+  &__error {
+    padding:    var(--space-lg, 1.25rem);
+    text-align: center;
+  }
+
+  &__error { color: $color-error; }
+
+  // ── "Alle Ergebnisse anzeigen" ──────────────────────────────────────────────
+  &__all {
+    display:         block;
+    padding:         0.875rem 1rem;
+    border-top:      1px solid var(--ajax-search-border);
+    font-size:       var(--text-sm);
+    font-weight:     $font-weight-semibold;
+    text-align:      center;
+    text-decoration: none;
+    color:           $color-primary;
+    transition:      $transition-base;
+
+    &:hover,
+    &:focus-visible {
+      background:      var(--ajax-search-hover);
+      text-decoration: underline;
+    }
+  }
 }
 
 // ── Compact Variant ───────────────────────────────────────────────────────────

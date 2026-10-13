@@ -527,3 +527,26 @@ ul.products.wc-products-grid {
         }
     }
 }
+
+// ---------------------------------------------------------------------------
+// Suche: Produkt-Kachel (template-parts/search/card-product.php)
+// Jede Kachel steht in einer eigenen <ul class="products"> innerhalb einer
+// .post-grid-Zelle. Das Shop-Grid (.wc-products-grid) greift hier bewusst nicht.
+// ---------------------------------------------------------------------------
+
+.post-grid ul.products.search-products {
+    display:    block;
+    height:     100%;
+    margin:     0;
+    padding:    0;
+    list-style: none;
+
+    li.product {
+        float:    none;
+        width:    100%;
+        height:   100%;
+        margin:   0;
+        padding:  0;
+        position: relative;
+    }
+}
