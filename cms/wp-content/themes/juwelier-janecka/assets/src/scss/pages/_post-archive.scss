@@ -398,3 +398,14 @@
         gap:                   var(--space-sm);
     }
 }
+
+
+// ── Suche: Seiten-Karten mobil (Suche: Seiten-Karten mobil) ──────────────────
+// Seiten und Beiträge stehen zwischen den Produktkacheln. In zwei Spalten werden ihre Karten so
+// schmal, dass der Text mitten im Wort umbricht - mobil über die volle Breite.
+
+@include respond-below('sm') {
+    .search-layout .post-grid[class*='post-grid--cols'] > .post-card {
+        grid-column: 1 / -1;
+    }
+}
