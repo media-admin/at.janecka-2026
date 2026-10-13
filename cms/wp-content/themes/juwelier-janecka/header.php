@@ -167,7 +167,7 @@ if ( function_exists('get_field') && get_field('scroll_progress_enabled', 'optio
                     <line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
             </button>
-            <?php echo do_shortcode( '[aws_search_form]' ); ?>
+            <?php echo do_shortcode( '[ajax_search]' ); ?>
         </div>
     </div>
 </header>

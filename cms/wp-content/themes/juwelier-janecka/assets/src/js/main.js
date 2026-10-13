@@ -213,6 +213,10 @@ function closeSearch() {
     searchOverlay.setAttribute( 'aria-hidden', 'true' );
     searchBtn.setAttribute( 'aria-expanded', 'false' );
     document.body.style.overflow = '';
+    const searchInput   = searchOverlay.querySelector( '.ajax-search__input' );
+    const searchResults = searchOverlay.querySelector( '.ajax-search__results' );
+    if ( searchInput ) searchInput.value = '';
+    if ( searchResults ) { searchResults.style.display = 'none'; searchResults.innerHTML = ''; }
 }
 
 searchBtn?.addEventListener( 'click', openSearch );
