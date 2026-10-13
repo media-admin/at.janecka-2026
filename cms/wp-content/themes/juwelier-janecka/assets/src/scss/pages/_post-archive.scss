@@ -409,3 +409,179 @@
         grid-column: 1 / -1;
     }
 }
+
+
+// ── Suche: eckige Formularelemente (Suche: eckige Formularelemente) ──────────
+// Bei Janecka keine abgerundeten Ecken bei Suchfeldern und -buttons.
+// Overlay: Kit-Komponente .ajax-search; Seitenkopf und 404: searchform.php (.serp-search).
+
+.search-overlay.search-overlay [class*='ajax-search'] {
+    border-radius: 0;
+}
+
+// Suchfeld im Seitenkopf: groß und horizontal zentriert
+.search-layout .archive-header__search {
+    width:         100%;
+    max-width:     44rem;
+    margin-inline: auto;
+}
+
+.serp-search {
+    display:       flex;
+    align-items:   stretch;
+    width:         100%;
+    max-width:     44rem;
+    margin-inline: auto;
+
+    .serp-search__field {
+        flex:               1 1 auto;
+        min-width:          0;
+        height:             3.25rem;
+        padding:            0 1rem;
+        border:             1px solid var(--color-border);
+        border-right:       0;
+        border-radius:      0;
+        background:         var(--color-card-bg, #fff);
+        color:              var(--color-text);
+        font:               inherit;
+        font-size:          1.0625rem;
+        -webkit-appearance: none;
+        appearance:         none;
+
+        &::placeholder { color: var(--color-text-muted); }
+        &::-webkit-search-cancel-button { display: none; }
+        &:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; }
+    }
+
+    .serp-search__submit {
+        flex:            0 0 3.25rem;
+        display:         inline-flex;
+        align-items:     center;
+        justify-content: center;
+        width:           3.25rem;
+        height:          3.25rem;
+        padding:         0;
+        border:          1px solid var(--color-primary);
+        border-radius:   0;
+        background:      var(--color-primary);
+        color:           var(--color-light, #fff);
+        cursor:          pointer;
+
+        &:hover { opacity: 0.85; }
+        &:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+    }
+}
+
+
+
+
+// ── Suche: Overlay wie das Formular im Seitenkopf (Suche: Overlay v2) ─────────
+// Feld und quadratischer Button in einer Zeile, keine Lupe vor dem Feld, dünner Rahmen,
+// Schließen-Button über dem Kasten. Rahmenbreite: --search-overlay-frame (0 = kein Rahmen).
+
+.search-overlay {
+    --search-overlay-frame: 0; // vorher 0.5rem
+
+    .search-overlay__inner {
+        padding: var(--search-overlay-frame);
+    }
+
+    // Schließen-Button über dem Kasten (weiß auf dem abgedunkelten Hintergrund)
+    .search-overlay__close {
+        top:             -2.75rem;
+        right:           0;
+        display:         inline-flex;
+        align-items:     center;
+        justify-content: center;
+        width:           2.5rem;
+        height:          2.5rem;
+        padding:         0;
+        border:          0;
+        background:      transparent;
+        color:           #fff;
+        filter:          drop-shadow(0 0 3px rgba(0, 0, 0, 0.45));
+    }
+
+    .ajax-search form,
+    .ajax-search :has(> .ajax-search__input) {
+        display:       flex;
+        align-items:   stretch;
+        gap:           0;
+        margin:        0;
+        padding:       0;
+        border:        0;
+        border-radius: 0;
+        background:    transparent;
+        box-shadow:    none;
+    }
+
+    .ajax-search :has(> .ajax-search__input) {
+        flex:      1 1 auto;
+        min-width: 0;
+    }
+
+    // Lupe vor dem Feld entfällt
+    .ajax-search :has(> .ajax-search__input) > :is(svg, [class*='icon']) {
+        display: none;
+    }
+
+    .ajax-search .ajax-search__input {
+        flex:               1 1 auto;
+        min-width:          0;
+        width:              100%;
+        height:             3.25rem;
+        padding:            0 1rem;
+        border:             1px solid var(--color-border);
+        border-right:       0;
+        border-radius:      0;
+        background:         var(--color-card-bg, #fff);
+        background-image:   none;
+        box-shadow:         none;
+        color:              var(--color-text);
+        font:               inherit;
+        font-size:          1.0625rem;
+        -webkit-appearance: none;
+        appearance:         none;
+
+        &::-webkit-search-cancel-button { display: none; }
+        &:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; }
+    }
+
+    // Das Kit zentriert den Button per top/right und transform: translateY(-50%).
+    // position: static hebt top/right auf, nicht aber das transform: deshalb zurücksetzen.
+    .ajax-search .ajax-search__submit {
+        position:        static;
+        inset:           auto;
+        transform:       none;
+        flex:            0 0 3.25rem;
+        display:         inline-flex;
+        align-items:     center;
+        justify-content: center;
+        width:           3.25rem;
+        height:          3.25rem;
+        margin:          0;
+        padding:         0;
+        border:          1px solid var(--color-primary);
+        border-radius:   0;
+        background:      var(--color-primary);
+        color:           var(--color-light, #fff);
+        box-shadow:      none;
+
+        &:hover,
+        &:focus,
+        &:active { transform: none; }
+    }
+}
+
+
+// ── Suche: Overlay-Trefferliste gleich breit wie Feld und Button (Suche: Overlay-Trefferliste) ──
+// Die Kit-Liste sitzt je 1px innerhalb der Feldzeile; hier bündig mit den Außenkanten.
+
+.search-overlay .ajax-search__results {
+    left:       0;
+    right:      0;
+    width:      auto;
+    max-width:  none;
+    margin:     0;
+    box-sizing: border-box;
+}
