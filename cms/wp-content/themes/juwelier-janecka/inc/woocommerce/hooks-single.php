@@ -225,7 +225,7 @@ function janecka_single_specs_accordion(): void {
             type="button"
             aria-expanded="false"
         >
-            <span><?php esc_html_e( 'Spezifikationen', 'juwelier-janecka' ); ?></span>
+            <span><?php esc_html_e( 'Details', 'juwelier-janecka' ); ?></span>
             <span class="single-product__accordion-icon" aria-hidden="true">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <line x1="12" y1="5" x2="12" y2="19" class="accordion-icon__vertical"/>
