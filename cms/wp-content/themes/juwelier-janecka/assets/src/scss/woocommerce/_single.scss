@@ -695,6 +695,26 @@ tr.wishlist_item td.product-date {
         z-index:  2;
     }
 
+    .product-gallery__wishlist-btn {
+        position: absolute;
+        top:      0.625rem;
+        right:    0.625rem;
+        z-index:  2;
+
+        .mlw-add-to-wishlist {
+            // Kreis-Rahmen aus dem generischen Plugin-CSS überschreiben - hier
+            // randlos mit halbtransparentem Hintergrund für Kontrast über dem
+            // Produktbild, statt festem Rahmen wie im Standard-Icon-Stil.
+            background:    rgba(255, 255, 255, 0.9);
+            border:        none;
+            box-shadow:    0 1px 4px rgba(0, 0, 0, 0.15);
+            width:         40px;
+            height:        40px;
+
+            &:hover { background: #fff; }
+        }
+    }
+
     a.tinvwl_add_to_wishlist_button {
         opacity:    1 !important;
         visibility: visible !important;
