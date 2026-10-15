@@ -111,3 +111,186 @@
         }
     }
 }
+
+
+// ── Shop-Modus-Wunschliste (media-lab-woocommerce) ──────────────────────────
+// Adaptiert von der .tinv-wishlist-Optik oben - gleiche Design-Sprache,
+// nur auf die eigenen .mlw-wishlist-*-Klassen ummgemünzt.
+
+.mlw-wishlist-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: var(--text-xs, 12px);
+
+    th, td {
+        padding: 0.75rem 0.5rem;
+        border-bottom: 1px solid var(--color-border, #e0e0e0);
+        text-align: left;
+        vertical-align: middle;
+        color: var(--color-text-muted, #888);
+        font-size: inherit;
+    }
+
+    th {
+        font-weight: 700;
+        color: var(--color-text);
+        font-size: inherit;
+    }
+}
+
+.mlw-wishlist-table__select-all input {
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+}
+
+.mlw-wishlist-row {
+
+    &__select-inner {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__checkbox,
+    &__checkbox-placeholder {
+        flex-shrink: 0;
+        width: 1rem;
+        height: 1rem;
+        margin: 0;
+    }
+
+    &__thumb {
+        text-align: center;
+    }
+
+    &__remove-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        margin: 0;
+        border-radius: 50%;
+        background: #fff;
+        border: 1px solid var(--color-border, #e0e0e0);
+        font-size: 11px;
+        line-height: 1;
+        cursor: pointer;
+        color: var(--color-text-muted, #888);
+        transition: color 0.2s ease, border-color 0.2s ease;
+
+        &:hover {
+            color: var(--color-text);
+            border-color: var(--color-text);
+        }
+    }
+
+    &__thumb-wrap {
+        width: 72px;
+        height: 72px;
+        margin: 0 auto;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+            background: #f5f5f5;
+        }
+    }
+
+    &__name {
+        // Lange Produktnamen sollen umbrechen, nicht die feste
+        // Spaltenbreite aus dem <colgroup> sprengen.
+        word-break: break-word;
+
+        a {
+            font-size: inherit !important;
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    }
+
+    &__price {
+        white-space: nowrap;
+    }
+
+    &__stock-icon {
+        color: #0a8754;
+        margin-right: 4px;
+
+        &--out {
+            color: #dc2626;
+        }
+    }
+
+    &__action {
+        text-align: right;
+    }
+
+    &__action-btn {
+        @include btn.btn-primary;
+        white-space: nowrap;
+        font-size: var(--text-xs, 12px) !important;
+    }
+}
+
+.mlw-wishlist__bulk-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: var(--space-md);
+
+    #mlw-wishlist-bulk-add {
+        @include btn.btn-primary;
+        font-size: var(--text-xs, 12px);
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.mlw-wishlist__share--footer {
+    margin-top: var(--space-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-xs, 12px);
+    color: var(--color-text-muted, #888);
+    justify-content: flex-end;
+
+    // medialab_share() rendert Label + Icon-Liste als zwei separate
+    // Block-Kinder (Label eigene Zeile, Icon-Liste darunter). Hier
+    // GEZIELT NUR in diesem Kontext zu einer Zeile zusammengeführt, ohne
+    // die globale Social-Share-Komponente selbst anzufassen (die läuft
+    // ja projektweit an anderer Stelle, z.B. Blog-Beiträgen, mit).
+    .medialab-share {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+    }
+
+    .medialab-share__label {
+        white-space: nowrap;
+    }
+}
+
+.mlw-wishlist-message {
+    padding: 1rem;
+    margin: var(--space-md) 0;
+    font-size: 0.875rem;
+}
+.mlw-wishlist-message--warning {
+    background: #fff3cd;
+    color: #856404;
+}
+.mlw-wishlist-message--warning a {
+    color: inherit;
+    text-decoration: underline;
+    font-weight: 600;
+}
