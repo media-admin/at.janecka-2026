@@ -5,7 +5,7 @@
   "description": "Custom WordPress Theme from Figma",
   "scripts": {
     "dev": "node scripts/vite-dev.mjs",
-    "dev:stop": "node -e \"try{require('fs').unlinkSync('cms/wp-content/themes/custom-theme/assets/hot')}catch(e){}\"",
+    "dev:stop": "node -e \"try{require('fs').unlinkSync('cms/wp-content/themes/juwelier-janecka/assets/hot')}catch(e){}\"",
     "build": "npm run dev:stop && vite build && vite build --config vite.config.blocks.js",
     "build:staging": "npm run dev:stop && NODE_ENV=staging vite build && NODE_ENV=staging vite build --config vite.config.blocks.js",
     "build:production": "npm run dev:stop && NODE_ENV=production vite build && NODE_ENV=production vite build --config vite.config.blocks.js",
