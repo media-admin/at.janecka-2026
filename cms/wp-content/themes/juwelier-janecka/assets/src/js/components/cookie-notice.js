@@ -11,6 +11,12 @@
  * WICHTIG: export default class – main.js importiert als Default und
  *          ruft `new CookieConsent()` auf. Keine Auto-Instanz im Modul.
  *
+ * Server-seitiges Consent-Logging:
+ *   Jede Consent-Entscheidung wird zusätzlich anonymisiert (kein Personenbezug)
+ *   per Fire-and-forget an admin-ajax.php gesendet, für die Consent-Rate-
+ *   Auswertung im SEO Toolkit Dashboard. Fehler dabei werden bewusst
+ *   verschluckt – das darf den Consent-Flow für den Besucher nie blockieren.
+ *
  * @since 1.6.1
  */
 
@@ -79,10 +85,32 @@ export default class CookieConsent {
             categories,
         } ) );
         this._dispatch( 'cookies:changed', categories );
+        this._logConsentServerSide( categories );
     }
 
     _hasValidConsent() {
         return this.consent !== null;
+    }
+
+    // ── Server-seitiges Logging (anonymisiert, fire-and-forget) ────────────────
+
+    _logConsentServerSide( categories ) {
+        const cfg = window.medialabConsentTracker;
+        if ( ! cfg?.ajaxUrl || ! cfg?.nonce ) return;
+
+        const body = new URLSearchParams();
+        body.set( 'action', 'medialab_log_consent' );
+        body.set( 'nonce', cfg.nonce );
+        Object.entries( categories ).forEach( ( [ key, val ] ) => {
+            body.set( `categories[${key}]`, val ? '1' : '0' );
+        } );
+
+        // Fire-and-forget – darf den Consent-Flow nie blockieren oder verzögern
+        fetch( cfg.ajaxUrl, {
+            method:      'POST',
+            credentials: 'omit',
+            body,
+        } ).catch( () => {} );
     }
 
     // ── Render ────────────────────────────────────────────────────────────────
@@ -313,12 +341,6 @@ export default class CookieConsent {
     openSettings() {
         this._openModal();
     }
-
-    // ── In cookie-notice.js einfügen ──────────────────────────────────────────────
-    // Position: direkt nach der openSettings() Methode (ganz am Ende der Klasse,
-    // vor der schließenden })
-
-    // ── Public API (Ergänzung) ────────────────────────────────────────────────────
 
     /**
      * Akzeptiert eine einzelne Kategorie programmatisch.
