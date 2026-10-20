@@ -82,6 +82,11 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/notifications.php';
 
 require_once plugin_dir_path( __FILE__ ) . 'inc/booking-auto-confirm.php';
 
+require_once plugin_dir_path( __FILE__ ) . 'inc/sale/sale-sync.php';
+require_once plugin_dir_path( __FILE__ ) . 'inc/sale/sale-frontend.php';
+require_once plugin_dir_path( __FILE__ ) . 'inc/sale/sale-filters.php';
+
+
 register_activation_hook(__FILE__, 'medialab_project_activate');
 
 /**
