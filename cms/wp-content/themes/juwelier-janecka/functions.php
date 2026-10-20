@@ -196,6 +196,9 @@ if ( class_exists( 'WooCommerce' ) ) {
 
 	// Einzelprodukt-Hooks (Galerie, Summary, Tabs, Schema)
 	require_once get_stylesheet_directory() . '/inc/woocommerce/hooks-single.php';
+    
+    // Wunschliste (media-lab-woocommerce, inc/wishlist): Janecka-spezifische Anpassungen
+    require_once get_stylesheet_directory() . '/inc/woocommerce/hooks-wishlist.php';
 }
 
 

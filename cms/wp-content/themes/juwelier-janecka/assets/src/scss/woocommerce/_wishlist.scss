@@ -147,10 +147,16 @@
 
 .mlw-wishlist-row {
 
+    // Erste Spalte ist nur 64px breit (colgroup in page.php): rechtes
+    // Zellen-Padding weg, damit Checkbox + größerer Abstand + Button passen.
+    &__select {
+        padding-right: 0;
+    }
+
     &__select-inner {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 1rem;
     }
 
     &__checkbox,
@@ -259,24 +265,84 @@
     margin-top: var(--space-lg);
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
+    justify-content: flex-end;
     font-size: var(--text-xs, 12px);
     color: var(--color-text-muted, #888);
-    justify-content: flex-end;
 
     // medialab_share() rendert Label + Icon-Liste als zwei separate
-    // Block-Kinder (Label eigene Zeile, Icon-Liste darunter). Hier
-    // GEZIELT NUR in diesem Kontext zu einer Zeile zusammengeführt, ohne
-    // die globale Social-Share-Komponente selbst anzufassen (die läuft
-    // ja projektweit an anderer Stelle, z.B. Blog-Beiträgen, mit).
-    .medialab-share {
+    // Block-Kinder. Hier GEZIELT NUR in diesem Kontext zu einer Zeile
+    // zusammengeführt, ohne die globale Social-Share-Komponente selbst
+    // anzufassen (die läuft projektweit an anderer Stelle mit, z.B. Blog).
+    // Services/Label kommen aus dem Filter mlw_wishlist_share_args
+    // (inc/woocommerce/hooks-wishlist.php).
+    // Doppelte Klasse (.medialab-share--horizontal): setzt sich gegen die
+    // Layout-Regeln der Social-Share-Komponente (Label über der Liste) durch.
+    .medialab-share.medialab-share--horizontal {
         display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
         align-items: center;
+        width: auto;
         gap: var(--space-sm);
+        color: inherit;
     }
 
     .medialab-share__label {
+        flex: 0 0 auto;
+        width: auto;
+        margin: 0;
         white-space: nowrap;
+        color: inherit;
+    }
+
+    .medialab-share__list {
+        display: flex;
+        flex: 0 0 auto;
+        flex-wrap: nowrap;
+        align-items: center;
+        width: auto;
+        gap: var(--space-sm);
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .medialab-share__btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        height: auto;
+        padding: 0.25rem;
+        border: 0;
+        border-radius: 0;
+        background: none;
+        color: inherit;
+        transition: color 0.2s ease;
+
+        svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        &:hover,
+        &:focus-visible {
+            color: var(--color-text);
+        }
+    }
+
+    // Button-Beschriftung nur visuell ausblenden (Screenreader behalten sie)
+    .medialab-share__btn-label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
     }
 }
 
