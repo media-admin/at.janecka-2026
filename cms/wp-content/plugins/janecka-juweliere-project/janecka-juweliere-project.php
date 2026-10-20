@@ -80,6 +80,8 @@ function medialab_project_activate() {
 }
 require_once plugin_dir_path( __FILE__ ) . 'inc/notifications.php';
 
+require_once plugin_dir_path( __FILE__ ) . 'inc/booking-auto-confirm.php';
+
 register_activation_hook(__FILE__, 'medialab_project_activate');
 
 /**
