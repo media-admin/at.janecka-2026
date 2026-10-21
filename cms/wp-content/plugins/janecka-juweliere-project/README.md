@@ -24,6 +24,25 @@ Add/remove CPTs in `inc/custom-post-types.php`
 Add/remove taxonomies in `inc/taxonomies.php`
 ACF fields auto-load from `acf-json/`
 
+## Janecka-spezifische Module
+
+Zusätzlich zu den Starter-Bausteinen enthält dieses Plugin projektspezifische WooCommerce-Erweiterungen:
+
+- **Sale-Bereich** (`inc/sale/`): Sale-Kategorien (Damenuhren, Herrenuhren, Damenschmuck, Herrenschmuck, Sonstiges)
+  mit automatischer Zuordnung bei Aktionspreis, dynamisches Menü, Weiterleitungen, dynamische Filter und
+  Filter für Marken-Archive
+- **Ähnliche Produkte** (`inc/related-cross-sells.php`): auf der Produktseite aus dem Cross-Sell-Feld statt
+  Zufallsauswahl nach Kategorie
+
+Regeln, Konfiguration, Deployment-Checkliste und Stolpersteine: [`docs/sale-filter-related.md`](docs/sale-filter-related.md)
+
+**Beim Duplizieren für ein anderes Projekt:** `inc/sale/`, `inc/related-cross-sells.php` und die zugehörigen
+`require_once`-Zeilen in `janecka-juweliere-project.php` entfernen; diese Module sind nicht für andere Projekte gedacht.
+
+**Abhängigkeit:** Der Kategorie-Filter auf Marken-Archiven braucht die aktuelle `media-lab-woocommerce`
+(`inc/filters/filter-bar.php` aus dem Starter Kit). Das Plugin liegt nicht in diesem Repo (siehe `.gitignore`)
+und muss bei Deployments mitgeliefert werden.
+
 ## Dependencies
 
 Requires: Media Lab Agency Core plugin
