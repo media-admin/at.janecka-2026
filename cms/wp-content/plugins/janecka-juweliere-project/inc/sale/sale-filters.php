@@ -9,12 +9,15 @@
  * Die Filterleiste der Kategorie-Archive liest ihre Attribute aus ACF (mlwf_attributes).
  * Für Sale und die Sale-Unterkategorien wird dieser Wert zur Laufzeit ersetzt: Es erscheinen
  * genau die Filter, die auch die Suche für diese Produktmenge anzeigen würde
- * (mlwf_search_facets(): nur Werte, die in mindestens einem Produkt vorkommen,
- * Filter mit nur einem Wert entfallen). Zusätzlich:
+ * (mlwf_search_facets(): nur Werte, die in mindestens einem Produkt vorkommen).
+ * Zusätzlich:
  *   - Preisfilter immer an,
  *   - auf /sale/ eine Unterkategorie-Auswahl (Damenuhren, Herrenschmuck, ...), die nur
  *     Gruppen mit Produkten zeigt.
  * Nichts davon wird gespeichert; Änderungen am Sortiment wirken sofort.
+ *
+ * Die Funktion janecka_sale_dynamic_attributes() wird auch von brand-filters.php
+ * (Marken-Archive) verwendet.
  *
  * @package JaneckaJuweliereProject
  */
@@ -33,31 +36,39 @@ function janecka_sale_is_sale_term( int $term_id ): bool {
 	return $term_id > 0 && in_array( $term_id, janecka_sale_all_term_ids(), true );
 }
 
-/** Attribut-/Marken-Taxonomien, die für die Produkte der Sale-Kategorie als Filter sinnvoll sind. */
-function janecka_sale_dynamic_attributes( int $term_id ): array {
+/**
+ * Attribut-/Marken-Taxonomien, die für die Produkte einer Kategorie bzw. Marke als Filter sinnvoll sind.
+ *
+ * @param int    $term_id  Term-ID der Kategorie bzw. Marke
+ * @param string $taxonomy product_cat (Standard) oder product_brand
+ */
+function janecka_sale_dynamic_attributes( int $term_id, string $taxonomy = 'product_cat' ): array {
 	static $cache = array();
-	if ( isset( $cache[ $term_id ] ) ) {
-		return $cache[ $term_id ];
+
+	$key = $taxonomy . ':' . $term_id;
+	if ( isset( $cache[ $key ] ) ) {
+		return $cache[ $key ];
 	}
-	$cache[ $term_id ] = array();
+	$cache[ $key ] = array();
 
 	if ( ! function_exists( 'mlwf_get_context_product_ids' ) || ! function_exists( 'mlwf_search_facets' ) ) {
-		return $cache[ $term_id ];
+		return $cache[ $key ];
 	}
 
 	$ids = array_filter(
-		mlwf_get_context_product_ids( $term_id, 'product_cat' ),
+		mlwf_get_context_product_ids( $term_id, $taxonomy ),
 		static function ( $id ) {
 			return 'publish' === get_post_status( $id );
 		}
 	);
 	if ( empty( $ids ) ) {
-		return $cache[ $term_id ];
+		return $cache[ $key ];
 	}
 
-	// Die Suche blendet Filter mit nur einem Wert aus. Im Sale (Uhren und Schmuck gemischt) trennt
-	// auch ein einzelner Wert, z. B. "Quartz", Uhren von Schmuck. Daher Mindestzahl auf 1 senken
-	// und selbst entscheiden: ein Ein-Wert-Filter bleibt, wenn nicht alle Produkte den Wert tragen.
+	// Die Suche blendet Filter mit nur einem Wert aus. Bei gemischtem Sortiment (z. B. Uhren und
+	// Schmuck im Sale) trennt auch ein einzelner Wert, z. B. "Quartz", Uhren von Schmuck. Daher
+	// Mindestzahl auf 1 senken und selbst entscheiden: ein Ein-Wert-Filter bleibt, wenn nicht
+	// alle Produkte den Wert tragen.
 	$min_terms = static function () {
 		return 1;
 	};
@@ -66,17 +77,20 @@ function janecka_sale_dynamic_attributes( int $term_id ): array {
 	remove_filter( 'mlwf_search_facet_min_terms', $min_terms );
 
 	unset( $facets['product_cat'] ); // Kategorien laufen über die Unterkategorie-Auswahl
+	if ( 'product_brand' === $taxonomy ) {
+		unset( $facets['product_brand'] ); // Auf einer Marken-Seite steht die Marke bereits fest
+	}
 
 	$total = count( $ids );
-	foreach ( $facets as $taxonomy => $facet ) {
+	foreach ( $facets as $facet_taxonomy => $facet ) {
 		if ( count( $facet['terms'] ) < 2 && (int) $facet['terms'][0]['count'] >= $total ) {
-			unset( $facets[ $taxonomy ] ); // alle Produkte haben denselben Wert: filtert nichts
+			unset( $facets[ $facet_taxonomy ] ); // alle Produkte haben denselben Wert: filtert nichts
 		}
 	}
 
-	$cache[ $term_id ] = array_keys( $facets );
+	$cache[ $key ] = array_keys( $facets );
 
-	return $cache[ $term_id ];
+	return $cache[ $key ];
 }
 
 // Attribute: dynamisch statt aus dem Term-Editor (nur Frontend).
