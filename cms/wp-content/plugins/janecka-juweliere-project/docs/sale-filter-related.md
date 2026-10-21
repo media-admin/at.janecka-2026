@@ -100,10 +100,8 @@ Auf Marken-Archiven zeigt die Filterleiste die Gruppe "Kategorie" mit allen Haup
 Marken-Produkte (Zähler innerhalb der Marke). Die Sale-Unterkategorien werden dort ausgeblendet, "Sale" selbst
 bleibt (Filter `mlwf_brand_subcategories` in `brand-filters.php`).
 
-**Voraussetzung:** gepatchte `media-lab-woocommerce/inc/filters/filter-bar.php` (Starter Kit, Commit
-"Kategorie-Filter auf Marken-Archiven"). Das Plugin liegt nicht im Janecka-Repo (`.gitignore`), die Datei muss
-bei Deployments per SFTP mitgeliefert werden. Ohne den Patch bleibt die Gruppe einfach aus; es entsteht kein Fehler.
-Ein Plugin-Update aus dem Starter Kit enthält die Änderung.
+**Voraussetzung:** `media-lab-woocommerce` ab Version 2.20.0 (`inc/filters/filter-bar.php`, Starter Kit). Das Plugin liegt nicht im Janecka-Repo (`.gitignore`), die Datei muss
+bei Deployments per SFTP mitgeliefert werden. Mit einer älteren Version bleibt die Gruppe einfach aus; es entsteht kein Fehler.
 
 ## 6. Ähnliche Produkte (`related-cross-sells.php`)
 
@@ -126,7 +124,7 @@ auf die Zahl der Cross-Sells gesetzt, das Mischen per `woocommerce_product_relat
 
 ## Deployment-Checkliste
 
-1. Backup der Datenbank. Dateien hochladen (die fünf Dateien oben, `janecka-juweliere-project.php`, gepatchte `filter-bar.php`).
+1. Backup der Datenbank. Dateien hochladen (die fünf Dateien oben, `janecka-juweliere-project.php`, `media-lab-woocommerce/inc/filters/filter-bar.php` ab Version 2.20.0).
 2. Frontend und `wp-admin` laden (Ausschluss eines fatalen Fehlers).
 3. **WooCommerce > Status > Werkzeuge > "Sale-Zuordnung abgleichen"** ausführen und die Meldung prüfen.
 4. Kategorien im Editor prüfen (Block "Sale-Zuordnung"), Einstellungen > Permalinks einmal speichern.

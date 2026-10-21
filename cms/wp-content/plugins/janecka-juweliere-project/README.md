@@ -39,8 +39,8 @@ Regeln, Konfiguration, Deployment-Checkliste und Stolpersteine: [`docs/sale-filt
 **Beim Duplizieren für ein anderes Projekt:** `inc/sale/`, `inc/related-cross-sells.php` und die zugehörigen
 `require_once`-Zeilen in `janecka-juweliere-project.php` entfernen; diese Module sind nicht für andere Projekte gedacht.
 
-**Abhängigkeit:** Der Kategorie-Filter auf Marken-Archiven braucht die aktuelle `media-lab-woocommerce`
-(`inc/filters/filter-bar.php` aus dem Starter Kit). Das Plugin liegt nicht in diesem Repo (siehe `.gitignore`)
+**Abhängigkeit:** Der Kategorie-Filter auf Marken-Archiven braucht `media-lab-woocommerce` ab Version 2.20.0
+(`inc/filters/filter-bar.php`, Starter Kit). Das Plugin liegt nicht in diesem Repo (siehe `.gitignore`)
 und muss bei Deployments mitgeliefert werden.
 
 ## Dependencies
