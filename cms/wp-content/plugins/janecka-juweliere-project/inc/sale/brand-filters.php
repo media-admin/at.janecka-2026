@@ -10,6 +10,11 @@
  * Hat eine Marke im Term-Editor eine eigene Filterliste, bleibt diese unverändert.
  * Die Marke selbst wird nicht als Filter angeboten.
  *
+ * Zusätzlich gibt es auf Marken-Seiten die Gruppe "Kategorie" mit allen Haupt- und Unterkategorien
+ * der Marken-Produkte (Zähler innerhalb der Marke). Voraussetzung: Patch in
+ * media-lab-woocommerce/inc/filters/filter-bar.php (patch-filter-bar.py). Ohne den Patch bleibt die
+ * Einstellung wirkungslos, aber unschädlich.
+ *
  * @package JaneckaJuweliereProject
  */
 
@@ -52,3 +57,20 @@ add_filter( 'acf/load_value/name=mlwf_inherit_parent', function ( $value, $post_
 	}
 	return 0;
 }, 25, 2 );
+
+// Kategorie-Filter auf Marken-Seiten einschalten (Marken ohne eigene Einstellung).
+add_filter( 'acf/load_value/name=mlwf_show_subcategories', function ( $value, $post_id ) {
+	if ( is_admin() || ( null !== $value && '' !== $value ) ) {
+		return $value;
+	}
+	return janecka_brand_term_id_from_acf( $post_id ) ? 1 : $value;
+}, 25, 2 );
+
+// Sale-Unterkategorien (Damenuhren im Sale usw.) nicht in der Kategorie-Liste einer Marke anbieten;
+// "Sale" selbst bleibt als Filter erhalten.
+add_filter( 'mlwf_brand_subcategories', function ( $terms ) {
+	$sale_children = array_values( janecka_sale_term_ids() );
+	return array_values( array_filter( (array) $terms, function ( $term ) use ( $sale_children ) {
+		return ! in_array( (int) $term->term_id, $sale_children, true );
+	} ) );
+} );
