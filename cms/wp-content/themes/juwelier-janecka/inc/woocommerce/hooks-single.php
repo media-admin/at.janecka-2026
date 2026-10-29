@@ -449,6 +449,18 @@ add_filter( 'woocommerce_product_related_products_heading', function(): string {
     return __( 'Ähnliche Produkte', 'juwelier-janecka' );
 } );
 
+
+
+add_filter( 'woocommerce_upsell_display_args', function( array $args ): array {
+    $args['posts_per_page'] = 4;
+    $args['columns']        = 4;
+    return $args;
+} );
+
+add_filter( 'woocommerce_product_upsells_products_heading', function(): string {
+    return __( 'Das könnte Ihnen auch gefallen …', 'juwelier-janecka' );
+} );
+
 // ===========================================================================
 // 11. ATC BUTTON TEXT
 // ===========================================================================

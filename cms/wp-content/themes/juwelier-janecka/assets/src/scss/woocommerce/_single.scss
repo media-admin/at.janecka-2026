@@ -39,9 +39,14 @@ body.single-product {
 		text-align: left;
 	}
 
+	> .up-sells.products {
+        grid-column: 1 / -1;
+        grid-row: 2;
+	}
+
 	> .related.products {
-		grid-column: 1 / -1;
-		grid-row: 2;
+			grid-column: 1 / -1;
+			grid-row: 3;
 	}
 
 	@media (max-width: 767px) {
@@ -49,7 +54,8 @@ body.single-product {
 
 		> .woocommerce-product-gallery,
 		> .summary.entry-summary,
-		> .related.products {
+		> .related.products,
+		> .up-sells.products {
 			grid-column: 1;
 			grid-row: auto;
 		}
@@ -422,7 +428,8 @@ body.single-product {
 // 5. Related Products
 // ---------------------------------------------------------------------------
 
-.related.products {
+.related.products,
+.up-sells.products {
 	padding-top: var(--space-xl);
 	margin-bottom: var(--space-xl);
 
@@ -537,7 +544,8 @@ body.single-product {
 
     > .woocommerce-product-gallery,
     > .summary.entry-summary,
-    > .related.products {
+    > .related.products,
+	> .up-sells.products {
       grid-column: 1;
       grid-row: auto;
       width: calc( 100% - 1rem) !important;
@@ -606,7 +614,8 @@ body.single-product {
   }
 
   // Related Products: 2 Spalten statt 4
-  .related.products {
+  .related.products,
+  .up-sells.products {
     ul.products,
     ul.wc-products-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -739,7 +748,8 @@ tr.wishlist_item td.product-date {
 }
 // ── Related Products ──────────────────────────────────────────────────────────
 
-.related.products {
+.related.products,
+.up-sells.products {
     > h2 {
         font-family: $font-subheading !important;
         font-size: $font-size-h2;
