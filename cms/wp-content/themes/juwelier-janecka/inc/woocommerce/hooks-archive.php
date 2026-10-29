@@ -122,19 +122,6 @@ add_action( 'woocommerce_before_shop_loop', function() {
     }
 }, 5 );
 
-// 2. Loop-Header
-add_action( 'woocommerce_before_shop_loop', 'janecka_wc_loop_header', 10 );
-
-function janecka_wc_loop_header(): void {
-    ?>
-    <div class="wc-loop-header">
-        <div class="wc-loop-header__count js-product-count">
-            <?php woocommerce_result_count(); ?>
-        </div>
-    </div>
-    <?php
-}
-
 // 3. Produkt-Container ÖFFNEN
 add_action( 'woocommerce_before_shop_loop', function() {
     echo '<div class="wc-products-container">';
