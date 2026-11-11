@@ -2,6 +2,8 @@
 /**
  * Single Post Template
  *
+ * Header-Reihenfolge: Titel (wie page.php) → Meta (Datum · Lesezeit · Autor) → Kategorie
+ *
  * @package custom-theme
  */
 
@@ -18,10 +20,46 @@ get_template_part( 'template-parts/components/breadcrumbs' );
 
     <article id="post-<?php the_ID(); ?>" <?php post_class( 'single-post' ); ?>>
 
-        <?php /* ── Header ────────────────────────────────────────────────── */ ?>
-        <header class="single-post__header">
+        <?php /* ── Header: Titel → Meta → Kategorie ───────────────────────── */ ?>
+        <?php
+        // Wird unten für den Featured-Image-Block benötigt
+        $hero     = function_exists( 'media_lab_get_hero_image' ) ? media_lab_get_hero_image() : null;
+        $has_hero = ! empty( $hero );
+        ?>
+        <header class="single-post__header entry-header page-header">
 
-            <?php /* Kategorien */ ?>
+            <?php /* Titel immer ausgeben (wie page.php) – das Hero-Template gibt keinen Titel aus */ ?>
+            <?php the_title( '<h1 class="page-header__title">', '</h1>' ); ?>
+
+            <?php /* Meta: Datum · (Aktualisiert) · Lesezeit · Autor (ohne Link) */ ?>
+            <div class="single-post__meta">
+                <time class="single-post__date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
+                    <?php echo esc_html( get_the_date() ); ?>
+                </time>
+
+                <?php if ( get_the_modified_date() !== get_the_date() ) : ?>
+                <span class="single-post__meta-sep" aria-hidden="true">·</span>
+                <span class="single-post__updated">
+                    <?php printf( esc_html__( 'Aktualisiert: %s', 'custom-theme' ), esc_html( get_the_modified_date() ) ); ?>
+                </span>
+                <?php endif; ?>
+
+                <span class="single-post__meta-sep" aria-hidden="true">·</span>
+                <span class="single-post__read-time">
+                    <?php
+                    $word_count = str_word_count( wp_strip_all_tags( get_the_content() ) );
+                    $read_time  = max( 1, (int) round( $word_count / 200 ) );
+                    printf( esc_html__( '%d Min. Lesezeit', 'custom-theme' ), $read_time );
+                    ?>
+                </span>
+
+                <span class="single-post__meta-sep" aria-hidden="true">·</span>
+                <span class="single-post__author-info">
+                    <span class="single-post__author-name"><?php the_author(); ?></span>
+                </span>
+            </div>
+
+            <?php /* Kategorien – eigene Zeile unter dem Meta-Block */ ?>
             <?php
             $cats = get_the_category();
             if ( $cats ) :
@@ -34,16 +72,6 @@ get_template_part( 'template-parts/components/breadcrumbs' );
                 <?php endforeach; ?>
             </div>
             <?php endif; ?>
-
-            <?php /* Titel – nur wenn kein Hero-Bild aktiv */ ?>
-            <?php
-            $hero        = function_exists( 'media_lab_get_hero_image' ) ? media_lab_get_hero_image() : null;
-            $has_hero    = ! empty( $hero );
-            ?>
-            <?php if ( ! $has_hero ) : ?>
-            <h1 class="single-post__title page-title"><?php the_title(); ?></h1>
-            <?php endif; ?>
-
 
         </header>
 
@@ -63,33 +91,6 @@ get_template_part( 'template-parts/components/breadcrumbs' );
             <?php endif; ?>
         </div>
         <?php endif; ?>
-
-        <?php /* ── Meta-Zeile (nach Featured Image) ────────────────────── */ ?>
-        <div class="single-post__meta">
-            <span class="single-post__author-info">
-                <a class="single-post__author-name" href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>">
-                    <?php the_author(); ?>
-                </a>
-            </span>
-            <span class="single-post__meta-sep" aria-hidden="true">·</span>
-            <time class="single-post__date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
-                <?php the_date(); ?>
-            </time>
-            <?php if ( get_the_modified_date() !== get_the_date() ) : ?>
-            <span class="single-post__meta-sep" aria-hidden="true">·</span>
-            <span class="single-post__updated">
-                <?php printf( esc_html__( 'Aktualisiert: %s', 'custom-theme' ), get_the_modified_date() ); ?>
-            </span>
-            <?php endif; ?>
-            <span class="single-post__meta-sep" aria-hidden="true">·</span>
-            <span class="single-post__read-time">
-                <?php
-                $word_count = str_word_count( wp_strip_all_tags( get_the_content() ) );
-                $read_time  = max( 1, (int) round( $word_count / 200 ) );
-                printf( esc_html__( '%d Min. Lesezeit', 'custom-theme' ), $read_time );
-                ?>
-            </span>
-        </div>
 
         <?php /* ── Inhalt ───────────────────────────────────────────────── */ ?>
         <div class="single-post__content entry-content">
